@@ -1,0 +1,97 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"includes": ["**", "!!**/dist", "!!**/.storybook", "!**/*.stories.tsx", "!!**/components/ui"]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineWidth": 100
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended",
+			"correctness": {
+				"noUnusedImports": "error",
+				"noUnusedVariables": "error"
+			},
+			"style": {
+				"useNamingConvention": {
+					"level": "error",
+					"options": {
+						"strictCase": true,
+						"conventions": [
+							{
+								"selector": {
+									"kind": "const",
+									"scope": "global"
+								},
+								"formats": ["CONSTANT_CASE"]
+							},
+							{
+								"selector": {
+									"kind": "variable",
+									"scope": "any"
+								},
+								"formats": ["camelCase"]
+							},
+							{
+								"selector": {
+									"kind": "function",
+									"scope": "any"
+								},
+								"formats": ["camelCase", "PascalCase"]
+							},
+							{
+								"selector": {
+									"kind": "class",
+									"scope": "any"
+								},
+								"formats": ["PascalCase"]
+							},
+							{
+								"selector": {
+									"kind": "typeLike",
+									"scope": "any"
+								},
+								"formats": ["PascalCase"]
+							}
+						]
+					}
+				}
+			},
+			"nursery": {
+				"useSortedClasses": {
+					"level": "warn",
+					"options": {
+						"functions": ["clsx", "cva", "twMerge", "cn"]
+					}
+				}
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	}
+}

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+COMMIT_MSG_FILE=$1
+FIRST_LINE=$(head -n 1 "$COMMIT_MSG_FILE")
+
+# 許可する接頭語の正規表現パターン
+PATTERN="^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?:.+"
+
+if ! echo "$FIRST_LINE" | grep -Eq "$PATTERN"; then
+    echo "=========================================================="
+    echo "❌ コミットが拒否されました。メッセージの形式が正しくありません。"
+    echo "以下の指定された接頭語（プレフィックス）を使用してください："
+    echo ""
+    echo "💡 各プレフィックスの記述例："
+    echo "  feat:     新機能の追加 (例: feat: ログイン機能の追加)"
+    echo "  fix:      バグの修正   (例: fix: パスワードバリデーションの修正)"
+    echo "  docs:     ドキュメント (例: docs: READMEにAPI仕様を追記)"
+    echo "  style:    見た目・書式 (例: style: インデントを4スペースから2に変更)"
+    echo "  refactor: コードのリファクタリング (例: refactor: 共通処理を関数に抽出)"
+    echo "  test:     テストコード (例: test: ユーザー登録の単体テストを追加)"
+    echo "  chore:    雑事・ビルド等 (例: chore: 依存パッケージのアップデート)"
+    echo ""
+    echo "※ スコープ（範囲）を指定する場合の例:"
+    echo "  feat(auth): ログイン機能の追加"
+    echo "=========================================================="
+    exit 1
+fi
