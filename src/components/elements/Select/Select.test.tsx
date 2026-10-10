@@ -1,4 +1,3 @@
-
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
@@ -11,9 +10,7 @@ describe('Select', () => {
 		render(<Select id="language" label="言語" options={OPTIONS} />);
 
 		expect(screen.getByText('言語')).toBeInTheDocument();
-		expect(screen.getByRole('combobox', { name: '言語' })).toHaveTextContent(
-			'選択してください',
-		);
+		expect(screen.getByRole('combobox', { name: '言語' })).toHaveTextContent('選択してください');
 	});
 
 	it('指定されたプレースホルダーを表示する', () => {
@@ -104,15 +101,9 @@ describe('Select', () => {
 			await screen.findByText('言語', { selector: '[data-slot="select-label"]' }),
 		).toBeInTheDocument();
 
-		expect(
-			await within(listbox).findByRole('option', { name: 'TypeScript' }),
-		).toBeInTheDocument();
-		expect(
-			await within(listbox).findByRole('option', { name: 'JavaScript' }),
-		).toBeInTheDocument();
-		expect(
-			await within(listbox).findByRole('option', { name: 'Python' }),
-		).toBeInTheDocument();
+		expect(await within(listbox).findByRole('option', { name: 'TypeScript' })).toBeInTheDocument();
+		expect(await within(listbox).findByRole('option', { name: 'JavaScript' })).toBeInTheDocument();
+		expect(await within(listbox).findByRole('option', { name: 'Python' })).toBeInTheDocument();
 	});
 
 	it('選択肢を選ぶと onChange に選択した value を渡す', async () => {
