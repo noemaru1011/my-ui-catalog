@@ -48,9 +48,10 @@ describe('Select', () => {
 		const { container } = render(<Select id="language" label="言語" options={OPTIONS} required />);
 
 		const label = screen.getByText('言語');
+		const requiredMark = container.querySelector<HTMLElement>('span.text-destructive');
 
-		expect(label.parentElement).toContainElement(container.querySelector('span.text-destructive'));
-		expect(container.querySelector('span.text-destructive')).toHaveTextContent('*');
+		expect(label.parentElement).toContainElement(requiredMark);
+		expect(requiredMark).toHaveTextContent('*');
 	});
 
 	it('required が未指定の場合は必須マークを表示しない', () => {
@@ -94,16 +95,15 @@ describe('Select', () => {
 
 		await user.click(screen.getByRole('combobox'));
 
-		expect(screen.getByRole('listbox')).toBeInTheDocument();
+		const listbox = await screen.findByRole('listbox');
+
 		expect(
-			screen.getByText('言語', { selector: '[data-slot="select-label"]' }),
+			await screen.findByText('言語', { selector: '[data-slot="select-label"]' }),
 		).toBeInTheDocument();
 
-		const listbox = screen.getByRole('listbox');
-
-		expect(within(listbox).getByRole('option', { name: 'TypeScript' })).toBeInTheDocument();
-		expect(within(listbox).getByRole('option', { name: 'JavaScript' })).toBeInTheDocument();
-		expect(within(listbox).getByRole('option', { name: 'Python' })).toBeInTheDocument();
+		expect(await within(listbox).findByRole('option', { name: 'TypeScript' })).toBeInTheDocument();
+		expect(await within(listbox).findByRole('option', { name: 'JavaScript' })).toBeInTheDocument();
+		expect(await within(listbox).findByRole('option', { name: 'Python' })).toBeInTheDocument();
 	});
 
 	it('選択肢を選ぶと onChange に選択した value を渡す', async () => {
@@ -113,7 +113,7 @@ describe('Select', () => {
 		render(<Select id="language" label="言語" options={OPTIONS} onChange={onChange} />);
 
 		await user.click(screen.getByRole('combobox'));
-		await user.click(screen.getByRole('option', { name: 'TypeScript' }));
+		await user.click(await screen.findByRole('option', { name: 'TypeScript' }));
 
 		expect(onChange).toHaveBeenCalledTimes(1);
 		expect(onChange).toHaveBeenCalledWith('typescript');
@@ -125,7 +125,7 @@ describe('Select', () => {
 		render(<Select id="language" label="言語" options={OPTIONS} />);
 
 		await user.click(screen.getByRole('combobox'));
-		await user.click(screen.getByRole('option', { name: 'JavaScript' }));
+		await user.click(await screen.findByRole('option', { name: 'JavaScript' }));
 
 		expect(screen.getByRole('combobox')).toBeInTheDocument();
 	});
@@ -137,7 +137,10 @@ describe('Select', () => {
 
 		await user.click(screen.getByRole('combobox'));
 
-		expect(screen.getByRole('option', { name: 'Rust' })).toHaveAttribute('aria-disabled', 'true');
+		expect(await screen.findByRole('option', { name: 'Rust' })).toHaveAttribute(
+			'aria-disabled',
+			'true',
+		);
 	});
 
 	it('disabled の選択肢を選んでも onChange を呼び出さない', async () => {
@@ -150,7 +153,7 @@ describe('Select', () => {
 
 		await user.click(screen.getByRole('combobox'));
 
-		const disabledOption = screen.getByRole('option', { name: 'Rust' });
+		const disabledOption = await screen.findByRole('option', { name: 'Rust' });
 
 		expect(disabledOption).toHaveAttribute('aria-disabled', 'true');
 

@@ -1,6 +1,9 @@
 name: Check Node.js Version Files
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     paths:
       - ".nvmrc"
