@@ -41,10 +41,3 @@ jobs:
 
       - name: Check unused code
         run: npm run knip
-
-      - name: Debug test environment
-        run: |
-          node -v
-          npm -v
-          npx playwright --version
-          npm ls vitest @vitest/browser-playwright playwright @base-ui/react
