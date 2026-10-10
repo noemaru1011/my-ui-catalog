@@ -23,7 +23,8 @@ Storybook を使用して、コンポーネントの表示・動作・バリエ�
 | Linter / Formatter | Biome |
 | Package Manager | npm |
 | Test | Vitest、Testing Library |
-| CI | GitHub ActionsGitHub |
+| CI/CD | GitHub ActionsGitHub |
+| Deploy | GitHub Pages |
 | AI | CodeX |
 
 ## Requirements
@@ -266,3 +267,13 @@ GitHub Actions による自動チェックを管理します。
 * `.github/workflows/ci.yml`: CI の実行
 
 具体的なチェック内容は各ワークフローファイルを参照してください。
+
+## CD
+
+GitHub Actions による自動デプロイを行う。
+
+* `.github/workflows/cd.yml`: CD の実行
+
+`main` ブランチへの push をトリガーに、Storybook のビルドと GitHub Pages へのデプロイを実行します。手動実行にも対応しています。
+
+具体的な処理内容は、ワークフローファイルを参照してください。
