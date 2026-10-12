@@ -18,11 +18,6 @@ const meta = {
 		as: 'div',
 	},
 	argTypes: {
-		space: {
-			control: 'select',
-			options: ['xs', 'sm', 'md', 'lg', 'xl'],
-			description: '子要素間の間隔',
-		},
 		as: {
 			control: 'select',
 			options: ['div', 'section', 'form', 'article', 'aside', 'main', 'nav', 'ul'],

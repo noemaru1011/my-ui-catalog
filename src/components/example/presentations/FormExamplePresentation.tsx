@@ -40,186 +40,184 @@ export default function FormExamplePresentation({ register, control, errors, onS
 			<Stack space="lg">
 				<Heading type="sectionTitle">フォーム例</Heading>
 
-				<form onSubmit={onSubmit}>
-					<Stack space="lg">
-						<Cluster space="lg" align="start">
-							<Container width="lg">
-								<Input
-									id="name"
-									label="氏名"
-									required
-									{...register('name')}
-									error={errors.name?.message}
-								/>
-							</Container>
-
-							<Container width="lg">
-								<PasswordInput
-									id="password"
-									label="パスワード"
-									required
-									{...register('password')}
-									error={errors.password?.message}
-								/>
-							</Container>
-
-							<Container width="lg">
-								<Controller
-									name="category"
-									control={control}
-									render={({ field, fieldState }) => (
-										<Select
-											id={field.name}
-											label="カテゴリ"
-											value={field.value}
-											required
-											onChange={field.onChange}
-											options={CATEGORY_OPTIONS}
-											error={fieldState.error?.message}
-										/>
-									)}
-								/>
-							</Container>
-
-							<Container width="lg">
-								<Controller
-									name="user"
-									control={control}
-									render={({ field, fieldState }) => (
-										<Combobox
-											id={field.name}
-											label="ユーザー"
-											value={field.value}
-											required
-											onChange={field.onChange}
-											options={USER_OPTIONS}
-											error={fieldState.error?.message}
-										/>
-									)}
-								/>
-							</Container>
-
-							<Container width="lg">
-								<Controller
-									name="users"
-									control={control}
-									render={({ field, fieldState }) => (
-										<ComboboxMultiple
-											id={field.name}
-											label="ユーザー（複数）"
-											value={field.value}
-											required
-											onChange={field.onChange}
-											options={USER_OPTIONS}
-											error={fieldState.error?.message}
-										/>
-									)}
-								/>
-							</Container>
-
-							<Container width="lg">
-								<Controller
-									name="date"
-									control={control}
-									render={({ field, fieldState }) => (
-										<DatePicker
-											id={field.name}
-											label="日付"
-											value={field.value}
-											required
-											onChange={field.onChange}
-											error={fieldState.error?.message}
-										/>
-									)}
-								/>
-							</Container>
-
-							<Container width="lg">
-								<Controller
-									name="dateRange"
-									control={control}
-									render={({ field, fieldState }) => (
-										<DateRange
-											id={field.name}
-											label="期間"
-											value={field.value}
-											onChange={field.onChange}
-											error={fieldState.error?.message}
-										/>
-									)}
-								/>
-							</Container>
-						</Cluster>
-
-						<Cluster space="xl" align="start">
-							<Container width="lg">
-								<Controller
-									name="interests"
-									control={control}
-									render={({ field, fieldState }) => (
-										<Checkbox
-											label="興味のある分野"
-											options={INTEREST_OPTIONS}
-											value={field.value}
-											onChange={field.onChange}
-											error={fieldState.error?.message}
-										/>
-									)}
-								/>
-							</Container>
-
-							<Container width="lg">
-								<Controller
-									name="gender"
-									control={control}
-									render={({ field, fieldState }) => (
-										<Radio
-											label="性別"
-											options={GENDER_OPTIONS}
-											value={field.value}
-											onChange={field.onChange}
-											error={fieldState.error?.message}
-										/>
-									)}
-								/>
-							</Container>
-						</Cluster>
-
-						<Controller
-							name="agreement"
-							control={control}
-							render={({ field, fieldState }) => (
-								<Checkbox
-									label="利用規約への同意"
-									options={[
-										{
-											value: 'agreement',
-											label: '利用規約に同意する',
-										},
-									]}
-									value={field.value}
-									onChange={field.onChange}
-									error={fieldState.error?.message}
-								/>
-							)}
-						/>
-
-						<Container width="3xl">
-							<Textarea
-								id="description"
-								label="説明"
+				<Stack space="lg" as="form" onSubmit={onSubmit}>
+					<Cluster space="lg" align="start">
+						<Container width="lg">
+							<Input
+								id="name"
+								label="氏名"
 								required
-								{...register('description')}
-								error={errors.description?.message}
+								{...register('name')}
+								error={errors.name?.message}
 							/>
 						</Container>
 
-						<Cluster justify="between" align="center">
-							<Link to="/#" label="戻る" />
-							<Button type="submit">送信</Button>
-						</Cluster>
-					</Stack>
-				</form>
+						<Container width="lg">
+							<PasswordInput
+								id="password"
+								label="パスワード"
+								required
+								{...register('password')}
+								error={errors.password?.message}
+							/>
+						</Container>
+
+						<Container width="lg">
+							<Controller
+								name="category"
+								control={control}
+								render={({ field, fieldState }) => (
+									<Select
+										id={field.name}
+										label="カテゴリ"
+										value={field.value}
+										required
+										onChange={field.onChange}
+										options={CATEGORY_OPTIONS}
+										error={fieldState.error?.message}
+									/>
+								)}
+							/>
+						</Container>
+
+						<Container width="lg">
+							<Controller
+								name="user"
+								control={control}
+								render={({ field, fieldState }) => (
+									<Combobox
+										id={field.name}
+										label="ユーザー"
+										value={field.value}
+										required
+										onChange={field.onChange}
+										options={USER_OPTIONS}
+										error={fieldState.error?.message}
+									/>
+								)}
+							/>
+						</Container>
+
+						<Container width="lg">
+							<Controller
+								name="users"
+								control={control}
+								render={({ field, fieldState }) => (
+									<ComboboxMultiple
+										id={field.name}
+										label="ユーザー（複数）"
+										value={field.value}
+										required
+										onChange={field.onChange}
+										options={USER_OPTIONS}
+										error={fieldState.error?.message}
+									/>
+								)}
+							/>
+						</Container>
+
+						<Container width="lg">
+							<Controller
+								name="date"
+								control={control}
+								render={({ field, fieldState }) => (
+									<DatePicker
+										id={field.name}
+										label="日付"
+										value={field.value}
+										required
+										onChange={field.onChange}
+										error={fieldState.error?.message}
+									/>
+								)}
+							/>
+						</Container>
+
+						<Container width="lg">
+							<Controller
+								name="dateRange"
+								control={control}
+								render={({ field, fieldState }) => (
+									<DateRange
+										id={field.name}
+										label="期間"
+										value={field.value}
+										onChange={field.onChange}
+										error={fieldState.error?.message}
+									/>
+								)}
+							/>
+						</Container>
+					</Cluster>
+
+					<Cluster space="xl" align="start">
+						<Container width="lg">
+							<Controller
+								name="interests"
+								control={control}
+								render={({ field, fieldState }) => (
+									<Checkbox
+										label="興味のある分野"
+										options={INTEREST_OPTIONS}
+										value={field.value}
+										onChange={field.onChange}
+										error={fieldState.error?.message}
+									/>
+								)}
+							/>
+						</Container>
+
+						<Container width="lg">
+							<Controller
+								name="gender"
+								control={control}
+								render={({ field, fieldState }) => (
+									<Radio
+										label="性別"
+										options={GENDER_OPTIONS}
+										value={field.value}
+										onChange={field.onChange}
+										error={fieldState.error?.message}
+									/>
+								)}
+							/>
+						</Container>
+					</Cluster>
+
+					<Controller
+						name="agreement"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Checkbox
+								label="利用規約への同意"
+								options={[
+									{
+										value: 'agreement',
+										label: '利用規約に同意する',
+									},
+								]}
+								value={field.value}
+								onChange={field.onChange}
+								error={fieldState.error?.message}
+							/>
+						)}
+					/>
+
+					<Container width="3xl">
+						<Textarea
+							id="description"
+							label="説明"
+							required
+							{...register('description')}
+							error={errors.description?.message}
+						/>
+					</Container>
+
+					<Cluster justify="between" align="center">
+						<Link to="/#" label="戻る" />
+						<Button type="submit">送信</Button>
+					</Cluster>
+				</Stack>
 			</Stack>
 		</Center>
 	);
