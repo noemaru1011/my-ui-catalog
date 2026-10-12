@@ -7,12 +7,12 @@ type ContainerProps = {
 };
 
 const WIDTH_CLASS = {
-	sm: 'w-64',
-	md: 'w-72',
-	lg: 'w-80',
-	xl: 'w-96',
-	'2xl': 'w-2xl',
-	'3xl': 'w-3xl',
+	sm: 'w-full max-w-64',
+	md: 'w-full max-w-72',
+	lg: 'w-full max-w-80',
+	xl: 'w-full max-w-96',
+	'2xl': 'w-full max-w-2xl',
+	'3xl': 'w-full max-w-3xl',
 	full: 'w-full',
 };
 
