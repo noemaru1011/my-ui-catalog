@@ -1,21 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Input } from '../../elements/Input/Input';
 import { Container } from './Container';
+import { Stack } from '../Stack/Stack';
 
 const meta = {
 	component: Container,
 	tags: ['autodocs'],
 	parameters: {
-		layout: 'centered',
+		layout: 'fullscreen',
 		docs: {
 			description: {
-				component: 'コンテンツの幅を制限するレイアウトコンポーネントです。',
+				component: 'コンテンツの幅を制限するレイアウトコンポーネントです。用途はページの外枠、余白、全体のレイアウト',
 			},
 		},
 	},
 	args: {
 		width: 'md',
 	},
+	argTypes: {
+		children: {
+			control: false,
+		},
+	}
+
 } satisfies Meta<typeof Container>;
 
 export default meta;
@@ -32,7 +39,7 @@ export const Default: Story = {
 
 export const Widths: Story = {
 	render: () => (
-		<div className="flex flex-col gap-4">
+		<Stack>
 			<Container width="sm">
 				<Input id="sm" label="sm" placeholder="w-64" />
 			</Container>
@@ -49,9 +56,17 @@ export const Widths: Story = {
 				<Input id="xl" label="xl" placeholder="w-96" />
 			</Container>
 
+			<Container width="2xl">
+				<Input id="2xl" label="2xl" placeholder="w-112" />
+			</Container>
+
+			<Container width="3xl">
+				<Input id="3xl" label="3xl" placeholder="w-128" />
+			</Container>
+
 			<Container width="full">
 				<Input id="full" label="full" placeholder="w-full" />
 			</Container>
-		</div>
+		</Stack>
 	),
 };

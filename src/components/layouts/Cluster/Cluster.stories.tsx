@@ -1,16 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Cluster } from './Cluster';
+import { Container } from '../Container/Container';
 
 const meta = {
 	component: Cluster,
 	tags: ['autodocs'],
 	parameters: {
-		layout: 'centered',
+		layout: 'padded',
 		docs: {
 			description: {
 				component:
-					'要素を横方向に並べるコンポーネントです。`space` で子要素間の間隔、`justify` で水平方向の配置、`align` で垂直方向の配置を指定できます。',
+					'子要素を横方向に並べるレイアウトコンポーネントです。space は要素間の間隔、justify は水平方向の配置、align は垂直方向の配置を制御します。子要素が収まらない場合は自動的に折り返します。',
 			},
 		},
 	},
@@ -42,17 +43,39 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const Item = ({
+	title,
+	className = '',
+}: {
+	title: string;
+	className?: string;
+}) => (
+	<div
+		className={`flex min-w-20 items-center justify-center rounded-md border border-blue-300 bg-blue-50 px-4 py-3 text-sm font-medium text-blue-900 ${className}`}
+	>
+		{title}
+	</div>
+);
 export const Default: Story = {
+	args: {
+		space: 'sm',
+		justify: 'start',
+		align: 'center',
+	},
 	render: (args) => (
-		<Cluster {...args}> <div className="rounded-md border p-3">1行目</div> <div className="rounded-md border p-3"> <p>1行目</p> <p>2行目</p> <p>3行目</p> </div> </Cluster>
-	),
-};
-
-export const Wrapping: Story = {
-	render: (args) => (<div className="w-64 border p-4">
-		<Cluster {...args}>
-			{Array.from({ length: 8 }, (_, index) => (<Badge key={index} variant="secondary">
-				タグ {index + 1} </Badge>
-			))} </Cluster> </div>
+		<Container width="full">
+			<Card>
+				<CardHeader>
+					<CardTitle>space・justify・align を Controls から変更して、子要素の配置や間隔を確認できます。</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<Cluster {...args}>
+						<Item title="小" />
+						<Item title="中" className="py-6" />
+						<Item title="大" className="py-8" />
+					</Cluster>
+				</CardContent>
+			</Card>
+		</Container>
 	),
 };

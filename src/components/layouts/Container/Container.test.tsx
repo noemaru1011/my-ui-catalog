@@ -10,12 +10,12 @@ describe('Container', () => {
 	});
 
 	it.each([
-		['sm', 'w-64'],
-		['md', 'w-72'],
-		['lg', 'w-80'],
-		['xl', 'w-96'],
-		['2xl', 'w-2xl'],
-		['3xl', 'w-3xl'],
+		['sm', 'max-w-64'],
+		['md', 'max-w-72'],
+		['lg', 'max-w-80'],
+		['xl', 'max-w-96'],
+		['2xl', 'max-w-2xl'],
+		['3xl', 'max-w-3xl'],
 		['full', 'w-full'],
 	] as const)('width="%s" のとき %s を適用する', (width, expectedClass) => {
 		const { container } = render(<Container width={width}>コンテンツ</Container>);
