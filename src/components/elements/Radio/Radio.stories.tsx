@@ -5,16 +5,14 @@ import { Radio } from './Radio';
 const meta = {
 	component: Radio,
 	tags: ['autodocs'],
-	parameters: {
-		layout: 'centered',
+	argTypes: {
+		value: {
+			control: false,
+		},
+		options: {
+			control: false,
+		},
 	},
-	decorators: [
-		(Story) => (
-			<div className="w-80">
-				<Story />
-			</div>
-		),
-	],
 	args: {
 		label: '表示項目',
 		options: [
@@ -24,7 +22,7 @@ const meta = {
 			{ value: 'connected-servers', label: '接続中のサーバー' },
 		],
 		value: '',
-		onChange: () => {},
+		onChange: () => { },
 	},
 } satisfies Meta<typeof Radio>;
 

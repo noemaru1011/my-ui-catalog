@@ -4,9 +4,6 @@ import { HamburgerMenu } from './HamburgerMenu';
 const meta = {
 	component: HamburgerMenu,
 	tags: ['autodocs'],
-	parameters: {
-		layout: 'centered',
-	},
 	argTypes: {
 		children: {
 			control: false,

@@ -4,9 +4,6 @@ import { Input } from './Input';
 const meta = {
 	component: Input,
 	tags: ['autodocs'],
-	parameters: {
-		layout: 'centered',
-	},
 	args: {
 		id: 'input',
 		label: '名前',

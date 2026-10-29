@@ -5,9 +5,6 @@ import { Heading } from './Heading';
 const meta = {
 	component: Heading,
 	tags: ['autodocs'],
-	parameters: {
-		layout: 'centered',
-	},
 	args: {
 		children: '見出し',
 		type: 'sectionTitle',

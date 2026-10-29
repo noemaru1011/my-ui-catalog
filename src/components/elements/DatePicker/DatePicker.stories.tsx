@@ -1,14 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Center } from '../../layouts/Center/Center';
 import { DatePicker } from './DatePicker';
 
 const meta = {
 	component: DatePicker,
 	tags: ['autodocs'],
-	parameters: {
-		layout: 'centered',
-	},
 	argTypes: {
 		value: {
 			control: false,
@@ -18,13 +14,6 @@ const meta = {
 		id: 'date',
 		label: '日付',
 	},
-	decorators: [
-		(Story) => (
-			<Center maxWidth="md">
-				<Story />
-			</Center>
-		),
-	],
 } satisfies Meta<typeof DatePicker>;
 
 export default meta;

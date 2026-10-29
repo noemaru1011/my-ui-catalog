@@ -4,8 +4,15 @@ import { Select } from './Select';
 const meta = {
 	component: Select,
 	tags: ['autodocs'],
+	argTypes: {
+		value: {
+			control: false,
+		},
+		options: {
+			control: false,
+		},
+	},
 	parameters: {
-		layout: 'centered',
 		docs: {
 			description: {
 				component: '選択肢内のグループ化などは非対応です。',
@@ -21,13 +28,6 @@ const meta = {
 			{ value: 'nuxt', label: 'Nuxt', disabled: true },
 		],
 	},
-	decorators: [
-		(Story) => (
-			<div className="w-[200px]">
-				<Story />
-			</div>
-		),
-	],
 } satisfies Meta<typeof Select>;
 
 export default meta;
