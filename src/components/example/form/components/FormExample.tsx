@@ -34,7 +34,7 @@ type Props = {
 	onSubmit: React.FormEventHandler<HTMLFormElement>;
 };
 
-export default function FormExamplePresentation({ register, control, errors, onSubmit }: Props) {
+export function FormExample({ register, control, errors, onSubmit }: Props) {
 	return (
 		<Center maxWidth="xl">
 			<Stack space="lg">
