@@ -1,0 +1,10 @@
+{
+	"version": 2,
+	"name": "vitest",
+	"owner": "onmax",
+	"repo": "nuxt-skills",
+	"path": "skills/vitest",
+	"branch": "main",
+	"sha": "c9a239c76c226e6ba565df0113febd5d4b0e116c",
+	"source": "manual"
+}
