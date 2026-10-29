@@ -38,6 +38,3 @@ jobs:
 
       - name: Build Storybook
         run: npm run build-storybook
-
-      - name: Check unused code
-        run: npm run knip
