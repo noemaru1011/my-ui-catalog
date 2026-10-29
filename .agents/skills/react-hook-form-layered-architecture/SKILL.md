@@ -1,433 +1,433 @@
 ---
 name: react-hook-form-layered-architecture
-description: Rules and guidelines for creating React form modules by separating responsibilities into schema, Container, presentation, and page layers. Enforces React Hook Form with Zod validation, strict component integration standards (register vs Controller), and isolated component layers.
+description: Guidelines for building React form features using Zod schemas, React Hook Form, custom hooks, UI components, and pages. Enforces separation of business logic and presentation, type-safe schema integration from the root @my-app/schemas package, and correct register vs Controller usage.
 ---
 
-# Schema-Container-Presentation-Page Form Architecture
+# React Hook Form Feature Architecture
 
 ## Goal
 
-Provide a clean, maintainable, and type-safe architecture for React form features by isolating concerns into four distinct layers:
+Build maintainable, type-safe React form features by separating responsibilities into four layers:
 
-1. **Schema**: Zod validation schemas, inferred TypeScript types, option arrays, and initial default values.
-2. **Container**: Form state management (`useForm`), schema resolution (`zodResolver`), submit handlers, and side effects.
-3. **Presentation**: Pure UI rendering, receiving form control props, and placing UI elements.
-4. **Page**: Routing entrypoint that mounts the Container component.
+1. **Schema**: Zod validation schemas and inferred TypeScript types. Shared application schemas are defined in the root `@my-app/schemas` package.
+2. **Custom Hook**: Form state management, schema resolution, submission handlers, API calls, side effects, and feature-specific state.
+3. **Component**: UI rendering, form fields, validation messages, and user interactions. Components receive required state and callbacks through props.
+4. **Page**: Routing entry point that composes the feature hook and UI components.
+
+Use Custom Hooks instead of dedicated Container components when a component exists only to manage state and pass props to a presentation component.
+
+Container / Presentation is not prohibited, but it is not the default architecture for new features.
 
 ---
 
 ## Directory & Naming Conventions
 
-Organize files for a feature named `[FeatureName]` in a dedicated folder:
+Organize feature-specific code under its feature directory.
+
+Example:
 
 ```text
-[FeatureName]/
-├── schema/
-│   └── [featureName]Schema.ts
-├── containers/
-│   └── [FeatureName]Container.tsx
-├── presentations/
-│   └── [FeatureName]Presentation.tsx
-└── pages/
-    └── [FeatureName]Page.tsx
+features/
+└── auth/
+    ├── login/
+    │   ├── hooks/
+    │   │   └── useLogin.ts
+    │   ├── components/
+    │   │   └── LoginForm.tsx
+    │   └── pages/
+    │       └── LoginPage.tsx
+    └── register/
+        ├── hooks/
+        │   └── useRegister.ts
+        ├── components/
+        │   └── RegisterForm.tsx
+        └── pages/
+            └── RegisterPage.tsx
 ```
 
-> **Naming Rule for Containers:**  
-> Always suffix Container components with `Container` (e.g., `FormExampleContainer.tsx`) to avoid naming collisions with layout components like `@/components/layouts/Container/Container`.
+For a simple feature, a smaller structure is acceptable. Do not create directories or files solely to satisfy a fixed folder template.
+
+### Naming rules
+
+- Custom Hooks: `use[FeatureName].ts`, such as `useLogin.ts`.
+- UI components: use descriptive names such as `LoginForm.tsx`, `RegisterForm.tsx`, or `InventoryView.tsx`.
+- Pages: `[FeatureName]Page.tsx`, such as `LoginPage.tsx`.
+- Shared schema packages: import schemas and input types from `@my-app/schemas`.
+- Avoid introducing `Container` components when their only responsibility is calling a hook and forwarding its return values to a UI component.
+
+Use named exports or default exports consistently with the surrounding project conventions.
+
+---
+
+## Schema Import Rules
+
+The root `@my-app/schemas` package is the canonical source for application schemas and their exported TypeScript types.
+
+Always import schemas and types from this package when they are available there.
+
+Correct:
+
+```tsx
+import type { SignInInput } from '@my-app/schemas';
+import { signInSchema } from '@my-app/schemas';
+```
+
+Incorrect:
+
+```tsx
+import { signInSchema } from '../schema/signInSchema';
+```
+
+Do not duplicate a schema or redefine an existing exported input type inside a feature directory.
+
+Feature-specific defaults, option arrays, or presentation-only constants may be defined locally when appropriate. Shared validation rules and inferred types should remain in the root schema package.
+
+Do not assume every form needs its own schema directory.
+
+---
+
+## Layer Responsibilities
+
+### 1. Schema layer
+
+Schemas and inferred types are maintained in the root `@my-app/schemas` package.
+
+Responsibilities:
+
+- Define Zod validation rules.
+- Export schemas and inferred TypeScript types.
+- Share validation rules between the frontend and other application layers where appropriate.
+- Avoid React, JSX, UI components, and React Hook Form dependencies.
+
+Example:
+
+```tsx
+import { z } from 'zod';
+
+export const signInSchema = z.object({
+  email: z.email(),
+  password: z.string().min(8),
+  rememberMe: z.boolean(),
+});
+
+export type SignInInput = z.infer<typeof signInSchema>;
+```
+
+This is an illustrative schema example. Follow the project's existing Zod version and validation conventions.
+
+### 2. Custom Hook layer
+
+The Custom Hook manages form state and feature behavior.
+
+Responsibilities:
+
+- Initialize `useForm`.
+- Connect the schema using `zodResolver`.
+- Define default form values.
+- Implement submit handlers.
+- Call APIs and mutations.
+- Handle loading and submission state.
+- Perform side effects such as toast notifications and navigation when appropriate.
+- Manage feature-specific state that belongs to the workflow.
+- Return only the values and callbacks required by the UI.
+
+Example:
+
+```tsx
+import { zodResolver } from '@hookform/resolvers/zod';
+import type { SignInInput } from '@my-app/schemas';
+import { signInSchema } from '@my-app/schemas';
+import { useForm } from 'react-hook-form';
+
+export function useLogin() {
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignInInput>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
+  });
+
+  const onSubmit = async (values: SignInInput): Promise<void> => {
+    // Execute the login workflow.
+  };
+
+  return {
+    register,
+    control,
+    errors,
+    isSubmitting,
+    onSubmit: handleSubmit(onSubmit),
+  };
+}
+```
+
+The example omits application-specific authentication and error handling.
+
+Do not put JSX or presentation markup inside a Custom Hook.
+
+Do not create a separate hook for every function or state variable. Split hooks when responsibilities become independently meaningful, reusable, or difficult to maintain.
+
+### 3. Component layer
+
+Components render the UI and expose interactions through props.
+
+Responsibilities:
+
+- Render form fields and layout.
+- Display validation errors.
+- Use the supplied submission handler.
+- Render loading and disabled states.
+- Connect fields to React Hook Form using `register` or `Controller`, according to the UI component's API.
+- Avoid performing API requests or containing feature-level business workflows.
+
+Components should not initialize their own form state when that state is intended to be managed by the feature hook.
+
+Example:
+
+```tsx
+import type { SignInInput } from '@my-app/schemas';
+import type { ComponentProps } from 'react';
+import type { FieldErrors, UseFormRegister } from 'react-hook-form';
+
+import { Input } from '@/components/elements/Input/Input';
+import { Button } from '@/components/ui/button';
+
+type Props = {
+  register: UseFormRegister<SignInInput>;
+  errors: FieldErrors<SignInInput>;
+  isSubmitting: boolean;
+  onSubmit: ComponentProps<'form'>['onSubmit'];
+};
+
+export function LoginForm({
+  register,
+  errors,
+  isSubmitting,
+  onSubmit,
+}: Props) {
+  return (
+    <form onSubmit={onSubmit} noValidate>
+      <Input
+        id="email"
+        label="Email"
+        type="email"
+        {...register('email')}
+        readOnly={isSubmitting}
+        error={errors.email?.message}
+      />
+
+      <Button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Signing in...' : 'Sign in'}
+      </Button>
+    </form>
+  );
+}
+```
+
+This is a minimal illustration. Use the project's actual UI components and design-system conventions.
+
+### 4. Page layer
+
+The Page connects the Custom Hook to the UI component.
+
+Responsibilities:
+
+- Call the feature hook.
+- Compose the page's UI.
+- Pass the hook's returned values to the appropriate components.
+- Handle page-level composition when multiple components are involved.
+
+Example:
+
+```tsx
+import { LoginForm } from '../components/LoginForm';
+import { useLogin } from '../hooks/useLogin';
+
+export default function LoginPage() {
+  const login = useLogin();
+
+  return <LoginForm {...login} />;
+}
+```
+
+Do not introduce a Container component merely to perform this connection.
+
+When a page is small and has no meaningful reason to separate the UI, combining the page and form component is acceptable. Preserve separation when it improves readability, reuse, or testing.
 
 ---
 
 ## UI Component Integration Guidelines
 
-When integrating UI components with React Hook Form inside the Presentation layer, strictly adhere to the following mapping rules:
+When integrating UI components with React Hook Form, follow these rules.
 
-### 1. Components using `register` (Native Input Wrappers)
+### 1. Components using `register`
 
-Use direct prop spreading `{...register('fieldName')}` for components that accept standard input ref and event handlers:
+Use direct prop spreading when a component supports the standard input ref, event handlers, and value behavior required by React Hook Form.
 
-- `<Input />`
-- `<PasswordInput />`
-- `<Textarea />`
+Typical examples:
 
-### 2. Components using `<Controller />` (Controlled UI Primitives)
+- `Input`
+- `PasswordInput`
+- `Textarea`
 
-Wrap with React Hook Form's `<Controller />` for custom UI components that handle value state via custom callbacks (`onChange`, `value`):
-
-- `<Select />`
-- `<Combobox />`
-- `<ComboboxMultiple />`
-- `<DatePicker />`
-- `<DateRange />`
-- `<Checkbox />`
-- `<Radio />`
-
----
-
-## Layer Definitions & Implementation Examples
-
-### 1. Schema Layer (`schema/[featureName]Schema.ts`)
-
-Pure TypeScript/Zod definitions. **Must not import any UI elements or React hooks.**
-
-```typescript
-import { z } from 'zod';
-
-export const FORM_SCHEMA = z.object({
-  name: z.string().min(1, 'Name is required.'),
-  password: z.string().min(8, 'Password must be at least 8 characters.'),
-  category: z.string().min(1, 'Please select a category.'),
-  user: z.string().min(1, 'Please select a user.'),
-  users: z.array(z.string()).min(1, 'Select at least one user.'),
-  date: z.date({ message: 'Date is required.' }),
-  dateRange: z
-    .object({
-      from: z.date(),
-      to: z.date().optional(),
-    })
-    .optional()
-    .refine((val) => val?.from && val?.to, { message: 'Date range is required.' }),
-  interests: z.array(z.string()).min(1, 'Select at least one interest.'),
-  gender: z.string().min(1, 'Gender selection is required.'),
-  agreement: z.array(z.string()).min(1, 'You must accept the terms.'),
-  description: z.string().min(1, 'Description is required.'),
-});
-
-export type FormValues = z.infer<typeof FORM_SCHEMA>;
-
-export const CATEGORY_OPTIONS = [
-  { value: 'engineering', label: 'Engineering' },
-  { value: 'design', label: 'Design' },
-];
-
-export const USER_OPTIONS = [
-  { value: 'tanaka', label: 'Tanaka Taro' },
-  { value: 'sato', label: 'Sato Hanako' },
-];
-
-export const INTEREST_OPTIONS = [
-  { value: 'programming', label: 'Programming' },
-  { value: 'design', label: 'Design' },
-];
-
-export const GENDER_OPTIONS = [
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
-];
-
-export const DEFAULT_FORM_VALUES: FormValues = {
-  name: '',
-  password: '',
-  category: '',
-  user: '',
-  users: [],
-  agreement: [],
-  interests: [],
-  gender: '',
-  date: undefined as unknown as Date,
-  dateRange: undefined,
-  description: '',
-};
-```
-
----
-
-### 2. Container Layer (`containers/[FeatureName]Container.tsx`)
-
-Handles form state initialization, schema binding, and submission handlers. Passes form control props down to Presentation.
+Example:
 
 ```tsx
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+<Input
+  id="email"
+  label="Email"
+  {...register('email')}
+  error={errors.email?.message}
+/>
+```
 
-import FormExamplePresentation from '../presentations/FormExamplePresentation';
-import {
-  DEFAULT_FORM_VALUES,
-  FORM_SCHEMA,
-  type FormValues,
-} from '../schema/formExampleSchema';
+Verify the actual component API before using `register`. A component's name alone does not guarantee compatibility.
 
-export default function FormExampleContainer() {
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(FORM_SCHEMA),
-    defaultValues: DEFAULT_FORM_VALUES,
-  });
+### 2. Components using `Controller`
 
-  const onSubmit = (values: FormValues) => {
-    console.log(values);
-  };
+Use `Controller` for controlled UI components whose APIs do not directly support React Hook Form's registration contract.
 
-  return (
-    <FormExamplePresentation
-      register={register}
-      control={control}
-      errors={errors}
-      onSubmit={handleSubmit(onSubmit)}
+Typical examples in this project may include:
+
+- `Select`
+- `Combobox`
+- `ComboboxMultiple`
+- `DatePicker`
+- `DateRange`
+- `Checkbox`
+- `Radio`
+
+Example:
+
+```tsx
+<Controller
+  name="category"
+  control={control}
+  render={({ field, fieldState }) => (
+    <Select
+      id={field.name}
+      label="Category"
+      value={field.value}
+      onChange={field.onChange}
+      options={CATEGORY_OPTIONS}
+      error={fieldState.error?.message}
     />
-  );
-}
+  )}
+/>
 ```
+
+Adapt `value`, `onChange`, `onBlur`, and `ref` to the actual component contract. Do not assume that every component uses the same value type.
+
+For example, if a checkbox component uses an array of selected values but the schema expects a boolean, explicitly convert between the UI value and the form value.
+
+Do not use `Controller` unnecessarily for components that correctly support `register`.
 
 ---
 
-### 3. Presentation Layer (`presentations/[FeatureName]Presentation.tsx`)
+## Form Submission and Side Effects
 
-Renders layout and UI components based on props. Does not manage form state or execute business logic.
+### Submission
+
+Apply `handleSubmit` to the submit handler before exposing it to the component.
 
 ```tsx
-import type { Control, FieldErrors, UseFormRegister } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
-
-import { Checkbox } from '@/components/elements/Checkbox/Checkbox';
-import { Combobox } from '@/components/elements/Combobox/Combobox';
-import { ComboboxMultiple } from '@/components/elements/ComboboxMultiple/ComboboxMultiple';
-import { DatePicker } from '@/components/elements/DatePicker/DatePicker';
-import { DateRange } from '@/components/elements/DateRange/DateRange';
-import { Heading } from '@/components/elements/Heading/Heading';
-import { Input } from '@/components/elements/Input/Input';
-import { PasswordInput } from '@/components/elements/Input/PasswordInput';
-import { Link } from '@/components/elements/Link/Link';
-import { Radio } from '@/components/elements/Radio/Radio';
-import { Select } from '@/components/elements/Select/Select';
-import { Textarea } from '@/components/elements/Textarea/Textarea';
-import { Center } from '@/components/layouts/Center/Center';
-import { Cluster } from '@/components/layouts/Cluster/Cluster';
-import { Container } from '@/components/layouts/Container/Container';
-import { Stack } from '@/components/layouts/Stack/Stack';
-import { Button } from '@/components/ui/button';
-
-import {
-  CATEGORY_OPTIONS,
-  GENDER_OPTIONS,
-  INTEREST_OPTIONS,
-  USER_OPTIONS,
-  type FormValues,
-} from '../schema/formExampleSchema';
-
-type Props = {
-  register: UseFormRegister<FormValues>;
-  control: Control<FormValues>;
-  errors: FieldErrors<FormValues>;
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
+return {
+  onSubmit: handleSubmit(onSubmit),
 };
-
-export default function FormExamplePresentation({
-  register,
-  control,
-  errors,
-  onSubmit,
-}: Props) {
-  return (
-    <Center maxWidth="xl">
-      <Stack space="lg">
-        <Heading type="sectionTitle">Form Example</Heading>
-
-        <form onSubmit={onSubmit}>
-          <Stack space="lg">
-            <Cluster space="lg" align="start">
-              {/* Registered components */}
-              <Container width="lg">
-                <Input
-                  id="name"
-                  label="Name"
-                  required
-                  {...register('name')}
-                  error={errors.name?.message}
-                />
-              </Container>
-
-              <Container width="lg">
-                <PasswordInput
-                  id="password"
-                  label="Password"
-                  required
-                  {...register('password')}
-                  error={errors.password?.message}
-                />
-              </Container>
-
-              {/* Controlled components */}
-              <Container width="lg">
-                <Controller
-                  name="category"
-                  control={control}
-                  render={({ field, fieldState }) => (
-                    <Select
-                      id={field.name}
-                      label="Category"
-                      value={field.value}
-                      required
-                      onChange={field.onChange}
-                      options={CATEGORY_OPTIONS}
-                      error={fieldState.error?.message}
-                    />
-                  )}
-                />
-              </Container>
-
-              <Container width="lg">
-                <Controller
-                  name="user"
-                  control={control}
-                  render={({ field, fieldState }) => (
-                    <Combobox
-                      id={field.name}
-                      label="User"
-                      value={field.value}
-                      required
-                      onChange={field.onChange}
-                      options={USER_OPTIONS}
-                      error={fieldState.error?.message}
-                    />
-                  )}
-                />
-              </Container>
-
-              <Container width="lg">
-                <Controller
-                  name="users"
-                  control={control}
-                  render={({ field, fieldState }) => (
-                    <ComboboxMultiple
-                      id={field.name}
-                      label="Users (Multiple)"
-                      value={field.value}
-                      required
-                      onChange={field.onChange}
-                      options={USER_OPTIONS}
-                      error={fieldState.error?.message}
-                    />
-                  )}
-                />
-              </Container>
-
-              <Container width="lg">
-                <Controller
-                  name="date"
-                  control={control}
-                  render={({ field, fieldState }) => (
-                    <DatePicker
-                      id={field.name}
-                      label="Date"
-                      value={field.value}
-                      required
-                      onChange={field.onChange}
-                      error={fieldState.error?.message}
-                    />
-                  )}
-                />
-              </Container>
-
-              <Container width="lg">
-                <Controller
-                  name="dateRange"
-                  control={control}
-                  render={({ field, fieldState }) => (
-                    <DateRange
-                      id={field.name}
-                      label="Date Range"
-                      value={field.value}
-                      onChange={field.onChange}
-                      error={fieldState.error?.message}
-                    />
-                  )}
-                />
-              </Container>
-            </Cluster>
-
-            <Cluster space="xl" align="start">
-              <Container width="lg">
-                <Controller
-                  name="interests"
-                  control={control}
-                  render={({ field, fieldState }) => (
-                    <Checkbox
-                      label="Interests"
-                      options={INTEREST_OPTIONS}
-                      value={field.value}
-                      onChange={field.onChange}
-                      error={fieldState.error?.message}
-                    />
-                  )}
-                />
-              </Container>
-
-              <Container width="lg">
-                <Controller
-                  name="gender"
-                  control={control}
-                  render={({ field, fieldState }) => (
-                    <Radio
-                      label="Gender"
-                      options={GENDER_OPTIONS}
-                      value={field.value}
-                      onChange={field.onChange}
-                      error={fieldState.error?.message}
-                    />
-                  )}
-                />
-              </Container>
-            </Cluster>
-
-            <Controller
-              name="agreement"
-              control={control}
-              render={({ field, fieldState }) => (
-                <Checkbox
-                  label="Terms Agreement"
-                  options={[{ value: 'agreement', label: 'I agree to the terms' }]}
-                  value={field.value}
-                  onChange={field.onChange}
-                  error={fieldState.error?.message}
-                />
-              )}
-            />
-
-            <Container width="3xl">
-              <Textarea
-                id="description"
-                label="Description"
-                required
-                {...register('description')}
-                error={errors.description?.message}
-              />
-            </Container>
-
-            <Cluster justify="between" align="center">
-              <Link to="/#" label="Back" />
-              <Button type="submit">Submit</Button>
-            </Cluster>
-          </Stack>
-        </form>
-      </Stack>
-    </Center>
-  );
-}
 ```
+
+The component should pass the returned handler directly to the form's `onSubmit`.
+
+### API errors
+
+- Handle expected API errors explicitly.
+- Provide user-facing messages through the project's established notification system.
+- Handle unexpected exceptions without assuming every thrown value is an `Error`.
+- Avoid duplicating error-handling logic when a shared application utility already exists.
+
+### Navigation
+
+Navigation may be handled inside the feature hook when it is part of the feature workflow, such as navigating to the home page after a successful login.
+
+Use page-level orchestration when the destination depends on broader routing context or when the behavior should be controlled by the page.
+
+### Loading states
+
+Use React Hook Form's `isSubmitting` for form submission state when appropriate.
+
+Use query and mutation state from the data layer for asynchronous operations managed by those tools.
+
+Do not introduce redundant state if an existing state source already represents the same operation. Additional state is acceptable when it represents a genuinely different workflow state.
 
 ---
 
-### 4. Page Layer (`pages/[FeatureName]Page.tsx`)
+## Complex Features
 
-Routing entrypoint that mounts the Container component.
+Not every feature should be forced into a single hook and a single UI component.
 
-```tsx
-import FormExampleContainer from '../containers/FormExampleContainer';
+For complex features, split responsibilities by meaningful behavior.
 
-export default function FormExamplePage() {
-  return <FormExampleContainer />;
-}
+Example:
+
+```text
+features/
+└── inventory/
+    ├── hooks/
+    │   ├── useInventory.ts
+    │   └── useInventoryDrafts.ts
+    ├── components/
+    │   ├── InventoryView.tsx
+    │   ├── InventoryForm.tsx
+    │   ├── InventoryDataTable.tsx
+    │   └── DeleteInventoryDialog.tsx
+    └── pages/
+        └── InventoryPage.tsx
 ```
+
+Use this level of separation only when justified by complexity.
+
+A feature hook may coordinate queries, mutations, form state, and several related UI actions. Extract a specialized hook when a distinct responsibility becomes independently understandable or reusable.
+
+Keep query definitions, mutation definitions, domain types, and table column definitions in their established modules rather than automatically moving all of them into the form hook.
 
 ---
 
 ## Architectural Checklist
 
-- [ ] **Schema Isolation:** The schema file contains no React, JSX, or UI library dependencies.
-- [ ] **Component Binding Rules:** `Input`, `PasswordInput`, and `Textarea` use `register`. `Select`, `Combobox`, `ComboboxMultiple`, `DatePicker`, `DateRange`, `Checkbox`, and `Radio` use `<Controller />`.
-- [ ] **Container Naming:** Containers are explicitly named `[FeatureName]Container.tsx` to prevent collisions with layout elements.
-- [ ] **Pure Presentation:** `useForm` is never initialized inside Presentation components.
+Before completing a form feature, verify the following:
+
+- [ ] Shared schemas and inferred input types are imported from `@my-app/schemas`.
+- [ ] Existing shared schemas are not duplicated in feature directories.
+- [ ] `useForm` uses the appropriate schema through `zodResolver`.
+- [ ] Default values match the form's expected types and schema.
+- [ ] Native-compatible inputs use `register`.
+- [ ] Controlled UI components use `Controller` when required by their APIs.
+- [ ] API calls, submission workflows, and feature side effects live in the Custom Hook or an appropriate service layer.
+- [ ] UI components render state and invoke callbacks rather than implementing feature business logic.
+- [ ] The Page composes the hook and UI without an unnecessary Container component.
+- [ ] Loading, validation, API errors, and submission behavior are handled.
+- [ ] Existing project naming, import aliases, and component conventions are followed.
+- [ ] Abstractions and file splits are introduced only when they improve maintainability.
+
+---
+
+## Migration Guidance
+
+When migrating an existing Container / Presentation feature:
+
+1. Move form initialization and business logic into a feature-specific Custom Hook.
+2. Preserve existing validation, API calls, error handling, and user-visible behavior.
+3. Rename or adapt the Presentation component to a descriptive component name, such as `LoginForm` or `InventoryView`.
+4. Create or update the Page to call the hook and pass its return values to the UI.
+5. Update route imports and tests.
+6. Remove obsolete Container and Presentation files only after all references and tests have been migrated.
+7. Verify the existing query and mutation behavior before removing explicit refetches or changing state management.
+
+Do not combine an architectural migration with unrelated behavioral changes unless those changes are intentional and verified.

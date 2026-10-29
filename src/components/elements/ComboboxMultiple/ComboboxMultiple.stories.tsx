@@ -6,7 +6,6 @@ const meta = {
 	component: ComboboxMultiple,
 	tags: ['autodocs'],
 	parameters: {
-		layout: 'centered',
 		docs: {
 			description: {
 				component:

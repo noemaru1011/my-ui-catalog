@@ -4,9 +4,6 @@ import { PasswordInput } from './PasswordInput';
 const meta = {
 	component: PasswordInput,
 	tags: ['autodocs'],
-	parameters: {
-		layout: 'centered',
-	},
 	args: {
 		id: 'password',
 		label: 'パスワード',

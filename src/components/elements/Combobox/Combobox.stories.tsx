@@ -5,7 +5,6 @@ const meta = {
 	component: Combobox,
 	tags: ['autodocs'],
 	parameters: {
-		layout: 'centered',
 		docs: {
 			description: {
 				component: '選択肢内のグループ化やマルチセレクトなどは非対応です。',

@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Center } from '../../layouts/Center/Center';
 import { Checkbox } from './Checkbox';
 
 const meta = {
 	component: Checkbox,
 	tags: ['autodocs'],
-	decorators: [
-		(Story: React.ComponentType) => (
-			<Center>
-				<Story />
-			</Center>
-		),
-	],
+	argTypes: {
+		options: {
+			control: false,
+		},
+		value: {
+			control: false,
+		},
+	},
 	args: {
 		label: '表示項目',
 		options: [
