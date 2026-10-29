@@ -180,10 +180,10 @@ React コンポーネントでは、Vitest と React Testing Library を使用�
 | `npm run format` | Biome によるフォーマット |
 | `npm run check` | Biome によるチェック |
 | `npm run check:fix` | Biome によるチェックと自動修正 |
-| `npm run test` | Vitest でテストを実行（キャッシュをクリア） |
-| `npm run test:run` | Vitest でテストを一括実行（キャッシュをクリア） |
-| `npm run test:components` | コンポーネントのテストを実行（キャッシュをクリア） |
-| `npm run test:storybook` | Storybook のテストを実行（キャッシュをクリア） |
+| `npm run test` | Vitest でテストを実行 |
+| `npm run test:run` | Vitest でテストを一括実行 |
+| `npm run test:components` | コンポーネントのテストを実行 |
+| `npm run test:storybook` | Storybook のテストを実行 |
 
 ### Code Quality
 
