@@ -1,5 +1,3 @@
-
-<!-- markdownlint-disable MD041 MD003 -->
 ---
 
 name: Issue
