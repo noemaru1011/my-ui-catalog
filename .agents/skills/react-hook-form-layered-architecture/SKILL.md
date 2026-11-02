@@ -1,4 +1,5 @@
 ---
+
 name: react-hook-form-layered-architecture
 description: Guidelines for building React form features using Zod schemas, React Hook Form, custom hooks, UI components, and pages. Enforces separation of business logic and presentation, type-safe schema integration from the root @my-app/schemas package, and correct register vs Controller usage.
 ---
@@ -105,9 +106,9 @@ Example:
 import { z } from 'zod';
 
 export const signInSchema = z.object({
-  email: z.email(),
-  password: z.string().min(8),
-  rememberMe: z.boolean(),
+	email: z.email(),
+	password: z.string().min(8),
+	rememberMe: z.boolean(),
 });
 
 export type SignInInput = z.infer<typeof signInSchema>;
@@ -140,31 +141,31 @@ import { signInSchema } from '@my-app/schemas';
 import { useForm } from 'react-hook-form';
 
 export function useLogin() {
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<SignInInput>({
-    resolver: zodResolver(signInSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-      rememberMe: false,
-    },
-  });
+	const {
+		register,
+		control,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+	} = useForm<SignInInput>({
+		resolver: zodResolver(signInSchema),
+		defaultValues: {
+			email: '',
+			password: '',
+			rememberMe: false,
+		},
+	});
 
-  const onSubmit = async (values: SignInInput): Promise<void> => {
-    // Execute the login workflow.
-  };
+	const onSubmit = async (values: SignInInput): Promise<void> => {
+		// Execute the login workflow.
+	};
 
-  return {
-    register,
-    control,
-    errors,
-    isSubmitting,
-    onSubmit: handleSubmit(onSubmit),
-  };
+	return {
+		register,
+		control,
+		errors,
+		isSubmitting,
+		onSubmit: handleSubmit(onSubmit),
+	};
 }
 ```
 
@@ -200,34 +201,29 @@ import { Input } from '@/components/elements/Input/Input';
 import { Button } from '@/components/ui/button';
 
 type Props = {
-  register: UseFormRegister<SignInInput>;
-  errors: FieldErrors<SignInInput>;
-  isSubmitting: boolean;
-  onSubmit: ComponentProps<'form'>['onSubmit'];
+	register: UseFormRegister<SignInInput>;
+	errors: FieldErrors<SignInInput>;
+	isSubmitting: boolean;
+	onSubmit: ComponentProps<'form'>['onSubmit'];
 };
 
-export function LoginForm({
-  register,
-  errors,
-  isSubmitting,
-  onSubmit,
-}: Props) {
-  return (
-    <form onSubmit={onSubmit} noValidate>
-      <Input
-        id="email"
-        label="Email"
-        type="email"
-        {...register('email')}
-        readOnly={isSubmitting}
-        error={errors.email?.message}
-      />
+export function LoginForm({ register, errors, isSubmitting, onSubmit }: Props) {
+	return (
+		<form onSubmit={onSubmit} noValidate>
+			<Input
+				id="email"
+				label="Email"
+				type="email"
+				{...register('email')}
+				readOnly={isSubmitting}
+				error={errors.email?.message}
+			/>
 
-      <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Signing in...' : 'Sign in'}
-      </Button>
-    </form>
-  );
+			<Button type="submit" disabled={isSubmitting}>
+				{isSubmitting ? 'Signing in...' : 'Sign in'}
+			</Button>
+		</form>
+	);
 }
 ```
 
@@ -251,9 +247,9 @@ import { LoginForm } from '../components/LoginForm';
 import { useLogin } from '../hooks/useLogin';
 
 export default function LoginPage() {
-  const login = useLogin();
+	const login = useLogin();
 
-  return <LoginForm {...login} />;
+	return <LoginForm {...login} />;
 }
 ```
 
@@ -280,12 +276,7 @@ Typical examples:
 Example:
 
 ```tsx
-<Input
-  id="email"
-  label="Email"
-  {...register('email')}
-  error={errors.email?.message}
-/>
+<Input id="email" label="Email" {...register('email')} error={errors.email?.message} />;
 ```
 
 Verify the actual component API before using `register`. A component's name alone does not guarantee compatibility.
@@ -308,19 +299,19 @@ Example:
 
 ```tsx
 <Controller
-  name="category"
-  control={control}
-  render={({ field, fieldState }) => (
-    <Select
-      id={field.name}
-      label="Category"
-      value={field.value}
-      onChange={field.onChange}
-      options={CATEGORY_OPTIONS}
-      error={fieldState.error?.message}
-    />
-  )}
-/>
+	name="category"
+	control={control}
+	render={({ field, fieldState }) => (
+		<Select
+			id={field.name}
+			label="Category"
+			value={field.value}
+			onChange={field.onChange}
+			options={CATEGORY_OPTIONS}
+			error={fieldState.error?.message}
+		/>
+	)}
+/>;
 ```
 
 Adapt `value`, `onChange`, `onBlur`, and `ref` to the actual component contract. Do not assume that every component uses the same value type.

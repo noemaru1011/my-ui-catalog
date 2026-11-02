@@ -13,27 +13,27 @@ Storybook を使用して、コンポーネントの表示・動作・バリエ�
 
 ## Tech Stack
 
-| 分類 | 技術 |
-| ------------------ | ------------------- |
-| Framework | React 19 |
-| Language | TypeScript |
-| UI Catalog | Storybook |
-| Build Tool | Vite |
-| Styling | Tailwind CSS 4 |
-| UI Primitives | shadcn/ui |
+| 分類                 | 技術                     |
+| -------------------- | ------------------------ |
+| Framework            | React 19                 |
+| Language             | TypeScript               |
+| UI Catalog           | Storybook                |
+| Build Tool           | Vite                     |
+| Styling              | Tailwind CSS 4           |
+| UI Primitives        | shadcn/ui                |
 | **Form(サンプル用)** | **React Hook Form、Zod** |
-| Linter / Formatter | Biome |
-| Package Manager | npm |
-| Test | Vitest、Testing Library |
-| CI/CD | GitHub ActionsGitHub |
-| Deploy | GitHub Pages |
-| AI | CodeX |
+| Linter / Formatter   | Biome                    |
+| Package Manager      | npm                      |
+| Test                 | Vitest、Testing Library  |
+| CI/CD                | GitHub ActionsGitHub     |
+| Deploy               | GitHub Pages             |
+| AI                   | CodeX                    |
 
 ## Requirements
 
-* Node.js `^24.0.0`
-* npm
-* Git
+- Node.js `^24.0.0`
+- npm
+- Git
 
 Node.js のバージョンは `.nvmrc` および `package.json` の `engines` に従います。
 
@@ -108,10 +108,10 @@ npm run build-storybook
 
 コンポーネントの配置やレイアウトを制御するためのコンポーネントです。
 
-* Center
-* Cluster
-* Container
-* Stack
+- Center
+- Cluster
+- Container
+- Stack
 
 ### UI Primitives
 
@@ -127,12 +127,12 @@ npm run build-storybook
 
 新しいコンポーネントを追加する場合は、用途に応じたディレクトリに配置します。
 
-| 配置先 | 用途 |
-| ---------------------- | ------------------------ |
-| `components/elements/` | 再利用可能な UI コンポーネント |
-| `components/layouts/` | レイアウト制御用コンポーネント |
-| `components/ui/` | shadcn/ui ベースの UI プリミティブ(自作の場合ここに追加しない) |
-| `components/example/` | 複数コンポーネントを組み合わせた使用例 |
+| 配置先                 | 用途                                                           |
+| ---------------------- | -------------------------------------------------------------- |
+| `components/elements/` | 再利用可能な UI コンポーネント                                 |
+| `components/layouts/`  | レイアウト制御用コンポーネント                                 |
+| `components/ui/`       | shadcn/ui ベースの UI プリミティブ(自作の場合ここに追加しない) |
+| `components/example/`  | 複数コンポーネントを組み合わせた使用例                         |
 
 ### Storybook Stories
 
@@ -159,12 +159,12 @@ Story ファイルでは、コンポーネントの基本表示、プロパテ�
 
 主なテスト観点は以下のとおりです。
 
-* **基本動作**：初期表示やデフォルトの状態が正しいこと
-* **Props による挙動の違い**：Props の指定値や組み合わせに応じて、表示・動作・状態が適切に変化すること
-* **ユーザー操作**：クリックや入力などの操作に応じて、期待する動作が行われること
-* **状態の変化**：操作後の表示や状態が期待どおりに更新されること
-* **制約条件**：`disabled` などの制約が適切に機能すること
-* **アクセシビリティ**：ロール、ラベル、ARIA 属性などが適切に設定されていること
+- **基本動作**：初期表示やデフォルトの状態が正しいこと
+- **Props による挙動の違い**：Props の指定値や組み合わせに応じて、表示・動作・状態が適切に変化すること
+- **ユーザー操作**：クリックや入力などの操作に応じて、期待する動作が行われること
+- **状態の変化**：操作後の表示や状態が期待どおりに更新されること
+- **制約条件**：`disabled` などの制約が適切に機能すること
+- **アクセシビリティ**：ロール、ラベル、ARIA 属性などが適切に設定されていること
 
 React コンポーネントでは、Vitest と React Testing Library を使用し、必要に応じて `userEvent` でユーザー操作を再現します。
 
@@ -172,18 +172,18 @@ React コンポーネントでは、Vitest と React Testing Library を使用�
 
 ## Development Commands
 
-| コマンド | 説明 |
-| ------------------------- | ---------------------------- |
-| `npm run storybook` | Storybook の開発サーバーを起動 |
-| `npm run build-storybook` | Storybook を静的ビルド |
-| `npm run lint` | Biome による Lint |
-| `npm run format` | Biome によるフォーマット |
-| `npm run check` | Biome によるチェック |
-| `npm run check:fix` | Biome によるチェックと自動修正 |
-| `npm run test` | Vitest でテストを実行 |
-| `npm run test:run` | Vitest でテストを一括実行 |
-| `npm run test:components` | コンポーネントのテストを実行 |
-| `npm run test:storybook` | Storybook のテストを実行 |
+| コマンド                  | 説明                           |
+| ------------------------- | ------------------------------ |
+| `npm run storybook`       | Storybook の開発サーバーを起動 |
+| `npm run build-storybook` | Storybook を静的ビルド         |
+| `npm run lint`            | Biome による Lint              |
+| `npm run format`          | Biome によるフォーマット       |
+| `npm run check`           | Biome によるチェック           |
+| `npm run check:fix`       | Biome によるチェックと自動修正 |
+| `npm run test`            | Vitest でテストを実行          |
+| `npm run test:run`        | Vitest でテストを一括実行      |
+| `npm run test:components` | コンポーネントのテストを実行   |
+| `npm run test:storybook`  | Storybook のテストを実行       |
 
 ### Code Quality
 
@@ -219,23 +219,23 @@ Biome を使用して、コードの品質・フォーマット・命名規則�
 
 ### Configuration Rules
 
-| 設定項目                 | ルール・値                        | 内容                        |
-| -------------------- | ---------------------------- | ------------------------- |
-| VCS                  | `enabled: true`              | バージョン管理との連携を有効化           |
-| VCS                  | `clientKind: "git"`          | Git を使用                   |
-| VCS                  | `useIgnoreFile: true`        | Git の無視設定を適用              |
-| Formatter            | `indentStyle: "tab"`         | タブインデントを使用                |
-| Formatter            | `lineWidth: 100`             | 行幅を 100 文字に設定             |
-| JavaScript Formatter | `quoteStyle: "single"`       | シングルクォートを使用               |
-| Linter               | `preset: "recommended"`      | 推奨ルールセットを適用               |
-| Correctness          | `noUnusedImports: "error"`   | 未使用の import をエラーにする       |
-| Correctness          | `noUnusedVariables: "error"` | 未使用の変数をエラーにする             |
-| Naming Convention    | `strictCase: true`           | 大文字・小文字を厳密にチェック           |
-| Naming Convention    | `level: "error"`             | 命名規則違反をエラーにする             |
+| 設定項目             | ルール・値                   | 内容                                  |
+| -------------------- | ---------------------------- | ------------------------------------- |
+| VCS                  | `enabled: true`              | バージョン管理との連携を有効化        |
+| VCS                  | `clientKind: "git"`          | Git を使用                            |
+| VCS                  | `useIgnoreFile: true`        | Git の無視設定を適用                  |
+| Formatter            | `indentStyle: "tab"`         | タブインデントを使用                  |
+| Formatter            | `lineWidth: 100`             | 行幅を 100 文字に設定                 |
+| JavaScript Formatter | `quoteStyle: "single"`       | シングルクォートを使用                |
+| Linter               | `preset: "recommended"`      | 推奨ルールセットを適用                |
+| Correctness          | `noUnusedImports: "error"`   | 未使用の import をエラーにする        |
+| Correctness          | `noUnusedVariables: "error"` | 未使用の変数をエラーにする            |
+| Naming Convention    | `strictCase: true`           | 大文字・小文字を厳密にチェック        |
+| Naming Convention    | `level: "error"`             | 命名規則違反をエラーにする            |
 | CSS Parser           | `tailwindDirectives: true`   | Tailwind CSS のディレクティブを有効化 |
-| Nursery              | `useSortedClasses: "warn"`   | クラス順序の違反を警告               |
-| Assist               | `enabled: true`              | コード支援機能を有効化               |
-| Assist               | `organizeImports: "on"`      | import 文を自動整理             |
+| Nursery              | `useSortedClasses: "warn"`   | クラス順序の違反を警告                |
+| Assist               | `enabled: true`              | コード支援機能を有効化                |
+| Assist               | `organizeImports: "on"`      | import 文を自動整理                   |
 
 クラス順序チェックの対象関数には、`clsx`、`cva`、`twMerge`、`cn` を設定します。
 
@@ -243,28 +243,28 @@ Biome を使用して、コードの品質・フォーマット・命名規則�
 
 ## Naming Conventions
 
-| 対象 | 適用範囲 | 命名形式 | 例 |
-| ---------- | -------- | -------------------------- | -------------------------- |
-| グローバル定数 | `global` | `CONSTANT_CASE` | `API_BASE_URL` |
-| 変数 | `any` | `camelCase` | `userName` |
-| 関数 | `any` | `camelCase` / `PascalCase` | `getUser` / `GetUser` |
-| クラス | `any` | `PascalCase` | `UserService` |
-| 型・インターフェース | `any` | `PascalCase` | `UserProfile` / `UserType` |
+| 対象                 | 適用範囲 | 命名形式                   | 例                         |
+| -------------------- | -------- | -------------------------- | -------------------------- |
+| グローバル定数       | `global` | `CONSTANT_CASE`            | `API_BASE_URL`             |
+| 変数                 | `any`    | `camelCase`                | `userName`                 |
+| 関数                 | `any`    | `camelCase` / `PascalCase` | `getUser` / `GetUser`      |
+| クラス               | `any`    | `PascalCase`               | `UserService`              |
+| 型・インターフェース | `any`    | `PascalCase`               | `UserProfile` / `UserType` |
 
 ### Component Naming
 
-* コンポーネントのディレクトリ名は `PascalCase` とします。
-* コンポーネントの実装ファイルは `ComponentName.tsx` とします。
-* Story ファイルは `ComponentName.stories.tsx` とします。
-* React コンポーネント名は `PascalCase` とします。
-* 変数や関数は原則として `camelCase` とします。
+- コンポーネントのディレクトリ名は `PascalCase` とします。
+- コンポーネントの実装ファイルは `ComponentName.tsx` とします。
+- Story ファイルは `ComponentName.stories.tsx` とします。
+- React コンポーネント名は `PascalCase` とします。
+- 変数や関数は原則として `camelCase` とします。
 
 ## CI
 
 GitHub Actions による自動チェックを管理します。
 
-* `.github/workflows/check-node-version.yml`: Node.js のバージョンチェック(簡易的)
-* `.github/workflows/ci.yml`: CI の実行
+- `.github/workflows/check-node-version.yml`: Node.js のバージョンチェック(簡易的)
+- `.github/workflows/ci.yml`: CI の実行
 
 具体的なチェック内容は各ワークフローファイルを参照してください。
 
@@ -272,7 +272,7 @@ GitHub Actions による自動チェックを管理します。
 
 GitHub Actions による自動デプロイを行う。
 
-* `.github/workflows/cd.yml`: CD の実行
+- `.github/workflows/cd.yml`: CD の実行
 
 `main` ブランチへの push をトリガーに、Storybook のビルドと GitHub Pages へのデプロイを実行します。手動実行にも対応しています。
 

@@ -1,4 +1,5 @@
 ---
+
 name: frontend-layout-components
 description: Use this skill when creating, modifying, or refactoring React layouts with the project's Center, Cluster, Container, and Stack components. Covers component selection, width constraints, horizontal and vertical layouts, spacing, alignment, wrapping, semantic HTML, and reusable layout composition with Tailwind CSS.
 ---
@@ -37,12 +38,12 @@ layouts/
 
 ### 2. Choose the Appropriate Component
 
-| Requirement | Component |
-|---|---|
-| Center content horizontally and constrain its maximum width | `Center` |
-| Arrange children horizontally with wrapping and configurable spacing | `Cluster` |
-| Constrain content width without automatic centering | `Container` |
-| Arrange children vertically with configurable spacing | `Stack` |
+| Requirement                                                          | Component   |
+| -------------------------------------------------------------------- | ----------- |
+| Center content horizontally and constrain its maximum width          | `Center`    |
+| Arrange children horizontally with wrapping and configurable spacing | `Cluster`   |
+| Constrain content width without automatic centering                  | `Container` |
+| Arrange children vertically with configurable spacing                | `Stack`     |
 
 Combine components when a layout requires multiple behaviors.
 
@@ -51,12 +52,12 @@ Combine components when a layout requires multiple behaviors.
 `Cluster` and `Stack` support the following `space` values:
 
 | Value | Tailwind CSS | Default spacing |
-|---|---|---|
-| `xs` | `gap-1` | 4px |
-| `sm` | `gap-2` | 8px |
-| `md` | `gap-4` | 16px |
-| `lg` | `gap-6` | 24px |
-| `xl` | `gap-8` | 32px |
+| ----- | ------------ | --------------- |
+| `xs`  | `gap-1`      | 4px             |
+| `sm`  | `gap-2`      | 8px             |
+| `md`  | `gap-4`      | 16px            |
+| `lg`  | `gap-6`      | 24px            |
+| `xl`  | `gap-8`      | 32px            |
 
 Use the predefined spacing options instead of arbitrary gap classes when they satisfy the requirement.
 
@@ -66,17 +67,17 @@ Prefer composition over duplicating layout logic.
 
 ```tsx
 <Center maxWidth="xl">
-  <Stack space="lg">
-    <Cluster justify="between" align="center">
-      <h1>Users</h1>
-      <Button>Add user</Button>
-    </Cluster>
+	<Stack space="lg">
+		<Cluster justify="between" align="center">
+			<h1>Users</h1>
+			<Button>Add user</Button>
+		</Cluster>
 
-    <Container width="full">
-      <UserList />
-    </Container>
-  </Stack>
-</Center>
+		<Container width="full">
+			<UserList />
+		</Container>
+	</Stack>
+</Center>;
 ```
 
 Each component should retain its intended responsibility:
@@ -94,20 +95,20 @@ Each component should retain its intended responsibility:
 
 #### Props
 
-| Prop | Type | Default |
-|---|---|---|
-| `children` | `ReactNode` | Required |
-| `maxWidth` | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'lg'` |
+| Prop       | Type                                     | Default  |
+| ---------- | ---------------------------------------- | -------- |
+| `children` | `ReactNode`                              | Required |
+| `maxWidth` | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'lg'`   |
 
 #### Width mapping
 
-| Value | Tailwind CSS |
-|---|---|
-| `sm` | `max-w-screen-sm` |
-| `md` | `max-w-screen-md` |
-| `lg` | `max-w-screen-lg` |
-| `xl` | `max-w-screen-xl` |
-| `full` | `max-w-full` |
+| Value  | Tailwind CSS      |
+| ------ | ----------------- |
+| `sm`   | `max-w-screen-sm` |
+| `md`   | `max-w-screen-md` |
+| `lg`   | `max-w-screen-lg` |
+| `xl`   | `max-w-screen-xl` |
+| `full` | `max-w-full`      |
 
 The component applies `mx-auto w-full` and does not add internal padding.
 
@@ -117,8 +118,8 @@ The component applies `mx-auto w-full` and does not add internal padding.
 import { Center } from '@/layouts/Center/Center';
 
 <Center maxWidth="lg">
-  <main>Page content</main>
-</Center>
+	<main>Page content</main>
+</Center>;
 ```
 
 Use `Center` for page content and sections that need horizontal centering with a maximum width.
@@ -129,31 +130,31 @@ Use `Center` for page content and sections that need horizontal centering with a
 
 #### Props
 
-| Prop | Type | Default |
-|---|---|---|
-| `children` | `PropsWithChildren` | Optional |
-| `space` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` |
-| `justify` | `'start' \| 'center' \| 'end' \| 'between'` | `'start'` |
-| `align` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'center'` |
+| Prop       | Type                                        | Default    |
+| ---------- | ------------------------------------------- | ---------- |
+| `children` | `PropsWithChildren`                         | Optional   |
+| `space`    | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`      | `'md'`     |
+| `justify`  | `'start' \| 'center' \| 'end' \| 'between'` | `'start'`  |
+| `align`    | `'start' \| 'center' \| 'end' \| 'stretch'` | `'center'` |
 
 The component applies `flex flex-wrap`.
 
 #### Justification mapping
 
-| Value | Tailwind CSS |
-|---|---|
-| `start` | `justify-start` |
-| `center` | `justify-center` |
-| `end` | `justify-end` |
+| Value     | Tailwind CSS      |
+| --------- | ----------------- |
+| `start`   | `justify-start`   |
+| `center`  | `justify-center`  |
+| `end`     | `justify-end`     |
 | `between` | `justify-between` |
 
 #### Alignment mapping
 
-| Value | Tailwind CSS |
-|---|---|
-| `start` | `items-start` |
-| `center` | `items-center` |
-| `end` | `items-end` |
+| Value     | Tailwind CSS    |
+| --------- | --------------- |
+| `start`   | `items-start`   |
+| `center`  | `items-center`  |
+| `end`     | `items-end`     |
 | `stretch` | `items-stretch` |
 
 #### Usage
@@ -162,9 +163,9 @@ The component applies `flex flex-wrap`.
 import { Cluster } from '@/layouts/Cluster/Cluster';
 
 <Cluster space="sm" justify="end" align="center">
-  <Button variant="secondary">Cancel</Button>
-  <Button>Save</Button>
-</Cluster>
+	<Button variant="secondary">Cancel</Button>
+	<Button>Save</Button>
+</Cluster>;
 ```
 
 Use `Cluster` for button groups, tags, filters, toolbars, and other horizontal arrangements that may wrap onto multiple lines.
@@ -175,22 +176,22 @@ Use `Cluster` for button groups, tags, filters, toolbars, and other horizontal a
 
 #### Props
 
-| Prop | Type | Default |
-|---|---|---|
-| `children` | `ReactNode` | Optional |
-| `width` | `'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| 'full'` | `'full'` |
+| Prop       | Type                                                       | Default  |
+| ---------- | ---------------------------------------------------------- | -------- |
+| `children` | `ReactNode`                                                | Optional |
+| `width`    | `'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| 'full'` | `'full'` |
 
 #### Width mapping
 
-| Value | Tailwind CSS |
-|---|---|
-| `sm` | `w-full max-w-64` |
-| `md` | `w-full max-w-72` |
-| `lg` | `w-full max-w-80` |
-| `xl` | `w-full max-w-96` |
-| `2xl` | `w-full max-w-2xl` |
-| `3xl` | `w-full max-w-3xl` |
-| `full` | `w-full` |
+| Value  | Tailwind CSS       |
+| ------ | ------------------ |
+| `sm`   | `w-full max-w-64`  |
+| `md`   | `w-full max-w-72`  |
+| `lg`   | `w-full max-w-80`  |
+| `xl`   | `w-full max-w-96`  |
+| `2xl`  | `w-full max-w-2xl` |
+| `3xl`  | `w-full max-w-3xl` |
+| `full` | `w-full`           |
 
 The component does not automatically center itself or add internal padding.
 
@@ -200,8 +201,8 @@ The component does not automatically center itself or add internal padding.
 import { Container } from '@/layouts/Container/Container';
 
 <Container width="2xl">
-  <Form />
-</Container>
+	<Form />
+</Container>;
 ```
 
 Use `Container` for forms, cards, sidebars, and content regions that need a width constraint.
@@ -210,10 +211,10 @@ When horizontal centering is also required, compose it with `Center`.
 
 ```tsx
 <Center maxWidth="lg">
-  <Container width="2xl">
-    <Form />
-  </Container>
-</Center>
+	<Container width="2xl">
+		<Form />
+	</Container>
+</Center>;
 ```
 
 Do not confuse `Container.width` with `Center.maxWidth`; they use different Tailwind CSS classes and width scales.
@@ -224,10 +225,10 @@ Do not confuse `Container.width` with `Center.maxWidth`; they use different Tail
 
 #### Props
 
-| Prop | Type | Default |
-|---|---|---|
-| `as` | `ElementType` | `'div'` |
-| `space` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` |
+| Prop        | Type                                                         | Default           |
+| ----------- | ------------------------------------------------------------ | ----------------- |
+| `as`        | `ElementType`                                                | `'div'`           |
+| `space`     | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`                       | `'md'`            |
 | Other props | `ComponentProps<T>` excluding `space`, `as`, and `className` | Element-dependent |
 
 The component applies `flex flex-col`.
@@ -240,19 +241,19 @@ The `className` prop is explicitly excluded from its public API. Do not pass `cl
 import { Stack } from '@/layouts/Stack/Stack';
 
 <Stack space="md">
-  <h2>Account settings</h2>
-  <p>Manage your account information.</p>
-  <Button>Save changes</Button>
-</Stack>
+	<h2>Account settings</h2>
+	<p>Manage your account information.</p>
+	<Button>Save changes</Button>
+</Stack>;
 ```
 
 Use the `as` prop when a semantic HTML element or another compatible component is required.
 
 ```tsx
 <Stack as="section" space="lg" aria-label="Account settings">
-  <h2>Account settings</h2>
-  <p>Manage your account information.</p>
-</Stack>
+	<h2>Account settings</h2>
+	<p>Manage your account information.</p>
+</Stack>;
 ```
 
 Use `Stack` for forms, vertically arranged content, card sections, and page sections.

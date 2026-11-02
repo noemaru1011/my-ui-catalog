@@ -9,7 +9,7 @@ updates:
       day: "monday"
       time: "09:00"
       timezone: "Asia/Tokyo"
-    
+
     # 複数のアップデートを1つのプルリクエストにまとめる設定
     groups:
       all-dependencies:
