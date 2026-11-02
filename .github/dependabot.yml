@@ -1,0 +1,17 @@
+version: 2
+updates:
+  # npm のパッケージ管理（package.json）を対象にする場合
+  - package-ecosystem: "npm"
+    directory: "/"
+    # 毎週チェックを実行
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    
+    # 複数のアップデートを1つのプルリクエストにまとめる設定
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
