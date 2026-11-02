@@ -1,16 +1,24 @@
+
 version: 2
 updates:
-  # npm のパッケージ管理（package.json）を対象にする場合
+  # npm のパッケージ管理
   - package-ecosystem: "npm"
     directory: "/"
-    # 毎週チェックを実行
+
+    # 毎週チェック
     schedule:
       interval: "weekly"
       day: "monday"
       time: "09:00"
       timezone: "Asia/Tokyo"
 
-    # 複数のアップデートを1つのプルリクエストにまとめる設定
+    # Node.js 26系への更新を除外
+    ignore:
+      - dependency-name: "@types/node"
+        versions:
+          - "26.x"
+
+    # 複数のアップデートを1つのPRにまとめる
     groups:
       all-dependencies:
         patterns:
