@@ -96,7 +96,7 @@ describe('Accordion', () => {
 			name: '項目A',
 		});
 
-		expect(trigger).toHaveAttribute('aria-disabled', 'true');
+		expect(trigger).toBeDisabled();
 
 		await user.click(trigger);
 

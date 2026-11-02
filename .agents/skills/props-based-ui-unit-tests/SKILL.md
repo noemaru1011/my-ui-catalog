@@ -1,4 +1,5 @@
 ---
+
 name: props-based-ui-unit-tests
 description: Create, review, and debug unit tests for props-driven UI components, especially React components using Vitest and React Testing Library. Use for form controls and general UI components to test prop-based rendering, user interactions, callbacks, conditional content, accessibility, validation, disabled states, fixtures, and edge cases.
 ---
@@ -92,7 +93,7 @@ Some UI libraries render custom elements with roles such as `checkbox`, `switch`
 
 ```tsx
 const control = screen.getByRole('checkbox', {
-  name: 'Notifications',
+	name: 'Notifications',
 });
 
 expect(control).toHaveAttribute('aria-disabled', 'true');
@@ -138,27 +139,27 @@ Its source data is:
 import type { Option } from './Option';
 
 export const OPTIONS: Option[] = [
-    {
-        value: 'typescript',
-        label: 'TypeScript',
-    },
-    {
-        value: 'javascript',
-        label: 'JavaScript',
-    },
-    {
-        value: 'python',
-        label: 'Python',
-    },
+	{
+		value: 'typescript',
+		label: 'TypeScript',
+	},
+	{
+		value: 'javascript',
+		label: 'JavaScript',
+	},
+	{
+		value: 'python',
+		label: 'Python',
+	},
 ];
 
 export const OPTIONS_WITH_DISABLED: Option[] = [
-    ...OPTIONS,
-    {
-        value: 'rust',
-        label: 'Rust',
-        disabled: true,
-    },
+	...OPTIONS,
+	{
+		value: 'rust',
+		label: 'Rust',
+		disabled: true,
+	},
 ];
 ```
 
@@ -203,14 +204,14 @@ Adapt names and expected values to the actual component:
 
 ```tsx
 it('calls onChange with the updated value after user interaction', async () => {
-  const user = userEvent.setup();
-  const onChange = vi.fn();
+	const user = userEvent.setup();
+	const onChange = vi.fn();
 
-  render(<ExampleComponent value="before" onChange={onChange} />);
+	render(<ExampleComponent value="before" onChange={onChange} />);
 
-  await user.click(screen.getByRole('button', { name: 'Change value' }));
+	await user.click(screen.getByRole('button', { name: 'Change value' }));
 
-  expect(onChange).toHaveBeenCalledWith('after');
+	expect(onChange).toHaveBeenCalledWith('after');
 });
 ```
 

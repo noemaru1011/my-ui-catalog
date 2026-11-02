@@ -1,4 +1,5 @@
 ---
+
 name: reporters
 description: Built-in reporters, default selection, and CI/output configuration
 ---
@@ -8,15 +9,15 @@ description: Built-in reporters, default selection, and CI/output configuration
 Select reporters via `--reporter` or `reporters` config. Configuring `reporters` **replaces** the default list — spread `configDefaults.reporters` to keep them.
 
 ```ts
-import { configDefaults, defineConfig } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  test: {
-    reporters: ['verbose', ['junit', { suiteName: 'UI tests' }]],
-    // keep defaults and add one:
-    // reporters: ['json', ...configDefaults.reporters],
-  },
-})
+	test: {
+		reporters: ['verbose', ['junit', { suiteName: 'UI tests' }]],
+		// keep defaults and add one:
+		// reporters: ['json', ...configDefaults.reporters],
+	},
+});
 ```
 
 ## Default Selection
@@ -56,23 +57,28 @@ vitest --reporter=json --outputFile=./test-output.json
 
 ```ts
 defineConfig({
-  test: {
-    reporters: ['junit', 'json'],
-    outputFile: { junit: './junit.xml', json: './report.json' },
-  },
-})
+	test: {
+		reporters: ['junit', 'json'],
+		outputFile: { junit: './junit.xml', json: './report.json' },
+	},
+});
 ```
 
 ## JUnit Templating
 
 ```ts
-reporters: [['junit', {
-  suiteNameTemplate: '{title}',     // {title} {filename} {basename} {displayName}
-  classnameTemplate: '{classname}', // {classname} {title} {suitename} {filename} ...
-  titleTemplate: '{title}',
-  ancestorSeparator: ' > ',
-  addFileAttribute: true,
-}]]
+reporters: [
+	[
+		'junit',
+		{
+			suiteNameTemplate: '{title}', // {title} {filename} {basename} {displayName}
+			classnameTemplate: '{classname}', // {classname} {title} {suitename} {filename} ...
+			titleTemplate: '{title}',
+			ancestorSeparator: ' > ',
+			addFileAttribute: true,
+		},
+	],
+];
 ```
 
 `{filename}` is the **relative** path (use `{basename}` for the bare name). Templates can also be functions receiving all variables.
@@ -82,7 +88,7 @@ reporters: [['junit', {
 The HTML reporter writes a directory via `outputDir` (default `.vitest`); the entry is `<outputDir>/index.html`. Use `singleFile: true` for a self-contained shareable file (large; coverage not inlined).
 
 ```ts
-reporters: [['html', { singleFile: true }]]
+reporters: [['html', { singleFile: true }]];
 ```
 
 ## Blob & Merge (CI/sharding)
