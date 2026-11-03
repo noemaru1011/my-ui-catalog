@@ -59,7 +59,7 @@ export function Checkbox({
 
 			{description && <FieldDescription>{description}</FieldDescription>}
 
-			<FieldGroup className="gap-3">
+			<FieldGroup className="gap-4">
 				{options.map((option) => {
 					const id = `${label}-${option.value}`;
 

@@ -21,7 +21,7 @@ type AccordionItemProps = {
 
 export function Accordion({ children, defaultValue, multiple = false }: AccordionProps) {
 	return (
-		<BaseAccordion multiple={multiple} defaultValue={defaultValue} className="max-w-lg">
+		<BaseAccordion multiple={multiple} defaultValue={defaultValue}>
 			{children}
 		</BaseAccordion>
 	);

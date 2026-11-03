@@ -27,6 +27,9 @@ const meta = {
 			{ value: 'next', label: 'Next.js' },
 			{ value: 'sveltekit', label: 'SvelteKit' },
 			{ value: 'nuxt', label: 'Nuxt', disabled: true },
+			{ value: 'remix', label: 'Remix' },
+			{ value: 'astro', label: 'Astro' },
+			{ value: 'angular', label: 'Angular' },
 		],
 	},
 } satisfies Meta<typeof Combobox>;
