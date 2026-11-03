@@ -1,7 +1,7 @@
 ---
 
 name: props-based-ui-unit-tests
-description: Create, review, and debug unit tests for props-driven UI components, especially React components using Vitest and React Testing Library. Use for form controls and general UI components to test prop-based rendering, user interactions, callbacks, conditional content, accessibility, validation, disabled states, fixtures, and edge cases.
+description: Create, review, and debug unit tests for props-driven UI components, especially React components using Vitest and React Testing Library. Use for form controls and general UI components to test prop-based rendering, user interactions, callbacks, conditional content, accessibility, validation, disabled states, fixtures, and edge cases,Write test'name in Japanese.
 ---
 
 # Props-Based UI Unit Tests
@@ -239,3 +239,7 @@ When asked to create or fix tests:
 ## Existing nested group note
 
 A fieldset and nested groups can result in multiple group-like elements. If the intended target is the outer fieldset, target it explicitly or use a stable, specific accessible query rather than assuming a generic `group` role is unique.
+
+## References
+
+- [Accessible queries, interactions, and controlled components](./references/accessible-interactions.md)

@@ -394,3 +394,7 @@ When implementing or refactoring layouts:
 - Avoid unrelated refactoring.
 - Do not claim that code was tested unless tests were actually executed.
 - If existing components cannot satisfy the requirement, explain the limitation and propose the smallest appropriate extension or alternative.
+
+## References
+
+- [Layout composition examples and API details](./references/layout-composition.md)

@@ -422,3 +422,7 @@ When migrating an existing Container / Presentation feature:
 7. Verify the existing query and mutation behavior before removing explicit refetches or changing state management.
 
 Do not combine an architectural migration with unrelated behavioral changes unless those changes are intentional and verified.
+
+## References
+
+- [Choosing and wiring React Hook Form field adapters](./references/field-integration.md)

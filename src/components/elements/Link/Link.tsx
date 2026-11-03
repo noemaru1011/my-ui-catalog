@@ -18,13 +18,10 @@ const SIZE_CLASS = {
 
 export function Link({ to, label, prefix, suffix, size = 'md' }: LinkProps) {
 	return (
-		<RouterLink
-			to={to}
-			className={cn('inline-flex items-center text-blue-600 underline', SIZE_CLASS[size])}
-		>
-			{prefix && <span>{prefix}</span>}
-			<span>{label}</span>
-			{suffix && <span>{suffix}</span>}
+		<RouterLink to={to} className={cn('inline-flex items-center text-blue-600', SIZE_CLASS[size])}>
+			{prefix && <span className="underline">{prefix}</span>}
+			<span className="underline">{label}</span>
+			{suffix && <span className="underline">{suffix}</span>}
 		</RouterLink>
 	);
 }
