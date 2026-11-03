@@ -18,7 +18,8 @@
 		"test": "npx vitest",
 		"test:run": "npx vitest run",
 		"test:components": "npx vitest run --project components",
-		"test:storybook": "npx vitest run --project storybook"
+		"test:storybook": "npx vitest run --project storybook",
+		"test:e2e": "playwright test"
 	},
 	"dependencies": {
 		"@base-ui/react": "^1.8.0",
