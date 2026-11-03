@@ -239,3 +239,7 @@ When asked to create or fix tests:
 ## Existing nested group note
 
 A fieldset and nested groups can result in multiple group-like elements. If the intended target is the outer fieldset, target it explicitly or use a stable, specific accessible query rather than assuming a generic `group` role is unique.
+
+## References
+
+- [Accessible queries, interactions, and controlled components](./references/accessible-interactions.md)
