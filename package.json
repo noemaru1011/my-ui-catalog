@@ -30,6 +30,7 @@
 		"class-variance-authority": "^0.7.1",
 		"cn": "^0.5.1",
 		"date-fns": "^4.4.0",
+		"embla-carousel-react": "^8.6.0",
 		"lucide-react": "^1.49.0",
 		"react": "^19.2.8",
 		"react-day-picker": "^10.0.2",
