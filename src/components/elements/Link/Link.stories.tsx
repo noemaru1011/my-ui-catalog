@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ChevronRight, Settings } from 'lucide-react';
 import { Link } from './Link';
 
 const meta = {
@@ -14,23 +13,6 @@ const meta = {
 		size: 'md',
 	},
 	argTypes: {
-		prefix: {
-			control: 'boolean',
-			mapping: {
-				false: undefined,
-				true: <Settings />,
-			},
-			options: [false, true],
-		},
-		suffix: {
-			control: 'boolean',
-			mapping: {
-				false: undefined,
-				true: <ChevronRight />,
-			},
-			options: [false, true],
-		},
-
 		size: {
 			control: 'radio',
 			options: ['sm', 'md', 'lg'],
