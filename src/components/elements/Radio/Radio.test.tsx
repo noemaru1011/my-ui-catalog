@@ -51,8 +51,15 @@ describe('Radio', () => {
 
 		expect(screen.getByText('使用する言語を選択してください')).toBeInTheDocument();
 		expect(screen.getByText('言語を選択してください')).toBeInTheDocument();
+		expect(screen.getByText('言語', { selector: 'legend' })).toHaveClass('text-destructive');
 		// エラー状態がグループに反映されることを確認
 		expect(screen.getByRole('radiogroup')).toHaveAttribute('aria-invalid', 'true');
+	});
+
+	it('errorがない場合、legendを通常の文字色で表示する', () => {
+		render(<Radio label="言語" options={OPTIONS} />);
+
+		expect(screen.getByText('言語', { selector: 'legend' })).not.toHaveClass('text-destructive');
 	});
 
 	it('disabledがtrueの場合、すべての選択肢を無効にする', () => {

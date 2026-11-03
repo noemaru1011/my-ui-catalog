@@ -89,6 +89,7 @@ describe('Checkbox', () => {
 		expect(screen.getByText('1つ以上選択してください')).toBeInTheDocument();
 
 		expect(document.querySelector('fieldset')).toHaveAttribute('data-invalid', 'true');
+		expect(screen.getByText('使用言語', { selector: 'legend' })).toHaveClass('text-destructive');
 
 		for (const option of OPTIONS) {
 			expect(screen.getByRole('checkbox', { name: option.label })).toHaveAttribute(
@@ -96,6 +97,14 @@ describe('Checkbox', () => {
 				'true',
 			);
 		}
+	});
+
+	it('error が未指定の場合、legend を通常の文字色で表示する', () => {
+		render(<Checkbox label="使用言語" options={OPTIONS} value={[]} onChange={vi.fn()} />);
+
+		expect(screen.getByText('使用言語', { selector: 'legend' })).not.toHaveClass(
+			'text-destructive',
+		);
 	});
 
 	it('required が true の場合に必須マークを表示する', () => {

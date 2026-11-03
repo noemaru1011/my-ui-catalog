@@ -51,7 +51,7 @@ export function Checkbox({
 
 	return (
 		<FieldSet data-invalid={!!error}>
-			<FieldLegend variant="label">
+			<FieldLegend variant="label" className={error && 'text-destructive'}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
 				{disabled && <Badge variant="secondary">編集不可</Badge>}
