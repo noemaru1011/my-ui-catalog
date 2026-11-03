@@ -13,21 +13,21 @@ Storybook を使用して、コンポーネントの表示・動作・バリエ�
 
 ## Tech Stack
 
-| 分類                 | 技術                     |
-| -------------------- | ------------------------ |
-| Framework            | React 19                 |
-| Language             | TypeScript               |
-| UI Catalog           | Storybook                |
-| Build Tool           | Vite                     |
-| Styling              | Tailwind CSS 4           |
-| UI Primitives        | shadcn/ui                |
-| **Form(サンプル用)** | **React Hook Form、Zod** |
-| Linter / Formatter   | Biome                    |
-| Package Manager      | npm                      |
-| Test                 | Vitest、Testing Library  |
-| CI/CD                | GitHub ActionsGitHub     |
-| Deploy               | GitHub Pages             |
-| AI                   | CodeX                    |
+| 分類                 | 技術                                |
+| -------------------- | ----------------------------------- |
+| Framework            | React 19                            |
+| Language             | TypeScript                          |
+| UI Catalog           | Storybook                           |
+| Build Tool           | Vite                                |
+| Styling              | Tailwind CSS 4                      |
+| UI Primitives        | shadcn/ui                           |
+| **Form(サンプル用)** | **React Hook Form、Zod**            |
+| Linter / Formatter   | Biome                               |
+| Package Manager      | npm                                 |
+| Test                 | Vitest、Testing Library、Playwright |
+| CI/CD                | GitHub ActionsGitHub                |
+| Deploy               | GitHub Pages                        |
+| AI                   | CodeX                               |
 
 ## Requirements
 
@@ -184,6 +184,7 @@ React コンポーネントでは、Vitest と React Testing Library を使用�
 | `npm run test:run`        | Vitest でテストを一括実行      |
 | `npm run test:components` | コンポーネントのテストを実行   |
 | `npm run test:storybook`  | Storybook のテストを実行       |
+| `npm run test:e2e`        | Playwright でE2Eテストを実行   |
 
 ### Code Quality
 
@@ -211,6 +212,9 @@ npm run test:components
 
 # Storybook のテストを実行
 npm run test:storybook
+
+# Playwright のE2Eテストを実行（Storybookを自動起動）
+npm run test:e2e
 ```
 
 ## Biome Configuration
@@ -265,6 +269,8 @@ GitHub Actions による自動チェックを管理します。
 
 - `.github/workflows/check-node-version.yml`: Node.js のバージョンチェック(簡易的)
 - `.github/workflows/ci.yml`: CI の実行
+
+CI では Playwright の Chromium をセットアップしてE2Eテストも実行し、失敗時はトレースをアーティファクトとして保存します。
 
 具体的なチェック内容は各ワークフローファイルを参照してください。
 
