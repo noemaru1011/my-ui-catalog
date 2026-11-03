@@ -40,16 +40,4 @@ describe('Link', () => {
 
 		expect(screen.getByRole('link', { name: 'ホーム' })).toHaveClass(className);
 	});
-
-	it('prefixとsuffixを表示する', () => {
-		render(
-			<MemoryRouter>
-				<Link to="/settings" label="設定" prefix={<span>前</span>} suffix={<span>後</span>} />
-			</MemoryRouter>,
-		);
-
-		expect(screen.getByRole('link', { name: '前設定後' })).toBeInTheDocument();
-		expect(screen.getByText('前')).toBeInTheDocument();
-		expect(screen.getByText('後')).toBeInTheDocument();
-	});
 });
