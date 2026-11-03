@@ -20,6 +20,12 @@ export default defineConfig({
 		dedupe: ['react', 'react-dom'],
 	},
 
+	optimizeDeps: {
+		// Base UI の Switch を事前バンドルし、Vitest Browser Mode での
+		// 依存モジュールの読み込み不整合（Invalid hook call）を防止する
+		include: ['@base-ui/react/switch'],
+	},
+
 	test: {
 		projects: [
 			{
