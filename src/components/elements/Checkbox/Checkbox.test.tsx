@@ -89,6 +89,7 @@ describe('Checkbox', () => {
 		expect(screen.getByText('1つ以上選択してください')).toBeInTheDocument();
 
 		expect(document.querySelector('fieldset')).toHaveAttribute('data-invalid', 'true');
+		expect(screen.getByText('使用言語', { selector: 'legend' })).toHaveClass('text-destructive');
 
 		for (const option of OPTIONS) {
 			expect(screen.getByRole('checkbox', { name: option.label })).toHaveAttribute(
@@ -96,6 +97,14 @@ describe('Checkbox', () => {
 				'true',
 			);
 		}
+	});
+
+	it('error が未指定の場合、legend を通常の文字色で表示する', () => {
+		render(<Checkbox label="使用言語" options={OPTIONS} value={[]} onChange={vi.fn()} />);
+
+		expect(screen.getByText('使用言語', { selector: 'legend' })).not.toHaveClass(
+			'text-destructive',
+		);
 	});
 
 	it('required が true の場合に必須マークを表示する', () => {
@@ -106,6 +115,8 @@ describe('Checkbox', () => {
 
 	it('disabled が true の場合はすべての項目を無効にする', () => {
 		render(<Checkbox label="使用言語" options={OPTIONS} value={[]} onChange={vi.fn()} disabled />);
+
+		expect(screen.getByText('編集不可')).toBeInTheDocument();
 
 		for (const option of OPTIONS) {
 			expect(screen.getByRole('checkbox', { name: option.label })).toHaveAttribute(
@@ -126,6 +137,7 @@ describe('Checkbox', () => {
 		);
 
 		expect(screen.getByRole('checkbox', { name: 'Rust' })).toHaveAttribute('aria-disabled', 'true');
+		expect(screen.queryByText('編集不可')).not.toBeInTheDocument();
 	});
 
 	it('disabled の項目をクリックしても onChange は呼ばれない', async () => {

@@ -69,6 +69,10 @@ describe('PasswordInput', () => {
 		expect(document.getElementById('password')).toHaveAttribute('readonly');
 
 		expect(screen.getByRole('button', { name: 'パスワードを表示' })).toBeDisabled();
+
+		const inputGroup = document.querySelector('[data-slot="input-group"]');
+		expect(inputGroup).toHaveClass('border-dashed', 'dark:has-disabled:bg-transparent');
+		expect(inputGroup).not.toHaveClass('has-disabled:bg-input/50');
 	});
 
 	it.each([

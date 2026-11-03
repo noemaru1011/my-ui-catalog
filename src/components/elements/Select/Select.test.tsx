@@ -96,7 +96,14 @@ describe('Select', () => {
 		render(<Select id="language" label="言語" options={OPTIONS} disabled />);
 
 		expect(screen.getByText('編集不可')).toBeInTheDocument();
-		expect(screen.getByRole('combobox')).toBeDisabled();
+
+		const trigger = screen.getByRole('combobox');
+		expect(trigger).toBeDisabled();
+		expect(trigger).toHaveClass(
+			'border-dashed',
+			'disabled:bg-transparent',
+			'dark:disabled:bg-transparent',
+		);
 	});
 
 	it('disabled が未指定の場合は編集不可の表示を行わない', () => {

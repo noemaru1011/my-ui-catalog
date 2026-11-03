@@ -82,7 +82,16 @@ export function ComboboxMultiple({
 				autoHighlight
 				itemToStringValue={(option) => option.label}
 			>
-				<ComboboxChips ref={anchor} className={cn('w-full', sizeClass)}>
+				<ComboboxChips
+					ref={anchor}
+					data-disabled={disabled}
+					className={cn(
+						'w-full',
+						sizeClass,
+						disabled &&
+							'border-dashed data-[disabled=true]:bg-transparent dark:data-[disabled=true]:bg-transparent',
+					)}
+				>
 					<ComboboxValue>
 						{(values) => (
 							<>

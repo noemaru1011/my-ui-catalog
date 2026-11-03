@@ -12,6 +12,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
 type SelectProps = WithoutExternalStyle<
@@ -70,7 +71,15 @@ export function Select({
 				disabled={disabled}
 				{...props}
 			>
-				<SelectTrigger id={id} aria-invalid={!!error} size={triggerSize} className="w-full">
+				<SelectTrigger
+					id={id}
+					aria-invalid={!!error}
+					size={triggerSize}
+					className={cn(
+						'w-full',
+						disabled && 'border-dashed disabled:bg-transparent dark:disabled:bg-transparent',
+					)}
+				>
 					<SelectValue placeholder={placeholder} />
 				</SelectTrigger>
 
