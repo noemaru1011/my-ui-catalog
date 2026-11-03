@@ -2,6 +2,7 @@ import type { ComponentProps } from 'react';
 import type { Option } from '@/components/types/Option';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
+import { Badge } from '@/components/ui/badge';
 import {
 	Field,
 	FieldDescription,
@@ -45,6 +46,7 @@ export function Radio({
 			<FieldLegend variant="label">
 				{label}
 				{required && <span className="text-destructive">*</span>}
+				{disabled && <Badge variant="secondary">編集不可</Badge>}
 			</FieldLegend>
 
 			{description && <FieldDescription>{description}</FieldDescription>}

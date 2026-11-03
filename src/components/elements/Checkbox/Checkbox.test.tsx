@@ -107,6 +107,8 @@ describe('Checkbox', () => {
 	it('disabled が true の場合はすべての項目を無効にする', () => {
 		render(<Checkbox label="使用言語" options={OPTIONS} value={[]} onChange={vi.fn()} disabled />);
 
+		expect(screen.getByText('編集不可')).toBeInTheDocument();
+
 		for (const option of OPTIONS) {
 			expect(screen.getByRole('checkbox', { name: option.label })).toHaveAttribute(
 				'aria-disabled',
@@ -126,6 +128,7 @@ describe('Checkbox', () => {
 		);
 
 		expect(screen.getByRole('checkbox', { name: 'Rust' })).toHaveAttribute('aria-disabled', 'true');
+		expect(screen.queryByText('編集不可')).not.toBeInTheDocument();
 	});
 
 	it('disabled の項目をクリックしても onChange は呼ばれない', async () => {

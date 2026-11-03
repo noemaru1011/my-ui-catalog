@@ -58,6 +58,8 @@ describe('Radio', () => {
 	it('disabledがtrueの場合、すべての選択肢を無効にする', () => {
 		render(<Radio label="言語" options={OPTIONS} disabled />);
 
+		expect(screen.getByText('編集不可')).toBeInTheDocument();
+
 		expect(screen.getByRole('radio', { name: 'TypeScript' })).toHaveAttribute(
 			'aria-disabled',
 			'true',
@@ -71,6 +73,8 @@ describe('Radio', () => {
 
 	it('disabledが設定された選択肢だけを無効にする', () => {
 		render(<Radio label="言語" options={OPTIONS_WITH_DISABLED} />);
+
+		expect(screen.queryByText('編集不可')).not.toBeInTheDocument();
 
 		expect(screen.getByRole('radio', { name: 'Rust' })).toHaveAttribute('aria-disabled', 'true');
 		expect(screen.getByRole('radio', { name: 'TypeScript' })).not.toHaveAttribute(
