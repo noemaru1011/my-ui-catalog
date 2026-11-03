@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Combobox } from './Combobox';
+import { useState } from 'react';
 
 const meta = {
 	component: Combobox,
@@ -34,4 +35,10 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+	render: (args) => {
+		const [value, setValue] = useState<string | undefined>(undefined);
+
+		return <Combobox {...args} value={value} onChange={setValue} />;
+	},
+};
