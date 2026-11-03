@@ -19,6 +19,24 @@ describe('Select', () => {
 		expect(screen.getByRole('combobox')).toHaveTextContent('言語を選択');
 	});
 
+	describe('inputSize', () => {
+		it('未指定時は md の高さを適用する', () => {
+			render(<Select id="language" label="言語" options={OPTIONS} />);
+
+			expect(screen.getByRole('combobox')).toHaveAttribute('data-size', 'default');
+		});
+
+		it.each([
+			['sm', 'sm'],
+			['md', 'default'],
+			['lg', 'lg'],
+		] as const)('inputSize="%s" の場合、対応する高さを設定する', (inputSize, size) => {
+			render(<Select id="language" label="言語" options={OPTIONS} inputSize={inputSize} />);
+
+			expect(screen.getByRole('combobox')).toHaveAttribute('data-size', size);
+		});
+	});
+
 	it('value に対応する選択済みの値を表示する', () => {
 		render(<Select id="language" label="言語" options={OPTIONS} value="typescript" />);
 

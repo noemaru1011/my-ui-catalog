@@ -31,6 +31,28 @@ describe('Combobox', () => {
 		expect(screen.getByRole('combobox', { name: '言語' })).toHaveValue('');
 	});
 
+	describe('inputSize', () => {
+		it('未指定時は md の高さを適用する', () => {
+			render(<Combobox {...defaultProps} />);
+
+			expect(
+				screen.getByRole('combobox', { name: '言語' }).closest('[data-slot="input-group"]'),
+			).toHaveClass('h-8');
+		});
+
+		it.each([
+			['sm', 'h-7'],
+			['md', 'h-8'],
+			['lg', 'h-10'],
+		] as const)('inputSize="%s" の場合、入力枠に %s を適用する', (inputSize, expectedClass) => {
+			render(<Combobox {...defaultProps} inputSize={inputSize} />);
+
+			expect(
+				screen.getByRole('combobox', { name: '言語' }).closest('[data-slot="input-group"]'),
+			).toHaveClass(expectedClass);
+		});
+	});
+
 	it('選択肢を選ぶと onChange に value を渡す', async () => {
 		const user = userEvent.setup();
 		const onChange = vi.fn();

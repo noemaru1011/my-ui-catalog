@@ -27,6 +27,7 @@ type ComboboxProps = WithoutExternalStyle<
 	required?: boolean;
 	disabled?: boolean;
 	placeholder?: string;
+	inputSize?: 'sm' | 'md' | 'lg';
 };
 export function Combobox({
 	id,
@@ -39,9 +40,16 @@ export function Combobox({
 	required = false,
 	disabled = false,
 	placeholder = '選択してください',
+	inputSize = 'md',
 	...rawProps
 }: ComboboxProps) {
 	const props = withoutExternalStyle(rawProps);
+
+	const sizeClass = {
+		sm: 'h-7',
+		md: 'h-8',
+		lg: 'h-10',
+	}[inputSize];
 
 	const selectedOption = options.find((option) => option.value === value) ?? null;
 
@@ -71,6 +79,7 @@ export function Combobox({
 					aria-invalid={!!error}
 					disabled={disabled}
 					showClear
+					className={sizeClass}
 				/>
 
 				<ComboboxContent>

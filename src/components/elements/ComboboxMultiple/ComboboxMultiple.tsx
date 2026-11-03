@@ -15,6 +15,7 @@ import {
 	useComboboxAnchor,
 } from '@/components/ui/combobox';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
+import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
 type ComboboxMultipleProps = WithoutExternalStyle<
@@ -31,6 +32,7 @@ type ComboboxMultipleProps = WithoutExternalStyle<
 	required?: boolean;
 	disabled?: boolean;
 	placeholder?: string;
+	inputSize?: 'sm' | 'md' | 'lg';
 };
 
 export function ComboboxMultiple({
@@ -44,9 +46,16 @@ export function ComboboxMultiple({
 	required = false,
 	disabled = false,
 	placeholder = '選択してください',
+	inputSize = 'md',
 	...rawProps
 }: ComboboxMultipleProps) {
 	const props = withoutExternalStyle(rawProps);
+
+	const sizeClass = {
+		sm: 'min-h-7',
+		md: 'min-h-8',
+		lg: 'min-h-10',
+	}[inputSize];
 
 	const anchor = useComboboxAnchor();
 	const selectedOptions = value
@@ -73,7 +82,7 @@ export function ComboboxMultiple({
 				autoHighlight
 				itemToStringValue={(option) => option.label}
 			>
-				<ComboboxChips ref={anchor} className="w-full">
+				<ComboboxChips ref={anchor} className={cn('w-full', sizeClass)}>
 					<ComboboxValue>
 						{(values) => (
 							<>

@@ -100,6 +100,28 @@ describe('ComboboxMultiple', () => {
 		});
 	});
 
+	describe('inputSize', () => {
+		it('未指定時は md の最小高さを適用する', () => {
+			renderCombobox();
+
+			expect(
+				screen.getByRole('combobox', { name: '権限' }).closest('[data-slot="combobox-chips"]'),
+			).toHaveClass('min-h-8');
+		});
+
+		it.each([
+			['sm', 'min-h-7'],
+			['md', 'min-h-8'],
+			['lg', 'min-h-10'],
+		] as const)('inputSize="%s" の場合、選択枠に %s を適用する', (inputSize, expectedClass) => {
+			renderCombobox({ inputSize });
+
+			expect(
+				screen.getByRole('combobox', { name: '権限' }).closest('[data-slot="combobox-chips"]'),
+			).toHaveClass(expectedClass);
+		});
+	});
+
 	describe('選択済みの値', () => {
 		it('valueに対応する選択済み項目を表示する', () => {
 			renderCombobox({ value: ['typescript', 'python'] });
