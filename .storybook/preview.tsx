@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/react-vite';
 import '../src/index.css';
 import { MemoryRouter } from "react-router-dom";
 import { ThemeProvider } from '../src/components/providers/theme-provider';
+import { Toaster } from "@/components/ui/toast"
 
 const preview: Preview = {
 	decorators: [
@@ -9,6 +10,7 @@ const preview: Preview = {
 			<MemoryRouter>
 				<ThemeProvider>
 					<Story />
+					<Toaster />
 				</ThemeProvider>
 			</MemoryRouter>
 		),
