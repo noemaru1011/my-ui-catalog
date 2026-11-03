@@ -1,7 +1,7 @@
 ---
 
 name: props-based-ui-unit-tests
-description: Create, review, and debug unit tests for props-driven UI components, especially React components using Vitest and React Testing Library. Use for form controls and general UI components to test prop-based rendering, user interactions, callbacks, conditional content, accessibility, validation, disabled states, fixtures, and edge cases.
+description: Create, review, and debug unit tests for props-driven UI components, especially React components using Vitest and React Testing Library. Use for form controls and general UI components to test prop-based rendering, user interactions, callbacks, conditional content, accessibility, validation, disabled states, fixtures, and edge cases,Write test'name in Japanese.
 ---
 
 # Props-Based UI Unit Tests
