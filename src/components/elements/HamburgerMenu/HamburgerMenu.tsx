@@ -1,6 +1,6 @@
 import { Menu } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { Button } from '../../ui/button';
 
 type HamburgerMenuProps = {
@@ -9,16 +9,16 @@ type HamburgerMenuProps = {
 
 export function HamburgerMenu({ children }: HamburgerMenuProps) {
 	return (
-		<Sheet>
-			<SheetTrigger
+		<Drawer swipeDirection="left">
+			<DrawerTrigger
 				render={
 					<Button type="button" variant="ghost" aria-label="メニューを開く">
 						<Menu />
 					</Button>
 				}
-			></SheetTrigger>
+			></DrawerTrigger>
 
-			<SheetContent side="left">{children}</SheetContent>
-		</Sheet>
+			<DrawerContent>{children}</DrawerContent>
+		</Drawer>
 	);
 }
