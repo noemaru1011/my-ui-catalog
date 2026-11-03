@@ -28,6 +28,7 @@ type SelectProps = WithoutExternalStyle<
 	required?: boolean;
 	disabled?: boolean;
 	placeholder?: string;
+	inputSize?: 'sm' | 'md' | 'lg';
 };
 
 export function Select({
@@ -41,9 +42,17 @@ export function Select({
 	required = false,
 	disabled = false,
 	placeholder = '選択してください',
+	inputSize = 'md',
 	...rawProps
 }: SelectProps) {
 	const props = withoutExternalStyle(rawProps);
+
+	const triggerSizes = {
+		sm: 'sm',
+		md: 'default',
+		lg: 'lg',
+	} as const;
+	const triggerSize = triggerSizes[inputSize];
 
 	return (
 		<Field data-invalid={!!error}>
@@ -61,7 +70,7 @@ export function Select({
 				disabled={disabled}
 				{...props}
 			>
-				<SelectTrigger id={id} aria-invalid={!!error} className="w-full">
+				<SelectTrigger id={id} aria-invalid={!!error} size={triggerSize} className="w-full">
 					<SelectValue placeholder={placeholder} />
 				</SelectTrigger>
 
