@@ -1,0 +1,9 @@
+{
+	"version": 2,
+	"name": "integration-testing",
+	"owner": "onmax",
+	"repo": "my-ui-catalog",
+	"path": "skills/integration-testing",
+	"branch": "main",
+	"source": "manual"
+}
