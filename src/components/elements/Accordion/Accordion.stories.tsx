@@ -1,6 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { MemoryRouter } from 'react-router-dom';
-import { Center } from '../../layouts/Center/Center';
 import { Link } from '../Link/Link';
 import { Text } from '../Text/Text';
 import { Accordion } from './Accordion';
@@ -16,15 +14,6 @@ const meta = {
 			},
 		},
 	},
-	decorators: [
-		(Story) => (
-			<MemoryRouter>
-				<Center maxWidth="xl">
-					<Story />
-				</Center>
-			</MemoryRouter>
-		),
-	],
 } satisfies Meta<typeof Accordion>;
 
 export default meta;

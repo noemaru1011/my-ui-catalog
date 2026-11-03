@@ -1,14 +1,16 @@
 import type { Preview } from '@storybook/react-vite';
 import '../src/index.css';
-
+import { MemoryRouter } from "react-router-dom";
 import { ThemeProvider } from '../src/components/providers/theme-provider';
 
 const preview: Preview = {
 	decorators: [
 		(Story) => (
-			<ThemeProvider>
-				<Story />
-			</ThemeProvider>
+			<MemoryRouter>
+				<ThemeProvider>
+					<Story />
+				</ThemeProvider>
+			</MemoryRouter>
 		),
 	],
 

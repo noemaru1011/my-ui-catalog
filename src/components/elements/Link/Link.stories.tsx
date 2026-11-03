@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ChevronRight, Settings } from 'lucide-react';
-import { MemoryRouter } from 'react-router-dom';
 import { Link } from './Link';
 
 const meta = {
@@ -9,13 +8,6 @@ const meta = {
 	parameters: {
 		layout: 'centered',
 	},
-	decorators: [
-		(Story) => (
-			<MemoryRouter>
-				<Story />
-			</MemoryRouter>
-		),
-	],
 	args: {
 		to: '/users',
 		label: 'ユーザー一覧',
