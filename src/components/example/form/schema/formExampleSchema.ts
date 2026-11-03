@@ -1,5 +1,13 @@
 import { z } from 'zod';
 
+export const MAX_ATTACHMENT_COUNT = 5;
+export const MAX_ATTACHMENT_SIZE_IN_BYTES = 10 * 1024 * 1024;
+
+export const ATTACHMENTS_SCHEMA = z
+	.array(z.file().max(MAX_ATTACHMENT_SIZE_IN_BYTES, 'ファイルサイズは10MB以下にしてください。'))
+	.min(1, 'ファイルを選択してください。')
+	.max(MAX_ATTACHMENT_COUNT, `ファイルは最大${MAX_ATTACHMENT_COUNT}件までです。`);
+
 export const FORM_SCHEMA = z.object({
 	name: z.string().min(1, '氏名を入力してください。'),
 	password: z.string().min(8, 'パスワードは8文字以上で入力してください。'),
@@ -22,6 +30,7 @@ export const FORM_SCHEMA = z.object({
 			message: '期間を選択してください。',
 		}),
 	description: z.string().min(1, '説明を入力してください。'),
+	attachments: ATTACHMENTS_SCHEMA,
 });
 
 export type FormValues = z.infer<typeof FORM_SCHEMA>;
@@ -63,4 +72,5 @@ export const DEFAULT_FORM_VALUES: FormValues = {
 	date: undefined as unknown as Date,
 	dateRange: undefined,
 	description: '',
+	attachments: [],
 };

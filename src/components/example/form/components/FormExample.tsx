@@ -6,6 +6,7 @@ import { Combobox } from '@/components/elements/Combobox/Combobox';
 import { ComboboxMultiple } from '@/components/elements/ComboboxMultiple/ComboboxMultiple';
 import { DatePicker } from '@/components/elements/DatePicker/DatePicker';
 import { DateRange } from '@/components/elements/DateRange/DateRange';
+import { FileUpload } from '@/components/elements/FileUpload/FileUpload';
 import { Heading } from '@/components/elements/Heading/Heading';
 import { Input } from '@/components/elements/Input/Input';
 import { PasswordInput } from '@/components/elements/Input/PasswordInput';
@@ -24,6 +25,8 @@ import {
 	type FormValues,
 	GENDER_OPTIONS,
 	INTEREST_OPTIONS,
+	MAX_ATTACHMENT_COUNT,
+	MAX_ATTACHMENT_SIZE_IN_BYTES,
 	USER_OPTIONS,
 } from '../schema/formExampleSchema';
 
@@ -141,6 +144,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 									<DateRange
 										id={field.name}
 										label="期間"
+										required
 										value={field.value}
 										onChange={field.onChange}
 										error={fieldState.error?.message}
@@ -157,6 +161,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								control={control}
 								render={({ field, fieldState }) => (
 									<Checkbox
+										required
 										label="興味のある分野"
 										options={INTEREST_OPTIONS}
 										value={field.value}
@@ -173,6 +178,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								control={control}
 								render={({ field, fieldState }) => (
 									<Radio
+										required
 										label="性別"
 										options={GENDER_OPTIONS}
 										value={field.value}
@@ -189,6 +195,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 						control={control}
 						render={({ field, fieldState }) => (
 							<Checkbox
+								required
 								label="利用規約への同意"
 								options={[
 									{
@@ -210,6 +217,28 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 							required
 							{...register('description')}
 							error={errors.description?.message}
+						/>
+					</Container>
+
+					<Container width="xl">
+						<Controller
+							name="attachments"
+							control={control}
+							render={({ field, fieldState }) => (
+								<FileUpload
+									id={field.name}
+									name={field.name}
+									label="添付ファイル"
+									required
+									value={field.value}
+									onFilesChange={field.onChange}
+									onBlur={field.onBlur}
+									inputRef={field.ref}
+									maxFiles={MAX_ATTACHMENT_COUNT}
+									maxSize={MAX_ATTACHMENT_SIZE_IN_BYTES / (1024 * 1024)}
+									error={fieldState.error?.message}
+								/>
+							)}
 						/>
 					</Container>
 
