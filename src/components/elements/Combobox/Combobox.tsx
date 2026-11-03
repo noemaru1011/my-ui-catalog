@@ -11,6 +11,7 @@ import {
 	ComboboxList,
 } from '@/components/ui/combobox';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
+import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
 type ComboboxProps = WithoutExternalStyle<
@@ -79,7 +80,7 @@ export function Combobox({
 					aria-invalid={!!error}
 					disabled={disabled}
 					showClear
-					className={sizeClass}
+					className={cn(sizeClass, disabled && 'border-dashed')}
 				/>
 
 				<ComboboxContent>

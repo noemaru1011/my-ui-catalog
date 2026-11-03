@@ -107,7 +107,12 @@ describe('Combobox', () => {
 		render(<Combobox {...defaultProps} disabled />);
 
 		expect(screen.getByText('編集不可')).toBeInTheDocument();
-		expect(screen.getByRole('combobox', { name: /言語/ })).toBeDisabled();
+		const input = screen.getByRole('combobox', { name: /言語/ });
+		expect(input).toBeDisabled();
+
+		const inputGroup = input.closest('[data-slot="input-group"]');
+		expect(inputGroup).toHaveClass('border-dashed', 'dark:has-disabled:bg-transparent');
+		expect(inputGroup).not.toHaveClass('has-disabled:bg-input/50');
 	});
 
 	it('disabled が true の場合は選択用の入力操作ができない', async () => {

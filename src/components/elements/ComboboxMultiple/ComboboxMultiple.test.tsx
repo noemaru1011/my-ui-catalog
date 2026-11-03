@@ -93,6 +93,20 @@ describe('ComboboxMultiple', () => {
 			expect(screen.getByText('編集不可')).toBeInTheDocument();
 		});
 
+		it('disabledの場合は選択枠を点線にし背景を透明にする', () => {
+			renderCombobox({ disabled: true });
+
+			const chips = screen
+				.getByRole('combobox', { name: /権限/ })
+				.closest('[data-slot="combobox-chips"]');
+			expect(chips).toHaveAttribute('data-disabled', 'true');
+			expect(chips).toHaveClass(
+				'border-dashed',
+				'data-[disabled=true]:bg-transparent',
+				'dark:data-[disabled=true]:bg-transparent',
+			);
+		});
+
 		it('disabledでない場合は「編集不可」を表示しない', () => {
 			renderCombobox();
 
