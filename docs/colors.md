@@ -53,6 +53,10 @@
 
 クラスは `bg-background`、`text-muted-foreground`、`border-input`、`ring-ring` のように使います。`error` と `destructive` はどちらも赤系ですが、状態表示と破壊的操作で用途を区別します。
 
+## ボタンの状態色
+
+ボタンは全バリアント共通で、[index.css](../src/index.css) の `[data-slot="button"]` ルールにより、ホバー時に少し暗く、押下時はさらに暗く表示します。背景・文字の基本色は `primary`、`secondary`、`destructive`、`muted`、`accent` などのセマンティックトークンを使い、ライト・ダークテーマに連動させます。
+
 ## チャート・サイドバー
 
 - チャートは `chart-1` から `chart-5` を使います。現状、ライト・ダークテーマで同じ値です。

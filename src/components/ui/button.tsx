@@ -8,17 +8,18 @@ const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				default: 'bg-primary text-primary-foreground hover:bg-primary/80',
+				default:
+					'bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80',
 				outline:
-					'border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
+					'border-border bg-background text-foreground hover:bg-muted active:bg-muted/70 hover:text-foreground active:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50 dark:active:bg-input/60',
 				secondary:
-					'bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
+					'bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] active:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_10%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
 				ghost:
-					'hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50',
+					'text-foreground hover:bg-muted active:bg-accent active:text-accent-foreground hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50 dark:active:bg-muted/70',
 				// 削除ボタンの文字色と背景色のコントラスト比が、アクセシビリティ基準の 4.5:1 を満たしていなかったので修正
 				destructive:
-					'bg-destructive text-white hover:bg-destructive/90 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive dark:text-white dark:hover:bg-destructive/90 dark:focus-visible:ring-destructive/40',
-				link: 'text-primary underline-offset-4 hover:underline',
+					'bg-destructive text-white hover:bg-destructive/90 active:bg-destructive/80 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive dark:text-white dark:hover:bg-destructive/90 dark:active:bg-destructive/80 dark:focus-visible:ring-destructive/40',
+				link: 'text-primary underline-offset-4 hover:text-primary/80 hover:underline active:text-primary/70',
 			},
 			size: {
 				default:

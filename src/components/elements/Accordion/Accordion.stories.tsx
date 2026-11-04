@@ -30,16 +30,22 @@ export const Default: Story = {
 				value="item-1"
 				trigger="パスワードをリセットするには？"
 			>
-				<Text>ログイン画面からパスワードをリセットできます。</Text>
-				<Link to="#" label="質問一覧に戻る" />
+				<Text>
+					ログイン画面からパスワードをリセットできます。詳しくは
+					<Link to="#" label="質問一覧" />
+					をご覧ください。
+				</Text>
 			</Accordion.Item>
 
 			<Accordion.Item
 				value="item-2"
 				trigger="契約プランを変更できますか？"
 			>
-				<Text>アカウント設定からいつでも契約プランを変更できます。</Text>
-				<Link to="#" label="質問一覧に戻る" />
+				<Text>
+					アカウント設定からいつでも契約プランを変更できます。詳しくは
+					<Link to="#" label="質問一覧" />
+					をご覧ください。
+				</Text>
 			</Accordion.Item>
 
 			<Accordion.Item
@@ -47,8 +53,11 @@ export const Default: Story = {
 				trigger="利用できる支払い方法は？"
 				disabled
 			>
-				<Text>クレジットカード、銀行振込などをご利用いただけます。</Text>
-				<Link to="#" label="質問一覧に戻る" />
+				<Text>
+					クレジットカード、銀行振込などをご利用いただけます。詳しくは
+					<Link to="#" label="質問一覧" />
+					をご覧ください。
+				</Text>
 			</Accordion.Item>
 		</Accordion>
 	),

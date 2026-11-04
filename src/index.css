@@ -326,6 +326,19 @@
 	a {
 		@apply text-blue-600 underline;
 	}
+
+	button:not(:disabled),
+	[role="button"]:not(:disabled) {
+		cursor: pointer;
+	}
+
+	[data-slot="button"]:not(:disabled):hover {
+		filter: brightness(0.88);
+	}
+
+	[data-slot="button"]:not(:disabled):active {
+		filter: brightness(0.78);
+	}
 }
 
 /* =========================================================
