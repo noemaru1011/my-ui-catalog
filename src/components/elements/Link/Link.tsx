@@ -5,11 +5,10 @@ import { cn } from '@/lib/utils';
 type LinkProps = {
 	to: ComponentProps<typeof RouterLink>['to'];
 	label?: string;
-	size?: 'sm' | 'md' | 'lg';
+	size?: 'md' | 'lg';
 };
 
 const SIZE_CLASS = {
-	sm: 'text-sm',
 	md: 'text-base',
 	lg: 'text-lg',
 } as const;

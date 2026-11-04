@@ -147,12 +147,10 @@ export function FileUpload({
 					<Stack space="sm">
 						<Stack space="xs">
 							<Text weight="bold">ファイルをドラッグ＆ドロップ</Text>
-							<Text size="sm" color="muted">
-								またはクリックしてファイルを選択
-							</Text>
+							<Text color="muted">またはクリックしてファイルを選択</Text>
 						</Stack>
 
-						<Text size="sm" color="muted">
+						<Text color="muted">
 							最大 {maxFiles} 件 / {maxSize} MB
 							{accept && ` / ${accept}`}
 						</Text>
@@ -188,7 +186,7 @@ export function FileUpload({
 					<Stack space="sm">
 						<Cluster justify="between">
 							<Text weight="bold">選択したファイル</Text>
-							<Text size="sm" color="muted">
+							<Text color="muted">
 								{files.length} / {maxFiles}
 							</Text>
 						</Cluster>
@@ -202,12 +200,8 @@ export function FileUpload({
 									<Cluster space="sm" align="center" justify="between">
 										<Icon className="text-muted-foreground h-5 w-5 shrink-0" />
 										<Stack space="xs">
-											<Text size="sm" weight="bold">
-												{file.name}
-											</Text>
-											<Text size="sm" color="muted">
-												{formatSize(file.size)}
-											</Text>
+											<Text weight="bold">{file.name}</Text>
+											<Text color="muted">{formatSize(file.size)}</Text>
 										</Stack>
 										<Button
 											type="button"

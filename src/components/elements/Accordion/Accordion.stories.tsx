@@ -26,18 +26,18 @@ export const Default: Story = {
 		<Container width="2xl">
 			<Accordion defaultValue={["item-1"]}>
 				<Accordion.Item value="item-1" trigger="パスワードをリセットするには？">
-					<Text size="sm">ログイン画面からパスワードをリセットできます。</Text>
-					<Link to="#" label="質問一覧に戻る" size="sm" />
+					<Text>ログイン画面からパスワードをリセットできます。</Text>
+					<Link to="#" label="質問一覧に戻る" />
 				</Accordion.Item>
 
 				<Accordion.Item value="item-2" trigger="契約プランを変更できますか？">
-					<Text size="sm">アカウント設定からいつでも契約プランを変更できます。</Text>
-					<Link to="#" label="質問一覧に戻る" size="sm" />
+					<Text>アカウント設定からいつでも契約プランを変更できます。</Text>
+					<Link to="#" label="質問一覧に戻る" />
 				</Accordion.Item>
 
 				<Accordion.Item value="item-3" trigger="利用できる支払い方法は？" disabled>
-					<Text size="sm">クレジットカード、銀行振込などをご利用いただけます。</Text>
-					<Link to="#" label="質問一覧に戻る" size="sm" />
+					<Text>クレジットカード、銀行振込などをご利用いただけます。</Text>
+					<Link to="#" label="質問一覧に戻る" />
 				</Accordion.Item>
 			</Accordion>
 		</Container>

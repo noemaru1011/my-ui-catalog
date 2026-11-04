@@ -36,8 +36,8 @@ export function PasswordInput({
 	const [visible, setVisible] = useState(false);
 
 	const sizeClass = {
-		sm: 'h-7 text-sm',
-		md: 'h-8 text-sm',
+		sm: 'h-7 text-base',
+		md: 'h-8 text-base',
 		lg: 'h-10 text-base',
 	}[inputSize];
 

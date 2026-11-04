@@ -127,7 +127,7 @@ export function DataTable({ data }: DataTableProps) {
 			</div>
 
 			<Cluster justify="between">
-				<Text size="sm" color="muted">
+				<Text color="muted">
 					{filteredCount} 件中{' '}
 					{filteredCount === 0 ? 0 : pagination.pageIndex * pagination.pageSize + 1}–
 					{Math.min((pagination.pageIndex + 1) * pagination.pageSize, filteredCount)} 件を表示

@@ -51,7 +51,7 @@ const Item = ({
 	className?: string;
 }) => (
 	<div
-		className={`flex min-w-20 items-center justify-center rounded-md border border-blue-300 bg-blue-50 px-4 py-3 text-sm font-medium text-blue-900 ${className}`}
+		className={`flex min-w-20 items-center justify-center rounded-md border border-blue-300 bg-blue-50 px-4 py-3 text-base font-medium text-blue-900 ${className}`}
 	>
 		{title}
 	</div>

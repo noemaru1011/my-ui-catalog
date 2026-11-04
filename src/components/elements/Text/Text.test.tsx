@@ -16,7 +16,6 @@ describe('Text', () => {
 
 	describe('size', () => {
 		it.each([
-			['sm', 'text-sm'],
 			['md', 'text-base'],
 			['lg', 'text-lg'],
 		] as const)('size="%s" の場合、%s を適用する', (size, expectedClass) => {
@@ -93,15 +92,11 @@ describe('Text', () => {
 			);
 		});
 
-		it('一部の props のみ指定した場合、残りはデフォルト値を使用する', () => {
-			render(
-				<Text size="sm" color="muted">
-					Partial props
-				</Text>,
-			);
+		it('size を省略した場合、デフォルトサイズを適用する', () => {
+			render(<Text color="muted">Partial props</Text>);
 
 			expect(screen.getByText('Partial props')).toHaveClass(
-				'text-sm',
+				'text-base',
 				'font-normal',
 				'text-muted-foreground',
 			);
