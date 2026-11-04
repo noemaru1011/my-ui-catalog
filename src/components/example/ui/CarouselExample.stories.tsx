@@ -31,7 +31,6 @@ const slides = [
 ];
 
 const meta = {
-	title: 'Example/ui/carousel',
 	tags: ['autodocs'],
 } satisfies Meta;
 

@@ -28,7 +28,7 @@ src/components/example/<table-name>/
 ├── columns.tsx
 ├── data-table.tsx
 ├── page.tsx
-└── <table-name>.stories.tsx
+└── <FeatureName>.stories.tsx
 
 src/lib/data-table-features.ts
 ```
@@ -44,6 +44,9 @@ src/lib/data-table-features.ts
 - `src/lib/data-table-features.ts` owns shared TanStack feature registration.
   Keep this configuration in `lib` rather than an individual example folder
   when it is intended for use by multiple tables.
+- The current example is `src/components/example/table/`; its story is
+  `TableExample.stories.tsx`, and the shared feature configuration is
+  `src/lib/data-table-features.ts`.
 
 For a one-off table whose features are not shared, keep its feature
 configuration local rather than expanding the shared library without need.
@@ -102,8 +105,10 @@ configuration local rather than expanding the shared library without need.
 - Render a clear empty state when the current row model has no rows.
 - Derive visible counts from the filtered row model; account for an empty
   result when calculating displayed row ranges.
-- Reset pagination when a changed filter or reset action would otherwise
-  leave the user on an invalid page.
+- If changing a filter can leave the user on an invalid page, reset the page
+  index as part of the filter update. In the current example, the explicit
+  reset button returns to the first page; changing the name filter does not
+  currently reset pagination.
 - Keep the semantic table markup (`TableHeader`, `TableBody`, `TableRow`,
   `TableHead`, `TableCell`, and `TableCaption`) and accessible control names.
 

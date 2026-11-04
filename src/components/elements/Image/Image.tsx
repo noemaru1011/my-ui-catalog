@@ -15,7 +15,7 @@ export function Image({ src, alt, description, to, width = '100%' }: ImageProps)
 		<figure className="m-0 max-w-full" style={{ width }}>
 			{to ? <Link to={to}>{image}</Link> : image}
 
-			{description && <figcaption className="mt-2 text-sm leading-7">{description}</figcaption>}
+			{description && <figcaption className="mt-2 text-base leading-7">{description}</figcaption>}
 		</figure>
 	);
 }

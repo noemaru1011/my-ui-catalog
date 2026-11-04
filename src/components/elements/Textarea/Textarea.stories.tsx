@@ -4,20 +4,10 @@ import { Textarea } from './Textarea';
 const meta = {
 	component: Textarea,
 	tags: ['autodocs'],
-	parameters: {
-		layout: 'centered',
-	},
 	args: {
 		id: 'textarea',
 		label: '名前',
 	},
-	decorators: [
-		(Story) => (
-			<div className="w-[200px]">
-				<Story />
-			</div>
-		),
-	],
 } satisfies Meta<typeof Textarea>;
 
 export default meta;

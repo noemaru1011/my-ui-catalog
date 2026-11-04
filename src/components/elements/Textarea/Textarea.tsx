@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import { type ComponentProps, useId } from 'react';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
 type TextareaProps = WithoutExternalStyle<ComponentProps<typeof BaseTextarea>, 'disabled'> & {
-	id: string;
+	id?: string;
 	label: string;
 	/** 編集不可の理由や文字数制限などを記載 */
 	description?: string;
@@ -27,10 +27,12 @@ export function Textarea({
 	...rawProps
 }: TextareaProps) {
 	const props = withoutExternalStyle(rawProps);
+	const generatedId = useId();
+	const textareaId = id ?? generatedId;
 
 	return (
 		<Field data-invalid={!!error}>
-			<FieldLabel htmlFor={id}>
+			<FieldLabel htmlFor={textareaId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
 				{readOnly && <Badge variant="secondary">編集不可</Badge>}
@@ -39,7 +41,7 @@ export function Textarea({
 			{description && <FieldDescription>{description}</FieldDescription>}
 
 			<BaseTextarea
-				id={id}
+				id={textareaId}
 				aria-invalid={!!error}
 				readOnly={readOnly}
 				className={cn(readOnly && 'border-dashed')}

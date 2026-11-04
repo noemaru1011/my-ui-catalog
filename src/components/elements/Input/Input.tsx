@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import { type ComponentProps, useId } from 'react';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Badge } from '@/components/ui/badge';
@@ -7,7 +7,7 @@ import { Input as BaseInput } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
 type InputProps = WithoutExternalStyle<ComponentProps<typeof BaseInput>, 'type' | 'disabled'> & {
-	id: string;
+	id?: string;
 	label: string;
 	type?: 'text' | 'email' | 'number' | 'tel' | 'url' | 'search';
 	/** 編集不可の理由や文字数制限などを記載 */
@@ -30,6 +30,8 @@ export function Input({
 	...rawProps
 }: InputProps) {
 	const props = withoutExternalStyle(rawProps);
+	const generatedId = useId();
+	const inputId = id ?? generatedId;
 
 	const sizeClass = {
 		sm: 'h-7',
@@ -39,7 +41,7 @@ export function Input({
 
 	return (
 		<Field data-invalid={!!error}>
-			<FieldLabel htmlFor={id}>
+			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
 				{readOnly && <Badge variant="secondary">編集不可</Badge>}
@@ -48,7 +50,7 @@ export function Input({
 			{description && <FieldDescription>{description}</FieldDescription>}
 
 			<BaseInput
-				id={id}
+				id={inputId}
 				aria-invalid={!!error}
 				readOnly={readOnly}
 				className={cn(sizeClass, readOnly && 'border-dashed')}

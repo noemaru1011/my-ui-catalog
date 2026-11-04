@@ -28,7 +28,6 @@ describe('Link', () => {
 	});
 
 	it.each([
-		['sm', 'text-sm'],
 		['md', 'text-base'],
 		['lg', 'text-lg'],
 	] as const)('size="%s" のスタイルを適用する', (size, className) => {

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Page } from './page';
 
 const meta = {
-	title: 'Example/TableExample',
 	component: Page,
 	tags: ['autodocs'],
 	parameters: {

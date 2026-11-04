@@ -6,7 +6,6 @@ import { Stack } from '@/components/layouts/Stack/Stack';
 import { Text } from '@/components/elements/Text/Text';
 
 const meta = {
-	title: 'Example/ui/button',
 	component: Button,
 	tags: ['autodocs'],
 	argTypes: {
@@ -31,6 +30,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const Loading: Story = {
+	args: {
+		loading: true,
+		children: '保存中',
+	},
+};
 
 export const Variants: Story = {
 	render: () => (

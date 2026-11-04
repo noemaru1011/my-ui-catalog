@@ -4,6 +4,12 @@ import { describe, expect, it, vi } from 'vitest';
 import { PasswordInput } from './PasswordInput';
 
 describe('PasswordInput', () => {
+	it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
+		render(<PasswordInput label="パスワード" />);
+
+		expect(screen.getByLabelText('パスワード')).toHaveAttribute('id');
+	});
+
 	it('ラベルとパスワード入力欄を表示する', () => {
 		render(<PasswordInput id="password" label="パスワード" />);
 

@@ -5,6 +5,20 @@ import { FileUpload } from './FileUpload';
 const meta = {
     component: FileUpload,
     tags: ['autodocs'],
+    argTypes: {
+        value: {
+            control: false,
+        },
+        onFilesChange: {
+            control: false,
+        },
+        onBlur: {
+            control: false,
+        },
+        inputRef: {
+            control: false,
+        },
+    },
     parameters: {
         docs: {
             description: {
@@ -20,15 +34,19 @@ export default meta;
 type Story = StoryObj<Omit<typeof meta, 'component'>>;
 
 export const Default: Story = {
-    render: () => (
+    render: (args) => (
         <FileUpload
+            id="file-upload"
+            name="file-upload"
             accept=".pdf,.png,.jpg,.xlsx"
+            label='ファイル'
             multiple
             maxFiles={5}
             maxSize={10}
             onFilesChange={(files) => {
                 console.log('Selected files:', files);
             }}
+            {...args}
         />
     ),
 };

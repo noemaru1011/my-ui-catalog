@@ -73,6 +73,7 @@ describe('Checkbox', () => {
 		);
 
 		expect(screen.getByText('使用する言語を選択してください')).toBeInTheDocument();
+		expect(document.querySelector('fieldset')).toHaveClass('gap-2');
 	});
 
 	it('error が指定された場合にエラーを表示する', () => {
@@ -89,7 +90,11 @@ describe('Checkbox', () => {
 		expect(screen.getByText('1つ以上選択してください')).toBeInTheDocument();
 
 		expect(document.querySelector('fieldset')).toHaveAttribute('data-invalid', 'true');
-		expect(screen.getByText('使用言語', { selector: 'legend' })).toHaveClass('text-destructive');
+		expect(screen.getByText('使用言語', { selector: 'legend' })).toHaveClass(
+			'text-destructive',
+			'mb-0',
+		);
+		expect(document.querySelector('fieldset')).toHaveClass('gap-2');
 
 		for (const option of OPTIONS) {
 			expect(screen.getByRole('checkbox', { name: option.label })).toHaveAttribute(

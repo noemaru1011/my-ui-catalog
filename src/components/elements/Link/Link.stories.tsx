@@ -12,12 +12,6 @@ const meta = {
 		label: 'ユーザー一覧',
 		size: 'md',
 	},
-	argTypes: {
-		size: {
-			control: 'radio',
-			options: ['sm', 'md', 'lg'],
-		},
-	},
 } satisfies Meta<typeof Link>;
 
 export default meta;

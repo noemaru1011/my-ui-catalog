@@ -13,7 +13,6 @@
 		"format": "biome format --write",
 		"check": "biome check",
 		"check:fix": "biome check --write",
-		"knip": "knip",
 		"prepare": "git config core.hooksPath .github/hooks",
 		"test": "npx vitest",
 		"test:run": "npx vitest run",
@@ -23,7 +22,7 @@
 	},
 	"dependencies": {
 		"@base-ui/react": "^1.8.0",
-		"@fontsource-variable/geist": "^5.3.0",
+		"@fontsource-variable/noto-sans-jp": "^5.3.1",
 		"@hookform/resolvers": "^6.0.2",
 		"@tailwindcss/vite": "^4.3.3",
 		"@tanstack/react-table": "^9.3.1",

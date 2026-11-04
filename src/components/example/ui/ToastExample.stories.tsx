@@ -6,7 +6,6 @@ import { Stack } from '@/components/layouts/Stack/Stack';
 import { Text } from '@/components/elements/Text/Text';
 
 const meta = {
-	title: 'Example/ui/toast',
 	tags: ['autodocs'],
 } satisfies Meta;
 

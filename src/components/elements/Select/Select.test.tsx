@@ -6,6 +6,12 @@ import { OPTIONS, OPTIONS_WITH_DISABLED } from '@/components/types/Option.mock';
 import { Select } from './Select';
 
 describe('Select', () => {
+	it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
+		render(<Select label="言語" options={OPTIONS} />);
+
+		expect(screen.getByRole('combobox', { name: '言語' })).toHaveAttribute('id');
+	});
+
 	it('ラベルとデフォルトのプレースホルダーを表示する', () => {
 		render(<Select id="language" label="言語" options={OPTIONS} />);
 

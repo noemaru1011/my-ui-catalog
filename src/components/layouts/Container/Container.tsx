@@ -16,6 +16,7 @@ const WIDTH_CLASS = {
 	full: 'w-full',
 };
 
+/** コンテンツの幅を制限するレイアウトコンポーネントです。用途はページの外枠、余白、全体のレイアウトコンテンツの幅を制限するレイアウトコンポーネントです。用途はページの外枠、余白、全体のレイアウト */
 export function Container({ children, width = 'full' }: ContainerProps) {
 	return <div className={WIDTH_CLASS[width]}>{children}</div>;
 }

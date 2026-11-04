@@ -30,6 +30,7 @@ const meta = {
 			{ value: 'nuxt', label: 'Nuxt', disabled: true },
 			{ value: 'remix', label: 'Remix' },
 			{ value: 'astro', label: 'Astro' },
+			{ value: 'angular', label: 'Angular' },
 		],
 	},
 } satisfies Meta<typeof ComboboxMultiple>;

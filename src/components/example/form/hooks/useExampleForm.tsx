@@ -20,7 +20,6 @@ export function useExampleForm() {
 	return {
 		register,
 		control,
-		handleSubmit,
 		errors,
 		onSubmit: handleSubmit(onSubmit),
 	};

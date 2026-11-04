@@ -15,7 +15,7 @@ Prefer `Center`, `Cluster`, `Container`, and `Stack` over manually implementing 
 ## Component Structure
 
 ```text
-layouts/
+src/components/layouts/
 ├── Center/
 │   └── Center.tsx
 ├── Cluster/
@@ -49,15 +49,13 @@ Combine components when a layout requires multiple behaviors.
 
 ### 3. Use Existing Spacing Options
 
-`Cluster` and `Stack` support the following `space` values:
+`Cluster` and `Stack` support these `space` values:
 
 | Value | Tailwind CSS | Default spacing |
 | ----- | ------------ | --------------- |
-| `xs`  | `gap-1`      | 4px             |
 | `sm`  | `gap-2`      | 8px             |
 | `md`  | `gap-4`      | 16px            |
 | `lg`  | `gap-6`      | 24px            |
-| `xl`  | `gap-8`      | 32px            |
 
 Use the predefined spacing options instead of arbitrary gap classes when they satisfy the requirement.
 
@@ -69,7 +67,7 @@ Prefer composition over duplicating layout logic.
 <Center maxWidth="xl">
 	<Stack space="lg">
 		<Cluster justify="between" align="center">
-			<h1>Users</h1>
+			<Heading type="sectionTitle">Users</Heading>
 			<Button>Add user</Button>
 		</Cluster>
 
@@ -115,7 +113,7 @@ The component applies `mx-auto w-full` and does not add internal padding.
 #### Usage
 
 ```tsx
-import { Center } from '@/layouts/Center/Center';
+import { Center } from '@/components/layouts/Center/Center';
 
 <Center maxWidth="lg">
 	<main>Page content</main>
@@ -133,7 +131,7 @@ Use `Center` for page content and sections that need horizontal centering with a
 | Prop       | Type                                        | Default    |
 | ---------- | ------------------------------------------- | ---------- |
 | `children` | `PropsWithChildren`                         | Optional   |
-| `space`    | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`      | `'md'`     |
+| `space`    | `'sm' \| 'md' \| 'lg'`                      | `'md'`     |
 | `justify`  | `'start' \| 'center' \| 'end' \| 'between'` | `'start'`  |
 | `align`    | `'start' \| 'center' \| 'end' \| 'stretch'` | `'center'` |
 
@@ -160,7 +158,7 @@ The component applies `flex flex-wrap`.
 #### Usage
 
 ```tsx
-import { Cluster } from '@/layouts/Cluster/Cluster';
+import { Cluster } from '@/components/layouts/Cluster/Cluster';
 
 <Cluster space="sm" justify="end" align="center">
 	<Button variant="secondary">Cancel</Button>
@@ -198,7 +196,7 @@ The component does not automatically center itself or add internal padding.
 #### Usage
 
 ```tsx
-import { Container } from '@/layouts/Container/Container';
+import { Container } from '@/components/layouts/Container/Container';
 
 <Container width="2xl">
 	<Form />
@@ -228,7 +226,7 @@ Do not confuse `Container.width` with `Center.maxWidth`; they use different Tail
 | Prop        | Type                                                         | Default           |
 | ----------- | ------------------------------------------------------------ | ----------------- |
 | `as`        | `ElementType`                                                | `'div'`           |
-| `space`     | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`                       | `'md'`            |
+| `space`     | `'sm' \| 'md' \| 'lg'`                                       | `'md'`            |
 | Other props | `ComponentProps<T>` excluding `space`, `as`, and `className` | Element-dependent |
 
 The component applies `flex flex-col`.
@@ -238,11 +236,11 @@ The `className` prop is explicitly excluded from its public API. Do not pass `cl
 #### Usage
 
 ```tsx
-import { Stack } from '@/layouts/Stack/Stack';
+import { Stack } from '@/components/layouts/Stack/Stack';
 
 <Stack space="md">
-	<h2>Account settings</h2>
-	<p>Manage your account information.</p>
+	<Heading type="blockTitle">Account settings</Heading>
+	<Text>Manage your account information.</Text>
 	<Button>Save changes</Button>
 </Stack>;
 ```
@@ -251,8 +249,8 @@ Use the `as` prop when a semantic HTML element or another compatible component i
 
 ```tsx
 <Stack as="section" space="lg" aria-label="Account settings">
-	<h2>Account settings</h2>
-	<p>Manage your account information.</p>
+	<Heading type="blockTitle">Account settings</Heading>
+	<Text>Manage your account information.</Text>
 </Stack>;
 ```
 
@@ -336,7 +334,7 @@ Use `Stack` when children should be arranged vertically.
 
 ### Using Arbitrary Spacing Values
 
-Prefer the existing `space` options before introducing custom gap classes or modifying component APIs.
+Prefer the existing `space` options (`sm`, `md`, or `lg`) before introducing custom gap classes or modifying component APIs.
 
 ### Passing Unsupported Props
 

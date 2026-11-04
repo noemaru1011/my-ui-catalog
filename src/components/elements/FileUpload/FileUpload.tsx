@@ -5,20 +5,23 @@ import { Text } from '@/components/elements/Text/Text';
 import { Cluster } from '@/components/layouts/Cluster/Cluster';
 import { Container } from '@/components/layouts/Container/Container';
 import { Stack } from '@/components/layouts/Stack/Stack';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Field, FieldError, FieldLabel } from '@/components/ui/field';
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import { cn } from '@/lib/utils';
 
 type FileUploadProps = {
 	id?: string;
-	name?: string;
+	name: string;
 	label?: string;
+	description?: string;
 	required?: boolean;
 	accept?: string;
 	multiple?: boolean;
 	maxFiles?: number;
-	maxSize?: number; // MB
+	/** 単位はMB */
+	maxSize?: number;
 	disabled?: boolean;
 	value?: File[];
 	error?: string;
@@ -31,6 +34,7 @@ export function FileUpload({
 	id,
 	name,
 	label,
+	description,
 	required = false,
 	accept,
 	multiple = true,
@@ -51,6 +55,12 @@ export function FileUpload({
 	const [validationError, setValidationError] = useState('');
 	const files = value ?? uncontrolledFiles;
 	const displayedError = validationError || error;
+	const describedBy = [
+		description && `${inputId}-description`,
+		displayedError && `${inputId}-error`,
+	]
+		.filter(Boolean)
+		.join(' ');
 
 	const updateFiles = useCallback(
 		(nextFiles: File[]) => {
@@ -124,14 +134,23 @@ export function FileUpload({
 				<FieldLabel htmlFor={inputId}>
 					{label}
 					{required && <span className="text-destructive">*</span>}
+					{disabled && <Badge variant="secondary">編集不可</Badge>}
 				</FieldLabel>
+			)}
+
+			{description && (
+				<FieldDescription id={`${inputId}-description`}>{description}</FieldDescription>
 			)}
 
 			<Stack space="md">
 				<Card
 					className={cn(
-						'border-2 p-8 text-center transition-colors',
-						dragging ? 'border-primary bg-primary/5' : 'border-muted',
+						'border-2 p-8 text-center shadow-none ring-0 transition-colors',
+						displayedError
+							? 'border-destructive'
+							: dragging
+								? 'border-primary bg-primary/5'
+								: 'border-muted',
 						disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
 					)}
 					onDragOver={(e) => {
@@ -145,14 +164,12 @@ export function FileUpload({
 					}}
 				>
 					<Stack space="sm">
-						<Stack space="xs">
+						<Stack space="sm">
 							<Text weight="bold">ファイルをドラッグ＆ドロップ</Text>
-							<Text size="sm" color="muted">
-								またはクリックしてファイルを選択
-							</Text>
+							<Text color="muted">またはクリックしてファイルを選択</Text>
 						</Stack>
 
-						<Text size="sm" color="muted">
+						<Text color="muted">
 							最大 {maxFiles} 件 / {maxSize} MB
 							{accept && ` / ${accept}`}
 						</Text>
@@ -172,7 +189,7 @@ export function FileUpload({
 						disabled={disabled}
 						aria-label={label ?? 'ファイルを選択'}
 						aria-invalid={!!displayedError}
-						aria-describedby={displayedError ? `${inputId}-error` : undefined}
+						aria-describedby={describedBy || undefined}
 						className="sr-only"
 						onBlur={onBlur}
 						onChange={(e) => {
@@ -188,7 +205,7 @@ export function FileUpload({
 					<Stack space="sm">
 						<Cluster justify="between">
 							<Text weight="bold">選択したファイル</Text>
-							<Text size="sm" color="muted">
+							<Text color="muted">
 								{files.length} / {maxFiles}
 							</Text>
 						</Cluster>
@@ -201,13 +218,9 @@ export function FileUpload({
 								<Container key={`${file.name}-${file.size}-${file.lastModified}`} width="full">
 									<Cluster space="sm" align="center" justify="between">
 										<Icon className="text-muted-foreground h-5 w-5 shrink-0" />
-										<Stack space="xs">
-											<Text size="sm" weight="bold">
-												{file.name}
-											</Text>
-											<Text size="sm" color="muted">
-												{formatSize(file.size)}
-											</Text>
+										<Stack space="sm">
+											<Text weight="bold">{file.name}</Text>
+											<Text color="muted">{formatSize(file.size)}</Text>
 										</Stack>
 										<Button
 											type="button"

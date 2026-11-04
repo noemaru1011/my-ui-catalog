@@ -2,11 +2,24 @@ import type { PropsWithChildren } from 'react';
 import { cn } from '@/lib/utils';
 
 type ClusterProps = PropsWithChildren<{
-	space?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+	/**
+	 * 子要素間の間隔
+	 * @default 'md'
+	 */
+	space?: 'sm' | 'md' | 'lg';
+	/**
+	 * 水平方向の配置
+	 * @default 'start'
+	 */
 	justify?: 'start' | 'center' | 'end' | 'between';
+	/**
+	 * 垂直方向の配置
+	 * @default 'center'
+	 */
 	align?: 'start' | 'center' | 'end' | 'stretch';
 }>;
 
+/** 子要素を横方向に並べるレイアウトコンポーネントです。space は要素間の間隔、justify は水平方向の配置、align は垂直方向の配置を制御します。子要素が収まらない場合は自動的に折り返します。 */
 export function Cluster({
 	space = 'md',
 	justify = 'start',
@@ -18,11 +31,9 @@ export function Cluster({
 			className={cn(
 				'flex flex-wrap',
 				{
-					'gap-1': space === 'xs',
 					'gap-2': space === 'sm',
 					'gap-4': space === 'md',
 					'gap-6': space === 'lg',
-					'gap-8': space === 'xl',
 				},
 				{
 					'justify-start': justify === 'start',

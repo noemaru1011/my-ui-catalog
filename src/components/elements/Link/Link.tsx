@@ -5,11 +5,10 @@ import { cn } from '@/lib/utils';
 type LinkProps = {
 	to: ComponentProps<typeof RouterLink>['to'];
 	label?: string;
-	size?: 'sm' | 'md' | 'lg';
+	size?: 'md' | 'lg';
 };
 
 const SIZE_CLASS = {
-	sm: 'text-sm',
 	md: 'text-base',
 	lg: 'text-lg',
 } as const;
@@ -18,6 +17,7 @@ export function Link({ to, label, size = 'md' }: LinkProps) {
 	return (
 		<RouterLink
 			to={to}
+			// Linkのcolorは特別なので、直接classNameに書く
 			className={cn('inline-flex items-center text-blue-600 underline', SIZE_CLASS[size])}
 		>
 			<span>{label}</span>

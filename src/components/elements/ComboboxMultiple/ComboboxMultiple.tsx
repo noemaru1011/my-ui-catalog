@@ -1,4 +1,5 @@
 import type { Combobox as ComboboxPrimitive } from '@base-ui/react';
+import { useId } from 'react';
 import type { Option } from '@/components/types/Option';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
@@ -22,7 +23,7 @@ type ComboboxMultipleProps = WithoutExternalStyle<
 	ComboboxPrimitive.Root.Props<Option, true>,
 	'items' | 'multiple' | 'disabled' | 'value' | 'onValueChange' | 'onChange'
 > & {
-	id: string;
+	id?: string;
 	label: string;
 	options: Option[];
 	value?: string[];
@@ -50,6 +51,8 @@ export function ComboboxMultiple({
 	...rawProps
 }: ComboboxMultipleProps) {
 	const props = withoutExternalStyle(rawProps);
+	const generatedId = useId();
+	const inputId = id ?? generatedId;
 
 	const sizeClass = {
 		sm: 'min-h-7',
@@ -64,7 +67,7 @@ export function ComboboxMultiple({
 
 	return (
 		<Field data-invalid={!!error}>
-			<FieldLabel htmlFor={id}>
+			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
 				{disabled && <Badge variant="secondary">編集不可</Badge>}
@@ -99,7 +102,7 @@ export function ComboboxMultiple({
 									<ComboboxChip key={option.value}>{option.label}</ComboboxChip>
 								))}
 								<ComboboxChipsInput
-									id={id}
+									id={inputId}
 									aria-invalid={!!error}
 									placeholder={values.length === 0 ? placeholder : undefined}
 								/>

@@ -23,11 +23,9 @@ describe('Cluster', () => {
 	});
 
 	it.each([
-		['xs', 'gap-1'],
 		['sm', 'gap-2'],
 		['md', 'gap-4'],
 		['lg', 'gap-6'],
-		['xl', 'gap-8'],
 	] as const)('space="%s" の場合、%s を適用する', (space, expectedClass) => {
 		const { container } = render(<Cluster space={space}>コンテンツ</Cluster>);
 

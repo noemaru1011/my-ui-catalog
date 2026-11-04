@@ -3,13 +3,12 @@ import { cn } from '@/lib/utils';
 
 type TextProps = {
 	children: ReactNode;
-	size?: 'sm' | 'md' | 'lg';
+	size?: 'md' | 'lg';
 	weight?: 'normal' | 'bold';
 	color?: 'default' | 'muted';
 };
 
 const SIZE_STYLES = {
-	sm: 'text-sm',
 	md: 'text-base',
 	lg: 'text-lg',
 } as const;
