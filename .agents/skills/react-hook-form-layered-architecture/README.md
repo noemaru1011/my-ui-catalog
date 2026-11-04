@@ -1,10 +1,12 @@
-# React Hook Form Layered Architecture
+# React Hook Form Example Architecture
 
-Guidance for implementing React forms with Zod, React Hook Form, custom hooks,
-UI components, and page composition.
+Guidance for extending this repository's Zod and React Hook Form example under
+`src/components/example/form/`.
 
-Use this skill when designing or changing form features. It describes the
-responsibilities of each layer, schema and type usage, default values,
-submission behavior, and when to connect fields with `register` or `Controller`.
+Use this skill when changing its schema, validation, form hook, field
+integration, or UI composition. It follows the implementation's local schema,
+hook, component, and page structure; this project does not define a shared
+`@my-app/schemas` package.
 
-See [SKILL.md](./SKILL.md) for the full architecture and integration guidance.
+See [SKILL.md](./SKILL.md) for the complete guidance and the
+[field integration reference](./references/field-integration.md).

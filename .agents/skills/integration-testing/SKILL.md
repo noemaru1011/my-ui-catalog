@@ -26,7 +26,8 @@ For isolated tests of a single props-driven component, use the
 
 ## Project Test Setup
 
-- The project uses Vitest with two projects: `components` and `storybook`.
+- The project uses Vitest with two projects configured in `vite.config.ts`:
+  `components` and `storybook`.
 - The `components` project runs `src/**/*.test.{ts,tsx}` in Chromium using
   Vitest browser mode and Playwright.
 - Tests use React Testing Library, `@testing-library/user-event`, and the
@@ -40,14 +41,23 @@ For isolated tests of a single props-driven component, use the
 - Do not assume a standalone `@playwright/test` suite or app server is
   configured. Use the existing Vitest Playwright setup unless the project
   configuration is intentionally changed.
+- The current form example is under
+  `src/components/example/form/`: its schema and inferred values are local to
+  the example, its hook owns `useForm`, and its component renders the fields.
+  The existing `FormExample.test.tsx` verifies the hook's validation state;
+  add component-level integration coverage when the user-visible workflow is
+  the subject of the test.
 
 ## Workflow
 
 ### 1. Trace the feature path
 
-Before writing a test, inspect the page, presentation component, custom hook,
-schema, and relevant control components. Determine how a user action travels
-through the UI to form state, validation, and submission.
+Before writing a test, inspect the page, UI component, custom hook, schema,
+and relevant control components. Determine how a user action travels through
+the UI to form state, validation, and submission. For the existing form
+example, use `FORM_SCHEMA` and `FormValues` from
+`src/components/example/form/schema/formExampleSchema.ts`; do not import a
+nonexistent shared schemas package.
 
 Test a user-visible behavior across the appropriate layers. Do not duplicate
 unit tests for every control or test private implementation details.

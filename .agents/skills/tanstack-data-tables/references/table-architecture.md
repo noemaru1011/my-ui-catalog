@@ -7,7 +7,7 @@ src/components/example/<table-name>/
 ├── columns.tsx
 ├── data-table.tsx
 ├── page.tsx
-└── <table-name>.stories.tsx
+└── <FeatureName>.stories.tsx
 
 src/lib/data-table-features.ts
 ```
@@ -50,6 +50,7 @@ src/lib/data-table-features.ts
 - Register the page or table component as a Storybook story.
 - Keep the story focused on rendering and documentation metadata rather than
   duplicating table behavior.
+- In the current example, the story is named `TableExample.stories.tsx`.
 
 ## State and Row Models
 
@@ -72,6 +73,9 @@ Use the configured row models to display rows and counts. Use the filtered
 model for total matching records, and the table row model for rows visible on
 the current page. For a displayed range, show `0` when the filtered count is
 zero and reset the page index when filters are cleared or changed as needed.
+The current example resets the page when its reset button is used, but not
+when the name filter changes; add that behavior if filtering can otherwise
+leave the current page out of range.
 
 ## User-Visible Checks
 

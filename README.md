@@ -25,17 +25,17 @@ Storybook を使用して、コンポーネントの表示・動作・バリエ�
 | Linter / Formatter   | Biome                               |
 | Package Manager      | npm                                 |
 | Test                 | Vitest、Testing Library、Playwright |
-| CI/CD                | GitHub ActionsGitHub                |
+| CI/CD                | GitHub Actions                      |
 | Deploy               | GitHub Pages                        |
-| AI                   | CodeX                               |
+| Agent Skills         | `.agents/skills/`                   |
 
 ## Requirements
 
-- Node.js `^24.0.0`
+- Node.js `>=24.22.2`
 - npm
 - Git
 
-Node.js のバージョンは `.nvmrc` および `package.json` の `engines` に従います。
+Node.js のバージョンは `.nvmrc` と `package.json` の `engines` で管理しています。
 
 ## Getting Started
 
@@ -78,20 +78,25 @@ npm run build-storybook
 ```text
 .
 ├── .agents
-│   └── skills             # CodeX skills
+│   └── skills             # プロジェクト用 Agent Skills
 ├── .github/
 │   ├── hooks/             # Git フック
-│   └── workflows/         # GitHub Actions
+│   ├── workflows/         # GitHub Actions
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── .storybook/            # Storybook 設定
+├── docs/                  # デザイントークン等のドキュメント
+├── e2e/                   # Playwright Test による E2E テスト
 ├── src/
 │   ├── components/
 │   │   ├── elements/      # 自作 UI コンポーネント
-│   │   ├── layouts/       # レイアウト用　自作コンポーネント
-│   │   ├── example/       # コンポーネントの組み合わせ例
-│   │   ├── types/         # 共通の型定義等
+│   │   ├── layouts/       # レイアウト用自作コンポーネント
+│   │   ├── example/       # フォーム・テーブル等の組み合わせ例
+│   │   ├── types/         # 共通の型・テスト用データ
 │   │   └── ui/            # shadcn/ui の UI
 │   ├── lib/               # 共通ユーティリティ
-│   └── index.css          # グローバルスタイル(tailwindのみ)
+│   ├── test/              # Vitest の共通セットアップ
+│   └── index.css          # グローバルスタイル
+├── vite.config.ts         # Vite・Vitest 設定
 ├── biome.json             # Biome 設定
 ├── components.json        # shadcn/ui 設定
 ├── package.json
@@ -123,6 +128,11 @@ npm run build-storybook
 
 複数のコンポーネントを組み合わせた使用例を管理します。
 
+- `src/components/example/form/`: Zod スキーマ、React Hook Form のカスタムフック、フォーム UI、ページで構成するフォーム例
+- `src/components/example/table/`: TanStack Table v9 を使ったソート、絞り込み、ページネーション、行編集の例
+
+フォーム例のスキーマと型は `src/components/example/form/schema/formExampleSchema.ts` に定義し、サンプルのため外部 API には接続しません。
+
 ## Adding a Component
 
 新しいコンポーネントを追加する場合は、用途に応じたディレクトリに配置します。
@@ -153,7 +163,7 @@ Story ファイルでは、コンポーネントの基本表示、プロパテ�
 
 ### Test
 
-コンポーネントのテスト方針や作成手順は Skills に落とし込み、コンポーネント間で一貫したテストを実施できるようにします。
+コンポーネントのテスト方針や作成手順は `.agents/skills/` にある Skills にまとめています。
 
 テストでは、実装の詳細ではなく、コンポーネントが外部から観測できる振る舞いを中心に検証します。
 
@@ -166,25 +176,34 @@ Story ファイルでは、コンポーネントの基本表示、プロパテ�
 - **制約条件**：`disabled` などの制約が適切に機能すること
 - **アクセシビリティ**：ロール、ラベル、ARIA 属性などが適切に設定されていること
 
-React コンポーネントでは、Vitest と React Testing Library を使用し、必要に応じて `userEvent` でユーザー操作を再現します。
+通常のコンポーネントテストは Vitest の `components` プロジェクトで実行し、Vitest Browser Mode と Playwright の Chromium、React Testing Library、`userEvent` を使用します。Storybook の story は別の `storybook` プロジェクトで検証します。どちらも設定は `vite.config.ts` にあります。
 
-コンポーネントの仕様を追加・変更した場合は、Skills に定義した方針に従って関連するテストを作成・更新し、既存の動作への影響がないことを確認します。
+複数コンポーネントにまたがるブラウザ操作を検証する Playwright Test は `e2e/` に配置し、Storybook をテスト対象として起動します。コンポーネントの仕様を変更した場合は、適切なテストを追加・更新して既存動作への影響を確認します。
 
 ## Development Commands
 
-| コマンド                  | 説明                           |
-| ------------------------- | ------------------------------ |
-| `npm run storybook`       | Storybook の開発サーバーを起動 |
-| `npm run build-storybook` | Storybook を静的ビルド         |
-| `npm run lint`            | Biome による Lint              |
-| `npm run format`          | Biome によるフォーマット       |
-| `npm run check`           | Biome によるチェック           |
-| `npm run check:fix`       | Biome によるチェックと自動修正 |
-| `npm run test`            | Vitest でテストを実行          |
-| `npm run test:run`        | Vitest でテストを一括実行      |
-| `npm run test:components` | コンポーネントのテストを実行   |
-| `npm run test:storybook`  | Storybook のテストを実行       |
-| `npm run test:e2e`        | Playwright でE2Eテストを実行   |
+| コマンド                  | 説明                                             |
+| ------------------------- | ------------------------------------------------ |
+| `npm run storybook`       | Storybook の開発サーバーを起動                   |
+| `npm run build-storybook` | Storybook を静的ビルド                           |
+| `npm run lint`            | Biome による Lint                                |
+| `npm run format`          | Biome によるフォーマット                         |
+| `npm run check`           | Biome によるチェック                             |
+| `npm run check:fix`       | Biome によるチェックと自動修正                   |
+| `npm run test`            | Vitest の watch モードでテストを実行             |
+| `npm run test:run`        | Vitest の全プロジェクトを一括実行                |
+| `npm run test:components` | コンポーネントテストを実行                       |
+| `npm run test:storybook`  | Storybook の story テストを実行                  |
+| `npm run test:e2e`        | Storybook を起動して Playwright E2E テストを実行 |
+
+特定のコンポーネントテストまたは E2E テストを実行する場合：
+
+```bash
+npm run test:components -- src/components/example/form/components/FormExample.test.tsx
+npm run test:e2e -- e2e/form.spec.ts
+```
+
+`npm run test:e2e` は Playwright 設定の `webServer` を使って Storybook を起動します。CI では Chromium をセットアップしてから、Biome チェック、全 Vitest テスト、E2E テスト、Storybook ビルドを実行します。
 
 ### Code Quality
 
@@ -280,6 +299,6 @@ GitHub Actions による自動デプロイを行う。
 
 - `.github/workflows/cd.yml`: CD の実行
 
-`main` ブランチへの push をトリガーに、Storybook のビルドと GitHub Pages へのデプロイを実行します。手動実行にも対応しています。
+`master` ブランチで CI が成功すると、Storybook のビルドと GitHub Pages へのデプロイを実行します。手動実行にも対応しています。
 
 具体的な処理内容は、ワークフローファイルを参照してください。

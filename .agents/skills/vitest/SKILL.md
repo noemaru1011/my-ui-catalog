@@ -20,7 +20,21 @@ Vitest is a next-generation testing framework powered by Vite. It provides a Jes
 - Built-in coverage via V8 or Istanbul
 - Snapshot testing, mocking, and spy utilities
 
-> The skill is based on Vitest 5.0.1, generated at 2026-09-25.
+> This project uses Vitest 5.0.5.
+
+## Project Setup
+
+- Vite and Vitest are configured together in the root `vite.config.ts`.
+- The `components` project runs `src/**/*.test.{ts,tsx}` with Vitest Browser
+  Mode, Playwright, and Chromium. It loads the shared
+  `src/test/setup.ts` setup file.
+- The `storybook` project runs the stories discovered by the Storybook Vitest
+  plugin, also in Chromium.
+- Run all projects once with `npm run test:run`; use
+  `npm run test:components` or `npm run test:storybook` to select one project.
+- Do not assume that jsdom or a standalone `@playwright/test` runner is used
+  for component tests. Standalone E2E tests use `playwright/test` through
+  `npm run test:e2e`.
 
 ## Core
 

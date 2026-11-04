@@ -15,6 +15,12 @@ decide which behavior the parent needs, then compose only those components.
 For example, center a page, stack its title and form, then constrain the form:
 
 ```tsx
+import { Heading } from '@/components/elements/Heading/Heading';
+import { Center } from '@/components/layouts/Center/Center';
+import { Cluster } from '@/components/layouts/Cluster/Cluster';
+import { Container } from '@/components/layouts/Container/Container';
+import { Stack } from '@/components/layouts/Stack/Stack';
+
 <Center maxWidth="xl">
 	<Stack as="main" space="lg">
 		<Heading type="sectionTitle">プロフィール</Heading>
@@ -40,7 +46,7 @@ Use `Cluster` for a toolbar or action row:
 - `Container.width` supports `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, and `full`.
 - `Center` centers its child but does not add padding.
 - `Container` constrains width but does not center itself.
-- `Cluster` and `Stack` support `xs`, `sm`, `md`, `lg`, and `xl` spacing.
+- `Cluster` and `Stack` support `sm`, `md`, and `lg` spacing.
 - `Stack` renders a `div` by default and supports an `as` prop for semantic
   elements. It intentionally does not accept a `className` prop.
 

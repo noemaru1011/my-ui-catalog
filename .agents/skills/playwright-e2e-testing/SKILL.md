@@ -27,8 +27,11 @@ browser mode is not the same as a standalone Playwright E2E test.
 
 - Standalone browser tests live in `e2e/` and use `*.spec.ts`.
 - Playwright Test is imported from `playwright/test`.
-- `playwright.config.ts` runs tests in Chromium and starts Storybook at
-  `http://127.0.0.1:6006` through `webServer`.
+- `playwright.config.ts` runs tests in Chromium and starts this project's
+  Storybook at `http://127.0.0.1:6006` through `webServer`.
+- The current E2E suite tests the Storybook iframe, not a separately served
+  production application. `e2e/form.spec.ts` covers visible validation for the
+  form example.
 - The `test:e2e` npm script runs the full suite and starts Storybook
   automatically:
 
@@ -50,9 +53,9 @@ browser mode is not the same as a standalone Playwright E2E test.
 
 ### 1. Inspect the feature and test setup
 
-Read `playwright.config.ts`, `package.json`, the target story or application
-entry point, and the feature code. Confirm the URL, accessible labels, expected
-behavior, and whether the existing `webServer` starts the correct app.
+Read `playwright.config.ts`, `package.json`, the target story and feature
+code. Confirm the Storybook story ID, accessible labels, expected behavior,
+and that the existing `webServer` starts Storybook.
 
 Keep the test in `e2e/` and follow the existing TypeScript and Japanese test
 naming conventions. Reuse the configured browser and server lifecycle unless
