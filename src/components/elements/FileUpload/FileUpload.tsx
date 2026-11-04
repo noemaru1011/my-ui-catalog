@@ -130,7 +130,7 @@ export function FileUpload({
 			<Stack space="md">
 				<Card
 					className={cn(
-						'border-2 p-6 text-center transition-colors',
+						'border-2 p-8 text-center transition-colors',
 						dragging ? 'border-primary bg-primary/5' : 'border-muted',
 						disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
 					)}

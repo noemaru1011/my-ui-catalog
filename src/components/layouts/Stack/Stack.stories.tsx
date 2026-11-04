@@ -27,9 +27,9 @@ export const Default: Story = {
 	render: (args) => (
 		<div className="w-80">
 			<Stack {...args}>
-				<div className="rounded-md border p-6">コンテンツ 1</div>
-				<div className="rounded-md border p-6">コンテンツ 2</div>
-				<div className="rounded-md border p-6">コンテンツ 3</div>
+				<div className="rounded-md border p-4">コンテンツ 1</div>
+				<div className="rounded-md border p-4">コンテンツ 2</div>
+				<div className="rounded-md border p-4">コンテンツ 3</div>
 			</Stack>
 		</div>
 	),

@@ -19,13 +19,15 @@ describe('Cluster', () => {
 		const { container } = render(<Cluster>コンテンツ</Cluster>);
 		const cluster = container.firstChild as HTMLElement;
 
-		expect(cluster).toHaveClass('flex', 'flex-wrap', 'gap-6', 'justify-start', 'items-center');
+		expect(cluster).toHaveClass('flex', 'flex-wrap', 'gap-4', 'justify-start', 'items-center');
 	});
 
 	it.each([
+		['xs', 'gap-1'],
 		['sm', 'gap-2'],
-		['md', 'gap-6'],
-		['lg', 'gap-16'],
+		['md', 'gap-4'],
+		['lg', 'gap-6'],
+		['xl', 'gap-8'],
 	] as const)('space="%s" の場合、%s を適用する', (space, expectedClass) => {
 		const { container } = render(<Cluster space={space}>コンテンツ</Cluster>);
 

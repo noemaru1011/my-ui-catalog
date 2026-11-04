@@ -14,7 +14,7 @@ const meta = {
 	argTypes: {
 		space: {
 			control: 'radio',
-			options: ['sm', 'md', 'lg'],
+			options: ['xs', 'sm', 'md', 'lg', 'xl'],
 		},
 		justify: {
 			control: 'radio',
@@ -39,7 +39,7 @@ const Item = ({
 	className?: string;
 }) => (
 	<div
-		className={`flex min-w-20 items-center justify-center rounded-md border border-blue-300 bg-blue-50 px-6 py-2 text-base font-medium text-blue-900 ${className}`}
+		className={`flex min-w-20 items-center justify-center rounded-md border border-blue-300 bg-blue-50 px-4 py-3 text-base font-medium text-blue-900 ${className}`}
 	>
 		{title}
 	</div>
@@ -60,7 +60,7 @@ export const Default: Story = {
 					<Cluster {...args}>
 						<Item title="小" />
 						<Item title="中" className="py-6" />
-						<Item title="大" className="py-6" />
+						<Item title="大" className="py-8" />
 					</Cluster>
 				</CardContent>
 			</Card>

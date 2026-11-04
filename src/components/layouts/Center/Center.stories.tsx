@@ -28,7 +28,7 @@ export const Default: Story = {
 	},
 	render: (args) => (
 		<Container width="full">
-			<div className="min-h-screen bg-gray-100 px-6 py-6">
+			<div className="min-h-screen bg-gray-100 px-4 py-8">
 				<Center {...args}>
 					<div className="min-h-64 border-2 border-dashed border-blue-500 bg-blue-50 p-6">
 						<Heading type="blockTitle">

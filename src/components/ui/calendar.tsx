@@ -36,10 +36,10 @@ function Calendar({
 			}}
 			classNames={{
 				root: cn('w-fit', defaultClassNames.root),
-				months: cn('relative flex flex-col gap-6 md:flex-row', defaultClassNames.months),
-				month: cn('flex w-full flex-col gap-6', defaultClassNames.month),
+				months: cn('relative flex flex-col gap-4 md:flex-row', defaultClassNames.months),
+				month: cn('flex w-full flex-col gap-4', defaultClassNames.month),
 				nav: cn(
-					'absolute inset-x-0 top-0 flex w-full items-center justify-between gap-2',
+					'absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1',
 					defaultClassNames.nav,
 				),
 				button_previous: cn(
@@ -57,7 +57,7 @@ function Calendar({
 					defaultClassNames.month_caption,
 				),
 				dropdowns: cn(
-					'flex h-(--cell-size) w-full items-center justify-center gap-2 text-base font-medium',
+					'flex h-(--cell-size) w-full items-center justify-center gap-1.5 text-base font-medium',
 					defaultClassNames.dropdowns,
 				),
 				dropdown_root: cn('relative rounded-(--cell-radius)', defaultClassNames.dropdown_root),
@@ -66,7 +66,7 @@ function Calendar({
 					'font-medium select-none',
 					captionLayout === 'label'
 						? 'text-base'
-						: 'flex items-center gap-2 rounded-(--cell-radius) text-base [&>svg]:size-3.5 [&>svg]:text-muted-foreground',
+						: 'flex items-center gap-1 rounded-(--cell-radius) text-base [&>svg]:size-3.5 [&>svg]:text-muted-foreground',
 					defaultClassNames.caption_label,
 				),
 				month_grid: cn('w-full border-collapse', defaultClassNames.month_grid),
@@ -170,7 +170,7 @@ function CalendarDayButton({
 			data-range-end={modifiers.range_end}
 			data-range-middle={modifiers.range_middle}
 			className={cn(
-				'relative isolate z-local flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-2 border-0 leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-local group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-[3px] group-data-[focused=true]/day:ring-ring/50 data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-muted data-[range-middle=true]:text-foreground data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground dark:hover:text-foreground [&>span]:text-base [&>span]:opacity-70',
+				'relative isolate z-local flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-local group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-[3px] group-data-[focused=true]/day:ring-ring/50 data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-muted data-[range-middle=true]:text-foreground data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground dark:hover:text-foreground [&>span]:text-base [&>span]:opacity-70',
 				defaultClassNames.day,
 				className,
 			)}

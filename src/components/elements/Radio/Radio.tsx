@@ -42,8 +42,8 @@ export function Radio({
 	const props = withoutExternalStyle(rawProps);
 
 	return (
-		<FieldSet data-invalid={!!error}>
-			<FieldLegend variant="label" className={error && 'text-destructive'}>
+		<FieldSet data-invalid={!!error} className="gap-2 has-[>[data-slot=radio-group]]:gap-2">
+			<FieldLegend variant="label" className={error ? 'text-destructive mb-0' : 'mb-0'}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
 				{disabled && <Badge variant="secondary">編集不可</Badge>}
@@ -58,7 +58,7 @@ export function Radio({
 				aria-invalid={!!error}
 				{...props}
 			>
-				<FieldGroup className="gap-2">
+				<FieldGroup className="gap-4">
 					{options.map((option) => {
 						const id = `${label}-${option.value}`;
 

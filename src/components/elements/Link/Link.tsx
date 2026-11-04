@@ -17,7 +17,7 @@ export function Link({ to, label, size = 'md' }: LinkProps) {
 	return (
 		<RouterLink
 			to={to}
-			// colorは特別なので、直接classNameに書く
+			// Linkのcolorは特別なので、直接classNameに書く
 			className={cn('inline-flex items-center text-blue-600 underline', SIZE_CLASS[size])}
 		>
 			<span>{label}</span>

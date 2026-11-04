@@ -51,7 +51,14 @@ describe('Radio', () => {
 
 		expect(screen.getByText('使用する言語を選択してください')).toBeInTheDocument();
 		expect(screen.getByText('言語を選択してください')).toBeInTheDocument();
-		expect(screen.getByText('言語', { selector: 'legend' })).toHaveClass('text-destructive');
+		expect(screen.getByText('言語', { selector: 'legend' })).toHaveClass(
+			'text-destructive',
+			'mb-0',
+		);
+		expect(document.querySelector('fieldset')).toHaveClass(
+			'gap-2',
+			'has-[>[data-slot=radio-group]]:gap-2',
+		);
 		// エラー状態がグループに反映されることを確認
 		expect(screen.getByRole('radiogroup')).toHaveAttribute('aria-invalid', 'true');
 	});

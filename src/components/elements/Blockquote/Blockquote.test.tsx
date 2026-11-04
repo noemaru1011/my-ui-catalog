@@ -43,7 +43,7 @@ describe('Blockquote', () => {
 
 		const content = screen.getByText('引用テキスト');
 
-		expect(content).toHaveClass('min-w-0', 'flex-1', 'py-2');
+		expect(content).toHaveClass('min-w-0', 'flex-1', 'py-1');
 	});
 
 	it('子要素がnullの場合でも正常に描画されること', () => {

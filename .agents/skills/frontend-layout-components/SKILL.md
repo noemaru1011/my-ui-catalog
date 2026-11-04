@@ -53,13 +53,11 @@ Combine components when a layout requires multiple behaviors.
 
 | Value | Tailwind CSS | Default spacing |
 | ----- | ------------ | --------------- |
-| `xs`  | `gap-2`      | 8px             |
+| `xs`  | `gap-1`      | 4px             |
 | `sm`  | `gap-2`      | 8px             |
-| `md`  | `gap-6`      | 24px            |
+| `md`  | `gap-4`      | 16px            |
 | `lg`  | `gap-6`      | 24px            |
-| `xl`  | `gap-16`     | 64px            |
-
-This project uses 8px, 24px, and 64px spacing scales. `xs`/`sm`, and `md`/`lg` are aliases for compatibility with the existing layout API.
+| `xl`  | `gap-8`      | 32px            |
 
 Use the predefined spacing options instead of arbitrary gap classes when they satisfy the requirement.
 
