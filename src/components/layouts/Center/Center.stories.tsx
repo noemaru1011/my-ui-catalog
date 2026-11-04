@@ -32,24 +32,26 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	args: {
-		children: (
-			<div className="min-h-64 border-2 border-dashed border-blue-500 bg-blue-50 p-6">
-				<Heading type="blockTitle">
-					コンテンツ領域
-				</Heading>
-				<Text>
-					maxWidth: lg
-				</Text>
-				<Text>
-					この領域は画面の中央に配置され、最大幅は lg に制限されます。
-				</Text>
-			</div>
-		),
+		maxWidth: 'lg',
+		children: null,
 	},
 	render: (args) => (
 		<Container width="full">
 			<div className="min-h-screen bg-gray-100 px-4 py-8">
-				<Center {...args} />
+				<Center {...args}>
+					<div className="min-h-64 border-2 border-dashed border-blue-500 bg-blue-50 p-6">
+						<Heading type="blockTitle">
+							コンテンツ領域
+						</Heading>
+						<Text>
+							maxWidth: {args.maxWidth}
+						</Text>
+						<Text>
+							この領域は画面の中央に配置され、
+							最大幅は {args.maxWidth} に制限されます。
+						</Text>
+					</div>
+				</Center>
 			</div>
 		</Container>
 	),
