@@ -12,7 +12,6 @@ import {
 import { Text } from '@/components/elements/Text/Text';
 
 const meta = {
-	title: 'Example/ui/dialog',
 	tags: ['autodocs'],
 } satisfies Meta;
 

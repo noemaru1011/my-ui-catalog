@@ -110,7 +110,7 @@ export function createColumns({
 			enableSorting: false,
 			cell: ({ row }) =>
 				editingId === row.original.id ? (
-					<Cluster space="xs">
+					<Cluster space="sm">
 						<Button type="button" size="sm" onClick={() => onSave(row.original.id)}>
 							保存
 						</Button>
@@ -119,7 +119,7 @@ export function createColumns({
 						</Button>
 					</Cluster>
 				) : (
-					<Cluster space="xs">
+					<Cluster space="sm">
 						<Button type="button" size="sm" variant="outline" onClick={() => onEdit(row.original)}>
 							編集
 						</Button>

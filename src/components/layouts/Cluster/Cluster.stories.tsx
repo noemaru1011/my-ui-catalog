@@ -14,7 +14,7 @@ const meta = {
 	argTypes: {
 		space: {
 			control: 'radio',
-			options: ['xs', 'sm', 'md', 'lg', 'xl'],
+			options: ['sm', 'md', 'lg'],
 		},
 		justify: {
 			control: 'radio',

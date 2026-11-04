@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/alert-dialog';
 
 const meta = {
-	title: 'Example/ui/alert-dialog',
 	tags: ['autodocs'],
 } satisfies Meta;
 

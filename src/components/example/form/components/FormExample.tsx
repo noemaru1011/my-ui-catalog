@@ -154,7 +154,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 						</Container>
 					</Cluster>
 
-					<Cluster space="xl" align="start">
+					<Cluster space="lg" align="start">
 						<Container width="lg">
 							<Controller
 								name="interests"

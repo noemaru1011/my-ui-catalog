@@ -145,7 +145,7 @@ export function FileUpload({
 					}}
 				>
 					<Stack space="sm">
-						<Stack space="xs">
+						<Stack space="sm">
 							<Text weight="bold">ファイルをドラッグ＆ドロップ</Text>
 							<Text color="muted">またはクリックしてファイルを選択</Text>
 						</Stack>
@@ -199,7 +199,7 @@ export function FileUpload({
 								<Container key={`${file.name}-${file.size}-${file.lastModified}`} width="full">
 									<Cluster space="sm" align="center" justify="between">
 										<Icon className="text-muted-foreground h-5 w-5 shrink-0" />
-										<Stack space="xs">
+										<Stack space="sm">
 											<Text weight="bold">{file.name}</Text>
 											<Text color="muted">{formatSize(file.size)}</Text>
 										</Stack>

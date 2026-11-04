@@ -6,7 +6,7 @@ type ClusterProps = PropsWithChildren<{
 	 * 子要素間の間隔
 	 * @default 'md'
 	 */
-	space?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+	space?: 'sm' | 'md' | 'lg';
 	/**
 	 * 水平方向の配置
 	 * @default 'start'
@@ -31,11 +31,9 @@ export function Cluster({
 			className={cn(
 				'flex flex-wrap',
 				{
-					'gap-1': space === 'xs',
 					'gap-2': space === 'sm',
 					'gap-4': space === 'md',
 					'gap-6': space === 'lg',
-					'gap-8': space === 'xl',
 				},
 				{
 					'justify-start': justify === 'start',
