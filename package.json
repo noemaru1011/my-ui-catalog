@@ -13,7 +13,6 @@
 		"format": "biome format --write",
 		"check": "biome check",
 		"check:fix": "biome check --write",
-		"knip": "knip",
 		"prepare": "git config core.hooksPath .github/hooks",
 		"test": "npx vitest",
 		"test:run": "npx vitest run",
