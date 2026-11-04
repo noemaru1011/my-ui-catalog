@@ -22,7 +22,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 const INPUT_GROUP_ADDON_VARIANTS = cva(
-	"flex h-auto cursor-text items-center justify-center gap-2 py-2 text-base font-medium text-muted-foreground select-none group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
+	"flex h-auto cursor-text items-center justify-center gap-2 py-2 text-base font-medium text-muted-foreground select-none group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-lg [&>svg:not([class*='size-'])]:size-4",
 	{
 		variants: {
 			align: {
@@ -65,9 +65,9 @@ function InputGroupAddon({
 const INPUT_GROUP_BUTTON_VARIANTS = cva('flex items-center gap-2 text-base shadow-none', {
 	variants: {
 		size: {
-			xs: "h-6 gap-2 rounded-[calc(var(--radius)-3px)] px-2 [&>svg:not([class*='size-'])]:size-3.5",
+			xs: "h-6 gap-2 rounded-lg px-2 [&>svg:not([class*='size-'])]:size-3.5",
 			sm: '',
-			'icon-xs': 'size-6 rounded-[calc(var(--radius)-3px)] p-0 has-[>svg]:p-0',
+			'icon-xs': 'size-6 rounded-lg p-0 has-[>svg]:p-0',
 			'icon-sm': 'size-8 p-0 has-[>svg]:p-0',
 		},
 	},
