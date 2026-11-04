@@ -6,14 +6,6 @@ import { Stack } from '../Stack/Stack';
 const meta = {
 	component: Container,
 	tags: ['autodocs'],
-	parameters: {
-		layout: 'fullscreen',
-		docs: {
-			description: {
-				component: 'コンテンツの幅を制限するレイアウトコンポーネントです。用途はページの外枠、余白、全体のレイアウト',
-			},
-		},
-	},
 	args: {
 		width: 'md',
 	},

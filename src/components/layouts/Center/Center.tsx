@@ -6,6 +6,7 @@ type CenterProps = {
 	maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
 };
 
+/** コンテンツを水平方向の中央に配置するコンポーネントです。用途はコンテンツの最大幅と中央寄せ */
 export function Center({ children, maxWidth = 'lg' }: CenterProps) {
 	return (
 		<div

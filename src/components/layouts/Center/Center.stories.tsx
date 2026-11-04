@@ -7,15 +7,6 @@ import { Text } from '@/components/elements/Text/Text';
 const meta = {
 	component: Center,
 	tags: ['autodocs'],
-	parameters: {
-		layout: 'fullscreen',
-		docs: {
-			description: {
-				component:
-					'コンテンツを水平方向の中央に配置するコンポーネントです。用途はコンテンツの最大幅と中央寄せ',
-			},
-		},
-	},
 	args: {
 		maxWidth: 'lg',
 	},
@@ -37,7 +28,7 @@ export const Default: Story = {
 	},
 	render: (args) => (
 		<Container width="full">
-			<div className="min-h-screen bg-gray-100 px-4 py-8">
+			<div className="min-h-screen bg-gray-100 px-6 py-6">
 				<Center {...args}>
 					<div className="min-h-64 border-2 border-dashed border-blue-500 bg-blue-50 p-6">
 						<Heading type="blockTitle">

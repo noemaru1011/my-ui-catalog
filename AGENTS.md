@@ -21,6 +21,8 @@ Do not duplicate rules that are already adequately enforced by linters, formatte
 
 ## Layout and UI Component Conventions
 
+- Use the 8px, 24px, and 64px spacing scales for margins, padding, and gaps (Tailwind spacing utilities `2`, `6`, and `16`). Use zero only for resets and preserve `auto` or component-specific alignment offsets where needed.
+- `Stack` and `Cluster` map their existing `space` options to these scales: `xs`/`sm` to 8px, `md`/`lg` to 24px, and `xl` to 64px.
 - **Use layout components** for arranging and positioning UI elements. Avoid writing `div` elements directly for layout or styling purposes whenever possible.
 - Use the existing layout components under `components/layouts/` instead of implementing layout logic with raw HTML elements and custom styles.
 

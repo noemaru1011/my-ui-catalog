@@ -3,19 +3,17 @@ import { describe, expect, it } from 'vitest';
 import { Stack } from './Stack';
 
 describe('Stack', () => {
-	it('デフォルトで div と flex flex-col gap-4 を適用する', () => {
+	it('デフォルトで div と flex flex-col gap-6 を適用する', () => {
 		const { container } = render(<Stack>コンテンツ</Stack>);
 
 		expect(container.firstChild).toHaveProperty('tagName', 'DIV');
-		expect(container.firstChild).toHaveClass('flex', 'flex-col', 'gap-4');
+		expect(container.firstChild).toHaveClass('flex', 'flex-col', 'gap-6');
 	});
 
 	it.each([
-		['xs', 'gap-1'],
 		['sm', 'gap-2'],
-		['md', 'gap-4'],
-		['lg', 'gap-6'],
-		['xl', 'gap-8'],
+		['md', 'gap-6'],
+		['lg', 'gap-16'],
 	] as const)('space="%s" のとき %s を適用する', (space, expectedClass) => {
 		const { container } = render(<Stack space={space} />);
 
@@ -52,7 +50,7 @@ describe('Stack', () => {
 			<Stack {...({ className: 'custom-class' } as object)}>コンテンツ</Stack>,
 		);
 
-		expect(container.firstChild).toHaveClass('flex', 'flex-col', 'gap-4');
+		expect(container.firstChild).toHaveClass('flex', 'flex-col', 'gap-6');
 		expect(container.firstChild).not.toHaveClass('custom-class');
 	});
 });

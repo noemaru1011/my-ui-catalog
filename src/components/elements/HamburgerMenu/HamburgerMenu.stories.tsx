@@ -24,7 +24,7 @@ const meta = {
 					<DrawerTitle>メニュー</DrawerTitle>
 					<DrawerDescription>ページを選択してください。</DrawerDescription>
 				</DrawerHeader>
-				<nav aria-label="メインメニュー" className="p-4">
+				<nav aria-label="メインメニュー" className="p-6">
 					<Stack as="ul" space="sm">
 						<li>
 							<DrawerClose

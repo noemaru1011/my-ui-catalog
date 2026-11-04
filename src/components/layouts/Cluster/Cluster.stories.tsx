@@ -6,15 +6,6 @@ import { Container } from '../Container/Container';
 const meta = {
 	component: Cluster,
 	tags: ['autodocs'],
-	parameters: {
-		layout: 'padded',
-		docs: {
-			description: {
-				component:
-					'子要素を横方向に並べるレイアウトコンポーネントです。space は要素間の間隔、justify は水平方向の配置、align は垂直方向の配置を制御します。子要素が収まらない場合は自動的に折り返します。',
-			},
-		},
-	},
 	args: {
 		space: 'md',
 		justify: 'start',
@@ -22,19 +13,16 @@ const meta = {
 	},
 	argTypes: {
 		space: {
-			control: 'select',
-			options: ['xs', 'sm', 'md', 'lg', 'xl'],
-			description: '子要素間の間隔',
+			control: 'radio',
+			options: ['sm', 'md', 'lg'],
 		},
 		justify: {
-			control: 'select',
+			control: 'radio',
 			options: ['start', 'center', 'end', 'between'],
-			description: '水平方向の配置',
 		},
 		align: {
-			control: 'select',
+			control: 'radio',
 			options: ['start', 'center', 'end', 'stretch'],
-			description: '垂直方向の配置',
 		},
 	},
 } satisfies Meta<typeof Cluster>;
@@ -51,7 +39,7 @@ const Item = ({
 	className?: string;
 }) => (
 	<div
-		className={`flex min-w-20 items-center justify-center rounded-md border border-blue-300 bg-blue-50 px-4 py-3 text-base font-medium text-blue-900 ${className}`}
+		className={`flex min-w-20 items-center justify-center rounded-md border border-blue-300 bg-blue-50 px-6 py-2 text-base font-medium text-blue-900 ${className}`}
 	>
 		{title}
 	</div>
@@ -72,7 +60,7 @@ export const Default: Story = {
 					<Cluster {...args}>
 						<Item title="小" />
 						<Item title="中" className="py-6" />
-						<Item title="大" className="py-8" />
+						<Item title="大" className="py-6" />
 					</Cluster>
 				</CardContent>
 			</Card>
