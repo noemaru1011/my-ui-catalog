@@ -43,7 +43,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 			<Stack space="lg">
 				<Heading type="sectionTitle">フォーム例</Heading>
 
-				<Stack space="lg" as="form" onSubmit={onSubmit}>
+				<Stack space="lg" as="form" noValidate onSubmit={onSubmit}>
 					<Cluster space="lg" align="start">
 						<Container width="lg">
 							<Input

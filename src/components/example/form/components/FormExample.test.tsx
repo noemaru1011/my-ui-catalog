@@ -14,7 +14,7 @@ describe('useExampleForm', () => {
 		const { result } = renderHook(() => useExampleForm());
 
 		await act(async () => {
-			await result.current.handleSubmit(() => {})({
+			await result.current.onSubmit({
 				preventDefault: () => {},
 			} as React.SubmitEvent<HTMLFormElement>);
 		});

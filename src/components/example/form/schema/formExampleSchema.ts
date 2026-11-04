@@ -60,7 +60,7 @@ export const GENDER_OPTIONS = [
 	{ value: 'other', label: 'その他' },
 ];
 
-export const DEFAULT_FORM_VALUES: FormValues = {
+export const DEFAULT_FORM_VALUES = {
 	name: '',
 	password: '',
 	category: '',
@@ -69,8 +69,7 @@ export const DEFAULT_FORM_VALUES: FormValues = {
 	agreement: [],
 	interests: [],
 	gender: '',
-	date: undefined as unknown as Date,
 	dateRange: undefined,
 	description: '',
 	attachments: [],
-};
+} satisfies Partial<FormValues>;
