@@ -1,6 +1,6 @@
 import { Button } from '@base-ui/react';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
-import { type ComponentProps, useState } from 'react';
+import { type ComponentProps, useId, useState } from 'react';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
@@ -12,7 +12,7 @@ type PasswordInputProps = WithoutExternalStyle<
 	ComponentProps<typeof InputGroupInput>,
 	'type' | 'disabled'
 > & {
-	id: string;
+	id?: string;
 	label: string;
 	description?: string;
 	error?: string;
@@ -32,6 +32,8 @@ export function PasswordInput({
 	...rawProps
 }: PasswordInputProps) {
 	const props = withoutExternalStyle(rawProps);
+	const generatedId = useId();
+	const inputId = id ?? generatedId;
 
 	const [visible, setVisible] = useState(false);
 
@@ -43,7 +45,7 @@ export function PasswordInput({
 
 	return (
 		<Field data-invalid={!!error}>
-			<FieldLabel htmlFor={id}>
+			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
 				{readOnly && <Badge variant="secondary">編集不可</Badge>}
@@ -53,7 +55,7 @@ export function PasswordInput({
 
 			<InputGroup className={cn(sizeClass, readOnly && 'border-dashed')}>
 				<InputGroupInput
-					id={id}
+					id={inputId}
 					type={visible ? 'text' : 'password'}
 					aria-invalid={!!error}
 					readOnly={readOnly}

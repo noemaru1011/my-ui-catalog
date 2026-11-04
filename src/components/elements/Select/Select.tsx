@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import { type ComponentProps, useId } from 'react';
 import type { Option } from '@/components/types/Option';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
@@ -19,7 +19,7 @@ type SelectProps = WithoutExternalStyle<
 	ComponentProps<typeof BaseSelect>,
 	'disabled' | 'value' | 'onValueChange'
 > & {
-	id: string;
+	id?: string;
 	label: string;
 	options: Option[];
 	value?: string;
@@ -47,6 +47,8 @@ export function Select({
 	...rawProps
 }: SelectProps) {
 	const props = withoutExternalStyle(rawProps);
+	const generatedId = useId();
+	const triggerId = id ?? generatedId;
 
 	const triggerSizes = {
 		sm: 'sm',
@@ -57,7 +59,7 @@ export function Select({
 
 	return (
 		<Field data-invalid={!!error}>
-			<FieldLabel htmlFor={id}>
+			<FieldLabel htmlFor={triggerId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
 				{disabled && <Badge variant="secondary">編集不可</Badge>}
@@ -72,7 +74,7 @@ export function Select({
 				{...props}
 			>
 				<SelectTrigger
-					id={id}
+					id={triggerId}
 					aria-invalid={!!error}
 					size={triggerSize}
 					className={cn(

@@ -19,6 +19,12 @@ describe('Combobox', () => {
 		expect(screen.getByPlaceholderText('選択してください')).toBeInTheDocument();
 	});
 
+	it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
+		render(<Combobox label="言語" options={OPTIONS} />);
+
+		expect(screen.getByRole('combobox', { name: '言語' })).toHaveAttribute('id');
+	});
+
 	it('指定された value に対応する選択肢を表示する', () => {
 		render(<Combobox {...defaultProps} value="typescript" />);
 

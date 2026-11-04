@@ -9,6 +9,15 @@ describe('DatePicker', () => {
 	});
 
 	describe('表示', () => {
+		it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
+			render(<DatePicker label="開始日" />);
+
+			const button = screen.getByText('日付を選択', { selector: 'button' });
+
+			expect(button).toHaveAttribute('id');
+			expect(screen.getByText('開始日').closest('label')).toHaveAttribute('for', button.id);
+		});
+
 		it('ラベルとデフォルトのプレースホルダーを表示する', () => {
 			render(<DatePicker id="date" label="開始日" />);
 

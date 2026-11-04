@@ -25,23 +25,99 @@ describe('FileUpload', () => {
 		const file = new File(['contents'], 'document.pdf', { type: 'application/pdf' });
 
 		const { rerender } = render(
-			<FileUpload label="添付ファイル" value={[]} onFilesChange={onFilesChange} />,
+			<FileUpload
+				id="attachments"
+				name="attachments"
+				label="添付ファイル"
+				value={[]}
+				onFilesChange={onFilesChange}
+			/>,
 		);
 
 		await user.upload(screen.getByLabelText('添付ファイル'), file);
 
 		expect(onFilesChange).toHaveBeenCalledWith([file]);
 
-		rerender(<FileUpload label="添付ファイル" value={[file]} onFilesChange={onFilesChange} />);
+		rerender(
+			<FileUpload
+				id="attachments"
+				name="attachments"
+				label="添付ファイル"
+				value={[file]}
+				onFilesChange={onFilesChange}
+			/>,
+		);
 
 		expect(screen.getByText('document.pdf')).toBeInTheDocument();
 	});
 
+	it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
+		render(<FileUpload name="attachments" label="添付ファイル" />);
+
+		const input = screen.getByLabelText('添付ファイル');
+
+		expect(input).toHaveAttribute('id');
+		expect(input).toHaveAttribute('name', 'attachments');
+	});
+
 	it('フォームから渡されたバリデーションエラーを表示する', () => {
-		render(<FileUpload label="添付ファイル" error="ファイルを選択してください。" />);
+		render(
+			<FileUpload
+				id="attachments"
+				name="attachments"
+				label="添付ファイル"
+				error="ファイルを選択してください。"
+			/>,
+		);
 
 		expect(screen.getByRole('alert')).toHaveTextContent('ファイルを選択してください。');
 		expect(screen.getByLabelText('添付ファイル')).toHaveAttribute('aria-invalid', 'true');
+		expect(screen.getByLabelText('添付ファイル').parentElement).toHaveClass(
+			'border-destructive',
+			'shadow-none',
+			'ring-0',
+		);
+	});
+
+	it('description が指定された場合に説明文を表示して入力に関連付ける', () => {
+		render(
+			<FileUpload
+				id="attachments"
+				name="attachments"
+				label="添付ファイル"
+				description="PDFまたは画像を添付してください"
+				error="ファイルを選択してください。"
+			/>,
+		);
+
+		expect(screen.getByText('PDFまたは画像を添付してください')).toBeInTheDocument();
+		expect(screen.getByLabelText('添付ファイル')).toHaveAttribute(
+			'aria-describedby',
+			'attachments-description attachments-error',
+		);
+	});
+
+	it('disabled の場合は編集不可バッジを表示してファイル選択を無効にする', async () => {
+		const user = userEvent.setup();
+		const onFilesChange = vi.fn();
+		const file = new File(['contents'], 'document.pdf', { type: 'application/pdf' });
+
+		render(
+			<FileUpload
+				id="attachments"
+				name="attachments"
+				label="添付ファイル"
+				disabled
+				onFilesChange={onFilesChange}
+			/>,
+		);
+
+		expect(screen.getByText('編集不可')).toBeInTheDocument();
+		expect(screen.getByLabelText('添付ファイル')).toBeDisabled();
+
+		await user.upload(screen.getByLabelText('添付ファイル'), file);
+
+		expect(onFilesChange).not.toHaveBeenCalled();
 	});
 
 	it('最大サイズを超えるファイルを拒否する', async () => {
@@ -49,7 +125,15 @@ describe('FileUpload', () => {
 		const onFilesChange = vi.fn();
 		const oversizedFile = new File([new Uint8Array(2 * 1024 * 1024)], 'large.pdf');
 
-		render(<FileUpload label="添付ファイル" maxSize={1} onFilesChange={onFilesChange} />);
+		render(
+			<FileUpload
+				id="attachments"
+				name="attachments"
+				label="添付ファイル"
+				maxSize={1}
+				onFilesChange={onFilesChange}
+			/>,
+		);
 
 		await user.upload(screen.getByLabelText('添付ファイル'), oversizedFile);
 

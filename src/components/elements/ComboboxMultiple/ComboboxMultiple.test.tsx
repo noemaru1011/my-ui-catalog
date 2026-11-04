@@ -27,6 +27,12 @@ describe('ComboboxMultiple', () => {
 			);
 		});
 
+		it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
+			render(<ComboboxMultiple label="権限" options={OPTIONS} />);
+
+			expect(screen.getByRole('combobox', { name: '権限' })).toHaveAttribute('id');
+		});
+
 		it('指定したプレースホルダーを表示する', () => {
 			renderCombobox({ placeholder: '言語を選択' });
 

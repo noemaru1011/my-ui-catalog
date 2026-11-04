@@ -31,6 +31,15 @@ vi.mock('@/components/ui/calendar', () => ({
 }));
 
 describe('DateRange', () => {
+	it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
+		render(<DateRange label="対象期間" />);
+
+		const button = screen.getByText('期間を選択', { selector: 'button' });
+
+		expect(button).toHaveAttribute('id');
+		expect(screen.getByText('対象期間').closest('label')).toHaveAttribute('for', button.id);
+	});
+
 	it('ラベルとデフォルトのプレースホルダーを表示する', () => {
 		render(<DateRange id="period" label="対象期間" />);
 

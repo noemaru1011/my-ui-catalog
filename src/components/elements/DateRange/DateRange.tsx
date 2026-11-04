@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import type { DateRange as DateRangeType } from 'react-day-picker';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -7,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
 type DateRangeProps = {
-	id: string;
+	id?: string;
 	label: string;
 	value?: DateRangeType;
 	onChange?: (range: DateRangeType | undefined) => void;
@@ -34,6 +35,8 @@ export function DateRange({
 	inputSize = 'md',
 	numberOfMonths = 2,
 }: DateRangeProps) {
+	const generatedId = useId();
+	const inputId = id ?? generatedId;
 	const sizeClass = {
 		sm: 'h-7',
 		md: 'h-8',
@@ -52,7 +55,7 @@ export function DateRange({
 
 	return (
 		<Field data-invalid={!!error}>
-			<FieldLabel htmlFor={id}>
+			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
 				{readOnly && <Badge variant="secondary">編集不可</Badge>}
@@ -64,7 +67,7 @@ export function DateRange({
 				<PopoverTrigger
 					render={
 						<Button
-							id={id}
+							id={inputId}
 							variant="outline"
 							disabled={readOnly}
 							aria-invalid={!!error}

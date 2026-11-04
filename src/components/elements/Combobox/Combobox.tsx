@@ -1,4 +1,5 @@
 import type { Combobox as ComboboxPrimitive } from '@base-ui/react';
+import { useId } from 'react';
 import type { Option } from '@/components/types/Option';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
@@ -18,7 +19,7 @@ type ComboboxProps = WithoutExternalStyle<
 	ComboboxPrimitive.Root.Props<Option>,
 	'items' | 'disabled' | 'value' | 'onValueChange' | 'onChange'
 > & {
-	id: string;
+	id?: string;
 	label: string;
 	options: Option[];
 	value?: string;
@@ -45,6 +46,8 @@ export function Combobox({
 	...rawProps
 }: ComboboxProps) {
 	const props = withoutExternalStyle(rawProps);
+	const generatedId = useId();
+	const inputId = id ?? generatedId;
 
 	const sizeClass = {
 		sm: 'h-7',
@@ -56,7 +59,7 @@ export function Combobox({
 
 	return (
 		<Field data-invalid={!!error}>
-			<FieldLabel htmlFor={id}>
+			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
 				{disabled && <Badge variant="secondary">編集不可</Badge>}
@@ -75,7 +78,7 @@ export function Combobox({
 				{...props}
 			>
 				<ComboboxInput
-					id={id}
+					id={inputId}
 					placeholder={placeholder}
 					aria-invalid={!!error}
 					disabled={disabled}

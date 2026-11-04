@@ -5,6 +5,12 @@ import { Input } from './Input';
 
 describe('Input', () => {
 	describe('デフォルト表示', () => {
+		it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
+			render(<Input label="ユーザー名" />);
+
+			expect(screen.getByRole('textbox', { name: 'ユーザー名' })).toHaveAttribute('id');
+		});
+
 		it('ラベルと入力フィールドを表示する', () => {
 			render(<Input id="username" label="ユーザー名" />);
 

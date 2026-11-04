@@ -5,6 +5,12 @@ import { Textarea } from './Textarea';
 
 describe('Textarea', () => {
 	describe('デフォルト表示', () => {
+		it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
+			render(<Textarea label="コメント" />);
+
+			expect(screen.getByRole('textbox', { name: 'コメント' })).toHaveAttribute('id');
+		});
+
 		it('ラベルとテキストエリアを表示する', () => {
 			render(<Textarea id="comment" label="コメント" />);
 

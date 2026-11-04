@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { useId } from 'react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
@@ -7,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
 type DatePickerProps = {
-	id: string;
+	id?: string;
 	label: string;
 	value?: Date;
 	onChange?: (date: Date | undefined) => void;
@@ -32,6 +33,8 @@ export function DatePicker({
 	placeholder = '日付を選択',
 	inputSize = 'md',
 }: DatePickerProps) {
+	const generatedId = useId();
+	const inputId = id ?? generatedId;
 	const sizeClass = {
 		sm: 'h-7',
 		md: 'h-8',
@@ -40,7 +43,7 @@ export function DatePicker({
 
 	return (
 		<Field data-invalid={!!error}>
-			<FieldLabel htmlFor={id}>
+			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
 				{readOnly && <Badge variant="secondary">編集不可</Badge>}
@@ -52,7 +55,7 @@ export function DatePicker({
 				<PopoverTrigger
 					render={
 						<Button
-							id={id}
+							id={inputId}
 							variant="outline"
 							disabled={readOnly}
 							aria-invalid={!!error}
