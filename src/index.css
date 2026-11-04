@@ -324,7 +324,7 @@
 	}
 
 	a {
-		@apply text-link;
+		@apply text-blue-600 underline;
 	}
 }
 

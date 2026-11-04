@@ -13,25 +13,23 @@
 </div>;
 ```
 
-リンクは `@layer base` で `text-link` が適用されるため、通常は個別に色を指定しません。背景色と文字色は読みやすさを保つため、`primary` と `primary-foreground` のような組み合わせで使います。
-
 ## ブランド・用途別カラー
 
-| トークン                  | 用途                        | ライトテーマ      | ダークテーマ |
-| ------------------------- | --------------------------- | ----------------- | ------------ |
-| `primary`                 | 主操作・主要な強調          | Blue 900          | Blue 300     |
-| `primary-foreground`      | Primary上の文字・アイコン   | 白                | 暗色         |
-| `secondary`               | 第二の強調                  | Blue 700          | Blue 500     |
-| `secondary-foreground`    | Secondary上の文字・アイコン | 白                | 暗色         |
-| `tertiary`                | 第三の強調                  | `#001a4d`         | `#8fb8ff`    |
-| `link`                    | リンク                      | `tertiary` と同色 | `#8fb8ff`    |
-| `focal-1`                 | 注目箇所の強調              | Yellow 300        | Yellow 300   |
-| `focal-2`                 | 注目箇所の強調              | 黒                | 黒           |
-| `search-highlight`        | 検索結果の背景              | Fuchsia 200       | Fuchsia 900  |
-| `search-highlight-border` | 検索結果の境界              | Fuchsia 900       | Fuchsia 300  |
-| `success`                 | 成功状態                    | Green 600         | Green 400    |
-| `error`                   | エラー状態                  | Red 800           | Red 400      |
-| `warning`                 | 警告状態                    | Yellow 700        | Yellow 400   |
+| トークン                  | 用途                        | ライトテーマ          | ダークテーマ          |
+| ------------------------- | --------------------------- | --------------------- | --------------------- |
+| `primary`                 | 主操作・主要な強調          | Blue 900              | Blue 300              |
+| `primary-foreground`      | Primary上の文字・アイコン   | 白                    | 暗色                  |
+| `secondary`               | 第二の強調                  | Blue 700              | Blue 500              |
+| `secondary-foreground`    | Secondary上の文字・アイコン | 白                    | 暗色                  |
+| `tertiary`                | 第三の強調                  | `#001a4d`             | `#8fb8ff`             |
+| `link`                    | リンク                      | `Blue-600` (下線あり) | `Blue-600` (下線あり) |
+| `focal-1`                 | 注目箇所の強調              | Yellow 300            | Yellow 300            |
+| `focal-2`                 | 注目箇所の強調              | 黒                    | 黒                    |
+| `search-highlight`        | 検索結果の背景              | Fuchsia 200           | Fuchsia 900           |
+| `search-highlight-border` | 検索結果の境界              | Fuchsia 900           | Fuchsia 300           |
+| `success`                 | 成功状態                    | Green 600             | Green 400             |
+| `error`                   | エラー状態                  | Red 800               | Red 400               |
+| `warning`                 | 警告状態                    | Yellow 700            | Yellow 400            |
 
 利用例は `bg-primary`、`text-link`、`border-search-highlight-border`、`text-success` のようなクラスです。用途に対応するクラスがない場合は、既存トークンを確認してから追加します。
 
