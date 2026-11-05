@@ -1,0 +1,13 @@
+{
+	"common": {
+		"save": "Save",
+		"cancel": "Cancel"
+	},
+	"home": {
+		"title": "Home",
+		"description": "Welcome"
+	},
+	"settings": {
+		"language": "Display language"
+	}
+}

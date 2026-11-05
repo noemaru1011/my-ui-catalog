@@ -1,0 +1,13 @@
+{
+	"common": {
+		"save": "保存",
+		"cancel": "キャンセル"
+	},
+	"home": {
+		"title": "ホーム",
+		"description": "ようこそ"
+	},
+	"settings": {
+		"language": "表示言語"
+	}
+}

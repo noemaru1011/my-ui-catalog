@@ -3,6 +3,7 @@ import '../src/index.css';
 import { MemoryRouter } from "react-router-dom";
 import { ThemeProvider } from '../src/components/providers/theme-provider';
 import { Toaster } from "@/components/ui/toast"
+import '../src/i18n';
 
 const preview: Preview = {
 	decorators: [
