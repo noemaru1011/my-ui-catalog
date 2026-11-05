@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { useExampleForm } from '../hooks/useExampleForm';
+import { useExampleForm } from '../hooks/useForm';
 
 describe('useExampleForm', () => {
 	it('初期値でフォームの必須項目が未入力の状態である', () => {

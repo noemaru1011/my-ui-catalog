@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { Checkbox } from './Checkbox';
+import { OPTIONS_WITH_DISABLED } from '@/components/types/Option.mock';
 
 const meta = {
 	component: Checkbox,
@@ -15,12 +16,7 @@ const meta = {
 	},
 	args: {
 		label: '表示項目',
-		options: [
-			{ value: 'hard-disks', label: 'ハードディスク' },
-			{ value: 'external-disks', label: '外付けディスク' },
-			{ value: 'cds-dvds', label: 'CD・DVD' },
-			{ value: 'connected-servers', label: '接続中のサーバー' },
-		],
+		options: OPTIONS_WITH_DISABLED,
 		value: [],
 		onChange: () => { },
 	},

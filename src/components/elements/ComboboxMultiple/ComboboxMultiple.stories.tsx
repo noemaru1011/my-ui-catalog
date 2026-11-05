@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { ComboboxMultiple } from './ComboboxMultiple';
+import { OPTIONS_WITH_DISABLED } from '@/components/types/Option.mock';
 
 const meta = {
 	component: ComboboxMultiple,
@@ -24,14 +25,7 @@ const meta = {
 	args: {
 		id: 'combobox-multiple',
 		label: 'フレームワーク',
-		options: [
-			{ value: 'next', label: 'Next.js' },
-			{ value: 'sveltekit', label: 'SvelteKit' },
-			{ value: 'nuxt', label: 'Nuxt', disabled: true },
-			{ value: 'remix', label: 'Remix' },
-			{ value: 'astro', label: 'Astro' },
-			{ value: 'angular', label: 'Angular' },
-		],
+		options: OPTIONS_WITH_DISABLED,
 	},
 } satisfies Meta<typeof ComboboxMultiple>;
 

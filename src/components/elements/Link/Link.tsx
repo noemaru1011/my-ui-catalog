@@ -15,11 +15,7 @@ const SIZE_CLASS = {
 
 export function Link({ to, label, size = 'md' }: LinkProps) {
 	return (
-		<RouterLink
-			to={to}
-			// Linkのcolorは特別なので、直接classNameに書く
-			className={cn('inline-flex items-center text-blue-600 underline', SIZE_CLASS[size])}
-		>
+		<RouterLink to={to} className={cn('inline-flex items-center', SIZE_CLASS[size])}>
 			<span>{label}</span>
 		</RouterLink>
 	);

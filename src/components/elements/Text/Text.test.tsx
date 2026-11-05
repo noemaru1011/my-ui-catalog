@@ -14,6 +14,24 @@ describe('Text', () => {
 		});
 	});
 
+	describe('as', () => {
+		it.each([
+			['span', 'SPAN'],
+			['strong', 'STRONG'],
+			['em', 'EM'],
+			['b', 'B'],
+			['i', 'I'],
+			['code', 'CODE'],
+			['small', 'SMALL'],
+			['mark', 'MARK'],
+			['time', 'TIME'],
+		] as const)('as="%s" の場合、%s 要素として描画する', (as, expectedTag) => {
+			render(<Text as={as}>Sample text</Text>);
+
+			expect(screen.getByText('Sample text').tagName).toBe(expectedTag);
+		});
+	});
+
 	describe('size', () => {
 		it.each([
 			['md', 'text-base'],
@@ -75,6 +93,25 @@ describe('Text', () => {
 			expect(screen.getByText('First')).toBeInTheDocument();
 			expect(screen.getByText('Second')).toBeInTheDocument();
 		});
+
+		it('Text コンポーネントを入れ子にして描画する', () => {
+			render(
+				<Text>
+					通常のテキスト
+					<Text as="strong">
+						太字テキスト
+						<Text as="code">コード</Text>
+					</Text>
+				</Text>,
+			);
+
+			const strong = screen.getByText(/太字テキスト/);
+			const code = screen.getByText('コード');
+
+			expect(strong.tagName).toBe('STRONG');
+			expect(code.tagName).toBe('CODE');
+			expect(strong).toContainElement(code);
+		});
 	});
 
 	describe('props の組み合わせ', () => {
@@ -100,6 +137,19 @@ describe('Text', () => {
 				'font-normal',
 				'text-muted-foreground',
 			);
+		});
+
+		it('as とスタイル props を組み合わせて適用する', () => {
+			render(
+				<Text as="span" size="lg" weight="bold" color="muted">
+					Styled span
+				</Text>,
+			);
+
+			const element = screen.getByText('Styled span');
+
+			expect(element.tagName).toBe('SPAN');
+			expect(element).toHaveClass('text-lg', 'font-bold', 'text-muted-foreground');
 		});
 	});
 });

@@ -1,6 +1,6 @@
 import { expect, test } from 'playwright/test';
 
-const FORM_STORY = '/iframe.html?id=components-example-form-formexample--default&viewMode=story';
+const FORM_STORY = '/iframe.html?id=components-example-form--default&viewMode=story';
 
 test.describe('フォーム例 E2E', () => {
 	test.beforeEach(async ({ page }) => {
