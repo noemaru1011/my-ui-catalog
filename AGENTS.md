@@ -2,8 +2,6 @@
 
 ## Purpose
 
-This file documents project-specific rules that cannot be fully enforced by automated tools such as linters and formatters, as well as common mistakes and pitfalls specific to this project.
-
 Document the following:
 
 - Project-specific conventions that cannot be enforced by automated tools.
@@ -63,3 +61,9 @@ Do not duplicate rules that are already adequately enforced by linters, formatte
 - If an existing component does not support the required behavior, consider extending the component or adding an appropriate reusable component before implementing one-off styling.
 - Direct use of HTML elements is acceptable when semantically necessary, when implementing non-visual structural elements, or when the existing components cannot reasonably support the required behavior.
 - Follow the existing component APIs and styling conventions. Do not assume props or functionality that have not been implemented.
+
+## Avoid nested UI components of the same type
+
+- Do not place a modal inside another modal.
+- Do not place a tool chip inside another tool chip.
+- Avoid unnecessary nesting of interactive UI components. Keep the UI hierarchy flat and easy to understand.
