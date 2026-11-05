@@ -62,7 +62,7 @@ export function Combobox({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{disabled && <Badge variant="secondary">編集不可</Badge>}
+				{disabled && <Badge variant="outline">編集不可</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}

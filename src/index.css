@@ -9,34 +9,110 @@
  * ========================================================= */
 
 @theme inline {
-	/* Font */
+	/* -------------------------------------------------------
+	 * Primitive Colors
+	 * ------------------------------------------------------- */
+
+	/* Blue */
+	--color-blue-50: #e8f1fe;
+	--color-blue-100: #d9e6ff;
+	--color-blue-200: #c5d7fb;
+	--color-blue-300: #9db7f9;
+	--color-blue-400: #7096f8;
+	--color-blue-500: #4979f5;
+	--color-blue-600: #3460fb;
+	--color-blue-700: #264af4;
+	--color-blue-800: #0031d8;
+	--color-blue-900: #0017c1;
+	--color-blue-1000: #00118f;
+	--color-blue-1100: #000071;
+	--color-blue-1200: #000060;
+
+	/* Magenta */
+	--color-magenta-200: #ffaeff;
+	--color-magenta-900: #8b008b;
+
+	/* Yellow */
+	--color-yellow-300: #ffd43d;
+	--color-yellow-700: #b78f00;
+	--color-yellow-900: #927200;
+
+	/* Green */
+	--color-green-600: #259d63;
+	--color-green-800: #197a4b;
+
+	/* Red */
+	--color-red-800: #ec0000;
+	--color-red-900: #ce0000;
+
+	/* -------------------------------------------------------
+	 * Font
+	 * ------------------------------------------------------- */
+
 	--font-heading: var(--font-sans);
 	--font-sans: "Noto Sans JP Variable", sans-serif;
 
-	/* Shadow */
+	/* -------------------------------------------------------
+	 * Shadow
+	 * ------------------------------------------------------- */
+
 	--shadow-popover: var(--shadow-md);
 	--shadow-toast: var(--shadow-lg);
 
-	/* Brand Colors */
+	/* -------------------------------------------------------
+	 * Brand Colors
+	 * ------------------------------------------------------- */
+
 	--color-primary: var(--primary);
 	--color-secondary: var(--secondary);
 	--color-tertiary: var(--tertiary);
 	--color-link: var(--link);
+	--color-link-visited: var(--link-visited);
 
-	/* Focal Colors */
-	--color-focal-1: var(--focal-1);
-	--color-focal-2: var(--focal-2);
+	/* -------------------------------------------------------
+	 * Focus Colors
+	 * ------------------------------------------------------- */
 
-	/* Search Highlight */
+	--color-focus-1: var(--focus-1);
+	--color-focus-2: var(--focus-2);
+
+	/* Backward compatibility */
+	--color-focal-1: var(--focus-1);
+	--color-focal-2: var(--focus-2);
+
+	/* -------------------------------------------------------
+	 * Search Highlight
+	 * ------------------------------------------------------- */
+
 	--color-search-highlight: var(--search-highlight);
 	--color-search-highlight-border: var(--search-highlight-border);
 
-	/* Semantic Colors */
-	--color-success: var(--success);
-	--color-error: var(--error);
-	--color-warning: var(--warning);
+	/* -------------------------------------------------------
+	 * Button Colors
+	 * ------------------------------------------------------- */
 
-	/* shadcn/ui Colors */
+	--color-button: var(--button);
+	--color-button-hover: var(--button-hover);
+	--color-button-active: var(--button-active);
+	--color-button-foreground: var(--button-foreground);
+
+	/* -------------------------------------------------------
+	 * Semantic Colors
+	 * ------------------------------------------------------- */
+
+	--color-success: var(--success);
+	--color-success-strong: var(--success-strong);
+
+	--color-error: var(--error);
+	--color-error-strong: var(--error-strong);
+
+	--color-warning: var(--warning);
+	--color-warning-strong: var(--warning-strong);
+
+	/* -------------------------------------------------------
+	 * shadcn/ui Colors
+	 * ------------------------------------------------------- */
+
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 
@@ -93,7 +169,10 @@
  * ========================================================= */
 
 :root {
-	/* Z-index */
+	/* -------------------------------------------------------
+	 * Z-index
+	 * ------------------------------------------------------- */
+
 	--z-index-base: 0;
 	--z-index-local: 10;
 	--z-index-sticky: 10;
@@ -109,54 +188,80 @@
 
 	/* Primary: Blue-900 */
 	--primary: var(--color-blue-900);
-	--primary-foreground: oklch(1 0 0);
+	--primary-foreground: #ffffff;
 
 	/* Secondary: Blue-700 */
 	--secondary: var(--color-blue-700);
-	--secondary-foreground: oklch(1 0 0);
+	--secondary-foreground: #ffffff;
 
-	/* Tertiary: Blue-1000 (Custom) */
-	--tertiary: #001a4d;
-
-	/* Link: Blue-1000 */
-	--link: var(--tertiary);
+	/* Tertiary: Blue-1000 */
+	--tertiary: var(--color-blue-1000);
 
 	/* Background: Blue-50 */
 	--background: var(--color-blue-50);
 	--foreground: oklch(0.145 0 0);
 
 	/* -------------------------------------------------------
-	 * Focal Colors
+	 * Link Colors
 	 * ------------------------------------------------------- */
 
-	/* Focal 1: Yellow-300 */
-	--focal-1: var(--color-yellow-300);
+	/* Default: Blue-1000 */
+	--link: var(--color-blue-1000);
 
-	/* Focal 2: Black */
-	--focal-2: #000000;
+	/* Visited: Magenta-900 */
+	--link-visited: var(--color-magenta-900);
+
+	/* -------------------------------------------------------
+	 * Focus Colors
+	 * ------------------------------------------------------- */
+
+	/* Focus-1: Yellow-300 */
+	--focus-1: var(--color-yellow-300);
+
+	/* Focus-2: Black */
+	--focus-2: #000000;
 
 	/* -------------------------------------------------------
 	 * Search Highlight
 	 * ------------------------------------------------------- */
 
 	/* Background: Magenta-200 */
-	--search-highlight: var(--color-fuchsia-200);
+	--search-highlight: var(--color-magenta-200);
 
 	/* Border: Magenta-900 */
-	--search-highlight-border: var(--color-fuchsia-900);
+	--search-highlight-border: var(--color-magenta-900);
+
+	/* -------------------------------------------------------
+	 * Button Colors
+	 * ------------------------------------------------------- */
+
+	/* Default: Blue-900 */
+	--button: var(--color-blue-900);
+
+	/* Hover: Blue-1000 */
+	--button-hover: var(--color-blue-1000);
+
+	/* Active: Blue-1200 */
+	--button-active: var(--color-blue-1200);
+
+	/* Label: White */
+	--button-foreground: #ffffff;
 
 	/* -------------------------------------------------------
 	 * Semantic Colors
 	 * ------------------------------------------------------- */
 
-	/* Success: Green-600 */
+	/* Success */
 	--success: var(--color-green-600);
+	--success-strong: var(--color-green-800);
 
-	/* Error: Red-800 */
+	/* Error */
 	--error: var(--color-red-800);
+	--error-strong: var(--color-red-900);
 
-	/* Warning: Yellow-700 */
+	/* Warning */
 	--warning: var(--color-yellow-700);
+	--warning-strong: var(--color-yellow-900);
 
 	/* -------------------------------------------------------
 	 * shadcn/ui
@@ -206,34 +311,72 @@
  * ========================================================= */
 
 .dark {
-	/* Brand Colors */
+	/* -------------------------------------------------------
+	 * Brand Colors
+	 * ------------------------------------------------------- */
+
+	/* Primary */
 	--primary: var(--color-blue-300);
 	--primary-foreground: oklch(0.145 0 0);
 
+	/* Secondary */
 	--secondary: var(--color-blue-500);
 	--secondary-foreground: oklch(0.145 0 0);
 
+	/* Tertiary */
 	--tertiary: #8fb8ff;
-	--link: #8fb8ff;
 
 	/* Background */
 	--background: oklch(0.145 0 0);
 	--foreground: oklch(0.985 0 0);
 
-	/* Focal Colors */
-	--focal-1: var(--color-yellow-300);
-	--focal-2: #000000;
+	/* -------------------------------------------------------
+	 * Link Colors
+	 * ------------------------------------------------------- */
 
-	/* Search Highlight */
-	--search-highlight: var(--color-fuchsia-900);
-	--search-highlight-border: var(--color-fuchsia-300);
+	--link: #8fb8ff;
+	--link-visited: var(--color-magenta-200);
 
-	/* Semantic Colors */
-	--success: var(--color-green-400);
-	--error: var(--color-red-400);
-	--warning: var(--color-yellow-400);
+	/* -------------------------------------------------------
+	 * Focus Colors
+	 * ------------------------------------------------------- */
 
-	/* shadcn/ui */
+	--focus-1: var(--color-yellow-300);
+	--focus-2: #000000;
+
+	/* -------------------------------------------------------
+	 * Search Highlight
+	 * ------------------------------------------------------- */
+
+	--search-highlight: var(--color-magenta-900);
+	--search-highlight-border: var(--color-magenta-200);
+
+	/* -------------------------------------------------------
+	 * Button Colors
+	 * ------------------------------------------------------- */
+
+	--button: var(--color-blue-300);
+	--button-hover: var(--color-blue-400);
+	--button-active: var(--color-blue-500);
+	--button-foreground: oklch(0.145 0 0);
+
+	/* -------------------------------------------------------
+	 * Semantic Colors
+	 * ------------------------------------------------------- */
+
+	--success: var(--color-green-600);
+	--success-strong: var(--color-green-800);
+
+	--error: var(--color-red-800);
+	--error-strong: var(--color-red-900);
+
+	--warning: var(--color-yellow-700);
+	--warning-strong: var(--color-yellow-900);
+
+	/* -------------------------------------------------------
+	 * shadcn/ui
+	 * ------------------------------------------------------- */
+
 	--card: oklch(0.205 0 0);
 	--card-foreground: oklch(0.985 0 0);
 
@@ -246,7 +389,7 @@
 	--accent: oklch(0.269 0 0);
 	--accent-foreground: oklch(0.985 0 0);
 
-	--destructive: var(--color-red-400);
+	--destructive: var(--color-red-800);
 
 	--border: oklch(1 0 0 / 10%);
 	--input: oklch(1 0 0 / 15%);
@@ -323,21 +466,27 @@
 		@apply font-sans;
 	}
 
+	/* Link Colors */
 	a {
-		@apply text-blue-600 underline;
+		color: var(--link);
+		@apply underline;
 	}
 
+	a:visited {
+		color: var(--link-visited);
+	}
+
+	/* Focus Colors */
+	:focus-visible {
+		outline: 2px solid var(--focus-1);
+		outline-offset: 2px;
+		box-shadow: 0 0 0 1px var(--focus-2);
+	}
+
+	/* Button Cursor */
 	button:not(:disabled),
 	[role="button"]:not(:disabled) {
 		cursor: pointer;
-	}
-
-	[data-slot="button"]:not(:disabled):hover {
-		filter: brightness(0.88);
-	}
-
-	[data-slot="button"]:not(:disabled):active {
-		filter: brightness(0.78);
 	}
 }
 
