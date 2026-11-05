@@ -57,6 +57,11 @@ export function Select({
 	} as const;
 	const triggerSize = triggerSizes[inputSize];
 
+	const items = options.map((option) => ({
+		value: option.value,
+		label: option.label,
+	}));
+
 	return (
 		<Field data-invalid={!!error}>
 			<FieldLabel htmlFor={triggerId}>
@@ -68,10 +73,11 @@ export function Select({
 			{description && <FieldDescription>{description}</FieldDescription>}
 
 			<BaseSelect
-				value={value}
+				{...props}
+				items={items}
+				value={value ?? null}
 				onValueChange={(value) => onChange?.(typeof value === 'string' ? value : '')}
 				disabled={disabled}
-				{...props}
 			>
 				<SelectTrigger
 					id={triggerId}

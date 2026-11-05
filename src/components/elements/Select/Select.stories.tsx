@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Select } from './Select';
+import { OPTIONS_WITH_DISABLED } from '@/components/types/Option.mock';
+import { useState } from 'react';
 
 const meta = {
 	component: Select,
@@ -12,24 +14,10 @@ const meta = {
 			control: false,
 		},
 	},
-	parameters: {
-		docs: {
-			description: {
-				component: '選択肢内のグループ化などは非対応です。',
-			},
-		},
-	},
 	args: {
 		id: 'select',
-		label: 'フレームワーク',
-		options: [
-			{ value: 'next', label: 'Next.js' },
-			{ value: 'sveltekit', label: 'SvelteKit' },
-			{ value: 'nuxt', label: 'Nuxt', disabled: true },
-			{ value: 'remix', label: 'Remix' },
-			{ value: 'astro', label: 'Astro' },
-			{ value: 'angular', label: 'Angular' },
-		],
+		label: '言語',
+		options: OPTIONS_WITH_DISABLED,
 	},
 } satisfies Meta<typeof Select>;
 
@@ -37,4 +25,10 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+	render: (args) => {
+		const [value, setValue] = useState('');
+
+		return <Select {...args} value={value} onChange={setValue} />;
+	},
+};

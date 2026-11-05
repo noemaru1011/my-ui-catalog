@@ -43,10 +43,10 @@ describe('Select', () => {
 		});
 	});
 
-	it('value に対応する選択済みの値を表示する', () => {
+	it('value に対応する label を表示する', () => {
 		render(<Select id="language" label="言語" options={OPTIONS} value="typescript" />);
 
-		expect(screen.getByRole('combobox')).toHaveTextContent('typescript');
+		expect(screen.getByRole('combobox')).toHaveTextContent('TypeScript');
 	});
 
 	it('description が指定された場合に説明文を表示する', () => {
@@ -205,15 +205,15 @@ describe('Select', () => {
 		expect(onChange).not.toHaveBeenCalled();
 	});
 
-	it('親から value が更新された場合は表示を更新する', () => {
+	it('親から value が更新された場合は対応する label に表示を更新する', () => {
 		const { rerender } = render(
 			<Select id="language" label="言語" options={OPTIONS} value="typescript" />,
 		);
 
-		expect(screen.getByRole('combobox')).toHaveTextContent('typescript');
+		expect(screen.getByRole('combobox')).toHaveTextContent('TypeScript');
 
 		rerender(<Select id="language" label="言語" options={OPTIONS} value="python" />);
 
-		expect(screen.getByRole('combobox')).toHaveTextContent('python');
+		expect(screen.getByRole('combobox')).toHaveTextContent('Python');
 	});
 });
