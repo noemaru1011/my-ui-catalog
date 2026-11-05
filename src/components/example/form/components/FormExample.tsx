@@ -28,7 +28,7 @@ import {
 	MAX_ATTACHMENT_COUNT,
 	MAX_ATTACHMENT_SIZE_IN_BYTES,
 	USER_OPTIONS,
-} from '../schema/formExampleSchema';
+} from '../schema/formSchema';
 
 type Props = {
 	register: UseFormRegister<FormValues>;

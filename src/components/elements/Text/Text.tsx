@@ -1,8 +1,11 @@
-import type { ReactNode } from 'react';
+import { createElement, type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+
+type TextTag = 'p' | 'span' | 'strong' | 'em' | 'b' | 'i' | 'code' | 'small' | 'mark' | 'time';
 
 type TextProps = {
 	children: ReactNode;
+	as?: TextTag;
 	size?: 'md' | 'lg';
 	weight?: 'normal' | 'bold';
 	color?: 'default' | 'muted';
@@ -23,8 +26,18 @@ const COLOR_STYLES = {
 	muted: 'text-muted-foreground',
 } as const;
 
-export function Text({ children, size = 'md', weight = 'normal', color = 'default' }: TextProps) {
-	return (
-		<p className={cn(SIZE_STYLES[size], WEIGHT_STYLES[weight], COLOR_STYLES[color])}>{children}</p>
+export function Text({
+	children,
+	as = 'p',
+	size = 'md',
+	weight = 'normal',
+	color = 'default',
+}: TextProps) {
+	return createElement(
+		as,
+		{
+			className: cn(SIZE_STYLES[size], WEIGHT_STYLES[weight], COLOR_STYLES[color]),
+		},
+		children,
 	);
 }

@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import {
 	ATTACHMENTS_SCHEMA,
 	MAX_ATTACHMENT_SIZE_IN_BYTES,
-} from '@/components/example/form/schema/formExampleSchema';
+} from '@/components/example/form/schema/formSchema';
 import { FileUpload } from './FileUpload';
 
 describe('FileUpload', () => {

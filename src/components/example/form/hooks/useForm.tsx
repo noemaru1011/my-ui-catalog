@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { DEFAULT_FORM_VALUES, FORM_SCHEMA, type FormValues } from '../schema/formExampleSchema';
+import { DEFAULT_FORM_VALUES, FORM_SCHEMA, type FormValues } from '../schema/formSchema';
 
 export function useExampleForm() {
 	const {

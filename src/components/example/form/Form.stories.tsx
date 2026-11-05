@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import FormExamplePage from './pages/FormExamplePage';
+import FormExamplePage from './pages/FormPage';
 
 const meta = {
 	component: FormExamplePage,
