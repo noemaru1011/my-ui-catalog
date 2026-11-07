@@ -91,9 +91,11 @@ describe('FileUpload', () => {
 		);
 
 		expect(screen.getByText('PDFまたは画像を添付してください')).toBeInTheDocument();
+		const descriptionId = screen.getByText('PDFまたは画像を添付してください').id;
+		const errorId = screen.getByRole('alert').id;
 		expect(screen.getByLabelText('添付ファイル')).toHaveAttribute(
 			'aria-describedby',
-			'attachments-description attachments-error',
+			`${descriptionId} ${errorId}`,
 		);
 	});
 

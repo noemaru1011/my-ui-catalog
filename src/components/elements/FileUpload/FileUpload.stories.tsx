@@ -6,6 +6,12 @@ const meta = {
     component: FileUpload,
     tags: ['autodocs'],
     argTypes: {
+        id: {
+            control: false,
+        },
+        name: {
+            control: false,
+        },
         value: {
             control: false,
         },
@@ -17,14 +23,6 @@ const meta = {
         },
         inputRef: {
             control: false,
-        },
-    },
-    parameters: {
-        docs: {
-            description: {
-                component:
-                    'ファイルアップロードは、ファイルのドラッグ＆ドロップまたはファイル選択によってファイルを追加するために使用。ファイル形式、ファイルサイズ、ファイル数の制限を指定できる。',
-            },
         },
     },
 } satisfies Meta<typeof FileUpload>;
@@ -41,8 +39,8 @@ export const Default: Story = {
             accept=".pdf,.png,.jpg,.xlsx"
             label='ファイル'
             multiple
-            maxFiles={5}
-            maxSize={10}
+            maxFiles={1}
+            maxSize={1}
             onFilesChange={(files) => {
                 console.log('Selected files:', files);
             }}

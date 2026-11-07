@@ -1,7 +1,6 @@
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useTranslation } from 'react-i18next';
-
 import { LanguageSelect } from './LanguageSelect';
 import { Text } from '../Text/Text';
 import { Stack } from '@/components/layouts/Stack/Stack';
@@ -11,8 +10,12 @@ const meta = {
     tags: ['autodocs'],
     args: {
         label: '表示言語',
-        disabled: false,
-        required: false,
+    },
+    argTypes: {
+        value: {
+            control: "inline-radio",
+            options: ['ja', 'en'],
+        },
     },
 } satisfies Meta<typeof LanguageSelect>;
 
@@ -49,7 +52,7 @@ export const Default: Story = {
                         </Text>
 
                         <Text size="md">
-                            {t('home.title')}
+                            {t('example.description')}
                         </Text>
                     </Stack>
                 </Stack>

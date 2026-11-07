@@ -1,6 +1,7 @@
 import { Button } from '@base-ui/react';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { type ComponentProps, useId, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
@@ -34,6 +35,7 @@ export function PasswordInput({
 	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
+	const { t } = useTranslation();
 
 	const [visible, setVisible] = useState(false);
 
@@ -48,7 +50,7 @@ export function PasswordInput({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{readOnly && <Badge variant="outline">編集不可</Badge>}
+				{readOnly && <Badge variant="outline">{t('common.notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}
@@ -68,7 +70,7 @@ export function PasswordInput({
 						type="button"
 						onClick={() => setVisible((prev) => !prev)}
 						disabled={readOnly}
-						aria-label={visible ? 'パスワードを隠す' : 'パスワードを表示'}
+						aria-label={visible ? t('common.hidePassword') : t('common.showPassword')}
 					>
 						{visible ? <EyeIcon size={16} /> : <EyeOffIcon size={16} />}
 					</Button>

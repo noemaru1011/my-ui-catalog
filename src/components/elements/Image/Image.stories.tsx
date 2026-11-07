@@ -19,8 +19,3 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const WithLink: Story = {
-    args: {
-        to: '/detail',
-    },
-};

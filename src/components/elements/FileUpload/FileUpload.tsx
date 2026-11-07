@@ -1,6 +1,7 @@
 import { File, FileArchive, FileImage, FileText, X } from 'lucide-react';
 import type { FocusEventHandler, Ref } from 'react';
 import { useCallback, useId, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text } from '@/components/elements/Text/Text';
 import { Cluster } from '@/components/layouts/Cluster/Cluster';
 import { Container } from '@/components/layouts/Container/Container';
@@ -19,9 +20,9 @@ type FileUploadProps = {
 	required?: boolean;
 	accept?: string;
 	multiple?: boolean;
-	maxFiles?: number;
+	maxFiles: number;
 	/** 単位はMB */
-	maxSize?: number;
+	maxSize: number;
 	disabled?: boolean;
 	value?: File[];
 	error?: string;
@@ -38,8 +39,8 @@ export function FileUpload({
 	required = false,
 	accept,
 	multiple = true,
-	maxFiles = 5,
-	maxSize = 10,
+	maxFiles,
+	maxSize,
 	disabled = false,
 	value,
 	error,
@@ -47,6 +48,7 @@ export function FileUpload({
 	onBlur,
 	inputRef,
 }: FileUploadProps) {
+	const { t } = useTranslation();
 	const internalInputRef = useRef<HTMLInputElement>(null);
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
@@ -55,9 +57,10 @@ export function FileUpload({
 	const [validationError, setValidationError] = useState('');
 	const files = value ?? uncontrolledFiles;
 	const displayedError = validationError || error;
+
 	const describedBy = [
-		description && `${inputId}-description`,
-		displayedError && `${inputId}-error`,
+		description && `${inputId} -description`,
+		displayedError && `${inputId} -error`,
 	]
 		.filter(Boolean)
 		.join(' ');
@@ -70,16 +73,63 @@ export function FileUpload({
 		[onFilesChange, value],
 	);
 
+	/**
+	 * accept に指定されたファイル形式かどうかを判定する。
+	 *
+	 * 対応形式:
+	 * - image/* : MIME type のワイルドカード
+	 * - application/pdf : MIME type
+	 * - .pdf : 拡張子
+	 */
+	const isAcceptedFile = (file: File): boolean => {
+		if (!accept) return true;
+
+		const acceptedTypes = accept
+			.split(',')
+			.map((type) => type.trim().toLowerCase())
+			.filter(Boolean);
+
+		if (acceptedTypes.length === 0) return true;
+
+		const fileType = file.type.toLowerCase();
+		const fileName = file.name.toLowerCase();
+
+		return acceptedTypes.some((type) => {
+			// MIME type のワイルドカード（image/* など）
+			if (type.endsWith('/*')) {
+				return fileType.startsWith(type.slice(0, -1));
+			}
+
+			// MIME type（application/pdf など）
+			if (type.includes('/')) {
+				return fileType === type;
+			}
+
+			// 拡張子（.pdf など）
+			if (type.startsWith('.')) {
+				return fileName.endsWith(type);
+			}
+
+			return false;
+		});
+	};
+
 	const addFiles = (selectedFiles: FileList | File[]) => {
 		setValidationError('');
 
 		const incoming = Array.from(selectedFiles);
 
 		const validFiles = incoming.filter((file) => {
-			if (file.size > maxSize * 1024 * 1024) {
-				setValidationError(`${file.name}: ファイルサイズが上限を超えています`);
+			if (!isAcceptedFile(file)) {
+				setValidationError(`${file.name}: ${t('common.file.invalidType')} `);
 				return false;
 			}
+
+			if (file.size > maxSize * 1024 * 1024) {
+				setValidationError(`${file.name}: ${t('common.file.sizeExceeded')} `);
+				return false;
+			}
+
 			return true;
 		});
 
@@ -95,7 +145,7 @@ export function FileUpload({
 		);
 
 		if (unique.length > maxFiles) {
-			setValidationError(`ファイルは最大${maxFiles}件までです`);
+			setValidationError(t('common.file.maxFilesExceeded', { count: maxFiles }));
 			updateFiles(unique.slice(0, maxFiles));
 			return;
 		}
@@ -112,6 +162,7 @@ export function FileUpload({
 		setDragging(false);
 
 		if (disabled) return;
+
 		addFiles(e.dataTransfer.files);
 	};
 
@@ -134,12 +185,12 @@ export function FileUpload({
 				<FieldLabel htmlFor={inputId}>
 					{label}
 					{required && <span className="text-destructive">*</span>}
-					{disabled && <Badge variant="outline">編集不可</Badge>}
+					{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
 				</FieldLabel>
 			)}
 
 			{description && (
-				<FieldDescription id={`${inputId}-description`}>{description}</FieldDescription>
+				<FieldDescription id={`${inputId} -description`}>{description}</FieldDescription>
 			)}
 
 			<Stack space="md">
@@ -165,14 +216,13 @@ export function FileUpload({
 				>
 					<Stack space="sm">
 						<Stack space="sm">
-							<Text weight="bold">ファイルをドラッグ＆ドロップ</Text>
-							<Text color="muted">またはクリックしてファイルを選択</Text>
+							<Text weight="bold">{t('common.file.dragAndDrop')}</Text>
+							<Text color="muted">{t('common.file.clickToSelect')}</Text>
 						</Stack>
 
-						<Text color="muted">
-							最大 {maxFiles} 件 / {maxSize} MB
-							{accept && ` / ${accept}`}
-						</Text>
+						<Text color="muted">{t('common.file.limits', { maxFiles, maxSize })}</Text>
+
+						{accept && <Text color="muted">{t('common.file.acceptedTypes', { accept })}</Text>}
 					</Stack>
 
 					<input
@@ -187,7 +237,7 @@ export function FileUpload({
 						accept={accept}
 						multiple={multiple}
 						disabled={disabled}
-						aria-label={label ?? 'ファイルを選択'}
+						aria-label={label ?? t('common.file.clickToSelect')}
 						aria-invalid={!!displayedError}
 						aria-describedby={describedBy || undefined}
 						className="sr-only"
@@ -199,12 +249,12 @@ export function FileUpload({
 					/>
 				</Card>
 
-				{displayedError && <FieldError id={`${inputId}-error`}>{displayedError}</FieldError>}
+				{displayedError && <FieldError id={`${inputId} -error`}>{displayedError}</FieldError>}
 
 				{files.length > 0 && (
 					<Stack space="sm">
 						<Cluster justify="between">
-							<Text weight="bold">選択したファイル</Text>
+							<Text weight="bold">{t('common.file.selectedFiles')}</Text>
 							<Text color="muted">
 								{files.length} / {maxFiles}
 							</Text>
@@ -215,13 +265,15 @@ export function FileUpload({
 							const Icon = getFileIcon(file);
 
 							return (
-								<Container key={`${file.name}-${file.size}-${file.lastModified}`} width="full">
+								<Container key={`${file.name} -${file.size} -${file.lastModified} `} width="full">
 									<Cluster space="sm" align="center" justify="between">
 										<Icon className="text-muted-foreground h-5 w-5 shrink-0" />
+
 										<Stack space="sm">
 											<Text weight="bold">{file.name}</Text>
 											<Text color="muted">{formatSize(file.size)}</Text>
 										</Stack>
+
 										<Button
 											type="button"
 											variant="ghost"
@@ -231,7 +283,7 @@ export function FileUpload({
 												e.stopPropagation();
 												removeFile(index);
 											}}
-											aria-label={`${file.name}を削除`}
+											aria-label={`${file.name} ${t('common.file.remove')} `}
 										>
 											<X className="h-4 w-4" />
 										</Button>

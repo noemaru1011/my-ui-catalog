@@ -7,11 +7,20 @@ const meta = {
 	component: Select,
 	tags: ['autodocs'],
 	argTypes: {
+		id: {
+			control: false,
+		},
 		value: {
 			control: false,
 		},
 		options: {
 			control: false,
+		},
+		inputSize: {
+			control: {
+				type: 'inline-radio',
+				options: ['sm', 'md', 'lg'],
+			},
 		},
 	},
 	args: {

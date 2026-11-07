@@ -1,5 +1,6 @@
 import type { Combobox as ComboboxPrimitive } from '@base-ui/react';
 import { useId } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Option } from '@/components/types/Option';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
@@ -41,13 +42,14 @@ export function Combobox({
 	error,
 	required = false,
 	disabled = false,
-	placeholder = '選択してください',
+	placeholder,
 	inputSize = 'md',
 	...rawProps
 }: ComboboxProps) {
 	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
+	const { t } = useTranslation();
 
 	const sizeClass = {
 		sm: 'h-7',
@@ -56,13 +58,13 @@ export function Combobox({
 	}[inputSize];
 
 	const selectedOption = options.find((option) => option.value === value) ?? null;
-
+	placeholder = t('common.selectPlaceholder');
 	return (
 		<Field data-invalid={!!error}>
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{disabled && <Badge variant="outline">編集不可</Badge>}
+				{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}
@@ -87,7 +89,7 @@ export function Combobox({
 				/>
 
 				<ComboboxContent>
-					<ComboboxEmpty>該当する項目がありません。</ComboboxEmpty>
+					<ComboboxEmpty> {t('common.noItemsFound')}</ComboboxEmpty>
 
 					<ComboboxList>
 						{(option) => (

@@ -2,6 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { OPTIONS, OPTIONS_WITH_DISABLED } from '@/components/types/Option.mock';
+import i18n from '@/i18n';
 import { Combobox } from './Combobox';
 
 describe('Combobox', () => {
@@ -16,7 +17,7 @@ describe('Combobox', () => {
 
 		expect(screen.getByRole('combobox', { name: '言語' })).toBeInTheDocument();
 
-		expect(screen.getByPlaceholderText('選択してください')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText(i18n.t('common.selectPlaceholder'))).toBeInTheDocument();
 	});
 
 	it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {

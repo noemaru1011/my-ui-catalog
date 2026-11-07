@@ -11,9 +11,16 @@ const meta = {
 		label: '期間',
 	},
 	argTypes: {
+		id: {
+			control: false,
+		},
 		value: {
 			control: false,
 		},
+		inputSize: {
+			control: 'inline-radio',
+			options: ['sm', 'md', 'lg'],
+		}
 	},
 } satisfies Meta<typeof DateRange>;
 

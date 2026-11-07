@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
 import { OPTIONS, OPTIONS_WITH_DISABLED } from '@/components/types/Option.mock';
+import i18n from '@/i18n';
 import { ComboboxMultiple } from './ComboboxMultiple';
 
 const DEFAULT_PROPS = {
@@ -23,7 +24,7 @@ describe('ComboboxMultiple', () => {
 			expect(screen.getByText('権限')).toBeInTheDocument();
 			expect(screen.getByRole('combobox', { name: '権限' })).toHaveAttribute(
 				'placeholder',
-				'選択してください',
+				i18n.t('common.selectPlaceholder'),
 			);
 		});
 
@@ -33,12 +34,12 @@ describe('ComboboxMultiple', () => {
 			expect(screen.getByRole('combobox', { name: '権限' })).toHaveAttribute('id');
 		});
 
-		it('指定したプレースホルダーを表示する', () => {
+		it('placeholder が指定されても翻訳済みのプレースホルダーを表示する', () => {
 			renderCombobox({ placeholder: '言語を選択' });
 
 			expect(screen.getByRole('combobox', { name: '権限' })).toHaveAttribute(
 				'placeholder',
-				'言語を選択',
+				i18n.t('common.selectPlaceholder'),
 			);
 		});
 
@@ -163,7 +164,7 @@ describe('ComboboxMultiple', () => {
 
 			expect(screen.getByRole('combobox', { name: '権限' })).toHaveAttribute(
 				'placeholder',
-				'選択してください',
+				i18n.t('common.selectPlaceholder'),
 			);
 		});
 
@@ -178,7 +179,7 @@ describe('ComboboxMultiple', () => {
 
 			expect(screen.getByRole('combobox', { name: '権限' })).not.toHaveAttribute(
 				'placeholder',
-				'選択してください',
+				i18n.t('common.selectPlaceholder'),
 			);
 		});
 	});

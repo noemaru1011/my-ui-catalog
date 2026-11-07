@@ -24,31 +24,31 @@ const meta = {
 					<DrawerTitle>メニュー</DrawerTitle>
 					<DrawerDescription>ページを選択してください。</DrawerDescription>
 				</DrawerHeader>
-				<nav aria-label="メインメニュー" className="p-4">
+				<Stack as="nav" aria-label="メインメニュー" >
 					<Stack as="ul" space="sm">
-						<li>
+						<Stack as="li">
 							<DrawerClose
 								render={<Button variant="ghost" className="w-full justify-start" />}
 							>
 								ホーム
 							</DrawerClose>
-						</li>
-						<li>
+						</Stack>
+						<Stack as="li">
 							<DrawerClose
 								render={<Button variant="ghost" className="w-full justify-start" />}
 							>
 								ユーザー
 							</DrawerClose>
-						</li>
-						<li>
+						</Stack>
+						<Stack as="li">
 							<DrawerClose
 								render={<Button variant="ghost" className="w-full justify-start" />}
 							>
 								設定
 							</DrawerClose>
-						</li>
+						</Stack>
 					</Stack>
-				</nav>
+				</Stack>
 			</>
 		),
 	},

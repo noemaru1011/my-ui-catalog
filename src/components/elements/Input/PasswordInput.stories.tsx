@@ -8,6 +8,15 @@ const meta = {
 		id: 'password',
 		label: 'パスワード',
 	},
+	argTypes: {
+		id: {
+			control: false,
+		},
+		inputSize: {
+			control: 'inline-radio',
+			options: ['sm', 'md', 'lg'],
+		}
+	}
 } satisfies Meta<typeof PasswordInput>;
 
 export default meta;

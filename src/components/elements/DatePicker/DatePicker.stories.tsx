@@ -6,8 +6,15 @@ const meta = {
 	component: DatePicker,
 	tags: ['autodocs'],
 	argTypes: {
+		id: {
+			control: false,
+		},
 		value: {
 			control: false,
+		},
+		inputSize: {
+			control: 'inline-radio',
+			options: ['sm', 'md', 'lg'],
 		},
 	},
 	args: {

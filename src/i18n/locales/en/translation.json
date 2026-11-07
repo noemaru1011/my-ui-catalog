@@ -1,0 +1,26 @@
+{
+	"common": {
+		"file": {
+			"dragAndDrop": "Drag and drop files",
+			"clickToSelect": "Click to select files",
+			"sizeExceeded": "File size exceeds the limit",
+			"maxFilesExceeded": "Maximum {{count}} files allowed",
+			"selectedFiles": "Selected files",
+			"remove": "Remove",
+			"limits": "Maximum {{maxFiles}} files / {{maxSize}} MB",
+			"acceptedTypes": "Accepted formats: {{accept}}",
+			"invalidType": "This file format is not allowed"
+		},
+		"notEditable": "Not editable",
+		"loading": "Loading...",
+		"selectPlaceholder": "Please select.",
+		"datePickerPlaceholder": "Please select a date.",
+		"dateRangePlaceholder": "Please select a date range.",
+		"noItemsFound": "No items found.",
+		"hidePassword": "Hide password",
+		"showPassword": "Show password"
+	},
+	"example": {
+		"description": "hello world"
+	}
+}

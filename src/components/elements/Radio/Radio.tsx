@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Option } from '@/components/types/Option';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
@@ -40,13 +41,14 @@ export function Radio({
 	...rawProps
 }: RadioProps) {
 	const props = withoutExternalStyle(rawProps);
+	const { t } = useTranslation();
 
 	return (
 		<FieldSet data-invalid={!!error} className="gap-2 has-[>[data-slot=radio-group]]:gap-2">
 			<FieldLegend variant="label" className={error ? 'text-destructive mb-0' : 'mb-0'}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{disabled && <Badge variant="outline">編集不可</Badge>}
+				{disabled && <Badge variant="outline">{t('common.disabled')}</Badge>}
 			</FieldLegend>
 
 			{description && <FieldDescription>{description}</FieldDescription>}
@@ -58,7 +60,7 @@ export function Radio({
 				aria-invalid={!!error}
 				{...props}
 			>
-				<FieldGroup className="gap-4">
+				<FieldGroup className="mt-2 gap-4">
 					{options.map((option) => {
 						const id = `${label}-${option.value}`;
 

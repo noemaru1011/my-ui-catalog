@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import type { DateRange as DateRangeType } from 'react-day-picker';
 import { describe, expect, it, vi } from 'vitest';
 
+import i18n from '@/i18n';
 import { DateRange } from './DateRange';
 
 vi.mock('@/components/ui/calendar', () => ({
@@ -34,7 +35,9 @@ describe('DateRange', () => {
 	it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
 		render(<DateRange label="対象期間" />);
 
-		const button = screen.getByText('期間を選択', { selector: 'button' });
+		const button = screen.getByText(i18n.t('common.dateRangePlaceholder'), {
+			selector: 'button',
+		});
 
 		expect(button).toHaveAttribute('id');
 		expect(screen.getByText('対象期間').closest('label')).toHaveAttribute('for', button.id);
@@ -44,13 +47,17 @@ describe('DateRange', () => {
 		render(<DateRange id="period" label="対象期間" />);
 
 		expect(screen.getByText('対象期間')).toBeInTheDocument();
-		expect(screen.getByText('期間を選択', { selector: 'button' })).toBeInTheDocument();
+		expect(
+			screen.getByText(i18n.t('common.dateRangePlaceholder'), { selector: 'button' }),
+		).toBeInTheDocument();
 	});
 
-	it('placeholder を指定すると指定した文言を表示する', () => {
+	it('placeholder が指定されても翻訳済みの文言を表示する', () => {
 		render(<DateRange id="period" label="対象期間" placeholder="開始日と終了日を選択" />);
 
-		expect(screen.getByText('開始日と終了日を選択', { selector: 'button' })).toBeInTheDocument();
+		expect(
+			screen.getByText(i18n.t('common.dateRangePlaceholder'), { selector: 'button' }),
+		).toBeInTheDocument();
 	});
 
 	it('required が true の場合に必須マークを表示する', () => {

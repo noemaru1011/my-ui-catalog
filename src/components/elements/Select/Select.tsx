@@ -1,4 +1,5 @@
 import { type ComponentProps, useId } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Option } from '@/components/types/Option';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
@@ -42,13 +43,15 @@ export function Select({
 	error,
 	required = false,
 	disabled = false,
-	placeholder = '選択してください',
+	placeholder,
 	inputSize = 'md',
 	...rawProps
 }: SelectProps) {
 	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const triggerId = id ?? generatedId;
+	const { t } = useTranslation();
+	placeholder = placeholder ?? t('common.selectPlaceholder');
 
 	const triggerSizes = {
 		sm: 'sm',
@@ -67,7 +70,7 @@ export function Select({
 			<FieldLabel htmlFor={triggerId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{disabled && <Badge variant="outline">編集不可</Badge>}
+				{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}

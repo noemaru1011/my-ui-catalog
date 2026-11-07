@@ -8,6 +8,15 @@ const meta = {
 		id: 'input',
 		label: '名前',
 	},
+	argTypes: {
+		id: {
+			control: false,
+		},
+		inputSize: {
+			control: 'inline-radio',
+			options: ['sm', 'md', 'lg'],
+		}
+	}
 } satisfies Meta<typeof Input>;
 
 export default meta;

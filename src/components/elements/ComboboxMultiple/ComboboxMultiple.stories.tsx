@@ -15,11 +15,18 @@ const meta = {
 		},
 	},
 	argTypes: {
+		id: {
+			control: false,
+		},
 		options: {
 			control: false,
 		},
 		value: {
 			control: false,
+		},
+		inputSize: {
+			control: 'inline-radio',
+			options: ['sm', 'md', 'lg'],
 		},
 	},
 	args: {

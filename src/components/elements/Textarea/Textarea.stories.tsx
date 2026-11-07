@@ -8,6 +8,11 @@ const meta = {
 		id: 'textarea',
 		label: '名前',
 	},
+	argTypes: {
+		id: {
+			control: false,
+		}
+	}
 } satisfies Meta<typeof Textarea>;
 
 export default meta;

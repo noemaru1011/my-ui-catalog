@@ -1,18 +1,19 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import i18n from '@/i18n';
 import { Loading } from './Loading';
 
 describe('Loading', () => {
 	it('デフォルトのメッセージが表示されること', () => {
 		render(<Loading />);
 
-		expect(screen.getByText('読み込み中')).toBeInTheDocument();
+		expect(screen.getByText(i18n.t('common.loading'))).toBeInTheDocument();
 	});
 
-	it('指定したメッセージが表示されること', () => {
+	it('message が指定されても翻訳済みのメッセージを表示すること', () => {
 		render(<Loading message="データを取得しています" />);
 
-		expect(screen.getByText('データを取得しています')).toBeInTheDocument();
+		expect(screen.getByText(i18n.t('common.loading'))).toBeInTheDocument();
 	});
 
 	it('statusロールが設定されていること', () => {
@@ -55,10 +56,10 @@ describe('Loading', () => {
 		expect(spinner).toHaveAttribute('aria-hidden', 'true');
 	});
 
-	it('空文字のメッセージが指定された場合に空文字が表示されること', () => {
+	it('空文字のメッセージが指定された場合も翻訳済みのメッセージを表示すること', () => {
 		render(<Loading message="" />);
 
 		expect(screen.getByRole('status')).toBeInTheDocument();
-		expect(screen.queryByText('読み込み中')).not.toBeInTheDocument();
+		expect(screen.getByText(i18n.t('common.loading'))).toBeInTheDocument();
 	});
 });
