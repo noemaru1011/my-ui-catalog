@@ -78,6 +78,7 @@
 	"overrides": {
 		"@joshwooding/vite-plugin-react-docgen-typescript": {
 			"glob": "^14.0.2"
-		}
+		},
+		"minimatch": "11.0.4"
 	}
 }
