@@ -3,6 +3,7 @@ import { act, render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
+import i18n from '@/i18n';
 import { useExampleForm } from '../hooks/useForm';
 import FormExamplePage from '../pages/FormPage';
 
@@ -67,5 +68,31 @@ describe('useExampleForm', () => {
 		await user.click(screen.getByRole('button', { name: '送信' }));
 
 		expect(screen.getAllByText('ファイルを選択してください。', { exact: true })).toHaveLength(2);
+	});
+
+	it('英語に切り替えるとフォームラベルとバリデーションメッセージも英語になる', async () => {
+		await i18n.changeLanguage('ja');
+		const user = userEvent.setup();
+
+		try {
+			render(
+				<QueryClientProvider client={new QueryClient()}>
+					<MemoryRouter>
+						<FormExamplePage />
+					</MemoryRouter>
+				</QueryClientProvider>,
+			);
+
+			expect(screen.getByRole('textbox', { name: /氏名/ })).toBeInTheDocument();
+			await user.click(screen.getByRole('button', { name: '送信' }));
+
+			expect(await screen.findByText('氏名を入力してください。')).toBeInTheDocument();
+			await i18n.changeLanguage('en');
+
+			expect(screen.getByRole('textbox', { name: /Full name/ })).toBeInTheDocument();
+			expect(await screen.findByText('Please enter your name.')).toBeInTheDocument();
+		} finally {
+			await i18n.changeLanguage('ja');
+		}
 	});
 });

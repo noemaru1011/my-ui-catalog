@@ -1,10 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from '@/components/ui/toast';
-import { DEFAULT_FORM_VALUES, FORM_SCHEMA, type FormValues } from '../schema/formSchema';
+import { createFormSchema, DEFAULT_FORM_VALUES, type FormValues } from '../schema/formSchema';
 
 export function useExampleForm() {
+	const { t, i18n } = useTranslation();
+	const previousLanguage = useRef(i18n.language);
 	const {
 		register,
 		control,
@@ -12,11 +16,22 @@ export function useExampleForm() {
 		setError,
 		clearErrors,
 		formState: { errors },
+		trigger,
 		reset,
 	} = useForm<FormValues>({
-		resolver: zodResolver(FORM_SCHEMA),
+		resolver: zodResolver(createFormSchema(t)),
 		defaultValues: DEFAULT_FORM_VALUES,
 	});
+
+	useEffect(() => {
+		if (previousLanguage.current === i18n.language) {
+			return;
+		}
+		previousLanguage.current = i18n.language;
+		if (Object.keys(errors).length > 0) {
+			void trigger();
+		}
+	}, [errors, i18n.language, trigger]);
 
 	// TanStack Query の Mutation
 	const { mutate, isPending } = useMutation({
@@ -26,8 +41,8 @@ export function useExampleForm() {
 		},
 		onSuccess: () => {
 			toast.add({
-				title: '保存しました',
-				description: '変更内容を保存しました。',
+				title: t('example.story.form.saved'),
+				description: t('example.story.form.savedDescription'),
 				type: 'success',
 			});
 			console.log('送信成功');
@@ -35,8 +50,8 @@ export function useExampleForm() {
 		},
 		onError: () => {
 			toast.add({
-				title: 'エラーが発生しました',
-				description: 'もう一度お試しください。',
+				title: t('example.story.form.error'),
+				description: t('example.story.form.errorDescriptionToast'),
 				type: 'error',
 			});
 		},

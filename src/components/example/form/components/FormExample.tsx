@@ -6,6 +6,7 @@ import type {
 	UseFormSetError,
 } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { Checkbox } from '@/components/elements/Checkbox/Checkbox';
 import { Combobox } from '@/components/elements/Combobox/Combobox';
@@ -28,13 +29,10 @@ import { Stack } from '@/components/layouts/Stack/Stack';
 import { Button } from '@/components/ui/button';
 
 import {
-	CATEGORY_OPTIONS,
+	createFormOptions,
 	type FormValues,
-	GENDER_OPTIONS,
-	INTEREST_OPTIONS,
 	MAX_ATTACHMENT_COUNT,
 	MAX_ATTACHMENT_SIZE_IN_BYTES,
-	USER_OPTIONS,
 } from '../schema/formSchema';
 
 type Props = {
@@ -55,17 +53,20 @@ export function FormExample({
 	onSubmit,
 	isPending,
 }: Props) {
+	const { t } = useTranslation();
+	const options = createFormOptions(t);
+
 	return (
 		<Center maxWidth="xl">
 			<Stack space="lg">
-				<Heading type="sectionTitle">フォーム例</Heading>
+				<Heading type="sectionTitle">{t('example.story.form.title')}</Heading>
 
 				<Stack space="lg" as="form" noValidate onSubmit={onSubmit}>
 					<Cluster space="lg" align="start">
 						<Container width="lg">
 							<Input
 								id="name"
-								label="氏名"
+								label={t('example.story.form.name')}
 								required
 								{...register('name')}
 								error={errors.name?.message}
@@ -75,7 +76,7 @@ export function FormExample({
 						<Container width="lg">
 							<PasswordInput
 								id="password"
-								label="パスワード"
+								label={t('example.story.form.password')}
 								required
 								{...register('password')}
 								error={errors.password?.message}
@@ -89,11 +90,11 @@ export function FormExample({
 								render={({ field, fieldState }) => (
 									<Select
 										id={field.name}
-										label="カテゴリ"
+										label={t('example.story.form.category')}
 										value={field.value}
 										required
 										onChange={field.onChange}
-										options={CATEGORY_OPTIONS}
+										options={options.category}
 										error={fieldState.error?.message}
 									/>
 								)}
@@ -107,11 +108,11 @@ export function FormExample({
 								render={({ field, fieldState }) => (
 									<Combobox
 										id={field.name}
-										label="ユーザー"
+										label={t('example.story.form.user')}
 										value={field.value}
 										required
 										onChange={field.onChange}
-										options={USER_OPTIONS}
+										options={options.users}
 										error={fieldState.error?.message}
 									/>
 								)}
@@ -125,11 +126,11 @@ export function FormExample({
 								render={({ field, fieldState }) => (
 									<ComboboxMultiple
 										id={field.name}
-										label="ユーザー（複数）"
+										label={t('example.story.form.users')}
 										value={field.value}
 										required
 										onChange={field.onChange}
-										options={USER_OPTIONS}
+										options={options.users}
 										error={fieldState.error?.message}
 									/>
 								)}
@@ -143,7 +144,7 @@ export function FormExample({
 								render={({ field, fieldState }) => (
 									<DatePicker
 										id={field.name}
-										label="日付"
+										label={t('example.story.form.date')}
 										value={field.value}
 										required
 										onChange={field.onChange}
@@ -160,7 +161,7 @@ export function FormExample({
 								render={({ field, fieldState }) => (
 									<DateRange
 										id={field.name}
-										label="期間"
+										label={t('example.story.form.period')}
 										required
 										value={field.value}
 										onChange={field.onChange}
@@ -179,8 +180,8 @@ export function FormExample({
 								render={({ field, fieldState }) => (
 									<Checkbox
 										required
-										label="興味のある分野"
-										options={INTEREST_OPTIONS}
+										label={t('example.story.form.interests')}
+										options={options.interests}
 										value={field.value}
 										onChange={field.onChange}
 										error={fieldState.error?.message}
@@ -196,8 +197,8 @@ export function FormExample({
 								render={({ field, fieldState }) => (
 									<Radio
 										required
-										label="性別"
-										options={GENDER_OPTIONS}
+										label={t('example.story.form.gender')}
+										options={options.gender}
 										value={field.value}
 										onChange={field.onChange}
 										error={fieldState.error?.message}
@@ -213,11 +214,11 @@ export function FormExample({
 						render={({ field, fieldState }) => (
 							<Checkbox
 								required
-								label="利用規約への同意"
+								label={t('example.story.form.agreement')}
 								options={[
 									{
 										value: 'agreement',
-										label: '利用規約に同意する',
+										label: t('example.story.form.agreeTerms'),
 									},
 								]}
 								value={field.value}
@@ -230,7 +231,7 @@ export function FormExample({
 					<Container width="3xl">
 						<Textarea
 							id="description"
-							label="説明"
+							label={t('example.story.form.description')}
 							required
 							{...register('description')}
 							error={errors.description?.message}
@@ -245,7 +246,7 @@ export function FormExample({
 								<FileUpload
 									id={field.name}
 									name={field.name}
-									label="添付ファイル（ドラッグ＆ドロップ）"
+									label={t('example.story.form.attachmentsDrop')}
 									required
 									value={field.value}
 									onFilesChange={field.onChange}
@@ -277,7 +278,7 @@ export function FormExample({
 								<FileUploadButton
 									id={field.name}
 									name={field.name}
-									label="添付ファイル（ボタン）"
+									label={t('example.story.form.attachmentsButton')}
 									required
 									value={field.value}
 									onFilesChange={field.onChange}
@@ -302,9 +303,9 @@ export function FormExample({
 					</Container>
 
 					<Cluster justify="between" align="center">
-						<Link to="/#" label="戻る" />
+						<Link to="/#" label={t('common.back')} />
 						<Button type="submit" loading={isPending}>
-							送信
+							{t('example.story.form.submit')}
 						</Button>
 					</Cluster>
 				</Stack>

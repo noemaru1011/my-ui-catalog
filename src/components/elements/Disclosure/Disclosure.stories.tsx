@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Link } from '../Link/Link';
 import { Text } from '../Text/Text';
 import { Disclosure } from './Disclosure';
@@ -22,14 +23,23 @@ export default meta;
 type Story = StoryObj<typeof Disclosure>;
 
 export const Default: Story = {
-    render: (args) => (
-        <Disclosure {...args}>
-            <Text>
-                こちらはDisclosureのコンテンツです。詳しくは
-                <Link to="#" label="詳細ページ" />
-                をご覧ください。
-            </Text>
-        </Disclosure>
-    ),
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<Disclosure
+				{...args}
+				triggerText={
+					args.triggerText === '詳細を表示'
+						? t('example.story.disclosure.showDetails')
+						: args.triggerText
+				}
+			>
+				<Text>
+					{t('example.story.disclosure.content')} {' '}
+					<Link to="#" label={t('example.story.disclosure.detailsPage')} />
+					{t('example.story.accordion.faqSuffix')}
+				</Text>
+			</Disclosure>
+		);
+	},
 };
-

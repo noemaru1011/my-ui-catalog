@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Stack } from './Stack';
 
 const meta = {
@@ -30,13 +31,18 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	render: (args) => (
-		<div className="w-80">
-			<Stack {...args}>
-				<div className="rounded-md border p-4">コンテンツ 1</div>
-				<div className="rounded-md border p-4">コンテンツ 2</div>
-				<div className="rounded-md border p-4">コンテンツ 3</div>
-			</Stack>
-		</div>
-	),
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<div className="w-80">
+				<Stack {...args}>
+					{[1, 2, 3].map((count) => (
+						<div className="rounded-md border p-4" key={count}>
+							{t('example.story.layout.content', { count })}
+						</div>
+					))}
+				</Stack>
+			</div>
+		);
+	},
 };

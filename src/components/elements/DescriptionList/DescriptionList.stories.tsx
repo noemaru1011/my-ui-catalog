@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Text } from '../Text/Text';
 import {
     DescriptionList,
@@ -20,19 +21,22 @@ export default meta;
 type Story = StoryObj<Omit<typeof meta, 'component'>>;
 
 export const Default: Story = {
-    render: (args) => (
-        <DescriptionList {...args}>
-            <DescriptionListItem term="氏名">
-                <Text>山田 太郎</Text>
-            </DescriptionListItem>
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<DescriptionList {...args}>
+				<DescriptionListItem term={t('example.story.descriptionList.name')}>
+					<Text>{t('example.story.descriptionList.person')}</Text>
+				</DescriptionListItem>
 
-            <DescriptionListItem term="メールアドレス">
-                <Text>example@example.com</Text>
-            </DescriptionListItem>
+				<DescriptionListItem term={t('example.story.descriptionList.email')}>
+					<Text>example@example.com</Text>
+				</DescriptionListItem>
 
-            <DescriptionListItem term="住所">
-                <Text>東京都千代田区霞が関</Text>
-            </DescriptionListItem>
-        </DescriptionList>
-    ),
+				<DescriptionListItem term={t('example.story.descriptionList.address')}>
+					<Text>{t('example.story.descriptionList.location')}</Text>
+				</DescriptionListItem>
+			</DescriptionList>
+		);
+	},
 };

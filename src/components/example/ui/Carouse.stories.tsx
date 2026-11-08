@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Image } from '@/components/elements/Image/Image';
 import { Heading } from '@/components/elements/Heading/Heading';
 import { Text } from '@/components/elements/Text/Text';
@@ -15,18 +16,15 @@ import {
 const slides = [
 	{
 		src: 'https://placehold.co/800x450?text=Mountain',
-		alt: '山並みの風景',
-		description: '山並みの風景',
+		textKey: 'mountains',
 	},
 	{
 		src: 'https://placehold.co/800x450?text=Ocean',
-		alt: '海辺の風景',
-		description: '海辺の風景',
+		textKey: 'ocean',
 	},
 	{
 		src: 'https://placehold.co/800x450?text=Forest',
-		alt: '森の風景',
-		description: '森の風景',
+		textKey: 'forest',
 	},
 ];
 
@@ -39,27 +37,33 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	render: () => (
-		<Center maxWidth="md">
-			<Stack space="md">
-				<Heading type="blockTitle">風景ギャラリー</Heading>
-				<Text color="muted">矢印ボタンで画像を切り替えられます。</Text>
-				<Carousel opts={{ loop: true }} aria-label="風景ギャラリー">
-					<CarouselContent>
-						{slides.map((slide) => (
-							<CarouselItem key={slide.src}>
-								<Image
-									src={slide.src}
-									alt={slide.alt}
-									description={slide.description}
-								/>
-							</CarouselItem>
-						))}
-					</CarouselContent>
-					<CarouselPrevious aria-label="前の画像" />
-					<CarouselNext aria-label="次の画像" />
-				</Carousel>
-			</Stack>
-		</Center>
-	),
+	render: () => {
+		const { t } = useTranslation();
+		return (
+			<Center maxWidth="md">
+				<Stack space="md">
+					<Heading type="blockTitle">{t('example.story.carousel.gallery')}</Heading>
+					<Text color="muted">{t('example.story.carousel.instructions')}</Text>
+					<Carousel opts={{ loop: true }} aria-label={t('example.story.carousel.gallery')}>
+						<CarouselContent>
+							{slides.map((slide) => {
+								const description = t(`example.story.carousel.${slide.textKey}`);
+								return (
+									<CarouselItem key={slide.src}>
+										<Image
+											src={slide.src}
+											alt={description}
+											description={description}
+										/>
+									</CarouselItem>
+								);
+							})}
+						</CarouselContent>
+						<CarouselPrevious aria-label={t('example.story.carousel.previous')} />
+						<CarouselNext aria-label={t('example.story.carousel.next')} />
+					</Carousel>
+				</Stack>
+			</Center>
+		);
+	},
 };

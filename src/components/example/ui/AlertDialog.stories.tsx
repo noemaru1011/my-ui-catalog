@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import {
 	AlertDialog,
@@ -24,23 +25,26 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: () => {
 		const [open, setOpen] = useState(false);
+		const { t } = useTranslation();
 
 		return (
 			<AlertDialog open={open} onOpenChange={setOpen}>
 				<AlertDialogTrigger render={<Button variant="destructive" />}>
-					削除する
+					{t('example.story.alertDialog.deleteAction')}
 				</AlertDialogTrigger>
 				<AlertDialogContent>
 					<AlertDialogHeader>
-						<AlertDialogTitle>本当に削除しますか？</AlertDialogTitle>
+						<AlertDialogTitle>
+							{t('example.story.alertDialog.confirmDelete')}
+						</AlertDialogTitle>
 						<AlertDialogDescription>
-							この操作は取り消せません。選択した項目が完全に削除されます。
+							{t('example.story.alertDialog.irreversible')}
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
-						<AlertDialogCancel>キャンセル</AlertDialogCancel>
+						<AlertDialogCancel>{t('example.story.alertDialog.cancel')}</AlertDialogCancel>
 						<AlertDialogAction variant="destructive" onClick={() => setOpen(false)}>
-							削除
+							{t('example.story.table.delete')}
 						</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>

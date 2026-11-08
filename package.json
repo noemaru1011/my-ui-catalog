@@ -18,7 +18,8 @@
 		"test:run": "npx vitest run",
 		"test:components": "npx vitest run --project components",
 		"test:storybook": "npx vitest run --project storybook",
-		"test:e2e": "playwright test"
+		"test:e2e": "playwright test",
+		"check:locale": "node scripts/check-locale-keys.mjs"
 	},
 	"dependencies": {
 		"@base-ui/react": "^1.8.0",

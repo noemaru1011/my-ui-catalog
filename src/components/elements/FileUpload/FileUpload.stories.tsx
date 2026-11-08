@@ -1,5 +1,6 @@
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { FileUpload } from './FileUpload';
 
 const meta = {
@@ -32,19 +33,22 @@ export default meta;
 type Story = StoryObj<Omit<typeof meta, 'component'>>;
 
 export const Default: Story = {
-    render: (args) => (
-        <FileUpload
-            id="file-upload"
-            name="file-upload"
-            accept=".pdf,.png,.jpg,.xlsx"
-            label='ファイル'
-            multiple
-            maxFiles={3}
-            maxSize={1}
-            onFilesChange={(files) => {
-                console.log('Selected files:', files);
-            }}
-            {...args}
-        />
-    ),
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<FileUpload
+				id="file-upload"
+				name="file-upload"
+				accept=".pdf,.png,.jpg,.xlsx"
+				multiple
+				maxFiles={3}
+				maxSize={1}
+				onFilesChange={(files) => {
+					console.log('Selected files:', files);
+				}}
+				{...args}
+				label={t('example.story.labels.file')}
+			/>
+		);
+	},
 };

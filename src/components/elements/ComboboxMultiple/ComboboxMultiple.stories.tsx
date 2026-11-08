@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ComboboxMultiple } from './ComboboxMultiple';
 import { OPTIONS_WITH_DISABLED } from '@/components/types/Option.mock';
 
@@ -43,7 +44,19 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: (args) => {
 		const [value, setValue] = useState<string[]>([]);
+		const { t } = useTranslation();
 
-		return <ComboboxMultiple {...args} value={value} onChange={setValue} />;
+		return (
+			<ComboboxMultiple
+				{...args}
+				label={
+					args.label === 'フレームワーク'
+						? t('example.story.labels.framework')
+						: args.label
+				}
+				value={value}
+				onChange={setValue}
+			/>
+		);
 	},
 };

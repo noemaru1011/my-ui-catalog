@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Radio } from './Radio';
 import { OPTIONS_WITH_DISABLED } from '@/components/types/Option.mock';
 
@@ -29,7 +30,19 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: (args) => {
 		const [value, setValue] = useState('');
+		const { t } = useTranslation();
 
-		return <Radio {...args} value={value} onChange={setValue} />;
+		return (
+			<Radio
+				{...args}
+				label={
+					args.label === '表示項目'
+						? t('example.story.labels.framework')
+						: args.label
+				}
+				value={value}
+				onChange={setValue}
+			/>
+		);
 	},
 };

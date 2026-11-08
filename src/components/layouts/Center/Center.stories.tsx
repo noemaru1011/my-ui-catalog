@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Center } from './Center';
 import { Container } from '@/components/layouts/Container/Container';
 import { Heading } from '@/components/elements/Heading/Heading';
@@ -14,6 +15,7 @@ const meta = {
 		maxWidth: {
 			control: {
 				type: 'select',
+				options: ['sm', 'md', 'lg', 'xl', 'full'],
 			},
 		},
 	},
@@ -31,24 +33,24 @@ export const Default: Story = {
 		maxWidth: 'lg',
 		children: null,
 	},
-	render: (args) => (
-		<Container width="full">
-			<div className="min-h-screen px-4 py-4">
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<Container width="full">
 				<Center {...args}>
 					<div className="min-h-64 border-2 border-dashed border-blue-500 p-6">
 						<Heading type="blockTitle">
-							コンテンツ領域
+							{t('example.story.layout.contentArea')}
 						</Heading>
+						<Text>maxWidth: {args.maxWidth}</Text>
 						<Text>
-							maxWidth: {args.maxWidth}
-						</Text>
-						<Text>
-							この領域は画面の中央に配置され、
-							最大幅は {args.maxWidth} に制限されます。
+							{t('example.story.layout.centerDescription', {
+								maxWidth: args.maxWidth,
+							})}
 						</Text>
 					</div>
 				</Center>
-			</div>
-		</Container>
-	),
+			</Container>
+		);
+	},
 };

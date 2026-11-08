@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { DatePicker } from './DatePicker';
 
 const meta = {
@@ -30,7 +31,15 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: (args) => {
 		const [date, setDate] = useState<Date>();
+		const { t } = useTranslation();
 
-		return <DatePicker {...args} value={date} onChange={setDate} />;
+		return (
+			<DatePicker
+				{...args}
+				label={args.label === '日付' ? t('example.story.labels.date') : args.label}
+				value={date}
+				onChange={setDate}
+			/>
+		);
 	},
 };

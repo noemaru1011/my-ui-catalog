@@ -1,5 +1,6 @@
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 
 import { Switch } from './Switch';
 
@@ -41,5 +42,23 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
+export const Default: Story = {
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<Switch
+				{...args}
+				aria-label={
+					args['aria-label'] === 'スイッチ切り替え'
+						? t('example.story.labels.switch')
+						: args['aria-label']
+				}
+				label={
+					args.label === '通知設定'
+						? t('example.story.labels.notifications')
+						: args.label
+				}
+			/>
+		);
+	},
+};

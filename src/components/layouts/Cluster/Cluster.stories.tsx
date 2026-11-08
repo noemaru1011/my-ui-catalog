@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Cluster } from './Cluster';
 import { Container } from '../Container/Container';
@@ -48,20 +49,23 @@ export const Default: Story = {
 		justify: 'start',
 		align: 'center',
 	},
-	render: (args) => (
-		<Container width="full">
-			<Card>
-				<CardHeader>
-					<CardTitle>space・justify・align を Controls から変更して、子要素の配置や間隔を確認できます。</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<Cluster {...args}>
-						<Item title="小" />
-						<Item title="中" className="py-6" />
-						<Item title="大" className="py-8" />
-					</Cluster>
-				</CardContent>
-			</Card>
-		</Container>
-	),
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<Container width="full">
+				<Card>
+					<CardHeader>
+						<CardTitle>{t('example.story.layout.clusterDescription')}</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<Cluster {...args}>
+							<Item title={t('example.story.layout.small')} />
+							<Item title={t('example.story.layout.medium')} className="py-6" />
+							<Item title={t('example.story.layout.large')} className="py-8" />
+						</Cluster>
+					</CardContent>
+				</Card>
+			</Container>
+		);
+	},
 };

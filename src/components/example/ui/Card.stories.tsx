@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -40,26 +41,27 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 function CardPreview({ size = 'default' }: { size?: 'default' | 'sm' }) {
+	const { t } = useTranslation();
 	return (
 		<Container width="xl">
 			<Card size={size}>
 				<CardHeader>
-					<CardTitle>プロジェクト設定</CardTitle>
-					<CardDescription>プロジェクトの基本情報を管理します。</CardDescription>
+					<CardTitle>{t('example.story.card.projectSettings')}</CardTitle>
+					<CardDescription>{t('example.story.card.projectDescription')}</CardDescription>
 					<CardAction>
-						<Badge variant="secondary">公開中</Badge>
+						<Badge variant="secondary">{t('example.story.card.published')}</Badge>
 					</CardAction>
 				</CardHeader>
 				<CardContent>
 					<Stack space="sm">
-						<Text>プロジェクトの名前や公開状態をここから確認できます。</Text>
-						<Text color="muted">最終更新: 2026年11月4日</Text>
+						<Text>{t('example.story.card.projectDetails')}</Text>
+						<Text color="muted">{t('example.story.card.lastUpdated')}</Text>
 					</Stack>
 				</CardContent>
 				<CardFooter>
 					<Cluster space="sm" justify="end">
-						<Button variant="outline">キャンセル</Button>
-						<Button>変更を保存</Button>
+						<Button variant="outline">{t('example.story.card.cancel')}</Button>
+						<Button>{t('example.story.card.save')}</Button>
 					</Cluster>
 				</CardFooter>
 			</Card>
@@ -79,16 +81,19 @@ export const Small: Story = {
 };
 
 export const ContentOnly: Story = {
-	render: () => (
-		<Container width="xl">
-			<Card>
-				<CardHeader>
-					<CardTitle>お知らせ</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<Text>カードのヘッダーとコンテンツだけを使ったシンプルな表示です。</Text>
-				</CardContent>
-			</Card>
-		</Container>
-	),
+	render: () => {
+		const { t } = useTranslation();
+		return (
+			<Container width="xl">
+				<Card>
+					<CardHeader>
+						<CardTitle>{t('example.story.card.announcements')}</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<Text>{t('example.story.card.contentOnly')}</Text>
+					</CardContent>
+				</Card>
+			</Container>
+		);
+	},
 };

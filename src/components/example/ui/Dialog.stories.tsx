@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import {
 	Dialog,
@@ -20,19 +21,22 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	render: () => (
-		<Dialog>
-			<DialogTrigger render={<Button />}>詳細を表示</DialogTrigger>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>ダイアログのタイトル</DialogTitle>
-					<DialogDescription>
-						ダイアログを使って、補足情報や操作を表示できます。
-					</DialogDescription>
-				</DialogHeader>
-				<Text>ここにダイアログの内容を表示します。</Text>
-				<DialogFooter showCloseButton />
-			</DialogContent>
-		</Dialog>
-	),
+	render: () => {
+		const { t } = useTranslation();
+		return (
+			<Dialog>
+				<DialogTrigger render={<Button />}>
+					{t('example.story.dialog.showDetails')}
+				</DialogTrigger>
+				<DialogContent>
+					<DialogHeader>
+						<DialogTitle>{t('example.story.dialog.title')}</DialogTitle>
+						<DialogDescription>{t('example.story.dialog.description')}</DialogDescription>
+					</DialogHeader>
+					<Text>{t('example.story.dialog.content')}</Text>
+					<DialogFooter showCloseButton />
+				</DialogContent>
+			</Dialog>
+		);
+	},
 };

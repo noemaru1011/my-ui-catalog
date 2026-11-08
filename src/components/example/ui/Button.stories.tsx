@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Search } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Cluster } from '@/components/layouts/Cluster/Cluster';
 import { Stack } from '@/components/layouts/Stack/Stack';
@@ -46,6 +47,17 @@ export const Loading: Story = {
 	args: {
 		loading: true,
 		children: '保存中',
+	},
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<Button
+				{...args}
+				{...(args.children === '保存中' && {
+					children: t('example.story.button.saving'),
+				})}
+			/>
+		);
 	},
 };
 

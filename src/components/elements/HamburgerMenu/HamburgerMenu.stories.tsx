@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import {
 	DrawerClose,
@@ -18,39 +19,7 @@ const meta = {
 		},
 	},
 	args: {
-		children: (
-			<>
-				<DrawerHeader>
-					<DrawerTitle>メニュー</DrawerTitle>
-					<DrawerDescription>ページを選択してください。</DrawerDescription>
-				</DrawerHeader>
-				<Stack as="nav" aria-label="メインメニュー" >
-					<Stack as="ul" space="sm">
-						<Stack as="li">
-							<DrawerClose
-								render={<Button variant="ghost" className="w-full justify-start" />}
-							>
-								ホーム
-							</DrawerClose>
-						</Stack>
-						<Stack as="li">
-							<DrawerClose
-								render={<Button variant="ghost" className="w-full justify-start" />}
-							>
-								ユーザー
-							</DrawerClose>
-						</Stack>
-						<Stack as="li">
-							<DrawerClose
-								render={<Button variant="ghost" className="w-full justify-start" />}
-							>
-								設定
-							</DrawerClose>
-						</Stack>
-					</Stack>
-				</Stack>
-			</>
-		),
+		children: null,
 	},
 } satisfies Meta<typeof HamburgerMenu>;
 
@@ -58,4 +27,29 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+	render: () => {
+		const { t } = useTranslation();
+		return (
+			<HamburgerMenu>
+				<DrawerHeader>
+					<DrawerTitle>{t('example.story.hamburger.menu')}</DrawerTitle>
+					<DrawerDescription>{t('example.story.hamburger.selectPage')}</DrawerDescription>
+				</DrawerHeader>
+				<Stack as="nav" aria-label={t('example.story.hamburger.mainMenu')}>
+					<Stack as="ul" space="sm">
+						{(['home', 'user', 'settings'] as const).map((page) => (
+							<Stack as="li" key={page}>
+								<DrawerClose
+									render={<Button variant="ghost" className="w-full justify-start" />}
+								>
+									{t(`example.story.hamburger.${page}`)}
+								</DrawerClose>
+							</Stack>
+						))}
+					</Stack>
+				</Stack>
+			</HamburgerMenu>
+		);
+	},
+};
