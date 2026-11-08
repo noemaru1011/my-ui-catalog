@@ -11,11 +11,17 @@ const meta = {
 	argTypes: {
 		as: {
 			control: 'select',
-			options: ['div', 'section', 'form', 'article', 'aside', 'main', 'nav', 'ul'],
+			options: ['div', 'section', 'form', 'article', 'aside', 'nav', 'ul'],
 		},
 		children: {
 			control: false,
 		},
+		space: {
+			control: 'inline-radio',
+		},
+	},
+	parameters: {
+		layout: 'fullscreen',
 	},
 } satisfies Meta<typeof Stack>;
 

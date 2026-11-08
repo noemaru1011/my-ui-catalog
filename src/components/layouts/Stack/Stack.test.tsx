@@ -11,6 +11,7 @@ describe('Stack', () => {
 	});
 
 	it.each([
+		['none', 'gap-0'],
 		['sm', 'gap-2'],
 		['md', 'gap-4'],
 		['lg', 'gap-6'],
