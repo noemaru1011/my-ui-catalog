@@ -1,4 +1,5 @@
 import { ServerCrash } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Heading } from '@/components/elements/Heading/Heading';
 import { Link } from '@/components/elements/Link/Link';
 import { Text } from '@/components/elements/Text/Text';
@@ -10,6 +11,8 @@ type InternalServerErrorProps = {
 };
 
 export function InternalServerError({ homeUrl }: InternalServerErrorProps) {
+	const { t } = useTranslation();
+
 	return (
 		<Stack space="sm">
 			<Text as="span" size="lg" weight="bold" color="muted">
@@ -18,15 +21,12 @@ export function InternalServerError({ homeUrl }: InternalServerErrorProps) {
 
 			<Cluster space="sm">
 				<ServerCrash size={32} strokeWidth={1.5} />
-				<Heading type="sectionTitle">サーバーエラーが発生しました</Heading>
+				<Heading type="sectionTitle">{t('error.internalServerError.title')}</Heading>
 			</Cluster>
 
-			<Text color="muted">
-				サーバー内部で予期しないエラーが発生しました。
-				時間をおいて再度お試しいただくか、管理者にお問い合わせください。
-			</Text>
+			<Text color="muted">{t('error.internalServerError.description')}</Text>
 
-			<Link to={homeUrl} label="トップページへ戻る" size="lg" />
+			<Link to={homeUrl} label={t('error.backToHome')} size="lg" />
 		</Stack>
 	);
 }

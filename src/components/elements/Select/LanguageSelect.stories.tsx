@@ -36,11 +36,6 @@ export const Default: Story = {
                 <Stack>
                     <LanguageSelect
                         {...args}
-                        label={
-                            args.label === '表示言語'
-                                ? t('example.story.labels.displayLanguage')
-                                : args.label
-                        }
                         value={currentLanguage}
                         onChange={(language) => {
                             i18n.changeLanguage(language);

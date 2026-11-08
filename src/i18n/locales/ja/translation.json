@@ -20,7 +20,26 @@
 		"noItemsFound": "該当する項目がありません。",
 		"back": "戻る",
 		"hidePassword": "パスワードを隠す",
-		"showPassword": "パスワードを表示"
+		"showPassword": "パスワードを表示",
+		"displayLanguage": "表示言語",
+		"darkMode": "ダークモード",
+		"lightMode": "ライトモード",
+		"darkModeToggle": "ダークモード切り替え"
+	},
+	"error": {
+		"notfound": {
+			"title": "ページが見つかりません",
+			"description": "お探しのページは見つかりませんでした。ページが削除されたか、URLが変更された可能性があります。"
+		},
+		"forbidden": {
+			"title": "アクセスが拒否されました",
+			"description": "このページを閲覧する権限がありません。 アクセス権限をご確認いただくか、管理者にお問い合わせください。"
+		},
+		"internalServerError": {
+			"title": "サーバーエラーが発生しました",
+			"description": "サーバー内部で予期しないエラーが発生しました。時間をおいて再度お試しいただくか、管理者にお問い合わせください。"
+		},
+		"backToHome": "トップページへ戻る"
 	},
 	"example": {
 		"description": "こんにちは、世界",
@@ -34,7 +53,6 @@
 				"period": "期間",
 				"file": "ファイル",
 				"language": "言語",
-				"displayLanguage": "表示言語",
 				"switch": "スイッチ切り替え",
 				"notifications": "通知設定",
 				"userList": "ユーザー一覧",

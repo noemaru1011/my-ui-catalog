@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Select } from '@/components/elements/Select/Select';
 import type { Option } from '@/components/types/Option';
 
@@ -21,9 +22,12 @@ const DEFAULT_LANGUAGES: Option[] = [
 ];
 
 export function LanguageSelect(props: Props) {
+	const { t } = useTranslation();
+
 	return (
 		<Select
 			{...props}
+			label={t('common.displayLanguage')}
 			options={DEFAULT_LANGUAGES}
 			onChange={(value) => {
 				if (value === 'ja' || value === 'en') {

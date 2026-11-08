@@ -20,7 +20,26 @@
 		"noItemsFound": "No items found.",
 		"back": "Back",
 		"hidePassword": "Hide password",
-		"showPassword": "Show password"
+		"showPassword": "Show password",
+		"displayLanguage": "Display language",
+		"darkMode": "Dark mode",
+		"lightMode": "Light mode",
+		"darkModeToggle": "Toggle dark mode"
+	},
+	"error": {
+		"notfound": {
+			"title": "Page not found",
+			"description": "The page you are looking for could not be found. It may have been deleted or its URL may have changed."
+		},
+		"forbidden": {
+			"title": "Access denied",
+			"description": "You do not have permission to view this page. Please check your access permissions or contact an administrator."
+		},
+		"internalServerError": {
+			"title": "A server error occurred",
+			"description": "An unexpected internal server error occurred. Please try again later or contact an administrator."
+		},
+		"backToHome": "Back to home"
 	},
 	"example": {
 		"description": "hello world",
@@ -34,7 +53,6 @@
 				"period": "Date range",
 				"file": "File",
 				"language": "Language",
-				"displayLanguage": "Display language",
 				"switch": "Toggle switch",
 				"notifications": "Notifications",
 				"userList": "User list",
