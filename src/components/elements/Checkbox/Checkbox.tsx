@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import { type ComponentProps, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Option } from '@/components/types/Option';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
@@ -42,6 +42,7 @@ export function Checkbox({
 }: CheckboxProps) {
 	const props = withoutExternalStyle(rawProps);
 	const { t } = useTranslation();
+	const generatedId = useId();
 
 	const handleChange = (optionValue: string, checked: boolean) => {
 		if (checked) {
@@ -62,8 +63,8 @@ export function Checkbox({
 			{description && <FieldDescription>{description}</FieldDescription>}
 
 			<FieldGroup className="mt-2 gap-4">
-				{options.map((option) => {
-					const id = `${label}-${option.value}`;
+				{options.map((option, index) => {
+					const id = `${generatedId}-${index}`;
 
 					return (
 						<Field key={option.value} orientation="horizontal" data-invalid={!!error}>
