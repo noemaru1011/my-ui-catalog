@@ -1,7 +1,7 @@
 import { Switch } from '@/components/elements/Switch/Switch';
 import { useTheme } from '@/components/providers/theme-provider';
 
-export default function ThemeSwitch() {
+export function ThemeSwitch() {
 	const { resolvedTheme, setTheme } = useTheme();
 
 	const isDark = resolvedTheme === 'dark';

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { ThemeProvider } from '@/components/providers/theme-provider';
-import ThemeSwitch from './ThemeSwitch';
+import { ThemeSwitch } from './ThemeSwitch';
 
 describe('ThemeSwitch', () => {
 	beforeEach(() => {
