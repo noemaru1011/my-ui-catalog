@@ -25,8 +25,29 @@ test.describe('フォーム例 E2E', () => {
 			'説明を入力してください。',
 			'ファイルを選択してください。',
 		]) {
-			await expect(page.getByText(message, { exact: true })).toBeVisible();
+			await expect(page.getByText(message, { exact: true }).first()).toBeVisible();
 		}
+
+		await expect(page.getByText('ファイルを選択してください。', { exact: true })).toHaveCount(2);
+	});
+
+	test('D&D版とボタン版でそれぞれファイルを添付できる', async ({ page }) => {
+		const dragDropFile = page.getByLabel('添付ファイル（ドラッグ＆ドロップ）');
+		const buttonFile = page.getByLabel('添付ファイル（ボタン）');
+
+		await dragDropFile.setInputFiles({
+			name: 'drag-drop.txt',
+			mimeType: 'text/plain',
+			buffer: Buffer.from('drag and drop upload'),
+		});
+		await buttonFile.setInputFiles({
+			name: 'button.txt',
+			mimeType: 'text/plain',
+			buffer: Buffer.from('button upload'),
+		});
+
+		await expect(page.getByRole('button', { name: 'drag-drop.txt Remove' })).toBeVisible();
+		await expect(page.getByRole('button', { name: 'button.txt Remove' })).toBeVisible();
 	});
 
 	test('短いパスワードでは文字数エラーが表示される', async ({ page }) => {

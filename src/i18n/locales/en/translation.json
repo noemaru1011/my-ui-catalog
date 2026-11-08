@@ -2,12 +2,13 @@
 	"common": {
 		"file": {
 			"dragAndDrop": "Drag and drop files",
+			"attach": "Attach files",
 			"clickToSelect": "Click to select files",
 			"sizeExceeded": "File size exceeds the limit",
 			"maxFilesExceeded": "Maximum {{count}} files allowed",
 			"selectedFiles": "Selected files",
 			"remove": "Remove",
-			"limits": "Maximum {{maxFiles}} files / {{maxSize}} MB",
+			"limits": "Maximum {{maxFiles}} files / {{maxSize}} MiB",
 			"acceptedTypes": "Accepted formats: {{accept}}",
 			"invalidType": "This file format is not allowed"
 		},

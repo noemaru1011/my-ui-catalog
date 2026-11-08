@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
-export const MAX_ATTACHMENT_COUNT = 5;
-export const MAX_ATTACHMENT_SIZE_IN_BYTES = 10 * 1024 * 1024;
+export const MAX_ATTACHMENT_COUNT = 2;
+export const MAX_ATTACHMENT_SIZE_IN_BYTES = 1 * 1024 * 1024;
 
 export const ATTACHMENTS_SCHEMA = z
-	.array(z.file().max(MAX_ATTACHMENT_SIZE_IN_BYTES, 'ファイルサイズは10MB以下にしてください。'))
+	.array(z.file().max(MAX_ATTACHMENT_SIZE_IN_BYTES, 'ファイルサイズは1MiB以下にしてください。'))
 	.min(1, 'ファイルを選択してください。')
 	.max(MAX_ATTACHMENT_COUNT, `ファイルは最大${MAX_ATTACHMENT_COUNT}件までです。`);
 
@@ -31,6 +31,7 @@ export const FORM_SCHEMA = z.object({
 		}),
 	description: z.string().min(1, '説明を入力してください。'),
 	attachments: ATTACHMENTS_SCHEMA,
+	buttonAttachments: ATTACHMENTS_SCHEMA,
 });
 
 export type FormValues = z.infer<typeof FORM_SCHEMA>;
@@ -72,4 +73,5 @@ export const DEFAULT_FORM_VALUES = {
 	dateRange: undefined,
 	description: '',
 	attachments: [],
+	buttonAttachments: [],
 } satisfies Partial<FormValues>;

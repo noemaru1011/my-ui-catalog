@@ -1,4 +1,10 @@
-import type { Control, FieldErrors, UseFormRegister } from 'react-hook-form';
+import type {
+	Control,
+	FieldErrors,
+	UseFormClearErrors,
+	UseFormRegister,
+	UseFormSetError,
+} from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 
 import { Checkbox } from '@/components/elements/Checkbox/Checkbox';
@@ -7,6 +13,7 @@ import { ComboboxMultiple } from '@/components/elements/ComboboxMultiple/Combobo
 import { DatePicker } from '@/components/elements/DatePicker/DatePicker';
 import { DateRange } from '@/components/elements/DateRange/DateRange';
 import { FileUpload } from '@/components/elements/FileUpload/FileUpload';
+import { FileUploadButton } from '@/components/elements/FileUploadButton/FileUploadButton';
 import { Heading } from '@/components/elements/Heading/Heading';
 import { Input } from '@/components/elements/Input/Input';
 import { PasswordInput } from '@/components/elements/Input/PasswordInput';
@@ -34,10 +41,20 @@ type Props = {
 	register: UseFormRegister<FormValues>;
 	control: Control<FormValues>;
 	errors: FieldErrors<FormValues>;
-	onSubmit: React.FormEventHandler<HTMLFormElement>;
+	setError: UseFormSetError<FormValues>;
+	clearErrors: UseFormClearErrors<FormValues>;
+	onSubmit: React.SubmitEventHandler<HTMLFormElement>;
+	isPending: boolean;
 };
-
-export function FormExample({ register, control, errors, onSubmit }: Props) {
+export function FormExample({
+	register,
+	control,
+	errors,
+	setError,
+	clearErrors,
+	onSubmit,
+	isPending,
+}: Props) {
 	return (
 		<Center maxWidth="xl">
 			<Stack space="lg">
@@ -228,7 +245,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								<FileUpload
 									id={field.name}
 									name={field.name}
-									label="添付ファイル"
+									label="添付ファイル（ドラッグ＆ドロップ）"
 									required
 									value={field.value}
 									onFilesChange={field.onChange}
@@ -237,6 +254,48 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 									maxFiles={MAX_ATTACHMENT_COUNT}
 									maxSize={MAX_ATTACHMENT_SIZE_IN_BYTES / (1024 * 1024)}
 									error={fieldState.error?.message}
+									onError={(message) => {
+										if (message) {
+											setError(field.name, {
+												type: 'validate',
+												message,
+											});
+										} else {
+											clearErrors(field.name);
+										}
+									}}
+								/>
+							)}
+						/>
+					</Container>
+
+					<Container width="xl">
+						<Controller
+							name="buttonAttachments"
+							control={control}
+							render={({ field, fieldState }) => (
+								<FileUploadButton
+									id={field.name}
+									name={field.name}
+									label="添付ファイル（ボタン）"
+									required
+									value={field.value}
+									onFilesChange={field.onChange}
+									onBlur={field.onBlur}
+									inputRef={field.ref}
+									maxFiles={MAX_ATTACHMENT_COUNT}
+									maxSize={MAX_ATTACHMENT_SIZE_IN_BYTES / (1024 * 1024)}
+									error={fieldState.error?.message}
+									onError={(message) => {
+										if (message) {
+											setError(field.name, {
+												type: 'validate',
+												message,
+											});
+										} else {
+											clearErrors(field.name);
+										}
+									}}
 								/>
 							)}
 						/>
@@ -244,7 +303,9 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 
 					<Cluster justify="between" align="center">
 						<Link to="/#" label="戻る" />
-						<Button type="submit">送信</Button>
+						<Button type="submit" loading={isPending}>
+							送信
+						</Button>
 					</Cluster>
 				</Stack>
 			</Stack>

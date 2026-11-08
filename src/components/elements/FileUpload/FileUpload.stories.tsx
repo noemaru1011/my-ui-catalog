@@ -39,7 +39,7 @@ export const Default: Story = {
             accept=".pdf,.png,.jpg,.xlsx"
             label='ファイル'
             multiple
-            maxFiles={1}
+            maxFiles={3}
             maxSize={1}
             onFilesChange={(files) => {
                 console.log('Selected files:', files);

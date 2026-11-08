@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 
 type FileUploadProps = {
@@ -21,12 +22,13 @@ type FileUploadProps = {
 	accept?: string;
 	multiple?: boolean;
 	maxFiles: number;
-	/** 単位はMB */
+	/** 単位はMiB（1 MiB = 1024 * 1024 bytes） */
 	maxSize: number;
 	disabled?: boolean;
 	value?: File[];
 	error?: string;
 	onFilesChange?: (files: File[]) => void;
+	onError?: (error: string) => void;
 	onBlur?: FocusEventHandler<HTMLInputElement>;
 	inputRef?: Ref<HTMLInputElement>;
 };
@@ -45,6 +47,7 @@ export function FileUpload({
 	value,
 	error,
 	onFilesChange,
+	onError,
 	onBlur,
 	inputRef,
 }: FileUploadProps) {
@@ -52,22 +55,25 @@ export function FileUpload({
 	const internalInputRef = useRef<HTMLInputElement>(null);
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
+
 	const [uncontrolledFiles, setUncontrolledFiles] = useState<File[]>([]);
 	const [dragging, setDragging] = useState(false);
-	const [validationError, setValidationError] = useState('');
+
 	const files = value ?? uncontrolledFiles;
-	const displayedError = validationError || error;
+	const displayedError = error;
 
 	const describedBy = [
-		description && `${inputId} -description`,
-		displayedError && `${inputId} -error`,
+		description && `${inputId}-description`,
+		displayedError && `${inputId}-error`,
 	]
 		.filter(Boolean)
 		.join(' ');
 
 	const updateFiles = useCallback(
 		(nextFiles: File[]) => {
-			if (value === undefined) setUncontrolledFiles(nextFiles);
+			if (value === undefined) {
+				setUncontrolledFiles(nextFiles);
+			}
 			onFilesChange?.(nextFiles);
 		},
 		[onFilesChange, value],
@@ -75,11 +81,6 @@ export function FileUpload({
 
 	/**
 	 * accept に指定されたファイル形式かどうかを判定する。
-	 *
-	 * 対応形式:
-	 * - image/* : MIME type のワイルドカード
-	 * - application/pdf : MIME type
-	 * - .pdf : 拡張子
 	 */
 	const isAcceptedFile = (file: File): boolean => {
 		if (!accept) return true;
@@ -95,17 +96,14 @@ export function FileUpload({
 		const fileName = file.name.toLowerCase();
 
 		return acceptedTypes.some((type) => {
-			// MIME type のワイルドカード（image/* など）
 			if (type.endsWith('/*')) {
 				return fileType.startsWith(type.slice(0, -1));
 			}
 
-			// MIME type（application/pdf など）
 			if (type.includes('/')) {
 				return fileType === type;
 			}
 
-			// 拡張子（.pdf など）
 			if (type.startsWith('.')) {
 				return fileName.endsWith(type);
 			}
@@ -115,23 +113,24 @@ export function FileUpload({
 	};
 
 	const addFiles = (selectedFiles: FileList | File[]) => {
-		setValidationError('');
+		onError?.('');
 
 		const incoming = Array.from(selectedFiles);
+		const validFiles: File[] = [];
 
-		const validFiles = incoming.filter((file) => {
+		for (const file of incoming) {
 			if (!isAcceptedFile(file)) {
-				setValidationError(`${file.name}: ${t('common.file.invalidType')} `);
-				return false;
+				onError?.(`${file.name}: ${t('common.file.invalidType')}`);
+				return;
 			}
 
 			if (file.size > maxSize * 1024 * 1024) {
-				setValidationError(`${file.name}: ${t('common.file.sizeExceeded')} `);
-				return false;
+				onError?.(`${file.name}: ${t('common.file.sizeExceeded')}`);
+				return;
 			}
 
-			return true;
-		});
+			validFiles.push(file);
+		}
 
 		const merged = multiple ? [...files, ...validFiles] : validFiles.slice(0, 1);
 
@@ -145,8 +144,8 @@ export function FileUpload({
 		);
 
 		if (unique.length > maxFiles) {
-			setValidationError(t('common.file.maxFilesExceeded', { count: maxFiles }));
 			updateFiles(unique.slice(0, maxFiles));
+			onError?.(t('common.file.maxFilesExceeded', { count: maxFiles }));
 			return;
 		}
 
@@ -155,6 +154,7 @@ export function FileUpload({
 
 	const removeFile = (index: number) => {
 		updateFiles(files.filter((_, i) => i !== index));
+		onError?.('');
 	};
 
 	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -168,11 +168,16 @@ export function FileUpload({
 
 	const getFileIcon = (file: File) => {
 		if (file.type.startsWith('image/')) return FileImage;
-		if (file.type.startsWith('text/') || file.type === 'application/pdf') return FileText;
+		if (file.type.startsWith('text/') || file.type === 'application/pdf') {
+			return FileText;
+		}
 		if (file.type.includes('zip')) return FileArchive;
 		return File;
 	};
 
+	const truncateFileName = (fileName: string) => {
+		return fileName.length > 10 ? `${fileName.slice(0, 10)}...` : fileName;
+	};
 	const formatSize = (size: number) => {
 		return size < 1024 * 1024
 			? `${(size / 1024).toFixed(1)} KB`
@@ -190,7 +195,7 @@ export function FileUpload({
 			)}
 
 			{description && (
-				<FieldDescription id={`${inputId} -description`}>{description}</FieldDescription>
+				<FieldDescription id={`${inputId}-description`}>{description}</FieldDescription>
 			)}
 
 			<Stack space="md">
@@ -249,7 +254,7 @@ export function FileUpload({
 					/>
 				</Card>
 
-				{displayedError && <FieldError id={`${inputId} -error`}>{displayedError}</FieldError>}
+				{displayedError && <FieldError id={`${inputId}-error`}>{displayedError}</FieldError>}
 
 				{files.length > 0 && (
 					<Stack space="sm">
@@ -265,29 +270,40 @@ export function FileUpload({
 							const Icon = getFileIcon(file);
 
 							return (
-								<Container key={`${file.name} -${file.size} -${file.lastModified} `} width="full">
-									<Cluster space="sm" align="center" justify="between">
+								<Container key={`${file.name}-${file.size}-${file.lastModified}`} width="full">
+									<div className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-3 rounded-md border p-3">
+										{/* ファイルアイコン */}
 										<Icon className="text-muted-foreground h-5 w-5 shrink-0" />
 
-										<Stack space="sm">
-											<Text weight="bold">{file.name}</Text>
-											<Text color="muted">{formatSize(file.size)}</Text>
-										</Stack>
+										{/* ファイル名 */}
+										<Tooltip>
+											<TooltipTrigger>
+												<Text weight="bold">{truncateFileName(file.name)}</Text>
+											</TooltipTrigger>
+											<TooltipContent className="max-w-xs break-all whitespace-normal">
+												{file.name}
+											</TooltipContent>
+										</Tooltip>
 
+										{/* ファイルサイズ */}
+										<Text color="muted">{formatSize(file.size)}</Text>
+
+										{/* 削除ボタン */}
 										<Button
 											type="button"
 											variant="ghost"
 											size="icon"
+											className="shrink-0"
 											disabled={disabled}
 											onClick={(e) => {
 												e.stopPropagation();
 												removeFile(index);
 											}}
-											aria-label={`${file.name} ${t('common.file.remove')} `}
+											aria-label={`${file.name} ${t('common.file.remove')}`}
 										>
 											<X className="h-4 w-4" />
 										</Button>
-									</Cluster>
+									</div>
 								</Container>
 							);
 						})}

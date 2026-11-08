@@ -2,12 +2,13 @@
 	"common": {
 		"file": {
 			"dragAndDrop": "ファイルをドラッグ＆ドロップ",
+			"attach": "ファイルを添付",
 			"clickToSelect": "クリックしてファイルを選択",
 			"sizeExceeded": "ファイルサイズが上限を超えています",
 			"maxFilesExceeded": "ファイルは最大{{count}}件までです",
 			"selectedFiles": "選択したファイル",
 			"remove": "削除",
-			"limits": "最大{{maxFiles}}件 / {{maxSize}} MB",
+			"limits": "最大{{maxFiles}}件 / {{maxSize}} MiB",
 			"acceptedTypes": "対応形式: {{accept}}",
 			"invalidType": "許可されていないファイル形式です"
 		},
