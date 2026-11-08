@@ -46,8 +46,8 @@ test.describe('フォーム例 E2E', () => {
 			buffer: Buffer.from('button upload'),
 		});
 
-		await expect(page.getByRole('button', { name: 'drag-drop.txt Remove' })).toBeVisible();
-		await expect(page.getByRole('button', { name: 'button.txt Remove' })).toBeVisible();
+		await expect(page.getByRole('button', { name: 'drag-drop.txt 削除' })).toBeVisible();
+		await expect(page.getByRole('button', { name: 'button.txt 削除' })).toBeVisible();
 	});
 
 	test('短いパスワードでは文字数エラーが表示される', async ({ page }) => {
