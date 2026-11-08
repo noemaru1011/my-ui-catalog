@@ -57,9 +57,9 @@ export function ComboboxMultiple({
 	const { t } = useTranslation();
 
 	const sizeClass = {
-		sm: 'min-h-7',
-		md: 'min-h-8',
-		lg: 'min-h-10',
+		sm: 'h-7 min-h-7',
+		md: 'h-8 min-h-8',
+		lg: 'h-10 min-h-10',
 	}[inputSize];
 
 	placeholder = t('common.selectPlaceholder');
