@@ -11,6 +11,13 @@ import { Cluster } from '@/components/layouts/Cluster/Cluster';
 import { Stack } from '@/components/layouts/Stack/Stack';
 import { Button } from '@/components/ui/button';
 import {
+	Pagination,
+	PaginationContent,
+	PaginationItem,
+	PaginationNext,
+	PaginationPrevious,
+} from '@/components/ui/pagination';
+import {
 	Table,
 	TableBody,
 	TableCaption,
@@ -127,31 +134,51 @@ export function DataTable({ data }: DataTableProps) {
 			</div>
 
 			<Cluster justify="between">
-				<Text color="muted">
+				<Text as="span" color="muted">
 					{filteredCount} 件中{' '}
 					{filteredCount === 0 ? 0 : pagination.pageIndex * pagination.pageSize + 1}–
 					{Math.min((pagination.pageIndex + 1) * pagination.pageSize, filteredCount)} 件を表示
 				</Text>
-				<Cluster space="sm">
-					<Button
-						type="button"
-						variant="outline"
-						size="sm"
-						onClick={() => table.previousPage()}
-						disabled={!table.getCanPreviousPage()}
-					>
-						前へ
-					</Button>
-					<Button
-						type="button"
-						variant="outline"
-						size="sm"
-						onClick={() => table.nextPage()}
-						disabled={!table.getCanNextPage()}
-					>
-						次へ
-					</Button>
-				</Cluster>
+
+				<Pagination>
+					<PaginationContent>
+						{table.getCanPreviousPage() && (
+							<PaginationItem>
+								<PaginationPrevious
+									href="#"
+									text="前へ"
+									aria-label="前へ"
+									onClick={(e) => {
+										e.preventDefault();
+										table.previousPage();
+									}}
+								/>
+							</PaginationItem>
+						)}
+
+						<PaginationItem>
+							<Text as="span">
+								{table.getPageCount() === 0
+									? '0/0'
+									: `${pagination.pageIndex + 1}/${table.getPageCount()}`}
+							</Text>
+						</PaginationItem>
+
+						{table.getCanNextPage() && (
+							<PaginationItem>
+								<PaginationNext
+									href="#"
+									text="次へ"
+									aria-label="次へ"
+									onClick={(e) => {
+										e.preventDefault();
+										table.nextPage();
+									}}
+								/>
+							</PaginationItem>
+						)}
+					</PaginationContent>
+				</Pagination>
 			</Cluster>
 		</Stack>
 	);
