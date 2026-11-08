@@ -1,4 +1,5 @@
 import { createColumnHelper } from '@tanstack/react-table';
+import type { TFunction } from 'i18next';
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
 import { Input } from '@/components/elements/Input/Input';
 import { Cluster } from '@/components/layouts/Cluster/Cluster';
@@ -13,6 +14,7 @@ export type Member = {
 };
 
 type ColumnOptions = {
+	t: TFunction;
 	editingId: number | null;
 	editDraft: Pick<Member, 'name' | 'role'>;
 	onDraftChange: (field: 'name' | 'role', value: string) => void;
@@ -25,6 +27,7 @@ type ColumnOptions = {
 const COLUMN_HELPER = createColumnHelper<DataTableFeatures, Member>();
 
 export function createColumns({
+	t,
 	editingId,
 	editDraft,
 	onDraftChange,
@@ -45,13 +48,13 @@ export function createColumns({
 					variant="ghost"
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
-					名前
+					{t('example.story.table.name')}
 					{column.getIsSorted() === 'asc' ? (
-						<ArrowUp aria-label="昇順" />
+						<ArrowUp aria-label={t('example.story.table.ascending')} />
 					) : column.getIsSorted() === 'desc' ? (
-						<ArrowDown aria-label="降順" />
+						<ArrowDown aria-label={t('example.story.table.descending')} />
 					) : (
-						<ArrowUpDown aria-label="ソート可能" />
+						<ArrowUpDown aria-label={t('example.story.table.sortable')} />
 					)}
 				</Button>
 			),
@@ -61,7 +64,7 @@ export function createColumns({
 					<Input
 						id={`member-${row.original.id}-name`}
 						label=""
-						aria-label="名前"
+						aria-label={t('example.story.table.name')}
 						inputSize="sm"
 						value={editDraft.name}
 						onChange={(event) => onDraftChange('name', event.target.value)}
@@ -77,13 +80,13 @@ export function createColumns({
 					variant="ghost"
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
-					役割
+					{t('example.story.table.role')}
 					{column.getIsSorted() === 'asc' ? (
-						<ArrowUp aria-label="昇順" />
+						<ArrowUp aria-label={t('example.story.table.ascending')} />
 					) : column.getIsSorted() === 'desc' ? (
-						<ArrowDown aria-label="降順" />
+						<ArrowDown aria-label={t('example.story.table.descending')} />
 					) : (
-						<ArrowUpDown aria-label="ソート可能" />
+						<ArrowUpDown aria-label={t('example.story.table.sortable')} />
 					)}
 				</Button>
 			),
@@ -92,7 +95,7 @@ export function createColumns({
 					<Input
 						id={`member-${row.original.id}-role`}
 						label=""
-						aria-label="役割"
+						aria-label={t('example.story.table.role')}
 						inputSize="sm"
 						value={editDraft.role}
 						onChange={(event) => onDraftChange('role', event.target.value)}
@@ -102,26 +105,26 @@ export function createColumns({
 				),
 		}),
 		COLUMN_HELPER.accessor('team', {
-			header: 'チーム',
+			header: t('example.story.table.team'),
 		}),
 		COLUMN_HELPER.display({
 			id: 'actions',
-			header: 'アクション',
+			header: t('example.story.table.actions'),
 			enableSorting: false,
 			cell: ({ row }) =>
 				editingId === row.original.id ? (
 					<Cluster space="sm">
 						<Button type="button" size="sm" onClick={() => onSave(row.original.id)}>
-							保存
+							{t('example.story.table.save')}
 						</Button>
 						<Button type="button" size="sm" variant="outline" onClick={onCancel}>
-							キャンセル
+							{t('example.story.table.cancel')}
 						</Button>
 					</Cluster>
 				) : (
 					<Cluster space="sm">
 						<Button type="button" size="sm" variant="outline" onClick={() => onEdit(row.original)}>
-							編集
+							{t('example.story.table.edit')}
 						</Button>
 						<Button
 							type="button"
@@ -129,7 +132,7 @@ export function createColumns({
 							variant="destructive"
 							onClick={() => onDelete(row.original.id)}
 						>
-							削除
+							{t('example.story.table.delete')}
 						</Button>
 					</Cluster>
 				),

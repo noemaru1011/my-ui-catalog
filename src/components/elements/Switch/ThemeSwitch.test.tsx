@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { ThemeProvider } from '@/components/providers/theme-provider';
-import ThemeToggle from './ThemeToggle';
+import { ThemeSwitch } from './ThemeSwitch';
 
-describe('ThemeToggle', () => {
+describe('ThemeSwitch', () => {
 	beforeEach(() => {
 		localStorage.clear();
 		document.documentElement.classList.remove('light', 'dark');
@@ -20,7 +20,7 @@ describe('ThemeToggle', () => {
 	const renderThemeToggle = (defaultTheme: 'light' | 'dark' | 'system' = 'light') => {
 		return render(
 			<ThemeProvider defaultTheme={defaultTheme}>
-				<ThemeToggle />
+				<ThemeSwitch />
 			</ThemeProvider>,
 		);
 	};

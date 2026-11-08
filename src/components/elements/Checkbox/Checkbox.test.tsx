@@ -15,6 +15,19 @@ describe('Checkbox', () => {
 		expect(screen.getByRole('checkbox', { name: 'Python' })).toBeInTheDocument();
 	});
 
+	it('label に空白が含まれていても選択肢の accessible name が保たれる', () => {
+		render(
+			<Checkbox
+				label="Areas of interest"
+				options={[{ label: 'Programming', value: 'programming' }]}
+				value={[]}
+				onChange={vi.fn()}
+			/>,
+		);
+
+		expect(screen.getByRole('checkbox', { name: 'Programming' })).toBeInTheDocument();
+	});
+
 	it('value に含まれる選択肢がチェック済みになる', () => {
 		render(
 			<Checkbox

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 type Theme = 'dark' | 'light' | 'system';
+type ResolvedTheme = 'dark' | 'light';
 
 type ThemeProviderProps = {
 	children: React.ReactNode;
@@ -10,11 +11,13 @@ type ThemeProviderProps = {
 
 type ThemeProviderState = {
 	theme: Theme;
+	resolvedTheme: ResolvedTheme;
 	setTheme: (theme: Theme) => void;
 };
 
 const INITIAL_STATE: ThemeProviderState = {
 	theme: 'system',
+	resolvedTheme: 'light',
 	setTheme: () => null,
 };
 
@@ -30,25 +33,36 @@ export function ThemeProvider({
 		() => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
 	);
 
+	const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>('light');
+
 	useEffect(() => {
 		const root = window.document.documentElement;
 
-		root.classList.remove('light', 'dark');
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-		if (theme === 'system') {
-			const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-				? 'dark'
-				: 'light';
+		const applyTheme = () => {
+			const systemTheme = mediaQuery.matches ? 'dark' : 'light';
+			const activeTheme = theme === 'system' ? systemTheme : theme;
 
-			root.classList.add(systemTheme);
-			return;
-		}
+			root.classList.remove('light', 'dark');
+			root.classList.add(activeTheme);
 
-		root.classList.add(theme);
+			setResolvedTheme(activeTheme);
+		};
+
+		applyTheme();
+
+		// システムテーマの変更にも追従
+		mediaQuery.addEventListener('change', applyTheme);
+
+		return () => {
+			mediaQuery.removeEventListener('change', applyTheme);
+		};
 	}, [theme]);
 
 	const value = {
 		theme,
+		resolvedTheme,
 		setTheme: (theme: Theme) => {
 			localStorage.setItem(storageKey, theme);
 			setTheme(theme);
@@ -62,11 +76,13 @@ export function ThemeProvider({
 	);
 }
 
-// biome-ignore lint/style/useNamingConvention: React hooks must use camelCase
+// biome-ignore lint/style/useNamingConvention: 外部でも使いが、hooksの命名規則に従うため、useThemeとする
 export const useTheme = () => {
 	const context = useContext(THEME_PROVIDER_CONTEXT);
 
-	if (context === undefined) throw new Error('useTheme must be used within a ThemeProvider');
+	if (context === undefined) {
+		throw new Error('useTheme must be used within a ThemeProvider');
+	}
 
 	return context;
 };

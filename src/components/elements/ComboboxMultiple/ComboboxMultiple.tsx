@@ -1,5 +1,6 @@
 import type { Combobox as ComboboxPrimitive } from '@base-ui/react';
 import { useId } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Option } from '@/components/types/Option';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
@@ -46,20 +47,22 @@ export function ComboboxMultiple({
 	error,
 	required = false,
 	disabled = false,
-	placeholder = '選択してください',
+	placeholder,
 	inputSize = 'md',
 	...rawProps
 }: ComboboxMultipleProps) {
 	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
+	const { t } = useTranslation();
 
 	const sizeClass = {
-		sm: 'min-h-7',
-		md: 'min-h-8',
-		lg: 'min-h-10',
+		sm: 'h-7 min-h-7',
+		md: 'h-8 min-h-8',
+		lg: 'h-10 min-h-10',
 	}[inputSize];
 
+	placeholder = t('common.selectPlaceholder');
 	const anchor = useComboboxAnchor();
 	const selectedOptions = value
 		.map((selectedValue) => options.find((option) => option.value === selectedValue))
@@ -70,7 +73,7 @@ export function ComboboxMultiple({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{disabled && <Badge variant="outline">編集不可</Badge>}
+				{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}
@@ -112,7 +115,7 @@ export function ComboboxMultiple({
 				</ComboboxChips>
 
 				<ComboboxContent anchor={anchor}>
-					<ComboboxEmpty>該当する項目がありません。</ComboboxEmpty>
+					<ComboboxEmpty>{t('common.noItemsFound')}</ComboboxEmpty>
 
 					<ComboboxList>
 						{(option) => (

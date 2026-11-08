@@ -1,7 +1,6 @@
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useTranslation } from 'react-i18next';
-
 import { LanguageSelect } from './LanguageSelect';
 import { Text } from '../Text/Text';
 import { Stack } from '@/components/layouts/Stack/Stack';
@@ -11,8 +10,12 @@ const meta = {
     tags: ['autodocs'],
     args: {
         label: '表示言語',
-        disabled: false,
-        required: false,
+    },
+    argTypes: {
+        value: {
+            control: "inline-radio",
+            options: ['ja', 'en'],
+        },
     },
 } satisfies Meta<typeof LanguageSelect>;
 
@@ -33,6 +36,11 @@ export const Default: Story = {
                 <Stack>
                     <LanguageSelect
                         {...args}
+                        label={
+                            args.label === '表示言語'
+                                ? t('example.story.labels.displayLanguage')
+                                : args.label
+                        }
                         value={currentLanguage}
                         onChange={(language) => {
                             i18n.changeLanguage(language);
@@ -41,15 +49,17 @@ export const Default: Story = {
 
                     <Stack>
                         <Text size="lg" weight="bold">
-                            プレビュー
+                            {t('example.story.languageSelect.preview')}
                         </Text>
 
                         <Text weight="bold" color="muted">
-                            現在の言語: {currentLanguage}
+                            {t('example.story.languageSelect.currentLanguage', {
+                                language: currentLanguage,
+                            })}
                         </Text>
 
                         <Text size="md">
-                            {t('home.title')}
+                            {t('example.description')}
                         </Text>
                     </Stack>
                 </Stack>

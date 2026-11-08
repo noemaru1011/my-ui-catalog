@@ -1,5 +1,6 @@
 import { useId } from 'react';
 import type { DateRange as DateRangeType } from 'react-day-picker';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
@@ -31,7 +32,7 @@ export function DateRange({
 	error,
 	required = false,
 	readOnly = false,
-	placeholder = '期間を選択',
+	placeholder,
 	inputSize = 'md',
 	numberOfMonths = 2,
 }: DateRangeProps) {
@@ -47,6 +48,9 @@ export function DateRange({
 		return date?.toLocaleDateString('ja-JP');
 	};
 
+	const { t } = useTranslation();
+	placeholder = t('common.dateRangePlaceholder');
+
 	const displayValue = value?.from
 		? value.to
 			? `${formatDate(value.from)} - ${formatDate(value.to)}`
@@ -58,7 +62,7 @@ export function DateRange({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{readOnly && <Badge variant="outline">編集不可</Badge>}
+				{readOnly && <Badge variant="outline">{t('common.notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}

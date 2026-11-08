@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { OPTIONS, OPTIONS_WITH_DISABLED } from '@/components/types/Option.mock';
+import i18n from '@/i18n';
 import { Radio } from './Radio';
 
 describe('Radio', () => {
@@ -72,7 +73,7 @@ describe('Radio', () => {
 	it('disabledがtrueの場合、すべての選択肢を無効にする', () => {
 		render(<Radio label="言語" options={OPTIONS} disabled />);
 
-		expect(screen.getByText('編集不可')).toBeInTheDocument();
+		expect(screen.getByText(i18n.t('common.disabled'))).toBeInTheDocument();
 
 		expect(screen.getByRole('radio', { name: 'TypeScript' })).toHaveAttribute(
 			'aria-disabled',

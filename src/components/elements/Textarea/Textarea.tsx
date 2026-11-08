@@ -1,4 +1,5 @@
 import { type ComponentProps, useId } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
@@ -29,13 +30,14 @@ export function Textarea({
 	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const textareaId = id ?? generatedId;
+	const { t } = useTranslation();
 
 	return (
 		<Field data-invalid={!!error}>
 			<FieldLabel htmlFor={textareaId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{readOnly && <Badge variant="outline">編集不可</Badge>}
+				{readOnly && <Badge variant="outline">{t('common.notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}

@@ -21,6 +21,7 @@ Storybook を使用して、コンポーネントの表示・動作・バリエ�
 | Build Tool           | Vite                                |
 | Styling              | Tailwind CSS 4                      |
 | UI Primitives        | shadcn/ui                           |
+| Internationalization | i18next、react-i18next              |
 | **Form(サンプル用)** | **React Hook Form、Zod**            |
 | Linter / Formatter   | Biome                               |
 | Package Manager      | npm                                 |
@@ -93,6 +94,10 @@ npm run build-storybook
 │   │   ├── example/       # フォーム・テーブル等の組み合わせ例
 │   │   ├── types/         # 共通の型・テスト用データ
 │   │   └── ui/            # shadcn/ui の UI
+│   ├── i18n/
+│   │   ├── locales/       # 言語ごとの翻訳ファイル
+│   │   ├── index.ts       # i18next の初期化
+│   │   └── i18next.d.ts   # 翻訳キーの型定義
 │   ├── lib/               # 共通ユーティリティ
 │   ├── test/              # Vitest の共通セットアップ
 │   └── index.css          # グローバルスタイル
@@ -131,7 +136,65 @@ npm run build-storybook
 - `src/components/example/form/`: Zod スキーマ、React Hook Form のカスタムフック、フォーム UI、ページで構成するフォーム例
 - `src/components/example/table/`: TanStack Table v9 を使ったソート、絞り込み、ページネーション、行編集の例
 
-フォーム例のスキーマと型は `src/components/example/form/schema/formExampleSchema.ts` に定義し、サンプルのため外部 API には接続しません。
+フォーム例のスキーマと型は `src/components/example/form/schema/formSchema.ts` に定義し、サンプルのため外部 API には接続しません。
+
+## Internationalization (i18n)
+
+翻訳には `i18next` と `react-i18next` を使用しています。翻訳リソースは `src/i18n/locales/` に言語ごとに配置し、現在は日本語 (`ja`) と英語 (`en`) に対応しています。
+
+| ファイル                               | 用途                                                       |
+| -------------------------------------- | ---------------------------------------------------------- |
+| `src/i18n/index.ts`                    | 翻訳リソース、対応言語、言語検出、フォールバック言語を設定 |
+| `src/i18n/locales/ja/translation.json` | 日本語の翻訳                                               |
+| `src/i18n/locales/en/translation.json` | 英語の翻訳                                                 |
+| `src/i18n/i18next.d.ts`                | 翻訳キーを TypeScript で型チェック                         |
+
+言語は localStorage の `language` を優先して検出し、次にブラウザーの言語設定を参照します。未対応言語の場合は日本語 (`ja`) を表示します。Storybook では `.storybook/preview.tsx` から i18n を読み込み、言語切替の動作は `LanguageSelect` の Story で確認できます。
+
+React コンポーネントでは `useTranslation` の `t` 関数を使って翻訳を参照します。
+
+```tsx
+import { useTranslation } from 'react-i18next';
+import { Text } from '@/components/elements/Text/Text';
+
+function Example() {
+	const { t } = useTranslation();
+
+	return <Text>{t('example.description')}</Text>;
+}
+```
+
+翻訳キーは `common`、`example` などの名前空間・用途ごとに階層化します。値を埋め込む場合は i18next の補間を使います。
+
+日本語 (`src/i18n/locales/ja/translation.json`) と英語 (`src/i18n/locales/en/translation.json`) で、同じキーにそれぞれの翻訳を定義します。
+
+```json
+{
+	"example": {
+		"greeting": "こんにちは、{{name}}さん"
+	}
+}
+```
+
+```json
+{
+	"example": {
+		"greeting": "Hello, {{name}}"
+	}
+}
+```
+
+```tsx
+t('example.greeting', { name: '太郎' });
+```
+
+新しい文言を追加・変更するときは、日本語と英語の両方の `translation.json` に同じキー構造で翻訳を追加し、コンポーネントや Story では文字列を直接記述せず翻訳キーを使ってください。翻訳キーが両言語で揃っていることは、次のコマンドで確認できます。
+
+```bash
+npm run check:locale
+```
+
+このチェックは CI でも実行されます。翻訳キーの型チェックを含むソースコードの検証には `npm run check` を使用してください。
 
 ## Adding a Component
 
@@ -195,6 +258,7 @@ Story ファイルでは、コンポーネントの基本表示、プロパテ�
 | `npm run test:components` | コンポーネントテストを実行                       |
 | `npm run test:storybook`  | Storybook の story テストを実行                  |
 | `npm run test:e2e`        | Storybook を起動して Playwright E2E テストを実行 |
+| `npm run check:locale`    | 日本語・英語の翻訳キー構造をチェック             |
 
 特定のコンポーネントテストまたは E2E テストを実行する場合：
 

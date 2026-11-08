@@ -1,4 +1,5 @@
 import { type ComponentProps, useId } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Badge } from '@/components/ui/badge';
@@ -32,6 +33,7 @@ export function Input({
 	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
+	const { t } = useTranslation();
 
 	const sizeClass = {
 		sm: 'h-7',
@@ -44,7 +46,7 @@ export function Input({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{readOnly && <Badge variant="outline">編集不可</Badge>}
+				{readOnly && <Badge variant="outline">{t('common.notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}

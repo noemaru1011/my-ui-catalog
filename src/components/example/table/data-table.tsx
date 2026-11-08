@@ -4,12 +4,20 @@ import {
 	type SortingState,
 	useTable,
 } from '@tanstack/react-table';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/elements/Input/Input';
 import { Text } from '@/components/elements/Text/Text';
 import { Cluster } from '@/components/layouts/Cluster/Cluster';
 import { Stack } from '@/components/layouts/Stack/Stack';
 import { Button } from '@/components/ui/button';
+import {
+	Pagination,
+	PaginationContent,
+	PaginationItem,
+	PaginationNext,
+	PaginationPrevious,
+} from '@/components/ui/pagination';
 import {
 	Table,
 	TableBody,
@@ -27,6 +35,7 @@ type DataTableProps = {
 };
 
 export function DataTable({ data }: DataTableProps) {
+	const { t } = useTranslation();
 	const [members, setMembers] = useState(data);
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -34,7 +43,12 @@ export function DataTable({ data }: DataTableProps) {
 	const [editingId, setEditingId] = useState<number | null>(null);
 	const [editDraft, setEditDraft] = useState({ name: '', role: '' });
 
+	useEffect(() => {
+		setMembers(data);
+	}, [data]);
+
 	const columns = createColumns({
+		t,
 		editingId,
 		editDraft,
 		onDraftChange: (field, value) => setEditDraft((current) => ({ ...current, [field]: value })),
@@ -72,27 +86,27 @@ export function DataTable({ data }: DataTableProps) {
 			<Cluster justify="between" align="end">
 				<Input
 					id="table-example-search"
-					label="名前で検索"
-					description="名前の一部を入力して絞り込めます。"
+					label={t('example.story.table.search')}
+					description={t('example.story.table.searchDescription')}
 					inputSize="sm"
 					value={(nameColumn?.getFilterValue() as string) ?? ''}
 					onChange={(event) => nameColumn?.setFilterValue(event.target.value)}
 				/>
 				<Button
 					type="button"
-					variant="outline"
+					variant="secondary"
 					onClick={() => {
 						setColumnFilters([]);
 						setSorting([]);
 						table.setPageIndex(0);
 					}}
 				>
-					絞り込み・ソートをリセット
+					{t('example.story.table.reset')}
 				</Button>
 			</Cluster>
 			<div className="overflow-hidden rounded-md border">
 				<Table>
-					<TableCaption>メンバー一覧。列見出しを押すと並び替えできます。</TableCaption>
+					<TableCaption>{t('example.story.table.caption')}</TableCaption>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
@@ -118,7 +132,7 @@ export function DataTable({ data }: DataTableProps) {
 						) : (
 							<TableRow>
 								<TableCell colSpan={columns.length} className="h-24 text-center">
-									該当するメンバーがいません。
+									{t('example.story.table.noMembers')}
 								</TableCell>
 							</TableRow>
 						)}
@@ -127,31 +141,53 @@ export function DataTable({ data }: DataTableProps) {
 			</div>
 
 			<Cluster justify="between">
-				<Text color="muted">
-					{filteredCount} 件中{' '}
-					{filteredCount === 0 ? 0 : pagination.pageIndex * pagination.pageSize + 1}–
-					{Math.min((pagination.pageIndex + 1) * pagination.pageSize, filteredCount)} 件を表示
+				<Text as="span" color="muted">
+					{t('example.story.table.showing', {
+						start: filteredCount === 0 ? 0 : pagination.pageIndex * pagination.pageSize + 1,
+						end: Math.min((pagination.pageIndex + 1) * pagination.pageSize, filteredCount),
+						count: filteredCount,
+					})}
 				</Text>
-				<Cluster space="sm">
-					<Button
-						type="button"
-						variant="outline"
-						size="sm"
-						onClick={() => table.previousPage()}
-						disabled={!table.getCanPreviousPage()}
-					>
-						前へ
-					</Button>
-					<Button
-						type="button"
-						variant="outline"
-						size="sm"
-						onClick={() => table.nextPage()}
-						disabled={!table.getCanNextPage()}
-					>
-						次へ
-					</Button>
-				</Cluster>
+
+				<Pagination>
+					<PaginationContent>
+						{table.getCanPreviousPage() && (
+							<PaginationItem>
+								<PaginationPrevious
+									href="#"
+									text={t('example.story.table.previous')}
+									aria-label={t('example.story.table.previous')}
+									onClick={(e) => {
+										e.preventDefault();
+										table.previousPage();
+									}}
+								/>
+							</PaginationItem>
+						)}
+
+						<PaginationItem>
+							<Text as="span">
+								{table.getPageCount() === 0
+									? '0/0'
+									: `${pagination.pageIndex + 1}/${table.getPageCount()}`}
+							</Text>
+						</PaginationItem>
+
+						{table.getCanNextPage() && (
+							<PaginationItem>
+								<PaginationNext
+									href="#"
+									text={t('example.story.table.next')}
+									aria-label={t('example.story.table.next')}
+									onClick={(e) => {
+										e.preventDefault();
+										table.nextPage();
+									}}
+								/>
+							</PaginationItem>
+						)}
+					</PaginationContent>
+				</Pagination>
 			</Cluster>
 		</Stack>
 	);

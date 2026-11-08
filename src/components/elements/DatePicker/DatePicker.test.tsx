@@ -1,6 +1,7 @@
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import i18n from '@/i18n';
 import { DatePicker } from './DatePicker';
 
 describe('DatePicker', () => {
@@ -12,7 +13,9 @@ describe('DatePicker', () => {
 		it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
 			render(<DatePicker label="開始日" />);
 
-			const button = screen.getByText('日付を選択', { selector: 'button' });
+			const button = screen.getByText(i18n.t('common.datePickerPlaceholder'), {
+				selector: 'button',
+			});
 
 			expect(button).toHaveAttribute('id');
 			expect(screen.getByText('開始日').closest('label')).toHaveAttribute('for', button.id);
@@ -23,17 +26,17 @@ describe('DatePicker', () => {
 
 			expect(screen.getByText('開始日')).toBeInTheDocument();
 			expect(
-				screen.getByText('日付を選択', {
+				screen.getByText(i18n.t('common.datePickerPlaceholder'), {
 					selector: 'button',
 				}),
 			).toBeInTheDocument();
 		});
 
-		it('指定したプレースホルダーを表示する', () => {
+		it('placeholder が指定されても翻訳済みのプレースホルダーを表示する', () => {
 			render(<DatePicker id="date" label="開始日" placeholder="日付を入力してください" />);
 
 			expect(
-				screen.getByText('日付を入力してください', {
+				screen.getByText(i18n.t('common.datePickerPlaceholder'), {
 					selector: 'button',
 				}),
 			).toBeInTheDocument();

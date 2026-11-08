@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { useId } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
@@ -30,7 +31,7 @@ export function DatePicker({
 	error,
 	required = false,
 	readOnly = false,
-	placeholder = '日付を選択',
+	placeholder,
 	inputSize = 'md',
 }: DatePickerProps) {
 	const generatedId = useId();
@@ -40,13 +41,15 @@ export function DatePicker({
 		md: 'h-8',
 		lg: 'h-10',
 	}[inputSize];
+	const { t } = useTranslation();
+	placeholder = t('common.datePickerPlaceholder');
 
 	return (
 		<Field data-invalid={!!error}>
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{readOnly && <Badge variant="outline">編集不可</Badge>}
+				{readOnly && <Badge variant="outline">{t('common.notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}

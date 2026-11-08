@@ -4,6 +4,7 @@ export type ImageProps = {
 	src: string;
 	alt: string;
 	description?: string;
+	/** リンク先のURL。指定した場合、画像がリンクとして表示されます。*/
 	to?: string;
 	width?: string;
 };

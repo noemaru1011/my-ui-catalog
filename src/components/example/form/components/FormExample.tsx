@@ -1,5 +1,12 @@
-import type { Control, FieldErrors, UseFormRegister } from 'react-hook-form';
+import type {
+	Control,
+	FieldErrors,
+	UseFormClearErrors,
+	UseFormRegister,
+	UseFormSetError,
+} from 'react-hook-form';
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { Checkbox } from '@/components/elements/Checkbox/Checkbox';
 import { Combobox } from '@/components/elements/Combobox/Combobox';
@@ -7,6 +14,7 @@ import { ComboboxMultiple } from '@/components/elements/ComboboxMultiple/Combobo
 import { DatePicker } from '@/components/elements/DatePicker/DatePicker';
 import { DateRange } from '@/components/elements/DateRange/DateRange';
 import { FileUpload } from '@/components/elements/FileUpload/FileUpload';
+import { FileUploadButton } from '@/components/elements/FileUploadButton/FileUploadButton';
 import { Heading } from '@/components/elements/Heading/Heading';
 import { Input } from '@/components/elements/Input/Input';
 import { PasswordInput } from '@/components/elements/Input/PasswordInput';
@@ -21,34 +29,44 @@ import { Stack } from '@/components/layouts/Stack/Stack';
 import { Button } from '@/components/ui/button';
 
 import {
-	CATEGORY_OPTIONS,
+	createFormOptions,
 	type FormValues,
-	GENDER_OPTIONS,
-	INTEREST_OPTIONS,
 	MAX_ATTACHMENT_COUNT,
 	MAX_ATTACHMENT_SIZE_IN_BYTES,
-	USER_OPTIONS,
 } from '../schema/formSchema';
 
 type Props = {
 	register: UseFormRegister<FormValues>;
 	control: Control<FormValues>;
 	errors: FieldErrors<FormValues>;
-	onSubmit: React.FormEventHandler<HTMLFormElement>;
+	setError: UseFormSetError<FormValues>;
+	clearErrors: UseFormClearErrors<FormValues>;
+	onSubmit: React.SubmitEventHandler<HTMLFormElement>;
+	isPending: boolean;
 };
+export function FormExample({
+	register,
+	control,
+	errors,
+	setError,
+	clearErrors,
+	onSubmit,
+	isPending,
+}: Props) {
+	const { t } = useTranslation();
+	const options = createFormOptions(t);
 
-export function FormExample({ register, control, errors, onSubmit }: Props) {
 	return (
 		<Center maxWidth="xl">
 			<Stack space="lg">
-				<Heading type="sectionTitle">フォーム例</Heading>
+				<Heading type="sectionTitle">{t('example.story.form.title')}</Heading>
 
 				<Stack space="lg" as="form" noValidate onSubmit={onSubmit}>
 					<Cluster space="lg" align="start">
 						<Container width="lg">
 							<Input
 								id="name"
-								label="氏名"
+								label={t('example.story.form.name')}
 								required
 								{...register('name')}
 								error={errors.name?.message}
@@ -58,7 +76,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 						<Container width="lg">
 							<PasswordInput
 								id="password"
-								label="パスワード"
+								label={t('example.story.form.password')}
 								required
 								{...register('password')}
 								error={errors.password?.message}
@@ -72,11 +90,11 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								render={({ field, fieldState }) => (
 									<Select
 										id={field.name}
-										label="カテゴリ"
+										label={t('example.story.form.category')}
 										value={field.value}
 										required
 										onChange={field.onChange}
-										options={CATEGORY_OPTIONS}
+										options={options.category}
 										error={fieldState.error?.message}
 									/>
 								)}
@@ -90,11 +108,11 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								render={({ field, fieldState }) => (
 									<Combobox
 										id={field.name}
-										label="ユーザー"
+										label={t('example.story.form.user')}
 										value={field.value}
 										required
 										onChange={field.onChange}
-										options={USER_OPTIONS}
+										options={options.users}
 										error={fieldState.error?.message}
 									/>
 								)}
@@ -108,11 +126,11 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								render={({ field, fieldState }) => (
 									<ComboboxMultiple
 										id={field.name}
-										label="ユーザー（複数）"
+										label={t('example.story.form.users')}
 										value={field.value}
 										required
 										onChange={field.onChange}
-										options={USER_OPTIONS}
+										options={options.users}
 										error={fieldState.error?.message}
 									/>
 								)}
@@ -126,7 +144,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								render={({ field, fieldState }) => (
 									<DatePicker
 										id={field.name}
-										label="日付"
+										label={t('example.story.form.date')}
 										value={field.value}
 										required
 										onChange={field.onChange}
@@ -143,7 +161,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								render={({ field, fieldState }) => (
 									<DateRange
 										id={field.name}
-										label="期間"
+										label={t('example.story.form.period')}
 										required
 										value={field.value}
 										onChange={field.onChange}
@@ -162,8 +180,8 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								render={({ field, fieldState }) => (
 									<Checkbox
 										required
-										label="興味のある分野"
-										options={INTEREST_OPTIONS}
+										label={t('example.story.form.interests')}
+										options={options.interests}
 										value={field.value}
 										onChange={field.onChange}
 										error={fieldState.error?.message}
@@ -179,8 +197,8 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								render={({ field, fieldState }) => (
 									<Radio
 										required
-										label="性別"
-										options={GENDER_OPTIONS}
+										label={t('example.story.form.gender')}
+										options={options.gender}
 										value={field.value}
 										onChange={field.onChange}
 										error={fieldState.error?.message}
@@ -196,11 +214,11 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 						render={({ field, fieldState }) => (
 							<Checkbox
 								required
-								label="利用規約への同意"
+								label={t('example.story.form.agreement')}
 								options={[
 									{
 										value: 'agreement',
-										label: '利用規約に同意する',
+										label: t('example.story.form.agreeTerms'),
 									},
 								]}
 								value={field.value}
@@ -213,7 +231,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 					<Container width="3xl">
 						<Textarea
 							id="description"
-							label="説明"
+							label={t('example.story.form.description')}
 							required
 							{...register('description')}
 							error={errors.description?.message}
@@ -228,7 +246,7 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 								<FileUpload
 									id={field.name}
 									name={field.name}
-									label="添付ファイル"
+									label={t('example.story.form.attachmentsDrop')}
 									required
 									value={field.value}
 									onFilesChange={field.onChange}
@@ -237,14 +255,58 @@ export function FormExample({ register, control, errors, onSubmit }: Props) {
 									maxFiles={MAX_ATTACHMENT_COUNT}
 									maxSize={MAX_ATTACHMENT_SIZE_IN_BYTES / (1024 * 1024)}
 									error={fieldState.error?.message}
+									onError={(message) => {
+										if (message) {
+											setError(field.name, {
+												type: 'validate',
+												message,
+											});
+										} else {
+											clearErrors(field.name);
+										}
+									}}
+								/>
+							)}
+						/>
+					</Container>
+
+					<Container width="xl">
+						<Controller
+							name="buttonAttachments"
+							control={control}
+							render={({ field, fieldState }) => (
+								<FileUploadButton
+									id={field.name}
+									name={field.name}
+									label={t('example.story.form.attachmentsButton')}
+									required
+									value={field.value}
+									onFilesChange={field.onChange}
+									onBlur={field.onBlur}
+									inputRef={field.ref}
+									maxFiles={MAX_ATTACHMENT_COUNT}
+									maxSize={MAX_ATTACHMENT_SIZE_IN_BYTES / (1024 * 1024)}
+									error={fieldState.error?.message}
+									onError={(message) => {
+										if (message) {
+											setError(field.name, {
+												type: 'validate',
+												message,
+											});
+										} else {
+											clearErrors(field.name);
+										}
+									}}
 								/>
 							)}
 						/>
 					</Container>
 
 					<Cluster justify="between" align="center">
-						<Link to="/#" label="戻る" />
-						<Button type="submit">送信</Button>
+						<Link to="/#" label={t('common.back')} />
+						<Button type="submit" loading={isPending}>
+							{t('example.story.form.submit')}
+						</Button>
 					</Cluster>
 				</Stack>
 			</Stack>

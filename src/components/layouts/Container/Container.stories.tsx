@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Input } from '../../elements/Input/Input';
 import { Container } from './Container';
 import { Stack } from '../Stack/Stack';
@@ -13,8 +14,10 @@ const meta = {
 		children: {
 			control: false,
 		},
-	}
-
+	},
+	parameters: {
+		layout: 'fullscreen',
+	},
 } satisfies Meta<typeof Container>;
 
 export default meta;
@@ -22,11 +25,18 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	render: (args) => (
-		<Container {...args}>
-			<Input id="default" label="入力項目" placeholder="入力してください" />
-		</Container>
-	),
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<Container {...args}>
+				<Input
+					id="default"
+					label={t('example.story.layout.input')}
+					placeholder={t('example.story.layout.inputPlaceholder')}
+				/>
+			</Container>
+		);
+	},
 };
 
 export const Widths: Story = {

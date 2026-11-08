@@ -4,6 +4,9 @@ import FormExamplePage from './pages/FormPage';
 const meta = {
 	component: FormExamplePage,
 	tags: ['autodocs'],
+	parameters: {
+		layout: 'fullscreen',
+	},
 } satisfies Meta<typeof FormExamplePage>;
 
 export default meta;

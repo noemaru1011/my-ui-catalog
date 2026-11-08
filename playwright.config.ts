@@ -9,6 +9,7 @@ export default defineConfig({
 	use: {
 		// biome-ignore lint/style/useNamingConvention: Playwright requires this option name.
 		baseURL: 'http://127.0.0.1:6006',
+		locale: 'ja-JP',
 		trace: 'retain-on-failure',
 	},
 	projects: [

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ChevronRight, Settings } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Heading } from './Heading';
 
 const meta = {
@@ -33,4 +34,16 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<Heading
+				{...args}
+				{...(args.children === '見出し' && {
+					children: t('example.story.labels.heading'),
+				})}
+			/>
+		);
+	},
+};

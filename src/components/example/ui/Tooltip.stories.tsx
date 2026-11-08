@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Info } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Text } from '@/components/elements/Text/Text';
 import { Cluster } from '@/components/layouts/Cluster/Cluster';
 import { Stack } from '@/components/layouts/Stack/Stack';
@@ -20,46 +21,60 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	render: () => (
-		<TooltipProvider delay={300}>
-			<Stack space="md">
-				<Text>ボタンにマウスを乗せるか、キーボードでフォーカスすると説明が表示されます。</Text>
-				<Tooltip>
-					<TooltipTrigger render={<Button variant="outline" />}>
-						<Info aria-hidden="true" />
-						詳細
-					</TooltipTrigger>
-					<TooltipContent>この操作の詳細を確認できます。</TooltipContent>
-				</Tooltip>
-			</Stack>
-		</TooltipProvider>
-	),
+	render: () => {
+		const { t } = useTranslation();
+		return (
+			<TooltipProvider delay={300}>
+				<Stack space="md">
+					<Text>{t('example.story.tooltip.instructions')}</Text>
+					<Tooltip>
+						<TooltipTrigger render={<Button variant="outline" />}>
+							<Info aria-hidden="true" />
+							{t('example.story.tooltip.details')}
+						</TooltipTrigger>
+						<TooltipContent>{t('example.story.tooltip.detailsDescription')}</TooltipContent>
+					</Tooltip>
+				</Stack>
+			</TooltipProvider>
+		);
+	},
 };
 
 export const Placements: Story = {
-	render: () => (
-		<TooltipProvider>
-			<Stack space="lg">
-				<Text>表示位置を確認できます。</Text>
-				<Cluster space="lg" justify="center">
-					<Tooltip>
-						<TooltipTrigger render={<Button variant="outline" />}>上</TooltipTrigger>
-						<TooltipContent side="top">上に表示</TooltipContent>
-					</Tooltip>
-					<Tooltip>
-						<TooltipTrigger render={<Button variant="outline" />}>右</TooltipTrigger>
-						<TooltipContent side="right">右に表示</TooltipContent>
-					</Tooltip>
-					<Tooltip>
-						<TooltipTrigger render={<Button variant="outline" />}>下</TooltipTrigger>
-						<TooltipContent side="bottom">下に表示</TooltipContent>
-					</Tooltip>
-					<Tooltip>
-						<TooltipTrigger render={<Button variant="outline" />}>左</TooltipTrigger>
-						<TooltipContent side="left">左に表示</TooltipContent>
-					</Tooltip>
-				</Cluster>
-			</Stack>
-		</TooltipProvider>
-	),
+	render: () => {
+		const { t } = useTranslation();
+		return (
+			<TooltipProvider>
+				<Stack space="lg">
+					<Text>{t('example.story.tooltip.placementInstructions')}</Text>
+					<Cluster space="lg" justify="center">
+						<Tooltip>
+							<TooltipTrigger render={<Button variant="outline" />}>
+								{t('example.story.tooltip.top')}
+							</TooltipTrigger>
+							<TooltipContent side="top">{t('example.story.tooltip.shownTop')}</TooltipContent>
+						</Tooltip>
+						<Tooltip>
+							<TooltipTrigger render={<Button variant="outline" />}>
+								{t('example.story.tooltip.right')}
+							</TooltipTrigger>
+							<TooltipContent side="right">{t('example.story.tooltip.shownRight')}</TooltipContent>
+						</Tooltip>
+						<Tooltip>
+							<TooltipTrigger render={<Button variant="outline" />}>
+								{t('example.story.tooltip.bottom')}
+							</TooltipTrigger>
+							<TooltipContent side="bottom">{t('example.story.tooltip.shownBottom')}</TooltipContent>
+						</Tooltip>
+						<Tooltip>
+							<TooltipTrigger render={<Button variant="outline" />}>
+								{t('example.story.tooltip.left')}
+							</TooltipTrigger>
+							<TooltipContent side="left">{t('example.story.tooltip.shownLeft')}</TooltipContent>
+						</Tooltip>
+					</Cluster>
+				</Stack>
+			</TooltipProvider>
+		);
+	},
 };

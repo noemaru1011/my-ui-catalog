@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/toast';
 import { Cluster } from '@/components/layouts/Cluster/Cluster';
@@ -14,15 +15,17 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	render: () => (
-		<Stack space="md">
-			<Text>ボタンを押すと、それぞれの種類の toast が表示されます。</Text>
-			<Cluster>
+	render: () => {
+		const { t } = useTranslation();
+		return (
+			<Stack space="md">
+				<Text>{t('example.story.toast.instructions')}</Text>
+				<Cluster>
 				<Button
 					onClick={() =>
 						toast.add({
-							title: '保存しました',
-							description: '変更内容を保存しました。',
+							title: t('example.story.toast.saved'),
+							description: t('example.story.toast.savedDescription'),
 							type: 'success',
 						})
 					}
@@ -33,8 +36,8 @@ export const Default: Story = {
 					variant="secondary"
 					onClick={() =>
 						toast.add({
-							title: 'お知らせ',
-							description: '新しい更新があります。',
+							title: t('example.story.toast.notice'),
+							description: t('example.story.toast.noticeDescription'),
 							type: 'info',
 						})
 					}
@@ -45,8 +48,8 @@ export const Default: Story = {
 					variant="outline"
 					onClick={() =>
 						toast.add({
-							title: 'ご確認ください',
-							description: '入力内容に注意してください。',
+							title: t('example.story.toast.check'),
+							description: t('example.story.toast.checkDescription'),
 							type: 'warning',
 						})
 					}
@@ -57,15 +60,16 @@ export const Default: Story = {
 					variant="destructive"
 					onClick={() =>
 						toast.add({
-							title: 'エラーが発生しました',
-							description: 'もう一度お試しください。',
+							title: t('example.story.toast.error'),
+							description: t('example.story.toast.errorDescription'),
 							type: 'error',
 						})
 					}
 				>
 					Error
 				</Button>
-			</Cluster>
-		</Stack>
-	),
+				</Cluster>
+			</Stack>
+		);
+	},
 };

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useTranslation } from 'react-i18next';
 import { Textarea } from './Textarea';
 
 const meta = {
@@ -8,10 +9,25 @@ const meta = {
 		id: 'textarea',
 		label: '名前',
 	},
+	argTypes: {
+		id: {
+			control: false,
+		}
+	}
 } satisfies Meta<typeof Textarea>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+	render: (args) => {
+		const { t } = useTranslation();
+		return (
+			<Textarea
+				{...args}
+				label={args.label === '名前' ? t('example.story.labels.name') : args.label}
+			/>
+		);
+	},
+};
