@@ -3,8 +3,6 @@ import '../src/index.css';
 import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from '../src/components/providers/theme-provider';
 import { Toaster } from '@/components/ui/toast';
-import { AppLayout } from '@/components/layouts/AppLayout/AppLayout';
-import { Heading } from '@/components/elements/Heading/Heading';
 import '../src/i18n';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -27,20 +25,7 @@ const preview: Preview = {
 				<QueryClientProvider client={queryClient}>
 					<MemoryRouter>
 						<ThemeProvider>
-							<AppLayout
-								header={
-									<div className="border-b px-6 py-4">
-										<Heading type="sectionTitle">
-											My Application
-										</Heading>
-									</div>
-								}
-								main={
-									<div className="flex min-h-[calc(100vh-65px)] justify-center p-4">
-										<Story />
-									</div>
-								}
-							/>
+							<Story />
 							<Toaster />
 						</ThemeProvider>
 					</MemoryRouter>

@@ -34,7 +34,7 @@ export function Heading({ children, type = 'sectionTitle', prefix, suffix }: Hea
 	const Tag = tag;
 
 	return (
-		<Tag className={cn('flex items-center gap-2', headingClassName)}>
+		<Tag className={cn('flex gap-2', headingClassName)}>
 			{prefix}
 			<span>{children}</span>
 			{suffix}
