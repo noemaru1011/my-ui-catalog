@@ -29,15 +29,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-export const Loading: Story = {
-	args: {
-		loading: true,
-		children: '保存中',
-	},
-};
-
 export const Variants: Story = {
 	render: () => (
 		<Cluster>
@@ -49,6 +40,13 @@ export const Variants: Story = {
 			<Button variant="link">Link</Button>
 		</Cluster>
 	),
+};
+
+export const Loading: Story = {
+	args: {
+		loading: true,
+		children: '保存中',
+	},
 };
 
 export const Sizes: Story = {

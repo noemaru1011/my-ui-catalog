@@ -80,7 +80,7 @@ export function DataTable({ data }: DataTableProps) {
 				/>
 				<Button
 					type="button"
-					variant="outline"
+					variant="secondary"
 					onClick={() => {
 						setColumnFilters([]);
 						setSorting([]);

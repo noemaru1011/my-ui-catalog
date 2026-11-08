@@ -7,13 +7,18 @@ import { Text } from '@/components/elements/Text/Text';
 const meta = {
 	component: Center,
 	tags: ['autodocs'],
-	args: {
-		maxWidth: 'lg',
-	},
 	argTypes: {
 		children: {
 			control: false,
 		},
+		maxWidth: {
+			control: {
+				type: 'select',
+			},
+		},
+	},
+	parameters: {
+		layout: 'fullscreen',
 	},
 } satisfies Meta<typeof Center>;
 

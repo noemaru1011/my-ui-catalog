@@ -6,24 +6,22 @@ import { Container } from '../Container/Container';
 const meta = {
 	component: Cluster,
 	tags: ['autodocs'],
-	args: {
-		space: 'md',
-		justify: 'start',
-		align: 'center',
-	},
 	argTypes: {
 		space: {
-			control: 'radio',
+			control: 'inline-radio',
 			options: ['sm', 'md', 'lg'],
 		},
 		justify: {
-			control: 'radio',
+			control: 'inline-radio',
 			options: ['start', 'center', 'end', 'between'],
 		},
 		align: {
-			control: 'radio',
+			control: 'inline-radio',
 			options: ['start', 'center', 'end', 'stretch'],
 		},
+	},
+	parameters: {
+		layout: 'fullscreen',
 	},
 } satisfies Meta<typeof Cluster>;
 

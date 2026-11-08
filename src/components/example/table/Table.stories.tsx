@@ -5,12 +5,7 @@ const meta = {
 	component: Page,
 	tags: ['autodocs'],
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'検索・ソート・ページ送りと、行の編集・削除ができるテーブルの例です。データはStory内のモックで、保存されません。',
-			},
-		},
+		layout: 'fullscreen',
 	},
 } satisfies Meta<typeof Page>;
 

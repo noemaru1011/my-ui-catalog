@@ -13,8 +13,10 @@ const meta = {
 		children: {
 			control: false,
 		},
-	}
-
+	},
+	parameters: {
+		layout: 'fullscreen',
+	},
 } satisfies Meta<typeof Container>;
 
 export default meta;
