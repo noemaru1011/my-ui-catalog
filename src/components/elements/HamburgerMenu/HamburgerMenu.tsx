@@ -7,6 +7,7 @@ type HamburgerMenuProps = {
 	children: ReactNode;
 };
 
+/** 子要素にはドロワーコンポーネントを推奨する。 */
 export function HamburgerMenu({ children }: HamburgerMenuProps) {
 	return (
 		<Drawer swipeDirection="left">

@@ -20,16 +20,18 @@ type SelectProps = WithoutExternalStyle<
 	ComponentProps<typeof BaseSelect>,
 	'disabled' | 'value' | 'onValueChange'
 > & {
+	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
 	label: string;
 	options: Option[];
 	value?: string;
 	onChange?: (value: string) => void;
+	/** 編集不可の理由や文字数制限などを記載。 */
 	description?: string;
 	error?: string;
 	required?: boolean;
+	/** 極力使用せず、表示できるか検討する。 */
 	disabled?: boolean;
-	placeholder?: string;
 	inputSize?: 'sm' | 'md' | 'lg';
 };
 
@@ -43,7 +45,6 @@ export function Select({
 	error,
 	required = false,
 	disabled = false,
-	placeholder,
 	inputSize = 'md',
 	...rawProps
 }: SelectProps) {
@@ -51,7 +52,6 @@ export function Select({
 	const generatedId = useId();
 	const triggerId = id ?? generatedId;
 	const { t } = useTranslation();
-	placeholder = placeholder ?? t('common.selectPlaceholder');
 
 	const triggerSizes = {
 		sm: 'sm',
@@ -91,7 +91,7 @@ export function Select({
 						disabled && 'border-dashed disabled:bg-transparent dark:disabled:bg-transparent',
 					)}
 				>
-					<SelectValue placeholder={placeholder} />
+					<SelectValue placeholder={t('common.selectPlaceholder')} />
 				</SelectTrigger>
 
 				<SelectContent>

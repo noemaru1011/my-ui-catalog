@@ -19,12 +19,6 @@ describe('Select', () => {
 		expect(screen.getByRole('combobox', { name: '言語' })).toHaveTextContent('選択してください');
 	});
 
-	it('指定されたプレースホルダーを表示する', () => {
-		render(<Select id="language" label="言語" options={OPTIONS} placeholder="言語を選択" />);
-
-		expect(screen.getByRole('combobox')).toHaveTextContent('言語を選択');
-	});
-
 	describe('inputSize', () => {
 		it('未指定時は md の高さを適用する', () => {
 			render(<Select id="language" label="言語" options={OPTIONS} />);

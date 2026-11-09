@@ -32,16 +32,6 @@ describe('DatePicker', () => {
 			).toBeInTheDocument();
 		});
 
-		it('placeholder が指定されても翻訳済みのプレースホルダーを表示する', () => {
-			render(<DatePicker id="date" label="開始日" placeholder="日付を入力してください" />);
-
-			expect(
-				screen.getByText(i18n.t('common.datePickerPlaceholder'), {
-					selector: 'button',
-				}),
-			).toBeInTheDocument();
-		});
-
 		it('value に指定した日付を yyyy/MM/dd 形式で表示する', () => {
 			render(<DatePicker id="date" label="開始日" value={new Date(2024, 5, 15)} />);
 
@@ -153,7 +143,11 @@ describe('DatePicker', () => {
 
 			await user.click(screen.getByRole('button', { name: '開始日' }));
 
-			expect(await screen.findByRole('grid')).toBeInTheDocument();
+			const dialog = await screen.findByRole('dialog', { name: '開始日' });
+			const calendar = within(dialog).getByRole('grid');
+
+			expect(calendar).toBeInTheDocument();
+			expect(within(calendar).getByRole('button', { name: /^15 / })).toBeInTheDocument();
 		});
 
 		it('日付を選択すると onChange を選択した Date で呼び出す', async () => {

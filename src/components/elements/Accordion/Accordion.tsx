@@ -19,7 +19,8 @@ type AccordionItemProps = {
 	disabled?: boolean;
 };
 
-/** アコーディオンは、単に表示領域をコンパクトにすることだけを目的として使用しない。ユーザーが必要に応じて詳細情報を展開できるような用途で使用。 */
+/** アコーディオンは、単に表示領域をコンパクトにすることだけを目的として使用しない。
+ * ユーザーが必要に応じて詳細情報を展開できるような用途で使用。 */
 export function Accordion({ children, defaultValue, multiple = false }: AccordionProps) {
 	return (
 		<BaseAccordion multiple={multiple} defaultValue={defaultValue}>

@@ -8,6 +8,7 @@
 	},
 	"scripts": {
 		"storybook": "storybook dev -p 6006",
+		"test:storybook-coverage": "vitest run --coverage",
 		"build-storybook": "storybook build",
 		"lint": "biome lint",
 		"format": "biome format --write",

@@ -73,7 +73,7 @@ describe('Radio', () => {
 	it('disabledがtrueの場合、すべての選択肢を無効にする', () => {
 		render(<Radio label="言語" options={OPTIONS} disabled />);
 
-		expect(screen.getByText(i18n.t('common.disabled'))).toBeInTheDocument();
+		expect(screen.getByText(i18n.t('common.notEditable'))).toBeInTheDocument();
 
 		expect(screen.getByRole('radio', { name: 'TypeScript' })).toHaveAttribute(
 			'aria-disabled',

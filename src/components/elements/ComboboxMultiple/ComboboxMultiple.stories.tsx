@@ -32,7 +32,7 @@ const meta = {
 	},
 	args: {
 		id: 'combobox-multiple',
-		label: 'フレームワーク',
+		label: '言語',
 		options: OPTIONS_WITH_DISABLED,
 	},
 } satisfies Meta<typeof ComboboxMultiple>;
@@ -50,12 +50,30 @@ export const Default: Story = {
 			<ComboboxMultiple
 				{...args}
 				label={
-					args.label === 'フレームワーク'
-						? t('example.story.labels.framework')
+					args.label === '言語'
+						? t('example.story.labels.language')
 						: args.label
 				}
 				value={value}
 				onChange={setValue}
+			/>
+		);
+	},
+};
+
+export const MultipleSelected: Story = {
+	render: (args) => {
+		const { t } = useTranslation();
+
+		return (
+			<ComboboxMultiple
+				{...args}
+				label={
+					args.label === '言語'
+						? t('example.story.labels.language')
+						: args.label
+				}
+				value={['typescript', 'javascript', 'python']}
 			/>
 		);
 	},

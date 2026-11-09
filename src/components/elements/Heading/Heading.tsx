@@ -4,8 +4,6 @@ import { cn } from '@/lib/utils';
 type HeadingProps = {
 	children: ReactNode;
 	type?: 'sectionTitle' | 'blockTitle' | 'subBlockTitle' | 'subSubBlockTitle';
-	prefix?: ReactNode;
-	suffix?: ReactNode;
 };
 
 const HEADING_STYLES = {
@@ -27,7 +25,8 @@ const HEADING_STYLES = {
 	},
 } as const;
 
-export function Heading({ children, type = 'sectionTitle', prefix, suffix }: HeadingProps) {
+/** デザインの一貫性の観点からも見出しもコンポーネントにする。 */
+export function Heading({ children, type = 'sectionTitle' }: HeadingProps) {
 	const { tag, className: headingClassName } = HEADING_STYLES[type];
 
 	// biome-ignore lint/style/useNamingConvention: Reactの動的タグ名はPascalCaseが必要
@@ -35,9 +34,7 @@ export function Heading({ children, type = 'sectionTitle', prefix, suffix }: Hea
 
 	return (
 		<Tag className={cn('flex gap-2', headingClassName)}>
-			{prefix}
 			<span>{children}</span>
-			{suffix}
 		</Tag>
 	);
 }

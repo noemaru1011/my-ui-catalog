@@ -23,7 +23,7 @@ export default defineConfig({
 	optimizeDeps: {
 		// Base UIを事前バンドルし、Vitest Browser Mode での
 		// 依存モジュールの読み込み不整合（Invalid hook call）を防止する
-		include: ['@base-ui/react/switch', '@base-ui/react/drawer'],
+		include: ['@base-ui/react/switch', '@base-ui/react/drawer', '@base-ui/react/tabs'],
 	},
 
 	test: {

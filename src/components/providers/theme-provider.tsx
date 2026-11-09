@@ -15,13 +15,7 @@ type ThemeProviderState = {
 	setTheme: (theme: Theme) => void;
 };
 
-const INITIAL_STATE: ThemeProviderState = {
-	theme: 'system',
-	resolvedTheme: 'light',
-	setTheme: () => null,
-};
-
-const THEME_PROVIDER_CONTEXT = createContext<ThemeProviderState>(INITIAL_STATE);
+const THEME_PROVIDER_CONTEXT = createContext<ThemeProviderState | undefined>(undefined);
 
 export function ThemeProvider({
 	children,

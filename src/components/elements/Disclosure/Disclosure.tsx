@@ -11,6 +11,9 @@ type DisclosureProps = {
 	defaultOpen?: boolean;
 };
 
+/** メイン情報に対する追加情報を折りたたんで提示するときに使用します。
+ * 大事な項目には使用しない、表示領域をコンパクトを目的とはしない。
+ */
 export function Disclosure({ triggerText, children, defaultOpen = false }: DisclosureProps) {
 	const [isOpen, setIsOpen] = useState(defaultOpen);
 

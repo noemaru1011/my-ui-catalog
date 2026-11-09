@@ -133,8 +133,8 @@ Tailwind CSSのテーマ変数を通じて、ライトモードとダークモ�
 | Accent背景    | `oklch(0.97 0 0)`  | `oklch(0.269 0 0)`   |
 | Accent文字色  | `oklch(0.205 0 0)` | `oklch(0.985 0 0)`   |
 | Destructive   | Red-800            | Red-800              |
-| Border        | `oklch(0.922 0 0)` | `oklch(1 0 0 / 10%)` |
-| Input         | `oklch(0.922 0 0)` | `oklch(1 0 0 / 15%)` |
+| Border        | `oklch(0.85 0 0)`  | `oklch(1 0 0 / 20%)` |
+| Input         | `oklch(0.82 0 0)`  | `oklch(1 0 0 / 25%)` |
 | Ring          | Blue-900           | Blue-400             |
 
 ### 4.1 サイドバー

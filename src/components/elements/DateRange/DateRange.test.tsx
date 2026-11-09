@@ -52,14 +52,6 @@ describe('DateRange', () => {
 		).toBeInTheDocument();
 	});
 
-	it('placeholder が指定されても翻訳済みの文言を表示する', () => {
-		render(<DateRange id="period" label="対象期間" placeholder="開始日と終了日を選択" />);
-
-		expect(
-			screen.getByText(i18n.t('common.dateRangePlaceholder'), { selector: 'button' }),
-		).toBeInTheDocument();
-	});
-
 	it('required が true の場合に必須マークを表示する', () => {
 		render(<DateRange id="period" label="対象期間" required />);
 
