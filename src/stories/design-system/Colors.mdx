@@ -1,0 +1,130 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ColorSwatch } from './colors/ColorSwatch';
+
+<Meta title="Design System/Colors" />
+
+# Color System
+
+アプリケーション全体で使用するカラートークンの一覧です。
+
+カラーはCSS変数で管理し、コンポーネントから直接参照します。
+
+## 1. Primitive Colors
+
+ブランドカラーや基本色のスケールです。
+
+<ColorSwatch
+  title="Blue"
+  description="ブランドカラー"
+  tokens={[
+    { name: 'Blue 50', variable: '--color-blue-50' },
+    { name: 'Blue 100', variable: '--color-blue-100' },
+    { name: 'Blue 200', variable: '--color-blue-200' },
+    { name: 'Blue 300', variable: '--color-blue-300' },
+    { name: 'Blue 400', variable: '--color-blue-400' },
+    { name: 'Blue 500', variable: '--color-blue-500' },
+    { name: 'Blue 600', variable: '--color-blue-600' },
+    { name: 'Blue 700', variable: '--color-blue-700' },
+    { name: 'Blue 800', variable: '--color-blue-800' },
+    { name: 'Blue 900', variable: '--color-blue-900' },
+    { name: 'Blue 1000', variable: '--color-blue-1000' },
+    { name: 'Blue 1100', variable: '--color-blue-1100' },
+    { name: 'Blue 1200', variable: '--color-blue-1200' },
+  ]}
+/>
+
+## 2. Theme Colors
+
+アプリケーションの基本的なテーマカラーです。
+
+<ColorSwatch
+  title="Theme"
+  tokens={[
+    { name: 'Background', variable: '--background' },
+    { name: 'Foreground', variable: '--foreground' },
+    { name: 'Primary', variable: '--primary' },
+    { name: 'Primary Foreground', variable: '--primary-foreground' },
+    { name: 'Secondary', variable: '--secondary' },
+    { name: 'Secondary Foreground', variable: '--secondary-foreground' },
+    { name: 'Muted', variable: '--muted' },
+    { name: 'Muted Foreground', variable: '--muted-foreground' },
+    { name: 'Accent', variable: '--accent' },
+    { name: 'Accent Foreground', variable: '--accent-foreground' },
+    { name: 'Card', variable: '--card' },
+    { name: 'Card Foreground', variable: '--card-foreground' },
+    { name: 'Popover', variable: '--popover' },
+    { name: 'Popover Foreground', variable: '--popover-foreground' },
+    { name: 'Destructive', variable: '--destructive' },
+  ]}
+/>
+
+## 3. UI Colors
+
+Input、Border、FocusなどのUI部品に使用する色です。
+
+<ColorSwatch
+  title="UI"
+  tokens={[
+    { name: 'Border', variable: '--border' },
+    { name: 'Input', variable: '--input' },
+    { name: 'Ring', variable: '--ring' },
+  ]}
+/>
+
+## 4. Semantic Colors
+
+状態や結果を表現する色です。
+
+<ColorSwatch
+  title="Semantic"
+  tokens={[
+    { name: 'Success', variable: '--success' },
+    { name: 'Success Foreground', variable: '--success-foreground' },
+    { name: 'Error', variable: '--error' },
+    { name: 'Error Foreground', variable: '--error-foreground' },
+    { name: 'Warning', variable: '--warning' },
+    { name: 'Warning Foreground', variable: '--warning-foreground' },
+  ]}
+/>
+
+## 5. Sidebar Colors
+
+サイドバー専用のカラートークンです。
+
+<ColorSwatch
+  title="Sidebar"
+  tokens={[
+    { name: 'Sidebar', variable: '--sidebar' },
+    { name: 'Sidebar Foreground', variable: '--sidebar-foreground' },
+    { name: 'Sidebar Primary', variable: '--sidebar-primary' },
+    { name: 'Sidebar Primary Foreground', variable: '--sidebar-primary-foreground' },
+    { name: 'Sidebar Accent', variable: '--sidebar-accent' },
+    { name: 'Sidebar Accent Foreground', variable: '--sidebar-accent-foreground' },
+    { name: 'Sidebar Border', variable: '--sidebar-border' },
+    { name: 'Sidebar Ring', variable: '--sidebar-ring' },
+  ]}
+/>
+
+## 6. Chart Colors
+
+グラフやデータ可視化に使用する色です。
+
+<ColorSwatch
+  title="Chart"
+  tokens={[
+    { name: 'Chart 1', variable: '--chart-1' },
+    { name: 'Chart 2', variable: '--chart-2' },
+    { name: 'Chart 3', variable: '--chart-3' },
+    { name: 'Chart 4', variable: '--chart-4' },
+    { name: 'Chart 5', variable: '--chart-5' },
+  ]}
+/>
+
+## 7. Light / Dark Theme
+
+LightとDarkでは同じセマンティック変数を使用します。
+
+- Light: `:root` に定義された値
+- Dark: `.dark` に定義された値
+
+テーマによってCSS変数の値が切り替わります。
