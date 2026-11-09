@@ -9,16 +9,17 @@ import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
 type DatePickerProps = {
+	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
 	label: string;
 	value?: Date;
 	onChange?: (date: Date | undefined) => void;
+	/** 編集不可の理由などを記載。 */
 	description?: string;
 	error?: string;
 	required?: boolean;
-	/** 値が確定している場合など、日付の変更を禁止する */
+	/** disabledはアクセシビリティの観点で使わない、readonlyも極力使用せず、表示できるか検討する。 */
 	readOnly?: boolean;
-	placeholder?: string;
 	inputSize?: 'sm' | 'md' | 'lg';
 };
 
@@ -31,7 +32,6 @@ export function DatePicker({
 	error,
 	required = false,
 	readOnly = false,
-	placeholder,
 	inputSize = 'md',
 }: DatePickerProps) {
 	const generatedId = useId();
@@ -42,7 +42,6 @@ export function DatePicker({
 		lg: 'h-10',
 	}[inputSize];
 	const { t } = useTranslation();
-	placeholder = t('common.datePickerPlaceholder');
 
 	return (
 		<Field data-invalid={!!error}>
@@ -69,18 +68,20 @@ export function DatePicker({
 								readOnly && 'border-dashed',
 							)}
 						>
-							{value ? format(value, 'yyyy/MM/dd') : placeholder}
+							{value ? format(value, 'yyyy/MM/dd') : t('common.datePickerPlaceholder')}
 						</Button>
 					}
 				/>
 
-				<PopoverContent className="w-auto p-0" align="start">
+				<PopoverContent aria-label={label} className="w-auto p-0" align="start">
 					<Calendar
 						mode="single"
 						selected={value}
 						onSelect={onChange}
 						defaultMonth={value}
 						captionLayout="dropdown"
+						startMonth={new Date(1900, 0)}
+						endMonth={new Date(2100, 11)}
 					/>
 				</PopoverContent>
 			</Popover>

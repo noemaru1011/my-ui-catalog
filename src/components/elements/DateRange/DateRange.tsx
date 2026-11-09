@@ -9,16 +9,17 @@ import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
 type DateRangeProps = {
+	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
 	label: string;
 	value?: DateRangeType;
 	onChange?: (range: DateRangeType | undefined) => void;
+	/** 編集不可の理由などを記載。 */
 	description?: string;
 	error?: string;
 	required?: boolean;
-	/** 値が確定している場合など、日付の変更を禁止する */
+	/** disabledはアクセシビリティの観点で使わない、readonlyも極力使用せず、表示できるか検討する。 */
 	readOnly?: boolean;
-	placeholder?: string;
 	inputSize?: 'sm' | 'md' | 'lg';
 	numberOfMonths?: number;
 };
@@ -32,7 +33,6 @@ export function DateRange({
 	error,
 	required = false,
 	readOnly = false,
-	placeholder,
 	inputSize = 'md',
 	numberOfMonths = 2,
 }: DateRangeProps) {
@@ -49,8 +49,6 @@ export function DateRange({
 	};
 
 	const { t } = useTranslation();
-	placeholder = t('common.dateRangePlaceholder');
-
 	const displayValue = value?.from
 		? value.to
 			? `${formatDate(value.from)} - ${formatDate(value.to)}`
@@ -82,7 +80,7 @@ export function DateRange({
 								readOnly && 'border-dashed',
 							)}
 						>
-							{displayValue ?? placeholder}
+							{displayValue ?? t('common.dateRangePlaceholder')}
 						</Button>
 					}
 				/>
@@ -95,6 +93,8 @@ export function DateRange({
 						defaultMonth={value?.from}
 						numberOfMonths={numberOfMonths}
 						captionLayout="dropdown"
+						startMonth={new Date(1900, 0)}
+						endMonth={new Date(2100, 11)}
 					/>
 				</PopoverContent>
 			</Popover>

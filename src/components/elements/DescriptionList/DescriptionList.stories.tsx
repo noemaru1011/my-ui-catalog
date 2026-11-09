@@ -2,18 +2,18 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../Text/Text';
 import {
-    DescriptionList,
-    DescriptionListItem,
+	DescriptionList,
+	DescriptionListItem,
 } from './DescriptionList';
 
 const meta = {
-    component: DescriptionList,
-    tags: ['autodocs'],
-    argTypes: {
-        children: {
-            control: false,
-        },
-    },
+	component: DescriptionList,
+	tags: ['autodocs'],
+	argTypes: {
+		children: {
+			control: false,
+		},
+	},
 } satisfies Meta<typeof DescriptionList>;
 
 export default meta;
@@ -21,10 +21,10 @@ export default meta;
 type Story = StoryObj<Omit<typeof meta, 'component'>>;
 
 export const Default: Story = {
-	render: (args) => {
+	render: () => {
 		const { t } = useTranslation();
 		return (
-			<DescriptionList {...args}>
+			<DescriptionList>
 				<DescriptionListItem term={t('example.story.descriptionList.name')}>
 					<Text>{t('example.story.descriptionList.person')}</Text>
 				</DescriptionListItem>

@@ -20,16 +20,18 @@ type ComboboxProps = WithoutExternalStyle<
 	ComboboxPrimitive.Root.Props<Option>,
 	'items' | 'disabled' | 'value' | 'onValueChange' | 'onChange'
 > & {
+	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
 	label: string;
 	options: Option[];
 	value?: string;
 	onChange?: (value: string) => void;
+	/** 編集不可の理由などを記載。 */
 	description?: string;
 	error?: string;
 	required?: boolean;
+	/** disabledはアクセシビリティの観点で使わない、readonlyも極力使用せず、表示できるか検討する。 */
 	disabled?: boolean;
-	placeholder?: string;
 	inputSize?: 'sm' | 'md' | 'lg';
 };
 export function Combobox({
@@ -42,7 +44,6 @@ export function Combobox({
 	error,
 	required = false,
 	disabled = false,
-	placeholder,
 	inputSize = 'md',
 	...rawProps
 }: ComboboxProps) {
@@ -58,7 +59,6 @@ export function Combobox({
 	}[inputSize];
 
 	const selectedOption = options.find((option) => option.value === value) ?? null;
-	placeholder = t('common.selectPlaceholder');
 	return (
 		<Field data-invalid={!!error}>
 			<FieldLabel htmlFor={inputId}>
@@ -81,7 +81,7 @@ export function Combobox({
 			>
 				<ComboboxInput
 					id={inputId}
-					placeholder={placeholder}
+					placeholder={t('common.selectPlaceholder')}
 					aria-invalid={!!error}
 					disabled={disabled}
 					showClear

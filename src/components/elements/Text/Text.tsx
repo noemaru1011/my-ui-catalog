@@ -26,6 +26,7 @@ const COLOR_STYLES = {
 	muted: 'text-muted-foreground',
 } as const;
 
+/** デザインの一貫性の観点からテキストもコンポーネントにする。 */
 export function Text({
 	children,
 	as = 'p',

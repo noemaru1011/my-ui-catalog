@@ -8,11 +8,9 @@ import { Stack } from '@/components/layouts/Stack/Stack';
 const meta = {
     component: LanguageSelect,
     tags: ['autodocs'],
-    args: {
-        label: '表示言語',
-    },
     argTypes: {
         value: {
+            description: 'コンポーネント内部で宣言',
             control: "inline-radio",
             options: ['ja', 'en'],
         },
@@ -24,7 +22,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    render: (args) => {
+    render: () => {
         const Component = () => {
             const { t, i18n } = useTranslation();
 
@@ -35,7 +33,6 @@ export const Default: Story = {
             return (
                 <Stack>
                     <LanguageSelect
-                        {...args}
                         value={currentLanguage}
                         onChange={(language) => {
                             i18n.changeLanguage(language);

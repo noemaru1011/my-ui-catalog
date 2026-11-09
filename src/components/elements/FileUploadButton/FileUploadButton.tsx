@@ -29,6 +29,8 @@ type FileUploadButtonProps = {
 	inputRef?: Ref<HTMLInputElement>;
 };
 
+/** D&Dができないファイル添付コンポーネントであり、領域が小さいことで、
+ * ユーザーが次の項目を見逃さない（視線に入りやすくする）ようにすることを目的としています。 */
 export function FileUploadButton({
 	id,
 	name,

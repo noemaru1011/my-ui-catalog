@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 import { FileUploadButton } from './FileUploadButton';
 
 const meta = {
@@ -29,4 +30,14 @@ export const Default: Story = {
 			{...args}
 		/>
 	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		const input = canvas.getByLabelText('ファイルを添付');
+
+		await userEvent.upload(input, new File(['PDF'], 'report.pdf', { type: 'application/pdf' }));
+		await expect(canvas.getByText('report.pdf')).toBeInTheDocument();
+		await userEvent.upload(input, new File(['text'], 'notes.txt', { type: 'text/plain' }));
+		await userEvent.click(canvas.getByRole('button', { name: 'report.pdf 削除' }));
+		await expect(canvas.queryByText('report.pdf')).not.toBeInTheDocument();
+	},
 };

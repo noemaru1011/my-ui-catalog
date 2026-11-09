@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import i18n from '@/i18n';
 import { useExampleForm } from '../hooks/useForm';
 import FormExamplePage from '../pages/FormPage';
+import { FORM_SCHEMA } from '../schema/formSchema';
 
 describe('useExampleForm', () => {
 	it('初期値でフォームの必須項目が未入力の状態である', () => {
@@ -94,5 +95,59 @@ describe('useExampleForm', () => {
 		} finally {
 			await i18n.changeLanguage('ja');
 		}
+	});
+
+	it('日付範囲の開始日と終了日が揃ったフォームを検証する', () => {
+		const date = new Date('2026-01-01T00:00:00.000Z');
+		const file = new File(['contents'], 'document.pdf', { type: 'application/pdf' });
+		const values = {
+			name: '山田 太郎',
+			password: 'password123',
+			category: 'engineering',
+			user: 'tanaka',
+			users: ['tanaka'],
+			agreement: ['agreement'],
+			interests: ['programming'],
+			gender: 'other',
+			date,
+			dateRange: { from: date, to: date },
+			description: '説明',
+			attachments: [file],
+			buttonAttachments: [file],
+		};
+
+		expect(FORM_SCHEMA.safeParse({ ...values, dateRange: undefined }).success).toBe(false);
+		expect(FORM_SCHEMA.safeParse(values).success).toBe(true);
+	});
+
+	it('両方の添付方法で選択エラーを表示し、有効なファイルで解除する', async () => {
+		const user = userEvent.setup();
+
+		render(
+			<QueryClientProvider client={new QueryClient()}>
+				<MemoryRouter>
+					<FormExamplePage />
+				</MemoryRouter>
+			</QueryClientProvider>,
+		);
+
+		const largeFile = new File([new Uint8Array(1024 * 1024 + 1)], 'large.pdf');
+		const validFile = new File(['contents'], 'document.pdf');
+		const dropInput = screen.getByLabelText('添付ファイル（ドラッグ＆ドロップ）');
+		const buttonInput = screen.getByLabelText('添付ファイル（ボタン）');
+
+		await user.upload(dropInput, largeFile);
+		expect(screen.getByText('large.pdf: ファイルサイズが上限を超えています')).toBeInTheDocument();
+		await user.upload(dropInput, validFile);
+		expect(
+			screen.queryByText('large.pdf: ファイルサイズが上限を超えています'),
+		).not.toBeInTheDocument();
+
+		await user.upload(buttonInput, largeFile);
+		expect(screen.getByText('large.pdf: ファイルサイズが上限を超えています')).toBeInTheDocument();
+		await user.upload(buttonInput, validFile);
+		expect(
+			screen.queryByText('large.pdf: ファイルサイズが上限を超えています'),
+		).not.toBeInTheDocument();
 	});
 });

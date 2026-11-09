@@ -16,7 +16,7 @@ const meta = {
 		},
 	},
 	args: {
-		label: '表示項目',
+		label: '言語',
 		options: OPTIONS_WITH_DISABLED,
 		value: '',
 		onChange: () => { },
@@ -36,8 +36,8 @@ export const Default: Story = {
 			<Radio
 				{...args}
 				label={
-					args.label === '表示項目'
-						? t('example.story.labels.framework')
+					args.label === '言語'
+						? t('example.story.labels.language')
 						: args.label
 				}
 				value={value}

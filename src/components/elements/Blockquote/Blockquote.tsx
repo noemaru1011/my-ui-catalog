@@ -4,6 +4,7 @@ type BlockquoteProps = {
 	children: React.ReactNode;
 };
 
+/** 引用する際に用いる。見た目の為には用いない。 */
 export function Blockquote({ children }: BlockquoteProps) {
 	return (
 		<blockquote className="flex items-stretch gap-4">

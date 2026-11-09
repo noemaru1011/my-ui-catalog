@@ -8,14 +8,15 @@ import { Input as BaseInput } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
 type InputProps = WithoutExternalStyle<ComponentProps<typeof BaseInput>, 'type' | 'disabled'> & {
+	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
 	label: string;
 	type?: 'text' | 'email' | 'number' | 'tel' | 'url' | 'search';
-	/** 編集不可の理由や文字数制限などを記載 */
+	/** 編集不可の理由や文字数制限などを記載。 */
 	description?: string;
 	error?: string;
 	required?: boolean;
-	/** 値が確定している時や、コピペする可能性がある場合(disabledは使わない) */
+	/** disabledはアクセシビリティの観点で使わない、readonlyも極力使用せず、表示できるか検討する。 */
 	readOnly?: boolean;
 	inputSize?: 'sm' | 'md' | 'lg';
 };

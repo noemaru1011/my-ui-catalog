@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ChevronRight, Settings } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Heading } from './Heading';
 
@@ -10,24 +9,7 @@ const meta = {
 		children: '見出し',
 		type: 'sectionTitle',
 	},
-	argTypes: {
-		prefix: {
-			control: 'boolean',
-			mapping: {
-				false: undefined,
-				true: <Settings />,
-			},
-			options: [false, true],
-		},
-		suffix: {
-			control: 'boolean',
-			mapping: {
-				false: undefined,
-				true: <ChevronRight />,
-			},
-			options: [false, true],
-		},
-	},
+
 } satisfies Meta<typeof Heading>;
 
 export default meta;

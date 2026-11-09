@@ -6,8 +6,8 @@ const meta = {
 	component: PasswordInput,
 	tags: ['autodocs'],
 	args: {
-		id: 'password',
 		label: 'パスワード',
+		description: '英大文字・英小文字・数字をすべて含み、10文字以上で入力してください。'
 	},
 	argTypes: {
 		id: {

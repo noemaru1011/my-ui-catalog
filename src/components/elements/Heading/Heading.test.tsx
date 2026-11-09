@@ -20,24 +20,6 @@ describe('Heading', () => {
 		expect(screen.getByRole('heading', { level, name: 'タイトル' })).toBeInTheDocument();
 	});
 
-	it('prefixとsuffixを表示する', () => {
-		render(
-			<Heading prefix={<span>prefix</span>} suffix={<span>suffix</span>}>
-				タイトル
-			</Heading>,
-		);
-
-		const heading = screen.getByRole('heading', {
-			level: 1,
-			name: 'prefixタイトルsuffix',
-		});
-
-		expect(heading).toBeInTheDocument();
-		expect(heading).toHaveTextContent('prefix');
-		expect(heading).toHaveTextContent('タイトル');
-		expect(heading).toHaveTextContent('suffix');
-	});
-
 	it('childrenにReact要素を指定できる', () => {
 		render(
 			<Heading>

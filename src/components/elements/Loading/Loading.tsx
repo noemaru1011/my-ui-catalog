@@ -6,10 +6,10 @@ type LoadingProps = {
 	message?: string;
 };
 
-/**データ生成中や読み込み中の表示に使用します。(時間がかかるときに用いる。) */
+/** データ生成中や読み込み中の表示に使用します。(時間がかかるときに用いる) */
 export function Loading({ message }: LoadingProps) {
 	const { t } = useTranslation();
-	message = t('common.loading', { message });
+
 	return (
 		<div
 			className="flex flex-col items-center justify-center gap-2"
@@ -20,7 +20,7 @@ export function Loading({ message }: LoadingProps) {
 		>
 			<Spinner className="size-24 motion-reduce:animate-none" aria-hidden="true" />
 
-			<Text>{message}</Text>
+			<Text>{message || t('common.loading')}</Text>
 		</div>
 	);
 }

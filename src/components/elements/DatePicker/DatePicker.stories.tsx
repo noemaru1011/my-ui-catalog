@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { expect, userEvent, within } from 'storybook/test';
 import { DatePicker } from './DatePicker';
 
 const meta = {
@@ -41,5 +42,16 @@ export const Default: Story = {
 				onChange={setDate}
 			/>
 		);
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		await userEvent.click(canvas.getByRole('button', { name: '日付' }));
+
+		const calendar = document.body.querySelector('[data-slot="calendar"]');
+		await expect(calendar).toBeInTheDocument();
+
+		const dateButton = calendar?.querySelector<HTMLButtonElement>('[data-day]');
+		if (!dateButton) throw new Error('Calendar did not render any day buttons');
+		await userEvent.click(dateButton);
 	},
 };

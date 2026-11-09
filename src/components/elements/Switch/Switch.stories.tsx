@@ -34,7 +34,6 @@ const meta = {
         label: '通知設定',
         labelPosition: 'left',
         size: 'default',
-        disabled: false,
     },
 } satisfies Meta<typeof Switch>;
 
@@ -43,22 +42,22 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	render: (args) => {
-		const { t } = useTranslation();
-		return (
-			<Switch
-				{...args}
-				aria-label={
-					args['aria-label'] === 'スイッチ切り替え'
-						? t('example.story.labels.switch')
-						: args['aria-label']
-				}
-				label={
-					args.label === '通知設定'
-						? t('example.story.labels.notifications')
-						: args.label
-				}
-			/>
-		);
-	},
+    render: (args) => {
+        const { t } = useTranslation();
+        return (
+            <Switch
+                {...args}
+                aria-label={
+                    args['aria-label'] === 'スイッチ切り替え'
+                        ? t('example.story.labels.switch')
+                        : args['aria-label']
+                }
+                label={
+                    args.label === '通知設定'
+                        ? t('example.story.labels.notifications')
+                        : args.label
+                }
+            />
+        );
+    },
 };

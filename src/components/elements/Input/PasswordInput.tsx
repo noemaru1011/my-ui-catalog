@@ -13,15 +13,19 @@ type PasswordInputProps = WithoutExternalStyle<
 	ComponentProps<typeof InputGroupInput>,
 	'type' | 'disabled'
 > & {
+	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
 	label: string;
+	/** 編集不可の理由や文字数制限などを記載。 */
 	description?: string;
 	error?: string;
 	required?: boolean;
+	/** disabledはアクセシビリティの観点で使わない、readonlyも極力使用せず、表示できるか検討する。 */
 	readOnly?: boolean;
 	inputSize?: 'sm' | 'md' | 'lg';
 };
 
+/** Inputタグ type=Password の専用コンポーネント、アイコンを押すことで type=text に切り替えができる。(確認が目的)*/
 export function PasswordInput({
 	id,
 	label,
@@ -66,6 +70,7 @@ export function PasswordInput({
 
 				<InputGroupAddon align="inline-end">
 					<Button
+						//タブを押してもスキップ
 						tabIndex={-1}
 						type="button"
 						onClick={() => setVisible((prev) => !prev)}

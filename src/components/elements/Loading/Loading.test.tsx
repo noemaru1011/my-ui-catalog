@@ -10,10 +10,11 @@ describe('Loading', () => {
 		expect(screen.getByText(i18n.t('common.loading'))).toBeInTheDocument();
 	});
 
-	it('message が指定されても翻訳済みのメッセージを表示すること', () => {
+	it('message が指定された場合、指定したメッセージが表示されること', () => {
 		render(<Loading message="データを取得しています" />);
 
-		expect(screen.getByText(i18n.t('common.loading'))).toBeInTheDocument();
+		expect(screen.getByText('データを取得しています')).toBeInTheDocument();
+		expect(screen.queryByText(i18n.t('common.loading'))).not.toBeInTheDocument();
 	});
 
 	it('statusロールが設定されていること', () => {

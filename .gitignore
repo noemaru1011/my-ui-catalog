@@ -28,7 +28,9 @@ dist-ssr
 storybook-static
 
 # Vitest artifacts
+coverage
 .vitest
+.tmp
 
 # Playwright artifacts
 test-results

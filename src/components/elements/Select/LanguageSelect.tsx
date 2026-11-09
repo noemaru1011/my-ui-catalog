@@ -5,7 +5,7 @@ import type { Option } from '@/components/types/Option';
 
 export type Language = 'ja' | 'en';
 
-type Props = Omit<ComponentProps<typeof Select>, 'options' | 'value' | 'onChange'> & {
+type Props = Omit<ComponentProps<typeof Select>, 'options' | 'value' | 'onChange' | 'label'> & {
 	value?: Language;
 	onChange?: (value: Language) => void;
 };

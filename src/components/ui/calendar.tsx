@@ -146,9 +146,15 @@ function CalendarDayButton({
 	day,
 	modifiers,
 	locale,
+	children,
+	'aria-label': ariaLabel,
 	...props
 }: React.ComponentProps<typeof DayButton> & { locale?: Partial<Locale> }) {
 	const defaultClassNames = getDefaultClassNames();
+	const accessibleName =
+		ariaLabel && (typeof children === 'string' || typeof children === 'number')
+			? `${children} ${ariaLabel}`
+			: ariaLabel;
 
 	const ref = React.useRef<HTMLButtonElement>(null);
 	React.useEffect(() => {
@@ -174,8 +180,11 @@ function CalendarDayButton({
 				defaultClassNames.day,
 				className,
 			)}
+			aria-label={accessibleName}
 			{...props}
-		/>
+		>
+			{children}
+		</Button>
 	);
 }
 

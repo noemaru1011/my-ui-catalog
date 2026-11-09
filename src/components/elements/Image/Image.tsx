@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom';
 
 export type ImageProps = {
 	src: string;
+	/** アクセシビリティの観点から必ず指定する。 */
 	alt: string;
 	description?: string;
-	/** リンク先のURL。指定した場合、画像がリンクとして表示されます。*/
+	/** リンク先のURL。指定した場合、画像がリンクとして表示される。*/
 	to?: string;
 	width?: string;
 };

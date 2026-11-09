@@ -23,9 +23,11 @@ type CheckboxProps = WithoutExternalStyle<
 	options: Option[];
 	value: string[];
 	onChange: (value: string[]) => void;
+	/** 編集不可の理由などを記載。 */
 	description?: string;
 	error?: string;
 	required?: boolean;
+	/** disabledはアクセシビリティの観点で使わない、readonlyも極力使用せず、表示できるか検討する。 */
 	disabled?: boolean;
 };
 

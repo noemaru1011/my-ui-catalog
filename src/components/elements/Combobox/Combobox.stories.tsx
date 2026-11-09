@@ -31,7 +31,7 @@ const meta = {
 	},
 	args: {
 		id: 'combobox',
-		label: 'フレームワーク',
+		label: '言語',
 		options: OPTIONS_WITH_DISABLED,
 	},
 } satisfies Meta<typeof Combobox>;
@@ -49,8 +49,8 @@ export const Default: Story = {
 			<Combobox
 				{...args}
 				label={
-					args.label === 'フレームワーク'
-						? t('example.story.labels.framework')
+					args.label === '言語'
+						? t('example.story.labels.language')
 						: args.label
 				}
 				value={value}
