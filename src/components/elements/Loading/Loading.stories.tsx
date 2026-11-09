@@ -22,7 +22,7 @@ export const Default: Story = {
                 {...args}
                 message={
                     args.message === '読み込み中...'
-                        ? t('example.story.labels.loading')
+                        ? t('common.loading')
                         : args.message
                 }
             />
