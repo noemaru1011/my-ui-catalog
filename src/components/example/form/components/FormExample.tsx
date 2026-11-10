@@ -44,15 +44,7 @@ type Props = {
 	onSubmit: React.SubmitEventHandler<HTMLFormElement>;
 	isPending: boolean;
 };
-export function FormExample({
-	register,
-	control,
-	errors,
-	setError,
-	clearErrors,
-	onSubmit,
-	isPending,
-}: Props) {
+export function FormExample({ register, control, errors, onSubmit, isPending }: Props) {
 	const { t } = useTranslation();
 	const options = createFormOptions(t);
 
@@ -255,16 +247,6 @@ export function FormExample({
 									maxFiles={MAX_ATTACHMENT_COUNT}
 									maxSize={MAX_ATTACHMENT_SIZE_IN_BYTES / (1024 * 1024)}
 									error={fieldState.error?.message}
-									onError={(message) => {
-										if (message) {
-											setError(field.name, {
-												type: 'validate',
-												message,
-											});
-										} else {
-											clearErrors(field.name);
-										}
-									}}
 								/>
 							)}
 						/>
@@ -276,6 +258,7 @@ export function FormExample({
 							control={control}
 							render={({ field, fieldState }) => (
 								<FileUploadButton
+									fieldLabel="ファイル添付"
 									id={field.name}
 									name={field.name}
 									label={t('example.story.form.attachmentsButton')}
@@ -287,16 +270,6 @@ export function FormExample({
 									maxFiles={MAX_ATTACHMENT_COUNT}
 									maxSize={MAX_ATTACHMENT_SIZE_IN_BYTES / (1024 * 1024)}
 									error={fieldState.error?.message}
-									onError={(message) => {
-										if (message) {
-											setError(field.name, {
-												type: 'validate',
-												message,
-											});
-										} else {
-											clearErrors(field.name);
-										}
-									}}
 								/>
 							)}
 						/>

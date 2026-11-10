@@ -137,37 +137,26 @@ describe('FileUpload', () => {
 
 		expect(onFilesChange).not.toHaveBeenCalled();
 	});
-
-	it('最大サイズを超えるファイルを拒否する', async () => {
+	it('最大サイズを超えるファイルも選択でき、呼び出し元に通知する', async () => {
 		const user = userEvent.setup();
 		const onFilesChange = vi.fn();
-		const onError = vi.fn();
-		const maximumSizedFile = new File([new Uint8Array(1024 * 1024)], 'maximum.pdf');
-		const oversizedFile = new File([new Uint8Array(2 * 1024 * 1024)], 'large.pdf');
+		const oversizedFile = new File(['large content'], 'large.pdf', { type: 'application/pdf' });
 
 		render(
 			<FileUpload
-				id="attachments"
 				name="attachments"
 				label="添付ファイル"
-				maxFiles={2}
+				maxFiles={3}
 				maxSize={1}
 				onFilesChange={onFilesChange}
-				onError={onError}
 			/>,
 		);
 
-		await user.upload(screen.getByLabelText('添付ファイル'), maximumSizedFile);
-
-		expect(onFilesChange).toHaveBeenCalledWith([maximumSizedFile]);
-
 		await user.upload(screen.getByLabelText('添付ファイル'), oversizedFile);
 
-		expect(onError).toHaveBeenLastCalledWith('large.pdf: ファイルサイズが上限を超えています');
-		expect(screen.queryByRole('alert')).not.toBeInTheDocument();
-		expect(onFilesChange).toHaveBeenCalledTimes(1);
+		expect(onFilesChange).toHaveBeenCalledWith([oversizedFile]);
+		expect(screen.getByText('large.pdf')).toBeInTheDocument();
 	});
-
 	it('拡張子と MIME タイプで許可されたファイルを選択できる', async () => {
 		const user = userEvent.setup();
 		const onFilesChange = vi.fn();
@@ -203,100 +192,64 @@ describe('FileUpload', () => {
 		await user.upload(screen.getByLabelText('添付ファイル'), text);
 		expect(onFilesChange).toHaveBeenLastCalledWith([text]);
 	});
-
-	it('不正な形式を拒否し、空の accept 指定は形式を制限しない', () => {
+	it('acceptをinputに設定し、形式チェックは行わない', async () => {
+		const user = userEvent.setup({
+			applyAccept: false,
+		});
 		const onFilesChange = vi.fn();
-		const onError = vi.fn();
-		const file = new File(['contents'], 'document.txt', { type: 'text/plain' });
-
-		const { rerender } = render(
-			<FileUpload
-				name="attachments"
-				label="添付ファイル"
-				accept=".pdf"
-				maxFiles={2}
-				maxSize={1}
-				onFilesChange={onFilesChange}
-				onError={onError}
-			/>,
-		);
-		fireEvent.change(screen.getByLabelText('添付ファイル'), { target: { files: [file] } });
-		expect(onError).toHaveBeenLastCalledWith('document.txt: 許可されていないファイル形式です');
-		expect(onFilesChange).not.toHaveBeenCalled();
-
-		rerender(
-			<FileUpload
-				name="attachments"
-				label="添付ファイル"
-				accept=" , "
-				maxFiles={2}
-				maxSize={1}
-				onFilesChange={onFilesChange}
-				onError={onError}
-			/>,
-		);
-		fireEvent.change(screen.getByLabelText('添付ファイル'), { target: { files: [file] } });
-		expect(onFilesChange).toHaveBeenCalledWith([file]);
-	});
-
-	it('認識できない形式指定を拒否する', () => {
-		const onFilesChange = vi.fn();
-		const onError = vi.fn();
-		const file = new File(['contents'], 'document.pdf', { type: 'application/pdf' });
 
 		render(
 			<FileUpload
 				name="attachments"
-				label="添付ファイル"
-				accept="application"
+				accept=".pdf"
 				maxFiles={2}
 				maxSize={1}
 				onFilesChange={onFilesChange}
-				onError={onError}
 			/>,
 		);
-		fireEvent.change(screen.getByLabelText('添付ファイル'), { target: { files: [file] } });
 
-		expect(onError).toHaveBeenLastCalledWith('document.pdf: 許可されていないファイル形式です');
-		expect(onFilesChange).not.toHaveBeenCalled();
+		const input = screen.getByLabelText('クリックしてファイルを選択');
+
+		expect(input).toHaveAttribute('accept', '.pdf');
+
+		const file = new File(['contents'], 'document.txt', {
+			type: 'text/plain',
+		});
+
+		await user.upload(input, file);
+
+		expect(onFilesChange).toHaveBeenCalledWith([file]);
 	});
-
-	it('ファイル数を制限し、重複ファイルを追加しない', async () => {
+	it('ファイル数の制限は行わず、重複ファイルを追加しない', async () => {
 		const user = userEvent.setup();
 		const onFilesChange = vi.fn();
-		const onError = vi.fn();
-		const first = new File(['one'], 'first.txt');
-		const second = new File(['two'], 'second.txt');
 
-		const { rerender } = render(
+		const first = new File(['first'], 'first.txt', {
+			type: 'text/plain',
+			lastModified: 1000,
+		});
+		const second = new File(['second'], 'second.txt', {
+			type: 'text/plain',
+			lastModified: 2000,
+		});
+
+		render(
 			<FileUpload
 				name="attachments"
 				label="添付ファイル"
 				maxFiles={1}
 				maxSize={1}
 				onFilesChange={onFilesChange}
-				onError={onError}
 			/>,
 		);
+
 		await user.upload(screen.getByLabelText('添付ファイル'), [first, second]);
-		expect(onFilesChange).toHaveBeenLastCalledWith([first]);
-		expect(onError).toHaveBeenLastCalledWith('ファイルは最大1件までです');
 
-		onFilesChange.mockClear();
-		rerender(
-			<FileUpload
-				name="attachments"
-				label="添付ファイル"
-				value={[first]}
-				maxFiles={2}
-				maxSize={1}
-				onFilesChange={onFilesChange}
-			/>,
-		);
-		await user.upload(screen.getByLabelText('添付ファイル'), first);
-		expect(onFilesChange).toHaveBeenCalledWith([first]);
+		expect(onFilesChange).toHaveBeenLastCalledWith([first, second]);
+
+		expect(screen.getByText('first.txt')).toBeInTheDocument();
+		expect(screen.getByText('second.txt')).toBeInTheDocument();
 	});
-
 	it('ファイルをドロップして表示し、削除ボタンで取り除く', async () => {
 		const onFilesChange = vi.fn();
 		const file = new File(['image'], 'a-very-long-image.png', { type: 'image/png' });

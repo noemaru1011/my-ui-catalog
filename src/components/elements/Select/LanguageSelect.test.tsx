@@ -11,7 +11,7 @@ describe('LanguageSelect', () => {
 		const user = userEvent.setup();
 		const onChange = vi.fn();
 
-		render(<LanguageSelect label="表示言語" onChange={onChange} />);
+		render(<LanguageSelect onChange={onChange} />);
 		await user.click(screen.getByRole('combobox', { name: '表示言語' }));
 		await user.click(await screen.findByRole('option', { name: optionLabel }));
 
@@ -21,7 +21,7 @@ describe('LanguageSelect', () => {
 	it('onChange が未指定でも選択できる', async () => {
 		const user = userEvent.setup();
 
-		render(<LanguageSelect label="表示言語" />);
+		render(<LanguageSelect />);
 		await user.click(screen.getByRole('combobox', { name: '表示言語' }));
 		await user.click(await screen.findByRole('option', { name: 'English' }));
 

@@ -51,7 +51,7 @@ export const Default: Story = {
                         </Text>
 
                         <Text size="md">
-                            {t('example.description')}
+                            {t('example.story.description')}
                         </Text>
                     </Stack>
                 </Stack>

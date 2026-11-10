@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 import i18n from '@/i18n';
 import { useExampleForm } from '../hooks/useForm';
 import FormExamplePage from '../pages/FormPage';
-import { FORM_SCHEMA } from '../schema/formSchema';
+import { FORM_SCHEMA, MAX_ATTACHMENT_SIZE_IN_BYTES } from '../schema/formSchema';
 
 describe('useExampleForm', () => {
 	it('初期値でフォームの必須項目が未入力の状態である', () => {
@@ -120,34 +120,48 @@ describe('useExampleForm', () => {
 		expect(FORM_SCHEMA.safeParse(values).success).toBe(true);
 	});
 
-	it('両方の添付方法で選択エラーを表示し、有効なファイルで解除する', async () => {
-		const user = userEvent.setup();
+	it('添付ファイルのサイズと件数をZodで検証する', () => {
+		const date = new Date('2026-01-01T00:00:00.000Z');
+		const validFile = new File(['contents'], 'document.pdf', {
+			type: 'application/pdf',
+		});
+		const largeFile = new File([new Uint8Array(MAX_ATTACHMENT_SIZE_IN_BYTES + 1)], 'large.pdf', {
+			type: 'application/pdf',
+		});
 
-		render(
-			<QueryClientProvider client={new QueryClient()}>
-				<MemoryRouter>
-					<FormExamplePage />
-				</MemoryRouter>
-			</QueryClientProvider>,
-		);
+		const validValues = {
+			name: '山田 太郎',
+			password: 'password123',
+			category: 'engineering',
+			user: 'tanaka',
+			users: ['tanaka'],
+			agreement: ['agreement'],
+			interests: ['programming'],
+			gender: 'other',
+			date,
+			dateRange: { from: date, to: date },
+			description: '説明',
+			attachments: [validFile],
+			buttonAttachments: [validFile],
+		};
 
-		const largeFile = new File([new Uint8Array(1024 * 1024 + 1)], 'large.pdf');
-		const validFile = new File(['contents'], 'document.pdf');
-		const dropInput = screen.getByLabelText('添付ファイル（ドラッグ＆ドロップ）');
-		const buttonInput = screen.getByLabelText('添付ファイル（ボタン）');
+		// 正常なファイルは通過する
+		expect(FORM_SCHEMA.safeParse(validValues).success).toBe(true);
 
-		await user.upload(dropInput, largeFile);
-		expect(screen.getByText('large.pdf: ファイルサイズが上限を超えています')).toBeInTheDocument();
-		await user.upload(dropInput, validFile);
-		expect(
-			screen.queryByText('large.pdf: ファイルサイズが上限を超えています'),
-		).not.toBeInTheDocument();
+		// ファイルサイズ超過はエラーになる
+		const oversizedResult = FORM_SCHEMA.safeParse({
+			...validValues,
+			attachments: [largeFile],
+		});
 
-		await user.upload(buttonInput, largeFile);
-		expect(screen.getByText('large.pdf: ファイルサイズが上限を超えています')).toBeInTheDocument();
-		await user.upload(buttonInput, validFile);
-		expect(
-			screen.queryByText('large.pdf: ファイルサイズが上限を超えています'),
-		).not.toBeInTheDocument();
+		expect(oversizedResult.success).toBe(false);
+
+		// 最大件数超過はエラーになる
+		const tooManyFilesResult = FORM_SCHEMA.safeParse({
+			...validValues,
+			attachments: [validFile, validFile, validFile],
+		});
+
+		expect(tooManyFilesResult.success).toBe(false);
 	});
 });

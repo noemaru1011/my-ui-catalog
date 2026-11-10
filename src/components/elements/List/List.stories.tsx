@@ -31,10 +31,6 @@ export const Default: Story = {
 						<Text>{t(`example.story.list.${key}`)}</Text>
 					</ListItem>
 				))}
-				<div>通常のReact Element</div>
-				{'テキストノード'}
-				{null}
-				{false}
 			</List>
 		);
 	},

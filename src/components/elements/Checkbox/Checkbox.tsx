@@ -27,7 +27,7 @@ type CheckboxProps = WithoutExternalStyle<
 	description?: string;
 	error?: string;
 	required?: boolean;
-	/** disabledはアクセシビリティの観点で使わない、readonlyも極力使用せず、表示できるか検討する。 */
+	/** 極力使用せず、表示できるか検討する。 */
 	disabled?: boolean;
 };
 

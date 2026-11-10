@@ -1,4 +1,6 @@
+
 import type { StorybookConfig } from '@storybook/react-vite';
+import remarkGfm from 'remark-gfm';
 
 const config: StorybookConfig = {
     stories: [
@@ -9,8 +11,17 @@ const config: StorybookConfig = {
         '@chromatic-com/storybook',
         '@storybook/addon-vitest',
         '@storybook/addon-a11y',
-        '@storybook/addon-docs',
         '@storybook/addon-mcp',
+        {
+            name: '@storybook/addon-docs',
+            options: {
+                mdxPluginOptions: {
+                    mdxCompileOptions: {
+                        remarkPlugins: [remarkGfm],
+                    },
+                },
+            },
+        },
     ],
     framework: {
         name: '@storybook/react-vite',
