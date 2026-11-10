@@ -14,6 +14,7 @@ type AccordionItemProps = {
 };
 
 type AccordionProps = {
+	/** AccordionItemPropsのみ有効です。 */
 	children:
 		| ReactElement<AccordionItemProps, typeof AccordionItem>
 		| ReactElement<AccordionItemProps, typeof AccordionItem>[];

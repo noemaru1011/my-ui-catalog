@@ -13,7 +13,7 @@ const SIZE_CLASS = {
 	lg: 'text-lg',
 } as const;
 
-/** SPAなので、aタグは使わない。また、デフォルトとvisitedで色を指定済み。*/
+/** SPAなので、ただのaタグは使わない。また、デフォルトとvisitedで色を指定済み。*/
 export function Link({ to, label, size = 'md' }: LinkProps) {
 	return (
 		<RouterLink to={to} className={cn(SIZE_CLASS[size])}>

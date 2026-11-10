@@ -9,6 +9,7 @@ type DescriptionListItemProps = {
 };
 
 type DescriptionListProps = {
+	/** DescriptionListItemPropsのみ有効です。 */
 	children:
 		| ReactElement<DescriptionListItemProps, typeof DescriptionListItem>
 		| ReactElement<DescriptionListItemProps, typeof DescriptionListItem>[];

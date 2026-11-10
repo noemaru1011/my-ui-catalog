@@ -27,6 +27,7 @@ export function ListItem({ children, number }: ListItemProps) {
 }
 
 type ListProps = {
+	/** ListItemPropsのみ有効です。(入れ子可) */
 	children: ReactElement<ListItemProps, typeof ListItem>[];
 	variant?: ListVariant;
 };
