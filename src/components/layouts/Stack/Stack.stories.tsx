@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useTranslation } from 'react-i18next';
 import { Stack } from './Stack';
+import { Text } from '@/components/elements/Text/Text';
 
 const meta = {
 	component: Stack,
@@ -38,7 +39,7 @@ export const Default: Story = {
 				<Stack {...args}>
 					{[1, 2, 3].map((count) => (
 						<div className="rounded-md border p-4" key={count}>
-							{t('example.story.layout.content', { count })}
+							<Text>{t('example.story.layout.content', { count })}</Text>
 						</div>
 					))}
 				</Stack>
