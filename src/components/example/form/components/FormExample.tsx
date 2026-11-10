@@ -1,13 +1,6 @@
-import type {
-	Control,
-	FieldErrors,
-	UseFormClearErrors,
-	UseFormRegister,
-	UseFormSetError,
-} from 'react-hook-form';
+import type { Control, FieldErrors, UseFormRegister } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-
 import { Checkbox } from '@/components/elements/Checkbox/Checkbox';
 import { Combobox } from '@/components/elements/Combobox/Combobox';
 import { ComboboxMultiple } from '@/components/elements/ComboboxMultiple/ComboboxMultiple';
@@ -39,8 +32,6 @@ type Props = {
 	register: UseFormRegister<FormValues>;
 	control: Control<FormValues>;
 	errors: FieldErrors<FormValues>;
-	setError: UseFormSetError<FormValues>;
-	clearErrors: UseFormClearErrors<FormValues>;
 	onSubmit: React.SubmitEventHandler<HTMLFormElement>;
 	isPending: boolean;
 };

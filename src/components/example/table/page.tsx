@@ -1,6 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { DataTable } from './data-table';
 
+/**
+ * tanstack/react-table を用いたテーブル例です。
+ * 詳しいコンポーネントの設計はコードを参照してください。
+ * ページネーションは最初の場合は前へのボタン,最後の場合は次へのボタンを表示させないようにする。
+ */
 export function Page() {
 	const { t } = useTranslation();
 	const roles = {
