@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toast';
 import i18n from '../src/i18n';
 import '../src/i18n';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 const createTestQueryClient = () =>
 	new QueryClient({
@@ -25,8 +26,10 @@ const preview: Preview = {
 				<QueryClientProvider client={queryClient}>
 					<MemoryRouter>
 						<ThemeProvider>
-							<Story />
-							<Toaster />
+							<TooltipProvider delay={100}>
+								<Story />
+								<Toaster />
+							</TooltipProvider>
 						</ThemeProvider>
 					</MemoryRouter>
 				</QueryClientProvider>
