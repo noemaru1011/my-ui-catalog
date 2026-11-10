@@ -9,12 +9,11 @@ import { createFormSchema, DEFAULT_FORM_VALUES, type FormValues } from '../schem
 export function useExampleForm() {
 	const { t, i18n } = useTranslation();
 	const previousLanguage = useRef(i18n.language);
+
 	const {
 		register,
 		control,
 		handleSubmit,
-		setError,
-		clearErrors,
 		formState: { errors },
 		trigger,
 		reset,
@@ -23,20 +22,21 @@ export function useExampleForm() {
 		defaultValues: DEFAULT_FORM_VALUES,
 	});
 
+	//言語切り替え時にフォームのバリデーションを再実行する副作用
 	useEffect(() => {
 		if (previousLanguage.current === i18n.language) {
 			return;
 		}
+
 		previousLanguage.current = i18n.language;
+
 		if (Object.keys(errors).length > 0) {
 			void trigger();
 		}
 	}, [errors, i18n.language, trigger]);
 
-	// TanStack Query の Mutation
 	const { mutate, isPending } = useMutation({
-		mutationFn: async (values: FormValues) => {
-			console.log('送信データ:', values);
+		mutationFn: async () => {
 			await new Promise((resolve) => setTimeout(resolve, 3000));
 		},
 		onSuccess: () => {
@@ -45,7 +45,6 @@ export function useExampleForm() {
 				description: t('example.story.form.savedDescription'),
 				type: 'success',
 			});
-			console.log('送信成功');
 			reset();
 		},
 		onError: () => {
@@ -57,9 +56,8 @@ export function useExampleForm() {
 		},
 	});
 
-	// React Hook Form の handleSubmit と連携
-	const onSubmit = handleSubmit((values) => {
-		mutate(values);
+	const onSubmit = handleSubmit(() => {
+		mutate();
 	});
 
 	return {
@@ -68,7 +66,5 @@ export function useExampleForm() {
 		errors,
 		onSubmit,
 		isPending,
-		setError,
-		clearErrors,
 	};
 }

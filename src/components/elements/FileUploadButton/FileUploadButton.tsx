@@ -5,35 +5,44 @@ import { useTranslation } from 'react-i18next';
 import { Text } from '@/components/elements/Text/Text';
 import { Cluster } from '@/components/layouts/Cluster/Cluster';
 import { Stack } from '@/components/layouts/Stack/Stack';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Field, FieldDescription, FieldError } from '@/components/ui/field';
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 type FileUploadButtonProps = {
+	/** idは指定しなかった場合、自動採番。 */
 	id?: string;
 	name: string;
+	/** ボタン上部に表示するラベル。 */
+	fieldLabel: string;
+	/** ボタン内部に表示するラベル。 */
 	label?: string;
 	description?: string;
+	/** 必須項目かどうか。 */
 	required?: boolean;
 	accept?: string;
 	multiple?: boolean;
 	maxFiles: number;
 	/** 単位はMiB（1 MiB = 1024 * 1024 bytes） */
 	maxSize: number;
+	/** 極力使用せず、表示できるか検討する。 */
 	disabled?: boolean;
 	value?: File[];
 	error?: string;
 	onFilesChange?: (files: File[]) => void;
-	onError?: (error: string) => void;
 	onBlur?: FocusEventHandler<HTMLInputElement>;
 	inputRef?: Ref<HTMLInputElement>;
 };
 
-/** D&Dができないファイル添付コンポーネントであり、領域が小さいことで、
- * ユーザーが次の項目を見逃さない（視線に入りやすくする）ようにすることを目的としています。 */
+/**
+ * D&Dができないファイル添付コンポーネントであり、領域が小さいことで、
+ * ユーザーが次の項目を見逃さない（視線に入りやすくする）ようにすることを目的としています。
+ */
 export function FileUploadButton({
 	id,
 	name,
+	fieldLabel,
 	label,
 	description,
 	required = false,
@@ -45,7 +54,6 @@ export function FileUploadButton({
 	value,
 	error,
 	onFilesChange,
-	onError,
 	onBlur,
 	inputRef,
 }: FileUploadButtonProps) {
@@ -53,53 +61,30 @@ export function FileUploadButton({
 	const internalInputRef = useRef<HTMLInputElement>(null);
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
+
 	const [uncontrolledFiles, setUncontrolledFiles] = useState<File[]>([]);
 	const files = value ?? uncontrolledFiles;
+
 	const buttonLabel = label ?? t('common.file.attach');
 	const descriptionId = `${inputId}-description`;
 	const errorId = `${inputId}-error`;
+
 	const describedBy = [description && descriptionId, error && errorId].filter(Boolean).join(' ');
 
 	const updateFiles = (nextFiles: File[]) => {
-		if (value === undefined) setUncontrolledFiles(nextFiles);
+		if (value === undefined) {
+			setUncontrolledFiles(nextFiles);
+		}
+
 		onFilesChange?.(nextFiles);
 	};
 
-	const isAcceptedFile = (file: File) => {
-		if (!accept) return true;
-
-		const acceptedTypes = accept
-			.split(',')
-			.map((type) => type.trim().toLowerCase())
-			.filter(Boolean);
-		const fileType = file.type.toLowerCase();
-		const fileName = file.name.toLowerCase();
-
-		return acceptedTypes.some((type) => {
-			if (type.endsWith('/*')) return fileType.startsWith(type.slice(0, -1));
-			if (type.includes('/')) return fileType === type;
-			if (type.startsWith('.')) return fileName.endsWith(type);
-			return false;
-		});
-	};
-
 	const addFiles = (selectedFiles: FileList | File[]) => {
-		onError?.('');
-
 		const incoming = Array.from(selectedFiles);
-		for (const file of incoming) {
-			if (!isAcceptedFile(file)) {
-				onError?.(`${file.name}: ${t('common.file.invalidType')}`);
-				return;
-			}
-
-			if (file.size > maxSize * 1024 * 1024) {
-				onError?.(`${file.name}: ${t('common.file.sizeExceeded')}`);
-				return;
-			}
-		}
 
 		const merged = multiple ? [...files, ...incoming] : incoming.slice(0, 1);
+
+		// 同一ファイルの重複を除外する
 		const unique = merged.filter(
 			(file, index, self) =>
 				index ===
@@ -111,19 +96,14 @@ export function FileUploadButton({
 				),
 		);
 
-		if (unique.length > maxFiles) {
-			updateFiles(unique.slice(0, maxFiles));
-			onError?.(t('common.file.maxFilesExceeded', { count: maxFiles }));
-			return;
-		}
-
-		updateFiles(unique);
+		// ファイル数の上限で切り詰める
+		updateFiles(unique.slice(0, maxFiles));
 	};
 
 	const removeFile = (index: number) => {
 		updateFiles(files.filter((_, fileIndex) => fileIndex !== index));
-		onError?.('');
 	};
+
 	const truncateFileName = (fileName: string) => {
 		return fileName.length > 10 ? `${fileName.slice(0, 10)}...` : fileName;
 	};
@@ -131,6 +111,19 @@ export function FileUploadButton({
 	return (
 		<Field data-invalid={!!error}>
 			<Stack space="sm">
+				{fieldLabel && (
+					<FieldLabel id={inputId}>
+						{fieldLabel}
+						{required && (
+							<span className="text-destructive" aria-hidden="true">
+								{' '}
+								*
+							</span>
+						)}
+						{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+					</FieldLabel>
+				)}
+
 				<Cluster space="sm">
 					<Button
 						type="button"
@@ -143,18 +136,17 @@ export function FileUploadButton({
 					>
 						<Paperclip aria-hidden="true" />
 						{buttonLabel}
-						{required && (
-							<span className="text-destructive" aria-hidden="true">
-								*
-							</span>
-						)}
 					</Button>
 
 					<input
 						ref={(element) => {
 							internalInputRef.current = element;
-							if (typeof inputRef === 'function') inputRef(element);
-							else if (inputRef) inputRef.current = element;
+
+							if (typeof inputRef === 'function') {
+								inputRef(element);
+							} else if (inputRef) {
+								inputRef.current = element;
+							}
 						}}
 						id={inputId}
 						name={name}
@@ -162,11 +154,19 @@ export function FileUploadButton({
 						accept={accept}
 						multiple={multiple}
 						disabled={disabled}
+						required={required}
 						aria-label={buttonLabel}
+						aria-labelledby={fieldLabel ? inputId : undefined}
+						aria-invalid={!!error}
+						aria-describedby={describedBy || undefined}
 						className="sr-only"
 						onBlur={onBlur}
 						onChange={(event) => {
-							if (event.target.files) addFiles(event.target.files);
+							if (event.target.files) {
+								addFiles(event.target.files);
+							}
+
+							// 同じファイルを再選択できるようにする
 							event.target.value = '';
 						}}
 					/>
@@ -192,6 +192,7 @@ export function FileUploadButton({
 										{file.name}
 									</TooltipContent>
 								</Tooltip>
+
 								<Button
 									type="button"
 									variant="ghost"

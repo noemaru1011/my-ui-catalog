@@ -1,5 +1,5 @@
 import { File, FileArchive, FileImage, FileText, X } from 'lucide-react';
-import type { FocusEventHandler, Ref } from 'react';
+import type { DragEvent, FocusEventHandler, Ref } from 'react';
 import { useCallback, useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from '@/components/elements/Text/Text';
@@ -14,9 +14,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { cn } from '@/lib/utils';
 
 type FileUploadProps = {
+	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
 	name: string;
 	label?: string;
+	/** 編集不可の理由や文字数制限などを記載。 */
 	description?: string;
 	required?: boolean;
 	accept?: string;
@@ -24,11 +26,11 @@ type FileUploadProps = {
 	maxFiles: number;
 	/** 単位はMiB（1 MiB = 1024 * 1024 bytes） */
 	maxSize: number;
+	/** 極力使用せず、表示できるか検討する。 */
 	disabled?: boolean;
 	value?: File[];
 	error?: string;
 	onFilesChange?: (files: File[]) => void;
-	onError?: (error: string) => void;
 	onBlur?: FocusEventHandler<HTMLInputElement>;
 	inputRef?: Ref<HTMLInputElement>;
 };
@@ -47,7 +49,6 @@ export function FileUpload({
 	value,
 	error,
 	onFilesChange,
-	onError,
 	onBlur,
 	inputRef,
 }: FileUploadProps) {
@@ -80,60 +81,14 @@ export function FileUpload({
 	);
 
 	/**
-	 * accept に指定されたファイル形式かどうかを判定する。
+	 * ファイルを追加する。
+	 * バリデーションは呼び出し元（React Hook Form / Zod）で行う。
 	 */
-	const isAcceptedFile = (file: File): boolean => {
-		if (!accept) return true;
-
-		const acceptedTypes = accept
-			.split(',')
-			.map((type) => type.trim().toLowerCase())
-			.filter(Boolean);
-
-		if (acceptedTypes.length === 0) return true;
-
-		const fileType = file.type.toLowerCase();
-		const fileName = file.name.toLowerCase();
-
-		return acceptedTypes.some((type) => {
-			if (type.endsWith('/*')) {
-				return fileType.startsWith(type.slice(0, -1));
-			}
-
-			if (type.includes('/')) {
-				return fileType === type;
-			}
-
-			if (type.startsWith('.')) {
-				return fileName.endsWith(type);
-			}
-
-			return false;
-		});
-	};
-
 	const addFiles = (selectedFiles: FileList | File[]) => {
-		onError?.('');
-
 		const incoming = Array.from(selectedFiles);
-		const validFiles: File[] = [];
+		const merged = multiple ? [...files, ...incoming] : incoming.slice(0, 1);
 
-		for (const file of incoming) {
-			if (!isAcceptedFile(file)) {
-				onError?.(`${file.name}: ${t('common.file.invalidType')}`);
-				return;
-			}
-
-			if (file.size > maxSize * 1024 * 1024) {
-				onError?.(`${file.name}: ${t('common.file.sizeExceeded')}`);
-				return;
-			}
-
-			validFiles.push(file);
-		}
-
-		const merged = multiple ? [...files, ...validFiles] : validFiles.slice(0, 1);
-
+		// 同一ファイルの重複を除外する
 		const unique = merged.filter(
 			(file, index, self) =>
 				index ===
@@ -143,21 +98,14 @@ export function FileUpload({
 				),
 		);
 
-		if (unique.length > maxFiles) {
-			updateFiles(unique.slice(0, maxFiles));
-			onError?.(t('common.file.maxFilesExceeded', { count: maxFiles }));
-			return;
-		}
-
 		updateFiles(unique);
 	};
 
 	const removeFile = (index: number) => {
 		updateFiles(files.filter((_, i) => i !== index));
-		onError?.('');
 	};
 
-	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+	const handleDrop = (e: DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
 		setDragging(false);
 
@@ -178,6 +126,7 @@ export function FileUpload({
 	const truncateFileName = (fileName: string) => {
 		return fileName.length > 10 ? `${fileName.slice(0, 10)}...` : fileName;
 	};
+
 	const formatSize = (size: number) => {
 		return size < 1024 * 1024
 			? `${(size / 1024).toFixed(1)} KB`
@@ -272,10 +221,8 @@ export function FileUpload({
 							return (
 								<Container key={`${file.name}-${file.size}-${file.lastModified}`} width="full">
 									<div className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-3 rounded-md border p-3">
-										{/* ファイルアイコン */}
 										<Icon className="text-muted-foreground h-5 w-5 shrink-0" />
 
-										{/* ファイル名 */}
 										<Tooltip>
 											<TooltipTrigger>
 												<Text weight="bold">{truncateFileName(file.name)}</Text>
@@ -285,10 +232,8 @@ export function FileUpload({
 											</TooltipContent>
 										</Tooltip>
 
-										{/* ファイルサイズ */}
 										<Text color="muted">{formatSize(file.size)}</Text>
 
-										{/* 削除ボタン */}
 										<Button
 											type="button"
 											variant="ghost"

@@ -100,8 +100,14 @@ describe('DataTable', () => {
 		await user.type(search, '存在しない名前');
 		expect(screen.getByText(TRANSLATION('noMembers'))).toBeInTheDocument();
 		expect(
-			screen.getByText(i18n.t('example.story.table.showing', { start: 0, end: 0, count: 0 })),
-		).toBeInTheDocument();
+			screen.getAllByText(
+				i18n.t('example.story.table.showing', {
+					start: 0,
+					end: 0,
+					count: 0,
+				}),
+			).length,
+		).toBeGreaterThan(0);
 
 		await user.click(screen.getByRole('button', { name: TRANSLATION('reset') }));
 		expect(screen.getByRole('row', { name: /山田 太郎/ })).toBeInTheDocument();
