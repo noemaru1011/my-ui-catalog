@@ -1,0 +1,165 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design System/Colors" />
+
+# Color System
+
+アプリケーション全体で使用するカラートークンの一覧です。
+
+カラーはCSS変数で管理し、コンポーネントから直接参照します。
+
+## 1. Primitive Colors
+
+ブランドカラーや基本色のスケールです。
+
+### Blue
+
+ブランドカラー
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
+  {Array.from({ length: 13 }, (_, i) => {
+    const value = i === 0 ? 50 : i * 100;
+    const variable = `--color-blue-${value}`;
+
+    return (
+      <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
+        <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
+        <div style={{ padding: 10 }}>
+          <div style={{ fontWeight: 600, fontSize: 13 }}>Blue {value}</div>
+          <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+## 2. Theme Colors
+
+アプリケーションの基本的なテーマカラーです。
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
+  {[
+    ['Background', '--background'],
+    ['Foreground', '--foreground'],
+    ['Primary', '--primary'],
+    ['Primary Foreground', '--primary-foreground'],
+    ['Secondary', '--secondary'],
+    ['Secondary Foreground', '--secondary-foreground'],
+    ['Muted', '--muted'],
+    ['Muted Foreground', '--muted-foreground'],
+    ['Accent', '--accent'],
+    ['Accent Foreground', '--accent-foreground'],
+    ['Card', '--card'],
+    ['Card Foreground', '--card-foreground'],
+    ['Popover', '--popover'],
+    ['Popover Foreground', '--popover-foreground'],
+    ['Destructive', '--destructive'],
+  ].map(([name, variable]) => (
+    <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
+      <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
+      <div style={{ padding: 10 }}>
+        <div style={{ fontWeight: 600, fontSize: 13 }}>{name}</div>
+        <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
+      </div>
+    </div>
+  ))}
+</div>
+
+## 3. UI Colors
+
+Input、Border、FocusなどのUI部品に使用する色です。
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
+  {[
+    ['Border', '--border'],
+    ['Input', '--input'],
+    ['Ring', '--ring'],
+  ].map(([name, variable]) => (
+    <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
+      <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
+      <div style={{ padding: 10 }}>
+        <div style={{ fontWeight: 600, fontSize: 13 }}>{name}</div>
+        <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
+      </div>
+    </div>
+  ))}
+</div>
+
+## 4. Semantic Colors
+
+状態や結果を表現する色です。
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
+  {[
+    ['Success', '--success'],
+    ['Success Foreground', '--success-foreground'],
+    ['Error', '--error'],
+    ['Error Foreground', '--error-foreground'],
+    ['Warning', '--warning'],
+    ['Warning Foreground', '--warning-foreground'],
+  ].map(([name, variable]) => (
+    <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
+      <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
+      <div style={{ padding: 10 }}>
+        <div style={{ fontWeight: 600, fontSize: 13 }}>{name}</div>
+        <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
+      </div>
+    </div>
+  ))}
+</div>
+
+## 5. Sidebar Colors
+
+サイドバー専用のカラートークンです。
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
+  {[
+    ['Sidebar', '--sidebar'],
+    ['Sidebar Foreground', '--sidebar-foreground'],
+    ['Sidebar Primary', '--sidebar-primary'],
+    ['Sidebar Primary Foreground', '--sidebar-primary-foreground'],
+    ['Sidebar Accent', '--sidebar-accent'],
+    ['Sidebar Accent Foreground', '--sidebar-accent-foreground'],
+    ['Sidebar Border', '--sidebar-border'],
+    ['Sidebar Ring', '--sidebar-ring'],
+  ].map(([name, variable]) => (
+    <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
+      <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
+      <div style={{ padding: 10 }}>
+        <div style={{ fontWeight: 600, fontSize: 13 }}>{name}</div>
+        <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
+      </div>
+    </div>
+  ))}
+</div>
+
+## 6. Chart Colors
+
+グラフやデータ可視化に使用する色です。
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
+  {[
+    ['Chart 1', '--chart-1'],
+    ['Chart 2', '--chart-2'],
+    ['Chart 3', '--chart-3'],
+    ['Chart 4', '--chart-4'],
+    ['Chart 5', '--chart-5'],
+  ].map(([name, variable]) => (
+    <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
+      <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
+      <div style={{ padding: 10 }}>
+        <div style={{ fontWeight: 600, fontSize: 13 }}>{name}</div>
+        <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
+      </div>
+    </div>
+  ))}
+</div>
+
+## 7. Light / Dark Theme
+
+LightとDarkでは同じセマンティック変数を使用します。
+
+- Light: `:root` に定義された値
+- Dark: `.dark` に定義された値
+
+テーマによってCSS変数の値が切り替わります。
