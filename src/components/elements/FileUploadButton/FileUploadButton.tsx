@@ -156,7 +156,6 @@ export function FileUploadButton({
 						disabled={disabled}
 						required={required}
 						aria-label={buttonLabel}
-						aria-labelledby={fieldLabel ? inputId : undefined}
 						aria-invalid={!!error}
 						aria-describedby={describedBy || undefined}
 						className="sr-only"
