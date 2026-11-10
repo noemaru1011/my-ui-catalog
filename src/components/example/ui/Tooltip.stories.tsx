@@ -24,18 +24,16 @@ export const Default: Story = {
 	render: () => {
 		const { t } = useTranslation();
 		return (
-			<TooltipProvider delay={300}>
-				<Stack space="md">
-					<Text>{t('example.story.tooltip.instructions')}</Text>
-					<Tooltip>
-						<TooltipTrigger render={<Button variant="outline" />}>
-							<Info aria-hidden="true" />
-							{t('example.story.tooltip.details')}
-						</TooltipTrigger>
-						<TooltipContent>{t('example.story.tooltip.detailsDescription')}</TooltipContent>
-					</Tooltip>
-				</Stack>
-			</TooltipProvider>
+			<Stack space="md">
+				<Text>{t('example.story.tooltip.instructions')}</Text>
+				<Tooltip>
+					<TooltipTrigger render={<Button variant="outline" />}>
+						<Info aria-hidden="true" />
+						{t('example.story.tooltip.details')}
+					</TooltipTrigger>
+					<TooltipContent>{t('example.story.tooltip.detailsDescription')}</TooltipContent>
+				</Tooltip>
+			</Stack>
 		);
 	},
 };
