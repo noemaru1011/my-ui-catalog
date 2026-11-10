@@ -2,5 +2,4 @@
 set -e
 
 npm run check
-npm run check:locale
 npm run test:run

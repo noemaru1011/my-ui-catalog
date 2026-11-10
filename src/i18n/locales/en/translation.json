@@ -1,272 +1,269 @@
 {
 	"common": {
-		"file": {
-			"dragAndDrop": "Drag and drop files",
-			"attach": "Attach files",
-			"clickToSelect": "Click to select files",
-			"sizeExceeded": "File size exceeds the limit",
-			"maxFilesExceeded": "Maximum {{count}} files allowed",
-			"selectedFiles": "Selected files",
-			"remove": "Remove",
-			"limits": "Maximum {{maxFiles}} files / {{maxSize}} MiB",
-			"acceptedTypes": "Accepted formats: {{accept}}",
-			"invalidType": "This file format is not allowed"
-		},
-		"notEditable": "Not editable",
-		"loading": "Loading...",
-		"selectPlaceholder": "Please select.",
+		"back": "Back",
+		"darkMode": "Dark mode",
+		"darkModeToggle": "Toggle dark mode",
 		"datePickerPlaceholder": "Please select a date.",
 		"dateRangePlaceholder": "Please select a date range.",
-		"noItemsFound": "No items found.",
-		"back": "Back",
-		"hidePassword": "Hide password",
-		"showPassword": "Show password",
 		"displayLanguage": "Display language",
-		"darkMode": "Dark mode",
+		"file": {
+			"acceptedTypes": "Accepted formats: {{accept}}",
+			"attach": "Attach files",
+			"clickToSelect": "Click to select files",
+			"dragAndDrop": "Drag and drop files",
+			"invalidType": "This file format is not allowed",
+			"limits": "Maximum {{maxFiles}} files / {{maxSize}} MiB",
+			"maxFilesExceeded": "Maximum {{count}} files allowed",
+			"maxFilesExceeded_one": "common.file.maxFilesExceeded",
+			"maxFilesExceeded_other": "common.file.maxFilesExceeded",
+			"remove": "Remove",
+			"selectedFiles": "Selected files",
+			"sizeExceeded": "File size exceeds the limit"
+		},
+		"hidePassword": "Hide password",
 		"lightMode": "Light mode",
-		"darkModeToggle": "Toggle dark mode"
+		"loading": "Loading...",
+		"noItemsFound": "No items found.",
+		"notEditable": "Not editable",
+		"selectPlaceholder": "Please select.",
+		"showPassword": "Show password"
 	},
 	"error": {
-		"notfound": {
-			"title": "Page not found",
-			"description": "The page you are looking for could not be found. It may have been deleted or its URL may have changed."
-		},
+		"backToHome": "Back to home",
 		"forbidden": {
-			"title": "Access denied",
-			"description": "You do not have permission to view this page. Please check your access permissions or contact an administrator."
+			"description": "You do not have permission to view this page. Please check your access permissions or contact an administrator.",
+			"title": "Access denied"
 		},
 		"internalServerError": {
-			"title": "A server error occurred",
-			"description": "An unexpected internal server error occurred. Please try again later or contact an administrator."
+			"description": "An unexpected internal server error occurred. Please try again later or contact an administrator.",
+			"title": "A server error occurred"
 		},
-		"backToHome": "Back to home"
+		"notfound": {
+			"description": "The page you are looking for could not be found. It may have been deleted or its URL may have changed.",
+			"title": "Page not found"
+		}
 	},
 	"example": {
-		"description": "hello world",
 		"story": {
-			"labels": {
-				"name": "Name",
-				"fullName": "Full name",
-				"password": "Password",
-				"framework": "Framework",
-				"date": "Date",
-				"period": "Date range",
-				"file": "File",
-				"language": "Language",
-				"switch": "Toggle switch",
-				"notifications": "Notifications",
-				"userList": "User list",
-				"heading": "Heading"
-			},
+			"description": "hello world",
 			"accordion": {
-				"resetPassword": "How do I reset my password?",
-				"resetPasswordAnswer": "You can reset your password from the login screen. For details, see the",
 				"changePlan": "Can I change my subscription plan?",
 				"changePlanAnswer": "You can change your subscription plan at any time from your account settings. For details, see the",
+				"faq": "FAQ",
+				"faqSuffix": "for more information.",
 				"paymentMethods": "Which payment methods are available?",
 				"paymentMethodsAnswer": "You can pay by credit card or bank transfer. For details, see the",
-				"faq": "FAQ",
-				"faqSuffix": "for more information."
-			},
-			"blockQuote": "This is an example of a blockquote. Use blockquotes to show text quoted from other documents or sources and visually distinguish it from regular text.",
-			"text": "This is text.",
-			"descriptionList": {
-				"name": "Name",
-				"email": "Email address",
-				"address": "Address",
-				"person": "Taro Yamada",
-				"location": "Kasumigaseki, Chiyoda City, Tokyo"
-			},
-			"disclosure": {
-				"showDetails": "Show details",
-				"content": "This is the content of the disclosure. For more information, see the",
-				"detailsPage": "details page"
-			},
-			"hamburger": {
-				"menu": "Menu",
-				"selectPage": "Select a page.",
-				"mainMenu": "Main menu",
-				"home": "Home",
-				"user": "Users",
-				"settings": "Settings"
-			},
-			"image": {
-				"sample": "Sample image",
-				"description": "Image description"
-			},
-			"list": {
-				"identityDocument": "Identity document",
-				"application": "Application form",
-				"photo": "ID photo",
-				"fillForm": "Fill out the application form",
-				"submitDocuments": "Submit the required documents",
-				"checkResult": "Check the review result"
-			},
-			"layout": {
-				"content": "Content {{count}}",
-				"contentArea": "Content area",
-				"centerDescription": "This area is centered on the screen, and its maximum width is limited to {{maxWidth}}.",
-				"input": "Input field",
-				"inputPlaceholder": "Enter a value",
-				"clusterDescription": "Change space, justify, and align in Controls to see how child elements are arranged and spaced.",
-				"small": "Small",
-				"medium": "Medium",
-				"large": "Large"
+				"resetPassword": "How do I reset my password?",
+				"resetPasswordAnswer": "You can reset your password from the login screen. For details, see the"
 			},
 			"alert": {
-				"saved": "Changes saved",
-				"savedDescription": "Project settings were updated successfully.",
+				"close": "Close notification",
 				"error": "An error occurred",
 				"errorDescription": "Could not save your changes. Please try again later.",
-				"close": "Close notification"
+				"saved": "Changes saved",
+				"savedDescription": "Project settings were updated successfully."
 			},
 			"alertDialog": {
-				"deleteAction": "Delete",
+				"cancel": "Cancel",
 				"confirmDelete": "Are you sure you want to delete this?",
-				"irreversible": "This action cannot be undone. The selected item will be permanently deleted.",
-				"cancel": "Cancel"
+				"deleteAction": "Delete",
+				"irreversible": "This action cannot be undone. The selected item will be permanently deleted."
+			},
+			"blockQuote": "This is an example of a blockquote. Use blockquotes to show text quoted from other documents or sources and visually distinguish it from regular text.",
+			"button": {
+				"saving": "Saving"
 			},
 			"card": {
-				"projectSettings": "Project settings",
-				"projectDescription": "Manage basic project information.",
-				"published": "Published",
-				"projectDetails": "View the project name and publishing status here.",
-				"lastUpdated": "Last updated: Nov 4, 2026",
-				"cancel": "Cancel",
-				"save": "Save changes",
 				"announcements": "Announcements",
-				"contentOnly": "A simple view with only the card header and content."
-			},
-			"button": {
-				"saving": "Saving",
-				"textButtons": "Text buttons",
-				"iconButtons": "Icon buttons"
+				"cancel": "Cancel",
+				"contentOnly": "A simple view with only the card header and content.",
+				"lastUpdated": "Last updated: Nov 4, 2026",
+				"projectDescription": "Manage basic project information.",
+				"projectDetails": "View the project name and publishing status here.",
+				"projectSettings": "Project settings",
+				"published": "Published",
+				"save": "Save changes"
 			},
 			"carousel": {
-				"mountains": "Mountain landscape",
-				"ocean": "Coastal landscape",
 				"forest": "Forest landscape",
 				"gallery": "Landscape gallery",
 				"instructions": "Use the arrow buttons to switch images.",
-				"previous": "Previous image",
-				"next": "Next image"
+				"mountains": "Mountain landscape",
+				"next": "Next image",
+				"ocean": "Coastal landscape",
+				"previous": "Previous image"
+			},
+			"descriptionList": {
+				"address": "Address",
+				"email": "Email address",
+				"location": "Kasumigaseki, Chiyoda City, Tokyo",
+				"name": "Name",
+				"person": "Taro Yamada"
 			},
 			"dialog": {
-				"showDetails": "Show details",
-				"title": "Dialog title",
+				"content": "Dialog content is displayed here.",
 				"description": "Use a dialog to display additional information or actions.",
-				"content": "Dialog content is displayed here."
+				"showDetails": "Show details",
+				"title": "Dialog title"
 			},
-			"toast": {
-				"instructions": "Click a button to display each type of toast.",
-				"saved": "Saved",
-				"savedDescription": "Your changes have been saved.",
-				"notice": "Notice",
-				"noticeDescription": "A new update is available.",
-				"check": "Please review",
-				"checkDescription": "Please check your input.",
-				"error": "An error occurred",
-				"errorDescription": "Please try again."
-			},
-			"tooltip": {
-				"instructions": "Hover over or focus a button with the keyboard to show its description.",
-				"details": "Details",
-				"detailsDescription": "View details about this action.",
-				"placementInstructions": "See where the tooltip is placed.",
-				"top": "Top",
-				"right": "Right",
-				"bottom": "Bottom",
-				"left": "Left",
-				"shownTop": "Shown above",
-				"shownRight": "Shown to the right",
-				"shownBottom": "Shown below",
-				"shownLeft": "Shown to the left"
-			},
-			"languageSelect": {
-				"preview": "Preview",
-				"currentLanguage": "Current language: {{language}}"
+			"disclosure": {
+				"content": "This is the content of the disclosure. For more information, see the",
+				"detailsPage": "details page",
+				"showDetails": "Show details"
 			},
 			"form": {
-				"title": "Form example",
-				"name": "Full name",
-				"password": "Password",
-				"category": "Category",
-				"user": "User",
-				"users": "Users (multiple)",
-				"date": "Date",
-				"period": "Date range",
-				"interests": "Areas of interest",
-				"gender": "Gender",
 				"agreement": "Agree to the terms",
 				"agreeTerms": "I agree to the terms",
-				"description": "Description",
-				"attachmentsDrop": "Attachments (drag and drop)",
 				"attachmentsButton": "Attachments (button)",
-				"submit": "Submit",
-				"categoryEngineering": "Engineering",
+				"attachmentsDrop": "Attachments (drag and drop)",
+				"category": "Category",
 				"categoryDesign": "Design",
+				"categoryEngineering": "Engineering",
 				"categorySales": "Sales",
-				"userTanaka": "Taro Tanaka",
+				"date": "Date",
+				"description": "Description",
+				"error": "An error occurred",
+				"errorAgreement": "You must agree to the terms.",
+				"errorAttachmentCount_one": "example.story.form.errorAttachmentCount",
+				"errorAttachmentCount_other": "example.story.form.errorAttachmentCount",
+				"errorAttachmentRequired": "Please select a file.",
+				"errorAttachmentSize": "Each file must be 1 MiB or smaller.",
+				"errorCategory": "Please select a category.",
+				"errorDate": "Please select a date.",
+				"errorDescription": "Please enter a description.",
+				"errorDescriptionToast": "Please try again.",
+				"errorGender": "Please select a gender.",
+				"errorInterests": "Select at least one area of interest.",
+				"errorName": "Please enter your name.",
+				"errorPassword": "Password must be at least 8 characters.",
+				"errorPeriod": "Please select a date range.",
+				"errorUser": "Please select a user.",
+				"errorUsers": "Please select at least one user.",
+				"gender": "Gender",
+				"genderFemale": "Female",
+				"genderMale": "Male",
+				"genderOther": "Other",
+				"interestDesign": "Design",
+				"interestProgramming": "Programming",
+				"interestReading": "Reading",
+				"interests": "Areas of interest",
+				"name": "Full name",
+				"password": "Password",
+				"period": "Date range",
+				"saved": "Saved",
+				"savedDescription": "Your changes have been saved.",
+				"submit": "Submit",
+				"title": "Form example",
+				"user": "User",
+				"users": "Users (multiple)",
 				"userSato": "Hanako Sato",
 				"userSuzuki": "Ichiro Suzuki",
 				"userTakahashi": "Misaki Takahashi",
-				"interestProgramming": "Programming",
-				"interestDesign": "Design",
-				"interestReading": "Reading",
-				"genderMale": "Male",
-				"genderFemale": "Female",
-				"genderOther": "Other",
-				"errorAttachmentSize": "Each file must be 1 MiB or smaller.",
-				"errorAttachmentRequired": "Please select a file.",
-				"errorAttachmentCount": "You can select up to {{count}} files.",
-				"errorName": "Please enter your name.",
-				"errorPassword": "Password must be at least 8 characters.",
-				"errorCategory": "Please select a category.",
-				"errorUser": "Please select a user.",
-				"errorUsers": "Please select at least one user.",
-				"errorAgreement": "You must agree to the terms.",
-				"errorInterests": "Select at least one area of interest.",
-				"errorGender": "Please select a gender.",
-				"errorDate": "Please select a date.",
-				"errorPeriod": "Please select a date range.",
-				"errorDescription": "Please enter a description.",
-				"saved": "Saved",
-				"savedDescription": "Your changes have been saved.",
-				"error": "An error occurred",
-				"errorDescriptionToast": "Please try again."
+				"userTanaka": "Taro Tanaka"
+			},
+			"hamburger": {
+				"home": "Home",
+				"mainMenu": "Main menu",
+				"menu": "Menu",
+				"selectPage": "Select a page.",
+				"settings": "Settings",
+				"user": "Users"
+			},
+			"image": {
+				"description": "Image description",
+				"sample": "Sample image"
+			},
+			"labels": {
+				"date": "Date",
+				"file": "File",
+				"heading": "Heading",
+				"language": "Language",
+				"name": "Name",
+				"notifications": "Notifications",
+				"password": "Password",
+				"period": "Date range",
+				"switch": "Toggle switch",
+				"userList": "User list"
+			},
+			"languageSelect": {
+				"currentLanguage": "Current language: {{language}}",
+				"preview": "Preview"
+			},
+			"layout": {
+				"centerDescription": "This area is centered on the screen, and its maximum width is limited to {{maxWidth}}.",
+				"clusterDescription": "Change space, justify, and align in Controls to see how child elements are arranged and spaced.",
+				"content_one": "example.story.layout.content",
+				"content_other": "example.story.layout.content",
+				"contentArea": "Content area",
+				"input": "Input field",
+				"inputPlaceholder": "Enter a value",
+				"large": "Large",
+				"medium": "Medium",
+				"small": "Small"
+			},
+			"list": {
+				"application": "Application form",
+				"identityDocument": "Identity document",
+				"photo": "ID photo"
 			},
 			"table": {
-				"search": "Search by name",
-				"searchDescription": "Enter part of a name to filter the results.",
-				"reset": "Reset filters and sorting",
-				"caption": "Member list. Select a column heading to sort.",
-				"noMembers": "No matching members.",
-				"count": "{{count}} total",
-				"showing": "Showing {{start}}–{{end}} of {{count}}",
-				"previous": "Previous",
-				"next": "Next",
-				"name": "Name",
-				"role": "Role",
-				"team": "Team",
 				"actions": "Actions",
 				"ascending": "Ascending",
-				"descending": "Descending",
-				"sortable": "Sortable",
-				"save": "Save",
 				"cancel": "Cancel",
-				"edit": "Edit",
+				"caption": "Member list. Select a column heading to sort.",
 				"delete": "Delete",
+				"descending": "Descending",
+				"edit": "Edit",
+				"name": "Name",
+				"next": "Next",
+				"noMembers": "No matching members.",
+				"previous": "Previous",
+				"reset": "Reset filters and sorting",
+				"role": "Role",
+				"roleCustomerSuccess": "Customer success",
 				"roleDesigner": "Designer",
 				"roleEngineer": "Engineer",
-				"roleProductManager": "Product manager",
-				"roleCustomerSuccess": "Customer success",
 				"roleMarketer": "Marketer",
+				"roleProductManager": "Product manager",
 				"roleSales": "Sales",
-				"teamProduct": "Product",
+				"save": "Save",
+				"search": "Search by name",
+				"searchDescription": "Enter part of a name to filter the results.",
+				"showing_one": "example.story.table.showing",
+				"showing_other": "example.story.table.showing",
+				"sortable": "Sortable",
+				"team": "Team",
 				"teamDevelopment": "Development",
-				"teamSupport": "Support",
 				"teamMarketing": "Marketing",
-				"teamSales": "Sales"
+				"teamProduct": "Product",
+				"teamSales": "Sales",
+				"teamSupport": "Support"
+			},
+			"text": "This is text.",
+			"toast": {
+				"check": "Please review",
+				"checkDescription": "Please check your input.",
+				"error": "An error occurred",
+				"errorDescription": "Please try again.",
+				"instructions": "Click a button to display each type of toast.",
+				"notice": "Notice",
+				"noticeDescription": "A new update is available.",
+				"saved": "Saved",
+				"savedDescription": "Your changes have been saved."
+			},
+			"tooltip": {
+				"bottom": "Bottom",
+				"details": "Details",
+				"detailsDescription": "View details about this action.",
+				"instructions": "Hover over or focus a button with the keyboard to show its description.",
+				"left": "Left",
+				"placementInstructions": "See where the tooltip is placed.",
+				"right": "Right",
+				"shownBottom": "Shown below",
+				"shownLeft": "Shown to the left",
+				"shownRight": "Shown to the right",
+				"shownTop": "Shown above",
+				"top": "Top"
 			}
 		}
 	}
