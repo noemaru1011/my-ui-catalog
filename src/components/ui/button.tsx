@@ -2,7 +2,7 @@ import { Button as ButtonPrimitive } from '@base-ui/react/button';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from 'cn';
 
-// CUSTOM: loading状態の表示にSpinnerを使用
+// CUSTOMIZE: loading状態の表示にSpinnerを使用
 import { Spinner } from '@/components/ui/spinner';
 
 const buttonVariants = cva(
@@ -82,11 +82,11 @@ function Button({
 			{...props}
 			data-slot="button"
 			className={cn(buttonVariants({ variant, size, className }))}
-			// CUSTOM: loading中は操作を禁止
+			// CUSTOMIZE: loading中は操作を禁止
 			disabled={loading || disabled}
 			aria-busy={loading || undefined}
 		>
-			{/* CUSTOM: loading中はSpinnerを表示 */}
+			{/* CUSTOMIZE: loading中はSpinnerを表示 */}
 			{loading && <Spinner aria-hidden="true" />}
 			{children}
 		</ButtonPrimitive>
