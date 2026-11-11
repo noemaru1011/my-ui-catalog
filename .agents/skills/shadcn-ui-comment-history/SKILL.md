@@ -1,4 +1,5 @@
 ---
+
 name: shadcn-ui-comment-history
 description: Compare the project's shadcn/ui primitives in src/components/ui with the latest shadcn registry version, then document intentional local differences that must be preserved using KEEP comments.
 ---
@@ -65,7 +66,7 @@ For JSX comments:
 
 ```tsx
 {
-  /* KEEP: 読み上げ用の状態を維持 */
+	/* KEEP: 読み上げ用の状態を維持 */
 }
 ```
 

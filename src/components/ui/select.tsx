@@ -31,7 +31,7 @@ function SelectTrigger({
 	children,
 	...props
 }: SelectPrimitive.Trigger.Props & {
-	// CUSTOMIZE: shadcn/ui標準にないlgサイズを追加
+	// KEEP: shadcn/ui標準にないlgサイズを追加
 	size?: 'sm' | 'default' | 'lg';
 }) {
 	return (
