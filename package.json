@@ -8,7 +8,6 @@
 	},
 	"scripts": {
 		"storybook": "storybook dev -p 6006",
-		"test:storybook-coverage": "vitest run --coverage",
 		"build-storybook": "storybook build",
 		"lint": "biome lint",
 		"format": "biome format --write",
@@ -19,6 +18,7 @@
 		"test:run": "npx vitest run",
 		"test:components": "npx vitest run --project components",
 		"test:storybook": "npx vitest run --project storybook",
+		"test:coverage": "vitest run --coverage",
 		"test:e2e": "playwright test",
 		"i18n:check": "i18next-cli status",
 		"i18n:check:unused": "i18next-cli status --unused"

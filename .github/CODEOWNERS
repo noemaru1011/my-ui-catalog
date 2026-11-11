@@ -1,0 +1,8 @@
+/.github/ @noemaru1011
+/.agents/ @noemaru1011
+
+*.test.ts @noemaru1011
+*.test.tsx @noemaru1011
+*.spec.ts @noemaru1011
+*.spec.tsx @noemaru1011
+/e2e/ @noemaru1011

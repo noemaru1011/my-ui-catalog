@@ -1,54 +1,88 @@
+<div align="center">
+
+<img src="./docs/my-icon.jpg" alt="UI Catalog" width="180" />
+
 # UI Catalog
 
-[**Live Demo**](https://noemaru1011.github.io/my-ui-catalog/)
+## 概要
 
-React と TypeScript で構成された UI コンポーネントカタログです。
+このプロジェクトは、React と TypeScript で構築した、個人開発の UI コンポーネントカタログです。
+Storybook を活用し、コンポーネントの表示・動作・バリエーションを一元管理します。
 
-自分が個人開発で作ったものです。
+[**カタログを確認する**](https://noemaru1011.github.io/my-ui-catalog/)
+<!-- Tech Stack -->
+<p align="center">
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white" />
+  <img src="https://img.shields.io/badge/i18next-26A69A?style=for-the-badge&logo=i18next&logoColor=white" />
+  <img src="https://img.shields.io/badge/react--i18next-26A69A?style=for-the-badge&logo=react&logoColor=white" />
+  <img src="https://img.shields.io/badge/i18next--cli-26A69A?style=for-the-badge&logo=i18next&logoColor=white" />
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/React_Hook_Form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white" />
+  <img src="https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white" />
+  <img src="https://img.shields.io/badge/Biome-60A5FA?style=for-the-badge&logo=biome&logoColor=white" />
+  <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white" />
+  <img src="https://img.shields.io/badge/Testing_Library-E33332?style=for-the-badge&logo=testinglibrary&logoColor=white" />
+  <img src="https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white" />
+  <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" />
+  <img src="https://img.shields.io/badge/GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white" />
+</p>
 
-Storybook を使用して、コンポーネントの表示・動作・バリエーションを確認し、UI の一貫性を維持します。
+</div>
 
-※テーブルやヘッダーなどは毎回異なるのでコンポーネント化してないです。  
-※ボタンなどは shadcn/ui をベースとてそのまま使うことが多いので、自作コンポーネント化してないです。
+### 技術スタック
 
-## Tech Stack
-
-| 分類                 | 技術                                |
+| カテゴリー           | 技術名                              |
 | -------------------- | ----------------------------------- |
-| Framework            | React 19                            |
+| Framework            | React                               |
 | Language             | TypeScript                          |
 | UI Catalog           | Storybook                           |
 | Build Tool           | Vite                                |
-| Styling              | Tailwind CSS 4                      |
+| Styling              | Tailwind CSS                        |
 | UI Primitives        | shadcn/ui                           |
-| Internationalization | i18next、react-i18next              |
-| **Form(サンプル用)** | **React Hook Form、Zod**            |
+| Internationalization | i18next, react-i18next, i18next-cli |
+| Form (Sample)        | React Hook Form, Zod                |
 | Linter / Formatter   | Biome                               |
 | Package Manager      | npm                                 |
-| Test                 | Vitest、Testing Library、Playwright |
+| Test                 | Vitest, Testing Library, Playwright |
 | CI/CD                | GitHub Actions                      |
-| Deploy               | GitHub Pages                        |
-| Agent Skills         | `.agents/skills/`                   |
+| Deployment           | GitHub Pages                        |
 
-## Requirements
+## インストール及びスタート方法
 
-- Node.js `>=24.22.2`
-- npm
-- Git
+### 1. 環境準備
+
+| Tool    | Version     |
+| ------- | ----------- |
+| Node.js | `>=24.22.2` |
+| npm     | Required    |
+| Git     | Required    |
 
 Node.js のバージョンは `.nvmrc` と `package.json` の `engines` で管理しています。
 
-## Getting Started
+### 2. Repositoryをクローン
 
-### 1. Node.js のバージョンを合わせる
+```bash
+git clone https://github.com/noemaru1011/my-ui-catalog.git
 
-nvm を使用している場合、以下を実行します。
+cd my-ui-catalog
+```
+
+### 3. Node.jsの環境構築
+
+nvm を使用している場合、プロジェクトで指定された Node.js のバージョンを適用します。
 
 ```bash
 nvm use
 ```
 
-### 2. 依存パッケージをインストールする
+### 4. 依存関係のインストール
 
 ```bash
 npm ci
@@ -56,17 +90,17 @@ npm ci
 
 インストール時には `prepare` スクリプトによって、Git フックの参照先が `.github/hooks` に設定されます。
 
-### 3. Storybook を起動する
+### 5. Storybookの起動
 
 ```bash
 npm run storybook
 ```
 
-ブラウザで以下の URL にアクセスします。
+ブラウザで以下にアクセスします。
 
 <http://localhost:6006>
 
-### 4. Storybook をビルドする
+### 6. Storybookのビルド
 
 ```bash
 npm run build-storybook
@@ -74,295 +108,149 @@ npm run build-storybook
 
 ビルド成果物は `storybook-static/` に出力されます。
 
-## Directory Structure
+## 使い方
 
-```text
-.
-├── .agents
-│   └── skills             # プロジェクト用 Agent Skills
-├── .github/
-│   ├── hooks/             # Git フック
-│   ├── workflows/         # GitHub Actions
-│   └── PULL_REQUEST_TEMPLATE.md
-├── .storybook/            # Storybook 設定
-├── docs/                  # デザイントークン等のドキュメント
-├── e2e/                   # Playwright Test による E2E テスト
-├── src/
-│   ├── components/
-│   │   ├── elements/      # 自作 UI コンポーネント
-│   │   ├── layouts/       # レイアウト用自作コンポーネント
-│   │   ├── example/       # フォーム・テーブル等の組み合わせ例
-│   │   ├── types/         # 共通の型・テスト用データ
-│   │   └── ui/            # shadcn/ui の UI
-│   ├── i18n/
-│   │   ├── locales/       # 言語ごとの翻訳ファイル
-│   │   ├── index.ts       # i18next の初期化
-│   │   └── i18next.d.ts   # 翻訳キーの型定義
-│   ├── lib/               # 共通ユーティリティ
-│   ├── test/              # Vitest の共通セットアップ
-│   └── index.css          # グローバルスタイル
-├── vite.config.ts         # Vite・Vitest 設定
-├── biome.json             # Biome 設定
-├── components.json        # shadcn/ui 設定
-├── package.json
-└── README.md
+### 1. プロジェクトを実行するコマンド
+
+```bash
+# Biome による Lint
+npm run test
+
+# Biome によるフォーマット
+npm run format
+
+# Biome によるチェック
+npm run check
+
+# Biome によるチェックと自動修正
+npm run check:fix
+
+# Vitest の Watch モードでテストを実行
+npm run test
+
+# 全 Vitest プロジェクトのテストを一括実行
+npm run test:run
+
+# コンポーネントテストを実行
+npm run test:components
+
+# Storybook の Story テストを実行
+npm run test:storybook
+
+# カバレッジ付きでテストを実行
+npm run test:coverage
+
+# Playwright E2E テストを実行 
+npm run test:e2e
+
+# 日本語・英語の翻訳キーが揃っているか確認
+npm run i18n:check
+
+# 使用されていない翻訳キーがないか確認
+npm run i18n:check:unused
 ```
 
-## Components
+### 2. プロジェクトの主な機能の使い方を説明
 
-### Elements
+#### Elements
 
 自作したアプリケーションの UI を構成する、再利用可能なコンポーネントを管理します。
 
-### Layouts
+#### Layouts
 
-コンポーネントの配置やレイアウトを制御するためのコンポーネントです。
+コンポーネントの配置やレイアウトを制御するためのコンポーネントを管理します。
 
-- Center
-- Cluster
-- Container
-- Stack
-
-### UI Primitives
+#### UI Primitives
 
 `src/components/ui/` では、shadcn/ui をベースとした UI プリミティブを管理します。
 
 ボタン、入力欄、ラベル、ポップオーバーなど、上位のコンポーネントを構成する基本的な UI 要素を配置します。
 
-### Examples
+#### Examples
 
 複数のコンポーネントを組み合わせた使用例を管理します。
 
-- `src/components/example/form/`: Zod スキーマ、React Hook Form のカスタムフック、フォーム UI、ページで構成するフォーム例
-- `src/components/example/table/`: TanStack Table v9 を使ったソート、絞り込み、ページネーション、行編集の例
+- `src/components/example/form/`：フォームの実装例
+- `src/components/example/table/`：テーブルの実装例
 
-フォーム例のスキーマと型は `src/components/example/form/schema/formSchema.ts` に定義し、サンプルのため外部 API には接続しません。
+### 3. コード例
 
-## Internationalization (i18n)
+#### Layouts
 
-翻訳には `i18next` と `react-i18next` を使用しています。翻訳リソースは `src/i18n/locales/` に言語ごとに配置し、現在は日本語 (`ja`) と英語 (`en`) に対応しています。
+- **Center**：子要素を中央に配置する
+- **Cluster**：子要素を横方向にまとめて配置する
+- **Container**：コンテンツの最大幅などを制御する
+- **Stack**：子要素を縦方向に積み重ねて配置する
 
-| ファイル                               | 用途                                                       |
-| -------------------------------------- | ---------------------------------------------------------- |
-| `src/i18n/index.ts`                    | 翻訳リソース、対応言語、言語検出、フォールバック言語を設定 |
-| `src/i18n/locales/ja/translation.json` | 日本語の翻訳                                               |
-| `src/i18n/locales/en/translation.json` | 英語の翻訳                                                 |
-| `src/i18n/i18next.d.ts`                | 翻訳キーを TypeScript で型チェック                         |
+#### Form
 
-言語は localStorage の `language` を優先して検出し、次にブラウザーの言語設定を参照します。未対応言語の場合は日本語 (`ja`) を表示します。Storybook では `.storybook/preview.tsx` から i18n を読み込み、言語切替の動作は `LanguageSelect` の Story で確認できます。
+`src/components/example/form/`
 
-React コンポーネントでは `useTranslation` の `t` 関数を使って翻訳を参照します。
+以下の技術を組み合わせたフォームの実装例です。
 
-```tsx
-import { useTranslation } from 'react-i18next';
-import { Text } from '@/components/elements/Text/Text';
+- Zod：入力値のバリデーション
+- React Hook Form：フォーム状態の管理
+- カスタムフック：フォーム処理の共通化
+- フォーム UI：入力画面の構築
+- ページ：フォームの利用例
 
-function Example() {
-	const { t } = useTranslation();
+#### Table
 
-	return <Text>{t('example.description')}</Text>;
-}
-```
+`src/components/example/table/`
 
-翻訳キーは `common`、`example` などの名前空間・用途ごとに階層化します。値を埋め込む場合は i18next の補間を使います。
+TanStack Table v9 を使用したテーブルの実装例です。
 
-日本語 (`src/i18n/locales/ja/translation.json`) と英語 (`src/i18n/locales/en/translation.json`) で、同じキーにそれぞれの翻訳を定義します。
+- ソート
+- 絞り込み
+- ページネーション
+- 行編集
 
-```json
-{
-	"example": {
-		"greeting": "こんにちは、{{name}}さん"
-	}
-}
-```
+## 運用
 
-```json
-{
-	"example": {
-		"greeting": "Hello, {{name}}"
-	}
-}
-```
+本リポジトリでは、品質の担保と開発効率の向上を目的に、以下のルールと自動化ツールを導入しています。
 
-```tsx
-t('example.greeting', { name: '太郎' });
-```
+### 1. 開発フローと GitHub Projects 連携
 
-新しい文言を追加・変更するときは、日本語と英語の両方の `translation.json` に同じキー構造で翻訳を追加し、コンポーネントや Story では文字列を直接記述せず翻訳キーを使ってください。翻訳キーが両言語で揃っていることは、次のコマンドで確認できます。
+すべての作業は **Issue** を起点とし、GitHub Projects 上でステータスを管理します。
 
-```bash
-npm run check:locale
-```
+1. **Issue の作成**
+   - `.github/ISSUE_TEMPLATE/issue.md` のテンプレートに従ってタスクを起票します。
+   - 起票された Issue はプロジェクトボードの `Todo` に追加されます。
+2. **ブランチ作成・実装**
+   - Issue 画面の「Create a branch」から作業用ブランチを作成し、ステータスを `In Progress` に変更します。
+   - コミット時には Git Hooks（`pre-commit` / `commit-msg`）が自動実行され、コードフォーマットやコミットメッセージの規約チェックが行われます。
+3. **Pull Request（PR）の作成**
+   - 実装完了後、`.github/PULL_REQUEST_TEMPLATE.md` に従って PR を作成し、ステータスを `In Review` に変更します。
+   - PR の説明欄に `Closes #<Issue番号>` を記載し、Issue と紐付けます。
+4. **レビュー・マージ**
+   - CI の通過およびレビュアーの承認後、マージを行います。
+   - マージされると紐づいた Issue が自動的にクローズされ、プロジェクトボードのステータスも `Done` へ移行します。
 
-このチェックは CI でも実行されます。翻訳キーの型チェックを含むソースコードの検証には `npm run check` を使用してください。
+### 2. ローカル開発環境（Git Hooks）
 
-## Adding a Component
+- **`pre-commit`**: コミット前に Lint やフォーマットチェック等を実行します。
+- **`commit-msg`**: コミットメッセージが規約（Conventional Commits 等）に沿っているか検証します。
 
-新しいコンポーネントを追加する場合は、用途に応じたディレクトリに配置します。
+### 3. CI / CD（GitHub Actions）
 
-| 配置先                 | 用途                                                           |
-| ---------------------- | -------------------------------------------------------------- |
-| `components/elements/` | 再利用可能な UI コンポーネント                                 |
-| `components/layouts/`  | レイアウト制御用コンポーネント                                 |
-| `components/ui/`       | shadcn/ui ベースの UI プリミティブ(自作の場合ここに追加しない) |
-| `components/example/`  | 複数コンポーネントを組み合わせた使用例                         |
+`.github/workflows` に定義された以下のワークフローが自動実行されます。
 
-### Storybook Stories
+- **`ci.yml`**: PR の作成・更新時に自動テスト、ビルド、静的解析を実行します。**CI がすべてパスすることがマージの必須条件です。**
+- **`check-node-version.yml`**: nvmcrを変更した際に、package.jsonのバージョンに差異がないか検証します。
+- **`cd.yml`**: `main` ブランチへのマージをトリガーに、本番環境への自動デプロイを実行します。
 
-`elements/` および `layouts/` のコンポーネントには、実装ファイルと対応する Story,Test ファイルを配置します。
+### 4. 依存パッケージの自動更新（Dependabot）
 
-例：
+- `.github/dependabot.yml` の設定に基づき、依存ライブラリのアップデートやセキュリティパッチの PR が定期的に自動作成されます。
+- Dependabot による PR も通常の PR と同様に CI の通過を確認したうえでマージします。
 
-```text
-src/components/elements/Select/
-├── Select.tsx
-├── Select.test.tsx
-└── Select.stories.tsx
-```
+### 5. コードオーナーとブランチ保護（CODEOWNERS）
 
-Story ファイルでは、コンポーネントの基本表示、プロパティの違い、状態やバリエーションなどを確認できるようにします。
+品質担保および開発ルール維持のため、`.github/CODEOWNERS` とブランチ保護ルール（Rulesets）により、重要ファイルの変更にはコードオーナーの承認を必須としています。
 
-コンポーネントの仕様を変更した場合は、必要に応じて対応する Story も更新します。
-
-### Test
-
-コンポーネントのテスト方針や作成手順は `.agents/skills/` にある Skills にまとめています。
-
-テストでは、実装の詳細ではなく、コンポーネントが外部から観測できる振る舞いを中心に検証します。
-
-主なテスト観点は以下のとおりです。
-
-- **基本動作**：初期表示やデフォルトの状態が正しいこと
-- **Props による挙動の違い**：Props の指定値や組み合わせに応じて、表示・動作・状態が適切に変化すること
-- **ユーザー操作**：クリックや入力などの操作に応じて、期待する動作が行われること
-- **状態の変化**：操作後の表示や状態が期待どおりに更新されること
-- **制約条件**：`disabled` などの制約が適切に機能すること
-- **アクセシビリティ**：ロール、ラベル、ARIA 属性などが適切に設定されていること
-
-通常のコンポーネントテストは Vitest の `components` プロジェクトで実行し、Vitest Browser Mode と Playwright の Chromium、React Testing Library、`userEvent` を使用します。Storybook の story は別の `storybook` プロジェクトで検証します。どちらも設定は `vite.config.ts` にあります。
-
-複数コンポーネントにまたがるブラウザ操作を検証する Playwright Test は `e2e/` に配置し、Storybook をテスト対象として起動します。コンポーネントの仕様を変更した場合は、適切なテストを追加・更新して既存動作への影響を確認します。
-
-## Development Commands
-
-| コマンド                  | 説明                                             |
-| ------------------------- | ------------------------------------------------ |
-| `npm run storybook`       | Storybook の開発サーバーを起動                   |
-| `npm run build-storybook` | Storybook を静的ビルド                           |
-| `npm run lint`            | Biome による Lint                                |
-| `npm run format`          | Biome によるフォーマット                         |
-| `npm run check`           | Biome によるチェック                             |
-| `npm run check:fix`       | Biome によるチェックと自動修正                   |
-| `npm run test`            | Vitest の watch モードでテストを実行             |
-| `npm run test:run`        | Vitest の全プロジェクトを一括実行                |
-| `npm run test:components` | コンポーネントテストを実行                       |
-| `npm run test:storybook`  | Storybook の story テストを実行                  |
-| `npm run test:e2e`        | Storybook を起動して Playwright E2E テストを実行 |
-| `npm run check:locale`    | 日本語・英語の翻訳キー構造をチェック             |
-
-特定のコンポーネントテストまたは E2E テストを実行する場合：
-
-```bash
-npm run test:components -- src/components/example/form/components/FormExample.test.tsx
-npm run test:e2e -- e2e/form.spec.ts
-```
-
-`npm run test:e2e` は Playwright 設定の `webServer` を使って Storybook を起動します。CI では Chromium をセットアップしてから、Biome チェック、全 Vitest テスト、E2E テスト、Storybook ビルドを実行します。
-
-### Code Quality
-
-開発時には、必要に応じて以下を実行します。
-
-```bash
-npm run check
-```
-
-自動修正を適用する場合：
-
-```bash
-npm run check:fix
-```
-
-```bash
-# テストを実行
-npm run test
-
-# テストを一括実行
-npm run test:run
-
-# コンポーネントのテストを実行
-npm run test:components
-
-# Storybook のテストを実行
-npm run test:storybook
-
-# Playwright のE2Eテストを実行（Storybookを自動起動）
-npm run test:e2e
-```
-
-## Biome Configuration
-
-Biome を使用して、コードの品質・フォーマット・命名規則を統一します。
-
-### Configuration Rules
-
-| 設定項目             | ルール・値                   | 内容                                  |
-| -------------------- | ---------------------------- | ------------------------------------- |
-| VCS                  | `enabled: true`              | バージョン管理との連携を有効化        |
-| VCS                  | `clientKind: "git"`          | Git を使用                            |
-| VCS                  | `useIgnoreFile: true`        | Git の無視設定を適用                  |
-| Formatter            | `indentStyle: "tab"`         | タブインデントを使用                  |
-| Formatter            | `lineWidth: 100`             | 行幅を 100 文字に設定                 |
-| JavaScript Formatter | `quoteStyle: "single"`       | シングルクォートを使用                |
-| Linter               | `preset: "recommended"`      | 推奨ルールセットを適用                |
-| Correctness          | `noUnusedImports: "error"`   | 未使用の import をエラーにする        |
-| Correctness          | `noUnusedVariables: "error"` | 未使用の変数をエラーにする            |
-| Naming Convention    | `strictCase: true`           | 大文字・小文字を厳密にチェック        |
-| Naming Convention    | `level: "error"`             | 命名規則違反をエラーにする            |
-| CSS Parser           | `tailwindDirectives: true`   | Tailwind CSS のディレクティブを有効化 |
-| Nursery              | `useSortedClasses: "warn"`   | クラス順序の違反を警告                |
-| Assist               | `enabled: true`              | コード支援機能を有効化                |
-| Assist               | `organizeImports: "on"`      | import 文を自動整理                   |
-
-クラス順序チェックの対象関数には、`clsx`、`cva`、`twMerge`、`cn` を設定します。
-
-実際の適用ルールは `biome.json` を参照してください。
-
-## Naming Conventions
-
-| 対象                 | 適用範囲 | 命名形式                   | 例                         |
-| -------------------- | -------- | -------------------------- | -------------------------- |
-| グローバル定数       | `global` | `CONSTANT_CASE`            | `API_BASE_URL`             |
-| 変数                 | `any`    | `camelCase`                | `userName`                 |
-| 関数                 | `any`    | `camelCase` / `PascalCase` | `getUser` / `GetUser`      |
-| クラス               | `any`    | `PascalCase`               | `UserService`              |
-| 型・インターフェース | `any`    | `PascalCase`               | `UserProfile` / `UserType` |
-
-### Component Naming
-
-- コンポーネントのディレクトリ名は `PascalCase` とします。
-- コンポーネントの実装ファイルは `ComponentName.tsx` とします。
-- Story ファイルは `ComponentName.stories.tsx` とします。
-- React コンポーネント名は `PascalCase` とします。
-- 変数や関数は原則として `camelCase` とします。
-
-## CI
-
-GitHub Actions による自動チェックを管理します。
-
-- `.github/workflows/check-node-version.yml`: Node.js のバージョンチェック(簡易的)
-- `.github/workflows/ci.yml`: CI の実行
-
-CI では Playwright の Chromium をセットアップしてE2Eテストも実行し、失敗時はトレースをアーティファクトとして保存します。
-
-具体的なチェック内容は各ワークフローファイルを参照してください。
-
-## CD
-
-GitHub Actions による自動デプロイを行う。
-
-- `.github/workflows/cd.yml`: CD の実行
-
-`master` ブランチで CI が成功すると、Storybook のビルドと GitHub Pages へのデプロイを実行します。手動実行にも対応しています。
-
-具体的な処理内容は、ワークフローファイルを参照してください。
+- **保護対象ファイル・ディレクトリ**
+  - **`.github/`・`.agents/`**: CI/CD ワークフロー、Git Hooks、AI 向け指示書などの開発ルール・自動化基盤
+  - **`*.test.ts(x)`・`*.spec.ts(x)`・`/e2e/`**: 単体テストおよび E2E テストコード（テスト削除・改ざんによる CI 突破の防止）
+- **変更・削除時の運用ルール**
+  - 上記ファイルを含む PR を作成すると、自動的にコードオーナー（`@noemaru1011`）がレビュアーに割り当てられます。
+  - テストの削除やルールの変更が正当な理由に基づく場合は、PR 上で理由を明記し、コードオーナーの承認（Approve）を得た
