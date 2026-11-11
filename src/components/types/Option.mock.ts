@@ -19,7 +19,7 @@ export const OPTIONS_WITH_DISABLED: Option[] = [
 	...OPTIONS,
 	{
 		value: 'rust',
-		label: 'Rust',
+		label: 'Rust(非活性は非推奨です。用いる場合は、理由などを記載してください。)',
 		disabled: true,
 	},
 ];

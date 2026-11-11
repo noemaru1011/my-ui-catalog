@@ -18,7 +18,7 @@ type FileUploadProps = {
 	id?: string;
 	name: string;
 	label?: string;
-	/** 編集不可の理由や文字数制限などを記載。 */
+	/** 編集不可の理由などを記載。 */
 	description?: string;
 	required?: boolean;
 	accept?: string;

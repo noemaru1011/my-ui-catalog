@@ -16,10 +16,12 @@ type FileUploadButtonProps = {
 	name: string;
 	/** ボタン上部に表示するラベル。 */
 	fieldLabel: string;
-	/** ボタン内部に表示するラベル。 */
+	/** ボタン内部に表示するラベル。
+	 * コンポーネントの内部で指定済み。変更も可能です。
+	 */
 	label?: string;
+	/** 編集不可の理由などを記載。 */
 	description?: string;
-	/** 必須項目かどうか。 */
 	required?: boolean;
 	accept?: string;
 	multiple?: boolean;

@@ -147,7 +147,7 @@ describe('Combobox', () => {
 		await user.click(screen.getByRole('combobox', { name: '言語' }));
 
 		const rust = await screen.findByRole('option', {
-			name: 'Rust',
+			name: 'Rust(非活性は非推奨です。用いる場合は、理由などを記載してください。)',
 		});
 
 		expect(rust).toHaveAttribute('aria-disabled', 'true');

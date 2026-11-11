@@ -91,7 +91,11 @@ describe('Radio', () => {
 
 		expect(screen.queryByText('編集不可')).not.toBeInTheDocument();
 
-		expect(screen.getByRole('radio', { name: 'Rust' })).toHaveAttribute('aria-disabled', 'true');
+		expect(
+			screen.getByRole('radio', {
+				name: 'Rust(非活性は非推奨です。用いる場合は、理由などを記載してください。)',
+			}),
+		).toHaveAttribute('aria-disabled', 'true');
 		expect(screen.getByRole('radio', { name: 'TypeScript' })).not.toHaveAttribute(
 			'aria-disabled',
 			'true',
