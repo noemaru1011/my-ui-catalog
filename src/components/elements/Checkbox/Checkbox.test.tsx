@@ -154,7 +154,11 @@ describe('Checkbox', () => {
 			'true',
 		);
 
-		expect(screen.getByRole('checkbox', { name: 'Rust' })).toHaveAttribute('aria-disabled', 'true');
+		expect(
+			screen.getByRole('checkbox', {
+				name: 'Rust(非活性は非推奨です。用いる場合は、理由などを記載してください。)',
+			}),
+		).toHaveAttribute('aria-disabled', 'true');
 		expect(screen.queryByText('編集不可')).not.toBeInTheDocument();
 	});
 

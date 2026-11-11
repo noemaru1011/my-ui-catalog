@@ -162,10 +162,11 @@ describe('Select', () => {
 
 		await user.click(screen.getByRole('combobox'));
 
-		expect(await screen.findByRole('option', { name: 'Rust' })).toHaveAttribute(
-			'aria-disabled',
-			'true',
-		);
+		expect(
+			await screen.findByRole('option', {
+				name: 'Rust(非活性は非推奨です。用いる場合は、理由などを記載してください。)',
+			}),
+		).toHaveAttribute('aria-disabled', 'true');
 	});
 
 	it('disabled の選択肢を選んでも onChange を呼び出さない', async () => {
@@ -178,7 +179,9 @@ describe('Select', () => {
 
 		await user.click(screen.getByRole('combobox'));
 
-		const disabledOption = await screen.findByRole('option', { name: 'Rust' });
+		const disabledOption = await screen.findByRole('option', {
+			name: 'Rust(非活性は非推奨です。用いる場合は、理由などを記載してください。)',
+		});
 
 		expect(disabledOption).toHaveAttribute('aria-disabled', 'true');
 

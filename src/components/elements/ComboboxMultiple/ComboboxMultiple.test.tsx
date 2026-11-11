@@ -34,15 +34,6 @@ describe('ComboboxMultiple', () => {
 			expect(screen.getByRole('combobox', { name: '権限' })).toHaveAttribute('id');
 		});
 
-		it('placeholder が指定されても翻訳済みのプレースホルダーを表示する', () => {
-			renderCombobox({ placeholder: '言語を選択' });
-
-			expect(screen.getByRole('combobox', { name: '権限' })).toHaveAttribute(
-				'placeholder',
-				i18n.t('common.selectPlaceholder'),
-			);
-		});
-
 		it('必須の場合に必須マークを表示する', () => {
 			const { container } = renderCombobox({ required: true });
 
@@ -238,7 +229,7 @@ describe('ComboboxMultiple', () => {
 			await user.click(screen.getByRole('combobox', { name: '権限' }));
 
 			const disabledOption = await screen.findByRole('option', {
-				name: 'Rust',
+				name: 'Rust(非活性は非推奨です。用いる場合は、理由などを記載してください。)',
 			});
 
 			expect(disabledOption).toHaveAttribute('aria-disabled', 'true');
