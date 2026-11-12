@@ -114,7 +114,7 @@ npm run build-storybook
 
 ```bash
 # Biome による Lint
-npm run test
+npm run lint
 
 # Biome によるフォーマット
 npm run format
@@ -235,9 +235,10 @@ TanStack Table v9 を使用したテーブルの実装例です。
 
 `.github/workflows` に定義された以下のワークフローが自動実行されます。
 
-- **`ci.yml`**: PR の作成・更新時に自動テスト、ビルド、静的解析を実行します。**CI がすべてパスすることがマージの必須条件です。**
-- **`check-node-version.yml`**: nvmcrを変更した際に、package.jsonのバージョンに差異がないか検証します。
-- **`cd.yml`**: `main` ブランチへのマージをトリガーに、本番環境への自動デプロイを実行します。
+- **`ci.yml`**: 自動テスト、ビルド、静的解析を実行します。**CI がすべてパスすることがマージの必須条件です。**
+- **`check-node-version.yml`**: .nvmrcを変更した際に、package.jsonのバージョンに差異がないか検証します。
+- **`cd.yml`**: `master` ブランチへのマージをトリガーに、本番環境への自動デプロイを実行します。
+- **`shadcn-ui-check.yml`**: src/components/ui 配下の変更されたコンポーネントを最新の shadcn/ui Registry と比較し、整合性を検証します。KEEP: コメントが記載されたコンポーネントは比較対象外とします。
 
 ### 4. 依存パッケージの自動更新（Dependabot）
 

@@ -15,11 +15,34 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
+# Verify HEAD commit.
+if ! git cat-file -e "${HEAD_SHA}^{commit}" 2>/dev/null; then
+  echo "::error::HEAD commit does not exist: $HEAD_SHA"
+  exit 1
+fi
+
 # Get changed UI component files.
-mapfile -t changed_files < <(
-  git diff --name-only --diff-filter=ACMR \
-    "$BASE_SHA...$HEAD_SHA" -- "$UI_DIR"
-)
+changed_files=()
+
+if [[ "$BASE_SHA" =~ ^0+$ ]]; then
+  # Initial push: check all tracked UI component files.
+  echo "Initial push detected. Checking all UI components."
+
+  mapfile -t changed_files < <(
+    git ls-tree -r --name-only "$HEAD_SHA" -- "$UI_DIR"
+  )
+else
+  # Verify BASE commit.
+  if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
+    echo "::error::BASE commit does not exist: $BASE_SHA"
+    exit 1
+  fi
+
+  mapfile -t changed_files < <(
+    git diff --name-only --diff-filter=ACMR \
+      "$BASE_SHA...$HEAD_SHA" -- "$UI_DIR"
+  )
+fi
 
 if [[ ${#changed_files[@]} -eq 0 ]]; then
   echo "No shadcn/ui changes."
