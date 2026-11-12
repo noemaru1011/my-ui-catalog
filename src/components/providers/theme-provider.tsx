@@ -70,8 +70,7 @@ export function ThemeProvider({
 	);
 }
 
-// biome-ignore lint/style/useNamingConvention: 外部でも使いが、hooksの命名規則に従うため、useThemeとする
-export const useTheme = () => {
+export function useTheme() {
 	const context = useContext(THEME_PROVIDER_CONTEXT);
 
 	if (context === undefined) {
@@ -79,4 +78,4 @@ export const useTheme = () => {
 	}
 
 	return context;
-};
+}
