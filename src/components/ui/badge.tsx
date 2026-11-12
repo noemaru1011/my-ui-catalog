@@ -11,7 +11,7 @@ const badgeVariants = cva(
 				default: 'bg-primary text-primary-foreground [a]:hover:bg-primary/80',
 				secondary: 'bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80',
 				destructive:
-					//// 削除ボタンの文字色と背景色のコントラスト比が、アクセシビリティ基準の 4.5:1 を満たしていなかったので修正
+					// KEEP: 削除variantの文字と背景のコントラスト基準4.5:1を維持
 					'bg-destructive text-white hover:bg-destructive/90 active:bg-destructive/80 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive dark:text-white dark:hover:bg-destructive/90 dark:active:bg-destructive/80 dark:focus-visible:ring-destructive/40',
 				outline: 'border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground',
 				ghost: 'hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50',

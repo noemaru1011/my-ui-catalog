@@ -1,119 +1,305 @@
+
 import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Design System/Colors" />
+
+export const ColorGrid = ({ colors, swatchHeight = 64 }) => (
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+      gap: 12,
+    }}
+  >
+    {colors.map(([name, variable]) => (
+      <div
+        key={variable}
+        style={{
+          border: '1px solid var(--border)',
+          borderRadius: 8,
+          overflow: 'hidden',
+          backgroundColor: 'var(--background)',
+          color: 'var(--foreground)',
+        }}
+      >
+        <div
+          style={{
+            height: swatchHeight,
+            backgroundColor: `var(${variable})`,
+            borderBottom: '1px solid var(--border)',
+          }}
+        />
+        <div style={{ padding: 10 }}>
+          <div
+            style={{
+              fontWeight: 600,
+              fontSize: 13,
+              color: 'var(--foreground)',
+            }}
+          >
+            {name}
+          </div>
+          <code
+            style={{
+              display: 'block',
+              marginTop: 4,
+              fontSize: 11,
+              color: 'var(--muted-foreground)',
+              overflowWrap: 'anywhere',
+            }}
+          >
+            {variable}
+          </code>
+        </div>
+      </div>
+    ))}
+  </div>
+);
 
 # Color System
 
 アプリケーション全体で使用するカラートークンの一覧です。
 
-カラーはCSS変数で管理し、コンポーネントから直接参照します。
+カラーは以下の2階層で構成します。
+
+- **Primitive Colors**: 基本となる色の定義
+- **Semantic Colors**: UIの用途や役割に応じた色の定義
+
+---
 
 ## 1. Primitive Colors
 
-ブランドカラーや基本色のスケールです。
+基本となるカラーのスケールです。
 
 ### Blue
 
-ブランドカラー
+ブランドカラーとして使用するBlueのカラーパレットです。
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
-  {Array.from({ length: 13 }, (_, i) => {
-    const value = i === 0 ? 50 : i * 100;
-    const variable = `--color-blue-${value}`;
+50〜1200の13段階で定義しています。
 
-    return (
-      <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
-        <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
-        <div style={{ padding: 10 }}>
-          <div style={{ fontWeight: 600, fontSize: 13 }}>Blue {value}</div>
-          <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
-        </div>
-      </div>
-    );
-  })}
-</div>
+<ColorGrid
+  colors={[
+    ['Blue 50', '--color-blue-50'],
+    ['Blue 100', '--color-blue-100'],
+    ['Blue 200', '--color-blue-200'],
+    ['Blue 300', '--color-blue-300'],
+    ['Blue 400', '--color-blue-400'],
+    ['Blue 500', '--color-blue-500'],
+    ['Blue 600', '--color-blue-600'],
+    ['Blue 700', '--color-blue-700'],
+    ['Blue 800', '--color-blue-800'],
+    ['Blue 900', '--color-blue-900'],
+    ['Blue 1000', '--color-blue-1000'],
+    ['Blue 1100', '--color-blue-1100'],
+    ['Blue 1200', '--color-blue-1200'],
+  ]}
+/>
 
-## 2. Theme Colors
+### Supporting Colors
 
-アプリケーションの基本的なテーマカラーです。
+リンク、検索ハイライト、フォーカス、状態表現などに使用する補助カラーです。
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
-  {[
-    ['Background', '--background'],
-    ['Foreground', '--foreground'],
+<ColorGrid
+  colors={[
+    ['Magenta 200', '--color-magenta-200'],
+    ['Magenta 900', '--color-magenta-900'],
+    ['Yellow 300', '--color-yellow-300'],
+    ['Yellow 700', '--color-yellow-700'],
+    ['Yellow 900', '--color-yellow-900'],
+    ['Green 600', '--color-green-600'],
+    ['Green 800', '--color-green-800'],
+    ['Red 800', '--color-red-800'],
+    ['Red 900', '--color-red-900'],
+  ]}
+/>
+
+---
+
+## 2. Key Colors
+
+アプリケーションのブランドイメージや基本的な画面構成を表現するカラーです。
+
+| 項目 | CSS変数 | 用途 |
+|---|---|---|
+| Primary | `--primary` | メインとなるブランドカラー |
+| Secondary | `--secondary` | サブとなるブランドカラー |
+| Tertiary | `--tertiary` | 補助的なブランドカラー |
+| Background | `--background` | アプリケーション全体の背景色 |
+
+<ColorGrid
+  colors={[
     ['Primary', '--primary'],
-    ['Primary Foreground', '--primary-foreground'],
     ['Secondary', '--secondary'],
+    ['Tertiary', '--tertiary'],
+    ['Background', '--background'],
+  ]}
+  swatchHeight={72}
+/>
+
+---
+
+## 3. Link Colors
+
+リンクテキストに使用するカラーです。
+
+| 項目 | CSS変数 | 用途 |
+|---|---|---|
+| Default | `--link` | 通常時のリンクカラー |
+| Visited | `--link-visited` | 閲覧済みリンクのカラー |
+
+<ColorGrid
+  colors={[
+    ['Default', '--link'],
+    ['Visited', '--link-visited'],
+  ]}
+  swatchHeight={72}
+/>
+
+---
+
+## 4. Focus Colors
+
+キーボード操作などでコンポーネントにフォーカスした際に使用するカラーです。
+
+| 項目 | CSS変数 | 用途 |
+|---|---|---|
+| Focus-1 | `--focus-1` | フォーカス時のアウトライン |
+| Focus-2 | `--focus-2` | アウトラインの視認性を補助する外側の境界色 |
+
+<ColorGrid
+  colors={[
+    ['Focus-1', '--focus-1'],
+    ['Focus-2', '--focus-2'],
+  ]}
+  swatchHeight={72}
+/>
+
+---
+
+## 5. Search Highlight Colors
+
+検索結果や検索キーワードを強調表示する際に使用するカラーです。
+
+| 項目 | CSS変数 | 用途 |
+|---|---|---|
+| Background | `--search-highlight` | ハイライト領域の背景色 |
+| Border | `--search-highlight-border` | ハイライト領域の境界色 |
+
+<ColorGrid
+  colors={[
+    ['Background', '--search-highlight'],
+    ['Border', '--search-highlight-border'],
+  ]}
+  swatchHeight={72}
+/>
+
+---
+
+## 6. Button Colors
+
+ボタンの操作状態に応じて使用するカラーです。
+
+| 項目 | CSS変数 | 用途 |
+|---|---|---|
+| Default | `--button` | 通常時の背景色 |
+| Hover | `--button-hover` | マウスオーバー時の背景色 |
+| Active | `--button-active` | 押下時の背景色 |
+| Foreground | `--button-foreground` | ボタン内のテキストカラー |
+
+<ColorGrid
+  colors={[
+    ['Default', '--button'],
+    ['Hover', '--button-hover'],
+    ['Active', '--button-active'],
+    ['Foreground', '--button-foreground'],
+  ]}
+  swatchHeight={72}
+/>
+
+---
+
+## 7. Semantic Colors
+
+操作結果や状態をユーザーに伝えるためのカラーです。
+
+### Success
+
+処理の成功や正常な状態を表現します。
+
+### Error
+
+エラーや処理の失敗、入力内容の不備などを表現します。
+
+### Warning
+
+注意が必要な状態や、確認を促す場合に使用します。
+
+| 状態 | 通常カラー | Strongカラー |
+|---|---|---|
+| Success | `--success` | `--success-strong` |
+| Error | `--error` | `--error-strong` |
+| Warning | `--warning` | `--warning-strong` |
+
+<ColorGrid
+  colors={[
+    ['Success', '--success'],
+    ['Success Strong', '--success-strong'],
+    ['Error', '--error'],
+    ['Error Strong', '--error-strong'],
+    ['Warning', '--warning'],
+    ['Warning Strong', '--warning-strong'],
+  ]}
+  swatchHeight={72}
+/>
+
+---
+
+## 8. Additional Theme Colors
+
+shadcn/uiのコンポーネントや画面構成で使用する補助的なテーマカラーです。
+
+### Base Colors
+
+| 項目 | CSS変数 | 用途 |
+|---|---|---|
+| Foreground | `--foreground` | 基本文字色 |
+| Primary Foreground | `--primary-foreground` | Primary背景上の文字色 |
+| Secondary Foreground | `--secondary-foreground` | Secondary背景上の文字色 |
+| Muted | `--muted` | 控えめな背景色 |
+| Muted Foreground | `--muted-foreground` | 補足テキストの文字色 |
+| Accent | `--accent` | 強調表示の背景色 |
+| Accent Foreground | `--accent-foreground` | Accent背景上の文字色 |
+| Destructive | `--destructive` | 削除などの危険操作を表す色 |
+| Border | `--border` | 境界線の色 |
+| Input | `--input` | 入力欄の境界色 |
+| Ring | `--ring` | フォーカスリングの色 |
+
+<ColorGrid
+  colors={[
+    ['Foreground', '--foreground'],
+    ['Primary Foreground', '--primary-foreground'],
     ['Secondary Foreground', '--secondary-foreground'],
     ['Muted', '--muted'],
     ['Muted Foreground', '--muted-foreground'],
     ['Accent', '--accent'],
     ['Accent Foreground', '--accent-foreground'],
+    ['Destructive', '--destructive'],
+    ['Border', '--border'],
+    ['Input', '--input'],
+    ['Ring', '--ring'],
+  ]}
+/>
+
+### Component Colors
+
+Card、Popover、Sidebarなど、特定のコンポーネントで使用するカラーです。
+
+<ColorGrid
+  colors={[
     ['Card', '--card'],
     ['Card Foreground', '--card-foreground'],
     ['Popover', '--popover'],
     ['Popover Foreground', '--popover-foreground'],
-    ['Destructive', '--destructive'],
-  ].map(([name, variable]) => (
-    <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
-      <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
-      <div style={{ padding: 10 }}>
-        <div style={{ fontWeight: 600, fontSize: 13 }}>{name}</div>
-        <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
-      </div>
-    </div>
-  ))}
-</div>
-
-## 3. UI Colors
-
-Input、Border、FocusなどのUI部品に使用する色です。
-
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
-  {[
-    ['Border', '--border'],
-    ['Input', '--input'],
-    ['Ring', '--ring'],
-  ].map(([name, variable]) => (
-    <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
-      <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
-      <div style={{ padding: 10 }}>
-        <div style={{ fontWeight: 600, fontSize: 13 }}>{name}</div>
-        <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
-      </div>
-    </div>
-  ))}
-</div>
-
-## 4. Semantic Colors
-
-状態や結果を表現する色です。
-
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
-  {[
-    ['Success', '--success'],
-    ['Success Foreground', '--success-foreground'],
-    ['Error', '--error'],
-    ['Error Foreground', '--error-foreground'],
-    ['Warning', '--warning'],
-    ['Warning Foreground', '--warning-foreground'],
-  ].map(([name, variable]) => (
-    <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
-      <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
-      <div style={{ padding: 10 }}>
-        <div style={{ fontWeight: 600, fontSize: 13 }}>{name}</div>
-        <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
-      </div>
-    </div>
-  ))}
-</div>
-
-## 5. Sidebar Colors
-
-サイドバー専用のカラートークンです。
-
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
-  {[
     ['Sidebar', '--sidebar'],
     ['Sidebar Foreground', '--sidebar-foreground'],
     ['Sidebar Primary', '--sidebar-primary'],
@@ -122,44 +308,36 @@ Input、Border、FocusなどのUI部品に使用する色です。
     ['Sidebar Accent Foreground', '--sidebar-accent-foreground'],
     ['Sidebar Border', '--sidebar-border'],
     ['Sidebar Ring', '--sidebar-ring'],
-  ].map(([name, variable]) => (
-    <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
-      <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
-      <div style={{ padding: 10 }}>
-        <div style={{ fontWeight: 600, fontSize: 13 }}>{name}</div>
-        <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
-      </div>
-    </div>
-  ))}
-</div>
+  ]}
+/>
 
-## 6. Chart Colors
+### Chart Colors
 
-グラフやデータ可視化に使用する色です。
+グラフやデータ可視化に使用するカラーです。
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
-  {[
+<ColorGrid
+  colors={[
     ['Chart 1', '--chart-1'],
     ['Chart 2', '--chart-2'],
     ['Chart 3', '--chart-3'],
     ['Chart 4', '--chart-4'],
     ['Chart 5', '--chart-5'],
-  ].map(([name, variable]) => (
-    <div key={variable} style={{ border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
-      <div style={{ height: 64, backgroundColor: `var(${variable})`, borderBottom: '1px solid var(--border)' }} />
-      <div style={{ padding: 10 }}>
-        <div style={{ fontWeight: 600, fontSize: 13 }}>{name}</div>
-        <code style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--muted-foreground)', overflowWrap: 'anywhere' }}>{variable}</code>
-      </div>
-    </div>
-  ))}
-</div>
+  ]}
+/>
 
-## 7. Light / Dark Theme
+---
+
+## 9. Light / Dark Theme
 
 LightとDarkでは同じセマンティック変数を使用します。
 
-- Light: `:root` に定義された値
-- Dark: `.dark` に定義された値
+| テーマ | 定義場所 | 説明 |
+|---|---|---|
+| Light | `:root` | デフォルトのカラー定義 |
+| Dark | `.dark` | ダークテーマ用のカラー定義 |
 
-テーマによってCSS変数の値が切り替わります。
+テーマの切り替えによってCSS変数の値が変更されます。
+
+Primitive Colorsは共通の値を使用し、Semantic Colorsをテーマに応じて切り替えます。
+
+これにより、コンポーネント側ではテーマを意識せず、同じCSS変数を参照できます。

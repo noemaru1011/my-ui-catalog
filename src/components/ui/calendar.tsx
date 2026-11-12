@@ -151,6 +151,7 @@ function CalendarDayButton({
 	...props
 }: React.ComponentProps<typeof DayButton> & { locale?: Partial<Locale> }) {
 	const defaultClassNames = getDefaultClassNames();
+	// KEEP: 日付と状態を含む読み上げ名を維持
 	const accessibleName =
 		ariaLabel && (typeof children === 'string' || typeof children === 'number')
 			? `${children} ${ariaLabel}`

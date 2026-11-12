@@ -38,3 +38,6 @@ playwright-report
 
 # VsCode settings
 .vscode
+
+# Playwright CLI output (may contain credentials)
+.playwright-cli/

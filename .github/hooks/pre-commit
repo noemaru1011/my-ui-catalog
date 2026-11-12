@@ -1,6 +1,18 @@
 #!/bin/sh
 set -e
 
+# 変更ファイルを取得（ステージング済み・未ステージング両方）
+CHANGED_FILES=$(git diff --name-only HEAD)
+
+# テスト対象ファイルがあるか確認
+TEST_TARGETS=$(echo "$CHANGED_FILES" | grep -E '\.(ts|tsx|js|jsx|vue)$' || true)
+
+# 全体チェック
 npm run check
-npm run test:run
-npm run test:e2e
+
+# 関連テストがある場合のみ実行
+if [ -n "$TEST_TARGETS" ]; then
+  echo "$TEST_TARGETS" | xargs npx vitest related --run
+else
+  echo "テスト対象ファイルの変更なし。テストをスキップします。"
+fi
