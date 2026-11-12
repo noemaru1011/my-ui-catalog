@@ -253,6 +253,7 @@ Save under `specs/<feature>.plan.md`. Use this structure:
 **File:** `tests/<group>/<kebab-case-scenario-name>.spec.ts`
 
 **Steps:**
+
   1. <Concrete user step>
     - expect: <observable outcome>
     - expect: <another observable outcome>
