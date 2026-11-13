@@ -1,0 +1,106 @@
+
+import { Meta } from '@storybook/addon-docs/blocks';
+import { Text } from '@/components/elements/Text/Text';
+import { Heading } from '@/components/elements/Heading/Heading';
+
+<Meta title="デザインシステム/タイポグラフィ" />
+
+# タイポグラフィ
+
+フォントファミリー: Noto Sans JP
+
+基本フォントサイズ: 16px
+
+---
+
+## 1. フォントファミリー
+
+| 項目 | 値 |
+|---|---|
+| フォントファミリー | Noto Sans JP |
+| 基本サイズ | 16px |
+| 基本の行の高さ | 1.75 |
+| 標準の太さ | 400 |
+| 見出しの太さ | 700 |
+
+---
+
+## 2. 見出し
+
+| 種類 | 要素 | サイズ | 太さ | 文字間隔 |
+|---|---|---:|---:|---:|
+| セクション見出し | h1 | 32px | 700 | -0.025em |
+| ブロック見出し | h2 | 24px | 700 | -0.025em |
+| 小見出し | h3 | 20px | 600 | -0.025em |
+| 小見出し（小） | h4 | 18px | 600 | -0.025em |
+
+<Heading type="sectionTitle">セクション見出し</Heading>
+<Heading type="blockTitle">ブロック見出し</Heading>
+<Heading type="subBlockTitle">小見出し</Heading>
+<Heading type="subSubBlockTitle">小見出し（小）</Heading>
+
+---
+
+## 3. 本文
+
+| 種類 | サイズ | 太さ | 行の高さ |
+|---|---:|---:|---:|
+| 大 | 18px | 400 | 1.75 |
+| 中 | 16px | 400 | 1.75 |
+| 小 | 14px | 400 | 1.75 |
+| 注釈 | 12px | 400 | 1.5 |
+
+<Text size="lg">大きい本文 - 18px</Text>
+<Text size="md">標準の本文 - 16px</Text>
+<Text size="md" color="muted">補足の本文 - 16px</Text>
+
+---
+
+## 4. 文字の太さ
+
+| 太さ | 値 |
+|---|---:|
+| 標準 | 400 |
+| 中太 | 500 |
+| やや太字 | 600 |
+| 太字 | 700 |
+
+<Text weight="normal">標準 - 400</Text>
+<Text weight="bold">太字 - 700</Text>
+
+---
+
+## 5. 文字色
+
+色トークンの定義は「カラー」ドキュメントを参照してください。
+
+<Text color="default">標準の文字</Text>
+<Text color="muted">補足の文字</Text>
+
+---
+
+## 6. インライン要素
+
+**強い強調**
+
+*軽い強調*
+
+`インラインコード`
+
+<mark style={{ backgroundColor: 'var(--muted)', color: 'var(--foreground)' }}>ハイライト</mark>
+
+<small>補足テキスト</small>
+
+---
+
+## 7. 文字サイズの段階
+
+| クラス | サイズ | 用途 |
+|---|---:|---|
+| text-xs | 12px | 注釈 |
+| text-sm | 14px | 小さい本文 |
+| text-base | 16px | 標準の本文 |
+| text-lg | 18px | 大きい本文 |
+| text-xl | 20px | 小見出し |
+| text-2xl | 24px | ブロック見出し |
+| text-3xl | 32px | セクション見出し |
