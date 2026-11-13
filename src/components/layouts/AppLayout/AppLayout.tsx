@@ -10,7 +10,7 @@ type AppLayoutProps = {
 export function AppLayout({ header, main }: AppLayoutProps) {
 	return (
 		<div className="flex min-h-screen flex-col">
-			<header className="sticky top-0 z-10 flex h-14 w-full items-center border-b-2 bg-white px-4 sm:px-6">
+			<header className="sticky top-0 z-10 flex h-14 w-full items-center border-b-2 bg-white dark:bg-blue-950 px-4 sm:px-6">
 				<div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4">
 					{header}
 				</div>
