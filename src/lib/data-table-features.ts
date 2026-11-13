@@ -11,24 +11,22 @@ import {
 	tableFeatures,
 } from '@tanstack/react-table';
 
-// biome-ignore lint/style/useNamingConvention: 関数なので
-export const features = tableFeatures({
-	columnFilteringFeature,
-	rowPaginationFeature,
-	rowSortingFeature,
+export function features() {
+	return tableFeatures({
+		columnFilteringFeature,
+		rowPaginationFeature,
+		rowSortingFeature,
+		filteredRowModel: createFilteredRowModel(),
+		paginatedRowModel: createPaginatedRowModel(),
+		sortedRowModel: createSortedRowModel(),
+		filterFns: {
+			includesString: filterFn_includesString,
+		},
+		sortFns: {
+			alphanumeric: sortFn_alphanumeric,
+			text: sortFn_text,
+		},
+	});
+}
 
-	filteredRowModel: createFilteredRowModel(),
-	paginatedRowModel: createPaginatedRowModel(),
-	sortedRowModel: createSortedRowModel(),
-
-	filterFns: {
-		includesString: filterFn_includesString,
-	},
-
-	sortFns: {
-		alphanumeric: sortFn_alphanumeric,
-		text: sortFn_text,
-	},
-});
-
-export type DataTableFeatures = typeof features;
+export type DataTableFeatures = ReturnType<typeof features>;

@@ -70,7 +70,7 @@ export function DataTable({ data }: DataTableProps) {
 	});
 
 	const table = useTable<DataTableFeatures, Member>({
-		features,
+		features: features(),
 		data: members,
 		columns,
 		state: { sorting, columnFilters, pagination },
