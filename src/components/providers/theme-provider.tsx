@@ -1,3 +1,4 @@
+// https://ui.shadcn.com/docs/dark-mode/vite 参考
 import { createContext, useContext, useEffect, useState } from 'react';
 
 type Theme = 'dark' | 'light' | 'system';

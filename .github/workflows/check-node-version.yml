@@ -1,5 +1,7 @@
 name: Check Node.js Version Files
 
+## .nvmrcが変更されたとき、package.jsonも変更されたか確認するだけ。
+
 on:
   push:
     branches:
