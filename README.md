@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./docs/my-icon.jpg" alt="UI Catalog" width="180" />
+<img src="my-icon.jpg" alt="UI Catalog" width="180" />
 
 # UI Catalog
 
@@ -58,11 +58,12 @@ Storybook を活用し、コンポーネントの表示・動作・バリエー�
 
 ### 1. 環境準備
 
-| Tool    | Version     |
-| ------- | ----------- |
-| Node.js | `>=24.22.2` |
-| npm     | Required    |
-| Git     | Required    |
+| Tool       | Version     |
+| ---------- | ----------- |
+| Node.js    | `>=24.22.2` |
+| npm        | Required    |
+| Git        | Required    |
+| GitHub CLI | Required    |
 
 Node.js のバージョンは `.nvmrc` と `package.json` の `engines` で管理しています。
 
@@ -238,7 +239,6 @@ TanStack Table v9 を使用したテーブルの実装例です。
 - **`ci.yml`**: 自動テスト、ビルド、静的解析を実行します。**CI がすべてパスすることがマージの必須条件です。**
 - **`check-node-version.yml`**: .nvmrcを変更した際に、package.jsonのバージョンに差異がないか検証します。
 - **`cd.yml`**: `master` ブランチへのマージをトリガーに、本番環境への自動デプロイを実行します。
-- **`shadcn-ui-check.yml`**: src/components/ui 配下の変更されたコンポーネントを最新の shadcn/ui Registry と比較し、整合性を検証します。KEEP: コメントが記載されたコンポーネントは比較対象外とします。
 
 ### 4. 依存パッケージの自動更新（Dependabot）
 

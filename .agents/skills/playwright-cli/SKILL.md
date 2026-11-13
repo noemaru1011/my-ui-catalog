@@ -263,6 +263,7 @@ playwright-cli --raw localstorage-get theme
 ```
 
 For structured output wrapping every reply as JSON, pass --json
+
 ```bash
 playwright-cli list --json
 ```

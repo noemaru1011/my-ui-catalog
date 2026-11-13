@@ -73,6 +73,7 @@ await page.screencast.showActions({
 ```
 
 Notes:
+
 - All decorations fade out over `duration`. Override `animation` in a style to do something else.
 - The cursor stays on screen at the last action point between actions and across navigations,
   and travels along a slightly curved path, so it reads as a hand moving a mouse.

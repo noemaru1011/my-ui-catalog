@@ -1,9 +1,9 @@
 
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Design System/Corners" />
+<Meta title="デザインシステム/角丸" />
 
-# Border Radius
+# 角丸（ボーダー半径）
 
 アプリケーション全体で使用する角丸ルールです。
 
@@ -11,7 +11,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 角丸の値はCSS変数を通じて一元管理し、コンポーネントごとに異なる値を直接指定しないことを原則とします。
 
-## 1. Basic Rule
+## 1. 基本ルール
 
 通常のUIコンポーネントには、10pxの角丸を適用します。
 
@@ -27,7 +27,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらずすべて10pxになります。
 
-| Tailwind Class | CSS Variable | CSS px |
+| Tailwind クラス | CSS変数 | px |
 | :--- | :---: | ---: |
 | `rounded-sm` | `--radius-sm` | 10px |
 | `rounded-md` | `--radius-md` | 10px |
@@ -37,11 +37,11 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
 | `rounded-3xl` | `--radius-3xl` | 10px |
 | `rounded-4xl` | `--radius-4xl` | 10px |
 
-### Radius Preview
+### 角丸のプレビュー
 
 各ユーティリティの角丸は同じ10pxです。
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px', color: 'var(--foreground)' }}>
   {[
     ['rounded-sm', '--radius-sm'],
     ['rounded-md', '--radius-md'],
@@ -51,7 +51,7 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
     ['rounded-3xl', '--radius-3xl'],
     ['rounded-4xl', '--radius-4xl'],
   ].map(([name, variable]) => (
-    <div key={name} style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: 12 }}>
+    <div key={name} style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: 12, background: 'var(--card)', color: 'var(--card-foreground)' }}>
       <div style={{ height: 64, background: 'var(--primary)', borderRadius: `var(${variable})`, opacity: 0.85 }} />
       <div style={{ fontWeight: 600, fontSize: 13, marginTop: 10 }}>{name}</div>
       <code style={{ display: 'block', fontSize: 11, color: 'var(--muted-foreground)', marginTop: 4 }}>{variable}</code>
@@ -60,7 +60,7 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
   ))}
 </div>
 
-### Application Scope
+### 適用範囲
 
 以下のような通常のUIコンポーネントには、既存の `rounded-*` クラスを使用します。
 
@@ -73,28 +73,28 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
 
 角丸を変更する場合は、個別のコンポーネントに数値を直接指定せず、`--radius` を変更してください。
 
-### Component Inheritance
+### コンポーネントの継承
 
 `elements` コンポーネントは、内部で使用する `ui` コンポーネントの角丸を引き継ぎます。
 
 角丸を変更する場合は、利用側の `elements` コンポーネントに重ねて指定するのではなく、対応する `ui` コンポーネントを変更してください。
 
-## 2. Exceptions
+## 2. 例外
 
 形状や表示上の理由がある場合は、10px以外の角丸を許容します。
 
-### Exception List
+### 例外一覧
 
-| Tailwind Class | Usage | Reason |
+| Tailwind クラス | 用途 | 理由 |
 | :--- | :--- | :--- |
 | `rounded-full` | 円形・カプセル形状 | 円形やつまみなどの形状を維持するため |
 | `rounded-none` | 部品の接続・範囲選択 | 部品同士の連続性を表現するため |
 | `rounded-[inherit]` | 親要素の内側 | 親要素の角丸を継承するため |
-| `rounded-[2px]` | Tooltipの矢印 | 小さな装飾形状のため |
+| `rounded-[2px]` | ツールチップの矢印 | 小さな装飾形状のため |
 
-### Exception Examples
+### 例外の使用例
 
-#### rounded-full
+#### `rounded-full`
 
 円形やカプセル形状が必要な部品に使用します。
 
@@ -104,12 +104,12 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
 - `src/components/ui/switch.tsx`
 - `src/components/ui/drawer.tsx`（つまみ）
 
-<div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+<div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 16, color: 'var(--foreground)' }}>
   <div style={{ width: 52, height: 52, borderRadius: '9999px', background: 'var(--primary)' }} />
   <div style={{ width: 100, height: 36, borderRadius: '9999px', background: 'var(--primary)' }} />
 </div>
 
-#### rounded-none
+#### `rounded-none`
 
 部品同士を繋げる場合や、範囲の連続性を表現する場合に使用します。
 
@@ -118,7 +118,7 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
 - `src/components/ui/input-group.tsx`（内側）
 - `src/components/ui/calendar.tsx`（範囲選択）
 
-#### rounded-[inherit]
+#### `rounded-[inherit]`
 
 親要素の角丸を子要素に引き継ぐ場合に使用します。
 
@@ -126,7 +126,7 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
 
 - `src/components/ui/drawer.tsx`（内部）
 
-#### rounded-[2px]
+#### `rounded-[2px]`
 
 小さな装飾形状に使用します。
 
@@ -134,7 +134,7 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
 
 - `src/components/ui/tooltip.tsx`（矢印）
 
-## 3. Calendar Cell Radius
+## 3. カレンダーセルの角丸
 
 カレンダーのセル角丸には、専用のCSS変数 `--cell-radius` を使用します。
 
@@ -146,7 +146,7 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
 
 ただし、範囲選択中の角丸は、開始位置・終了位置・中間部分を正しく表現するため、個別に調整します。
 
-### Range Selection
+### 範囲選択
 
 - 開始位置：範囲の左端を丸める
 - 中間部分：セル同士が連続するようにする
@@ -154,11 +154,11 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
 
 範囲選択の表示を優先し、必要な部分に限って個別の角丸指定を許容します。
 
-## 4. Change Guidelines
+## 4. 変更時の指針
 
 角丸の追加・変更時には、以下のルールを確認してください。
 
-### Development Checklist
+### 開発時の確認事項
 
 - 新しい通常部品には、10px以外の固定値を追加しない。
 - 独自の角丸CSS変数を追加しない。
@@ -168,16 +168,16 @@ Tailwind CSSの角丸ユーティリティは、サイズ名にかかわらず�
 - `rounded-[inherit]` は親要素の角丸を継承する必要がある場合に限って使用する。
 - 例外の角丸を追加・変更した場合は、用途と理由を本ドキュメントにも反映する。
 
-## 5. Design Principle
+## 5. 設計原則
 
 このプロジェクトでは、角丸をCSS変数で一元管理し、UI全体の一貫性を維持します。
 
-| Item | Rule |
+| 項目 | ルール |
 | :--- | :--- |
-| Standard Radius | 10px |
-| Source Variable | `--radius` |
-| Tailwind Utilities | `rounded-sm` ～ `rounded-4xl` |
-| Change Method | CSS変数 `--radius` を変更 |
-| Exceptions | 形状・表示上の理由がある場合のみ許容 |
+| 標準の角丸 | 10px |
+| 基準の変数 | `--radius` |
+| Tailwindクラス | `rounded-sm` ～ `rounded-4xl` |
+| 変更方法 | CSS変数 `--radius` を変更 |
+| 例外 | 形状・表示上の理由がある場合のみ許容 |
 
 **基本原則：通常の角丸は10pxに統一し、例外は明確な用途と理由がある場合に限って使用する。**
