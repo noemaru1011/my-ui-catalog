@@ -44,4 +44,4 @@ jobs:
         run: npm run build
 
       - name: Publish
-        run: npm publish --access restricted --provenance
+        run: npm publish --access restricted
