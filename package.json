@@ -60,7 +60,7 @@
 		"i18next": "^26.7.1",
 		"i18next-browser-languagedetector": "^8.3.0",
 		"lucide-react": "^1.49.0",
-		"react": "^19.2.8",
+		"react": "^19...8",
 		"react-day-picker": "^10.0.2",
 		"react-dom": "^19.0.0",
 		"react-hook-form": "^7.89.0",
@@ -87,10 +87,10 @@
 		"@types/react-dom": "^19.2.7",
 		"@typescript/typescript6": "^6.0.2",
 		"@vitejs/plugin-react": "^6.1.1",
-		"@vitest/browser": "5.0.5",
-		"@vitest/browser-playwright": "5.0.5",
-		"@vitest/coverage-v8": "5.0.5",
-		"@vitest/ui": "5.0.5",
+		"@vitest/browser": "^5.0.5",
+		"@vitest/browser-playwright": "^5.0.5",
+		"@vitest/coverage-v8": "^5.0.5",
+		"@vitest/ui": "^5.0.5",
 		"chromatic": "^18.14.2",
 		"i18next-cli": "^1.87.0",
 		"jsdom": "^30.1.2",
@@ -98,9 +98,9 @@
 		"shadcn": "^4.23.0",
 		"storybook": "^10.6.6",
 		"typescript": "~7.0.2",
-		"vite-plugin-dts": "^5.1.2",
 		"vite": "^8.3.6",
-		"vitest": "5.0.5"
+		"vite-plugin-dts": "^5.1.2",
+		"vitest": "^5.0.5"
 	},
 	"allowScripts": {
 		"esbuild@0.28.2": true
