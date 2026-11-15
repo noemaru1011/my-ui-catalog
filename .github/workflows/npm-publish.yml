@@ -1,9 +1,13 @@
 name: NPM Publish
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+    branches:
+      - master
+  workflow_dispatch:
 
 permissions:
   contents: read
