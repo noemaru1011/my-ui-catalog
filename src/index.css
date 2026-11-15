@@ -103,11 +103,10 @@
 	--color-success: var(--success);
 	--color-success-strong: var(--success-strong);
 
-	--color-error: var(--error);
-	--color-error-strong: var(--error-strong);
-
 	--color-warning: var(--warning);
 	--color-warning-strong: var(--warning-strong);
+
+	/* error は destructive に統合 (shadcn/ui 互換性) */
 
 	/* -------------------------------------------------------
 	 * shadcn/ui Colors
