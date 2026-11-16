@@ -11,6 +11,7 @@ export {
 	AlertDialog,
 	Badge,
 	Breadcrumb,
+	Button,
 	Card,
 	Carousel,
 	Dialog,
