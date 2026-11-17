@@ -16,58 +16,58 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: () => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Stack space="md">
-				<Text>{t('example.story.toast.instructions')}</Text>
+				<Text>{t('story.toast.instructions')}</Text>
 				<Cluster>
-				<Button
-					onClick={() =>
-						toast.add({
-							title: t('example.story.toast.saved'),
-							description: t('example.story.toast.savedDescription'),
-							type: 'success',
-						})
-					}
-				>
-					Success
-				</Button>
-				<Button
-					variant="secondary"
-					onClick={() =>
-						toast.add({
-							title: t('example.story.toast.notice'),
-							description: t('example.story.toast.noticeDescription'),
-							type: 'info',
-						})
-					}
-				>
-					Info
-				</Button>
-				<Button
-					variant="outline"
-					onClick={() =>
-						toast.add({
-							title: t('example.story.toast.check'),
-							description: t('example.story.toast.checkDescription'),
-							type: 'warning',
-						})
-					}
-				>
-					Warning
-				</Button>
-				<Button
-					variant="destructive"
-					onClick={() =>
-						toast.add({
-							title: t('example.story.toast.error'),
-							description: t('example.story.toast.errorDescription'),
-							type: 'error',
-						})
-					}
-				>
-					Error
-				</Button>
+					<Button
+						onClick={() =>
+							toast.add({
+								title: t('story.toast.saved'),
+								description: t('story.toast.savedDescription'),
+								type: 'success',
+							})
+						}
+					>
+						Success
+					</Button>
+					<Button
+						variant="secondary"
+						onClick={() =>
+							toast.add({
+								title: t('story.toast.notice'),
+								description: t('story.toast.noticeDescription'),
+								type: 'info',
+							})
+						}
+					>
+						Info
+					</Button>
+					<Button
+						variant="outline"
+						onClick={() =>
+							toast.add({
+								title: t('story.toast.check'),
+								description: t('story.toast.checkDescription'),
+								type: 'warning',
+							})
+						}
+					>
+						Warning
+					</Button>
+					<Button
+						variant="destructive"
+						onClick={() =>
+							toast.add({
+								title: t('story.toast.error'),
+								description: t('story.toast.errorDescription'),
+								type: 'error',
+							})
+						}
+					>
+						Error
+					</Button>
 				</Cluster>
 			</Stack>
 		);

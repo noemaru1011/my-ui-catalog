@@ -18,12 +18,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Heading
 				{...args}
 				{...(args.children === '見出し' && {
-					children: t('example.story.labels.heading'),
+					children: t('story.labels.heading'),
 				})}
 			/>
 		);

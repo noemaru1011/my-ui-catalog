@@ -32,12 +32,12 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: (args) => {
 		const [date, setDate] = useState<Date>();
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 
 		return (
 			<DatePicker
 				{...args}
-				label={args.label === '日付' ? t('example.story.labels.date') : args.label}
+				label={args.label === '日付' ? t('story.labels.date') : args.label}
 				value={date}
 				onChange={setDate}
 			/>

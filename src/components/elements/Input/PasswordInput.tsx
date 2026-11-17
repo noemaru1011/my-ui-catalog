@@ -54,7 +54,7 @@ export function PasswordInput({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{readOnly && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+				{readOnly && <Badge variant="outline">{t('notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}
@@ -75,7 +75,7 @@ export function PasswordInput({
 						type="button"
 						onClick={() => setVisible((prev) => !prev)}
 						disabled={readOnly}
-						aria-label={visible ? t('common.hidePassword') : t('common.showPassword')}
+						aria-label={visible ? t('hidePassword') : t('showPassword')}
 					>
 						{visible ? <EyeIcon size={16} /> : <EyeOffIcon size={16} />}
 					</Button>

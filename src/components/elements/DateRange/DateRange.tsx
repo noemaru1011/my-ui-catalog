@@ -60,7 +60,7 @@ export function DateRange({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{readOnly && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+				{readOnly && <Badge variant="outline">{t('notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}
@@ -80,7 +80,7 @@ export function DateRange({
 								readOnly && 'border-dashed',
 							)}
 						>
-							{displayValue ?? t('common.dateRangePlaceholder')}
+							{displayValue ?? t('dateRangePlaceholder')}
 						</Button>
 					}
 				/>

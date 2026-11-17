@@ -22,16 +22,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: () => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Stack space="md">
-				<Text>{t('example.story.tooltip.instructions')}</Text>
+				<Text>{t('story.tooltip.instructions')}</Text>
 				<Tooltip>
 					<TooltipTrigger render={<Button variant="outline" />}>
 						<Info aria-hidden="true" />
-						{t('example.story.tooltip.details')}
+						{t('story.tooltip.details')}
 					</TooltipTrigger>
-					<TooltipContent>{t('example.story.tooltip.detailsDescription')}</TooltipContent>
+					<TooltipContent>{t('story.tooltip.detailsDescription')}</TooltipContent>
 				</Tooltip>
 			</Stack>
 		);
@@ -40,35 +40,35 @@ export const Default: Story = {
 
 export const Placements: Story = {
 	render: () => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<TooltipProvider>
 				<Stack space="lg">
-					<Text>{t('example.story.tooltip.placementInstructions')}</Text>
+					<Text>{t('story.tooltip.placementInstructions')}</Text>
 					<Cluster space="lg" justify="center">
 						<Tooltip>
 							<TooltipTrigger render={<Button variant="outline" />}>
-								{t('example.story.tooltip.top')}
+								{t('story.tooltip.top')}
 							</TooltipTrigger>
-							<TooltipContent side="top">{t('example.story.tooltip.shownTop')}</TooltipContent>
+							<TooltipContent side="top">{t('story.tooltip.shownTop')}</TooltipContent>
 						</Tooltip>
 						<Tooltip>
 							<TooltipTrigger render={<Button variant="outline" />}>
-								{t('example.story.tooltip.right')}
+								{t('story.tooltip.right')}
 							</TooltipTrigger>
-							<TooltipContent side="right">{t('example.story.tooltip.shownRight')}</TooltipContent>
+							<TooltipContent side="right">{t('story.tooltip.shownRight')}</TooltipContent>
 						</Tooltip>
 						<Tooltip>
 							<TooltipTrigger render={<Button variant="outline" />}>
-								{t('example.story.tooltip.bottom')}
+								{t('story.tooltip.bottom')}
 							</TooltipTrigger>
-							<TooltipContent side="bottom">{t('example.story.tooltip.shownBottom')}</TooltipContent>
+							<TooltipContent side="bottom">{t('story.tooltip.shownBottom')}</TooltipContent>
 						</Tooltip>
 						<Tooltip>
 							<TooltipTrigger render={<Button variant="outline" />}>
-								{t('example.story.tooltip.left')}
+								{t('story.tooltip.left')}
 							</TooltipTrigger>
-							<TooltipContent side="left">{t('example.story.tooltip.shownLeft')}</TooltipContent>
+							<TooltipContent side="left">{t('story.tooltip.shownLeft')}</TooltipContent>
 						</Tooltip>
 					</Cluster>
 				</Stack>

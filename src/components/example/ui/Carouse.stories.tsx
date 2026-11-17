@@ -26,7 +26,7 @@ const slides = [
 		src: 'https://placehold.co/800x450?text=Forest',
 		textKey: 'forest',
 	},
-];
+] as const;
 
 const meta = {
 	tags: ['autodocs'],
@@ -38,16 +38,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: () => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Center maxWidth="md">
 				<Stack space="md">
-					<Heading type="blockTitle">{t('example.story.carousel.gallery')}</Heading>
-					<Text color="muted">{t('example.story.carousel.instructions')}</Text>
-					<Carousel opts={{ loop: true }} aria-label={t('example.story.carousel.gallery')}>
+					<Heading type="blockTitle">{t('story.carousel.gallery')}</Heading>
+					<Text color="muted">{t('story.carousel.instructions')}</Text>
+					<Carousel opts={{ loop: true }} aria-label={t('story.carousel.gallery')}>
 						<CarouselContent>
 							{slides.map((slide) => {
-								const description = t(`example.story.carousel.${slide.textKey}`);
+								const description = t(`story.carousel.${slide.textKey}`);
 								return (
 									<CarouselItem key={slide.src}>
 										<Image
@@ -59,8 +59,8 @@ export const Default: Story = {
 								);
 							})}
 						</CarouselContent>
-						<CarouselPrevious aria-label={t('example.story.carousel.previous')} />
-						<CarouselNext aria-label={t('example.story.carousel.next')} />
+						<CarouselPrevious aria-label={t('story.carousel.previous')} />
+						<CarouselNext aria-label={t('story.carousel.next')} />
 					</Carousel>
 				</Stack>
 			</Center>

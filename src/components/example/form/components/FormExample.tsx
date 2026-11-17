@@ -36,20 +36,21 @@ type Props = {
 	isPending: boolean;
 };
 export function FormExample({ register, control, errors, onSubmit, isPending }: Props) {
-	const { t } = useTranslation();
+	const { t } = useTranslation('example');
+	const { t: tCommon } = useTranslation('common');
 	const options = createFormOptions(t);
 
 	return (
 		<Center maxWidth="xl">
 			<Stack space="lg">
-				<Heading type="sectionTitle">{t('example.story.form.title')}</Heading>
+				<Heading type="sectionTitle">{t('story.form.title')}</Heading>
 
 				<Stack space="lg" as="form" noValidate onSubmit={onSubmit}>
 					<Cluster space="lg" align="start">
 						<Container width="lg">
 							<Input
 								id="name"
-								label={t('example.story.form.name')}
+								label={t('story.form.name')}
 								required
 								{...register('name')}
 								error={errors.name?.message}
@@ -59,7 +60,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 						<Container width="lg">
 							<PasswordInput
 								id="password"
-								label={t('example.story.form.password')}
+								label={t('story.form.password')}
 								required
 								{...register('password')}
 								error={errors.password?.message}
@@ -73,7 +74,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 								render={({ field, fieldState }) => (
 									<Select
 										id={field.name}
-										label={t('example.story.form.category')}
+										label={t('story.form.category')}
 										value={field.value}
 										required
 										onChange={field.onChange}
@@ -91,7 +92,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 								render={({ field, fieldState }) => (
 									<Combobox
 										id={field.name}
-										label={t('example.story.form.user')}
+										label={t('story.form.user')}
 										value={field.value}
 										required
 										onChange={field.onChange}
@@ -109,7 +110,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 								render={({ field, fieldState }) => (
 									<ComboboxMultiple
 										id={field.name}
-										label={t('example.story.form.users')}
+										label={t('story.form.users')}
 										value={field.value}
 										required
 										onChange={field.onChange}
@@ -127,7 +128,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 								render={({ field, fieldState }) => (
 									<DatePicker
 										id={field.name}
-										label={t('example.story.form.date')}
+										label={t('story.form.date')}
 										value={field.value}
 										required
 										onChange={field.onChange}
@@ -144,7 +145,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 								render={({ field, fieldState }) => (
 									<DateRange
 										id={field.name}
-										label={t('example.story.form.period')}
+										label={t('story.form.period')}
 										required
 										value={field.value}
 										onChange={field.onChange}
@@ -163,7 +164,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 								render={({ field, fieldState }) => (
 									<Checkbox
 										required
-										label={t('example.story.form.interests')}
+										label={t('story.form.interests')}
 										options={options.interests}
 										value={field.value}
 										onChange={field.onChange}
@@ -180,7 +181,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 								render={({ field, fieldState }) => (
 									<Radio
 										required
-										label={t('example.story.form.gender')}
+										label={t('story.form.gender')}
 										options={options.gender}
 										value={field.value}
 										onChange={field.onChange}
@@ -197,11 +198,11 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 						render={({ field, fieldState }) => (
 							<Checkbox
 								required
-								label={t('example.story.form.agreement')}
+								label={t('story.form.agreement')}
 								options={[
 									{
 										value: 'agreement',
-										label: t('example.story.form.agreeTerms'),
+										label: t('story.form.agreeTerms'),
 									},
 								]}
 								value={field.value}
@@ -214,7 +215,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 					<Container width="3xl">
 						<Textarea
 							id="description"
-							label={t('example.story.form.description')}
+							label={t('story.form.description')}
 							required
 							{...register('description')}
 							error={errors.description?.message}
@@ -229,7 +230,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 								<FileUpload
 									id={field.name}
 									name={field.name}
-									label={t('example.story.form.attachmentsDrop')}
+									label={t('story.form.attachmentsDrop')}
 									required
 									value={field.value}
 									onFilesChange={field.onChange}
@@ -252,7 +253,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 									fieldLabel="ファイル添付"
 									id={field.name}
 									name={field.name}
-									label={t('example.story.form.attachmentsButton')}
+									label={t('story.form.attachmentsButton')}
 									required
 									value={field.value}
 									onFilesChange={field.onChange}
@@ -267,9 +268,9 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 					</Container>
 
 					<Cluster justify="between" align="center">
-						<Link to="/#" label={t('common.back')} />
+						<Link to="/#" label={tCommon('back')} />
 						<Button type="submit" loading={isPending}>
-							{t('example.story.form.submit')}
+							{t('story.form.submit')}
 						</Button>
 					</Cluster>
 				</Stack>

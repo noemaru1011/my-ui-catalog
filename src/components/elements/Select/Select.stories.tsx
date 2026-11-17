@@ -38,12 +38,12 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: (args) => {
 		const [value, setValue] = useState('');
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 
 		return (
 			<Select
 				{...args}
-				label={args.label === '言語' ? t('example.story.labels.language') : args.label}
+				label={args.label === '言語' ? t('story.labels.language') : args.label}
 				value={value}
 				onChange={setValue}
 			/>

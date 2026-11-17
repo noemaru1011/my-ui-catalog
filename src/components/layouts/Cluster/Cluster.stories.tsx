@@ -50,18 +50,18 @@ export const Default: Story = {
 		align: 'center',
 	},
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Container width="full">
 				<Card>
 					<CardHeader>
-						<CardTitle>{t('example.story.layout.clusterDescription')}</CardTitle>
+						<CardTitle>{t('story.layout.clusterDescription')}</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<Cluster {...args}>
-							<Item title={t('example.story.layout.small')} />
-							<Item title={t('example.story.layout.medium')} className="py-6" />
-							<Item title={t('example.story.layout.large')} className="py-8" />
+							<Item title={t('story.layout.small')} />
+							<Item title={t('story.layout.medium')} className="py-6" />
+							<Item title={t('story.layout.large')} className="py-8" />
 						</Cluster>
 					</CardContent>
 				</Card>

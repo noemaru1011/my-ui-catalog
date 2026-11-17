@@ -26,26 +26,26 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: () => {
 		const [open, setOpen] = useState(false);
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 
 		return (
 			<AlertDialog open={open} onOpenChange={setOpen}>
 				<AlertDialogTrigger render={<Button variant="destructive" />}>
-					{t('example.story.alertDialog.deleteAction')}
+					{t('story.alertDialog.deleteAction')}
 				</AlertDialogTrigger>
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>
-							{t('example.story.alertDialog.confirmDelete')}
+							{t('story.alertDialog.confirmDelete')}
 						</AlertDialogTitle>
 						<AlertDialogDescription>
-							{t('example.story.alertDialog.irreversible')}
+							{t('story.alertDialog.irreversible')}
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
-						<AlertDialogCancel>{t('example.story.alertDialog.cancel')}</AlertDialogCancel>
+						<AlertDialogCancel>{t('story.alertDialog.cancel')}</AlertDialogCancel>
 						<AlertDialogAction variant="destructive" onClick={() => setOpen(false)}>
-							{t('example.story.table.delete')}
+							{t('story.table.delete')}
 						</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>

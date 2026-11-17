@@ -20,7 +20,7 @@ export function Loading({ message }: LoadingProps) {
 		>
 			<Spinner className="size-24 motion-reduce:animate-none" aria-hidden="true" />
 
-			<Text>{message || t('common.loading')}</Text>
+			<Text>{message || t('loading')}</Text>
 		</div>
 	);
 }

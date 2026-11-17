@@ -35,7 +35,7 @@ describe('DateRange', () => {
 	it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
 		render(<DateRange label="対象期間" />);
 
-		const button = screen.getByText(i18n.t('common.dateRangePlaceholder'), {
+		const button = screen.getByText(i18n.t('dateRangePlaceholder'), {
 			selector: 'button',
 		});
 
@@ -48,7 +48,7 @@ describe('DateRange', () => {
 
 		expect(screen.getByText('対象期間')).toBeInTheDocument();
 		expect(
-			screen.getByText(i18n.t('common.dateRangePlaceholder'), { selector: 'button' }),
+			screen.getByText(i18n.t('dateRangePlaceholder'), { selector: 'button' }),
 		).toBeInTheDocument();
 	});
 

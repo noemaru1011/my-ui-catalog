@@ -30,7 +30,8 @@ type TableTranslationKey =
 	| 'previous'
 	| 'delete';
 
-const TRANSLATION = (key: TableTranslationKey) => i18n.t(`example.story.table.${key}`);
+const T_EXAMPLE = i18n.getFixedT(null, 'example');
+const TRANSLATION = (key: TableTranslationKey) => T_EXAMPLE(`story.table.${key}`);
 
 describe('DataTable', () => {
 	it('名前と役割で昇順・降順の並べ替えを行う', async () => {
@@ -101,7 +102,7 @@ describe('DataTable', () => {
 		expect(screen.getByText(TRANSLATION('noMembers'))).toBeInTheDocument();
 		expect(
 			screen.getAllByText(
-				i18n.t('example.story.table.showing', {
+				T_EXAMPLE('story.table.showing', {
 					start: 0,
 					end: 0,
 					count: 0,

@@ -43,18 +43,18 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
     render: (args) => {
-        const { t } = useTranslation();
+        const { t } = useTranslation('example');
         return (
             <Switch
                 {...args}
                 aria-label={
                     args['aria-label'] === 'スイッチ切り替え'
-                        ? t('example.story.labels.switch')
+                        ? t('story.labels.switch')
                         : args['aria-label']
                 }
                 label={
                     args.label === '通知設定'
-                        ? t('example.story.labels.notifications')
+                        ? t('story.labels.notifications')
                         : args.label
                 }
             />

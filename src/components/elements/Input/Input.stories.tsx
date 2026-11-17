@@ -26,11 +26,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Input
 				{...args}
-				label={args.label === '名前' ? t('example.story.labels.name') : args.label}
+				label={args.label === '名前' ? t('story.labels.name') : args.label}
 			/>
 		);
 	},

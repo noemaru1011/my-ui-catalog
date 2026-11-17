@@ -67,7 +67,7 @@ export function FileUploadButton({
 	const [uncontrolledFiles, setUncontrolledFiles] = useState<File[]>([]);
 	const files = value ?? uncontrolledFiles;
 
-	const buttonLabel = label ?? t('common.file.attach');
+	const buttonLabel = label ?? t('file.attach');
 	const descriptionId = `${inputId}-description`;
 	const errorId = `${inputId}-error`;
 
@@ -122,7 +122,7 @@ export function FileUploadButton({
 								*
 							</span>
 						)}
-						{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+						{disabled && <Badge variant="outline">{t('notEditable')}</Badge>}
 					</FieldLabel>
 				)}
 
@@ -173,7 +173,7 @@ export function FileUploadButton({
 					/>
 
 					<Text color="muted" as="small">
-						{t('common.file.limits', { maxFiles, maxSize })}
+						{t('file.limits', { maxFiles, maxSize })}
 					</Text>
 				</Cluster>
 
@@ -199,7 +199,7 @@ export function FileUploadButton({
 									variant="ghost"
 									size="icon-xs"
 									disabled={disabled}
-									aria-label={`${file.name} ${t('common.file.remove')}`}
+									aria-label={`${file.name} ${t('file.remove')}`}
 									onClick={() => removeFile(index)}
 								>
 									<X aria-hidden="true" />

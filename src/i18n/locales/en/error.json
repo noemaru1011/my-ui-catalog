@@ -1,0 +1,15 @@
+{
+	"backToHome": "Back to home",
+	"forbidden": {
+		"description": "You do not have permission to view this page. Please check your access permissions or contact an administrator.",
+		"title": "Access denied"
+	},
+	"internalServerError": {
+		"description": "An unexpected internal server error occurred. Please try again later or contact an administrator.",
+		"title": "A server error occurred"
+	},
+	"notfound": {
+		"description": "The page you are looking for could not be found. It may have been deleted or its URL may have changed.",
+		"title": "Page not found"
+	}
+}

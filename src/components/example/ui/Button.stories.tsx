@@ -49,12 +49,12 @@ export const Loading: Story = {
 		children: '保存中',
 	},
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Button
 				{...args}
 				{...(args.children === '保存中' && {
-					children: t('example.story.button.saving'),
+					children: t('story.button.saving'),
 				})}
 			/>
 		);

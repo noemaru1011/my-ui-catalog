@@ -44,14 +44,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: (args) => {
 		const [value, setValue] = useState<string[]>([]);
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 
 		return (
 			<ComboboxMultiple
 				{...args}
 				label={
 					args.label === '言語'
-						? t('example.story.labels.language')
+						? t('story.labels.language')
 						: args.label
 				}
 				value={value}
@@ -63,14 +63,14 @@ export const Default: Story = {
 
 export const MultipleSelected: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 
 		return (
 			<ComboboxMultiple
 				{...args}
 				label={
 					args.label === '言語'
-						? t('example.story.labels.language')
+						? t('story.labels.language')
 						: args.label
 				}
 				value={['typescript', 'javascript', 'python']}

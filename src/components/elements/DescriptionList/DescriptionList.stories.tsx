@@ -22,19 +22,19 @@ type Story = StoryObj<Omit<typeof meta, 'component'>>;
 
 export const Default: Story = {
 	render: () => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<DescriptionList>
-				<DescriptionListItem term={t('example.story.descriptionList.name')}>
-					<Text>{t('example.story.descriptionList.person')}</Text>
+				<DescriptionListItem term={t('story.descriptionList.name')}>
+					<Text>{t('story.descriptionList.person')}</Text>
 				</DescriptionListItem>
 
-				<DescriptionListItem term={t('example.story.descriptionList.email')}>
-					<Text>example@example.com</Text>
+				<DescriptionListItem term={t('story.descriptionList.email')}>
+					<Text>example@com</Text>
 				</DescriptionListItem>
 
-				<DescriptionListItem term={t('example.story.descriptionList.address')}>
-					<Text>{t('example.story.descriptionList.location')}</Text>
+				<DescriptionListItem term={t('story.descriptionList.address')}>
+					<Text>{t('story.descriptionList.location')}</Text>
 				</DescriptionListItem>
 			</DescriptionList>
 		);

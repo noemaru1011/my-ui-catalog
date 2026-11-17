@@ -1,0 +1,221 @@
+{
+	"story": {
+		"description": "こんにちは、世界",
+		"accordion": {
+			"changePlan": "契約プランを変更できますか？",
+			"changePlanAnswer": "アカウント設定からいつでも契約プランを変更できます。詳しくは",
+			"faq": "質問一覧",
+			"faqSuffix": "をご覧ください。",
+			"paymentMethods": "利用できる支払い方法は？",
+			"paymentMethodsAnswer": "クレジットカード、銀行振込などをご利用いただけます。詳しくは",
+			"resetPassword": "パスワードをリセットするには？",
+			"resetPasswordAnswer": "ログイン画面からパスワードをリセットできます。詳しくは"
+		},
+		"alert": {
+			"close": "通知を閉じる",
+			"error": "エラーが発生しました",
+			"errorDescription": "保存できませんでした。時間をおいてもう一度お試しください。",
+			"saved": "変更を保存しました",
+			"savedDescription": "プロジェクト設定が正常に更新されました。"
+		},
+		"alertDialog": {
+			"cancel": "キャンセル",
+			"confirmDelete": "本当に削除しますか？",
+			"deleteAction": "削除する",
+			"irreversible": "この操作は取り消せません。選択した項目が完全に削除されます。"
+		},
+		"blockQuote": "これは、引用ブロックの例です。引用ブロックは、他の文献や資料などから引用した文章を示すために使用されます。引用元の文章と通常の文章を視覚的に区別することができます。",
+		"button": {
+			"saving": "保存中"
+		},
+		"card": {
+			"announcements": "お知らせ",
+			"cancel": "キャンセル",
+			"contentOnly": "カードのヘッダーとコンテンツだけを使ったシンプルな表示です。",
+			"lastUpdated": "最終更新: 2026年11月4日",
+			"projectDescription": "プロジェクトの基本情報を管理します。",
+			"projectDetails": "プロジェクトの名前や公開状態をここから確認できます。",
+			"projectSettings": "プロジェクト設定",
+			"published": "公開中",
+			"save": "変更を保存"
+		},
+		"carousel": {
+			"forest": "森の風景",
+			"gallery": "風景ギャラリー",
+			"instructions": "矢印ボタンで画像を切り替えられます。",
+			"mountains": "山並みの風景",
+			"next": "次の画像",
+			"ocean": "海辺の風景",
+			"previous": "前の画像"
+		},
+		"descriptionList": {
+			"address": "住所",
+			"email": "メールアドレス",
+			"location": "東京都千代田区霞が関",
+			"name": "氏名",
+			"person": "山田 太郎"
+		},
+		"dialog": {
+			"content": "ここにダイアログの内容を表示します。",
+			"description": "ダイアログを使って、補足情報や操作を表示できます。",
+			"showDetails": "詳細を表示",
+			"title": "ダイアログのタイトル"
+		},
+		"disclosure": {
+			"content": "こちらはDisclosureのコンテンツです。詳しくは",
+			"detailsPage": "詳細ページ",
+			"showDetails": "詳細を表示"
+		},
+		"form": {
+			"agreement": "利用規約への同意",
+			"agreeTerms": "利用規約に同意する",
+			"attachmentsButton": "添付ファイル（ボタン）",
+			"attachmentsDrop": "添付ファイル（ドラッグ＆ドロップ）",
+			"category": "カテゴリ",
+			"categoryDesign": "デザイン",
+			"categoryEngineering": "エンジニアリング",
+			"categorySales": "営業",
+			"date": "日付",
+			"description": "説明",
+			"error": "エラーが発生しました",
+			"errorAgreement": "利用規約への同意が必要です。",
+			"errorAttachmentCount_other": "添付ファイルは{{count}}件まで選択できます。",
+			"errorAttachmentRequired": "ファイルを選択してください。",
+			"errorAttachmentSize": "ファイルサイズは1MiB以下にしてください。",
+			"errorCategory": "カテゴリを選択してください。",
+			"errorDate": "日付を選択してください。",
+			"errorDescription": "説明を入力してください。",
+			"errorDescriptionToast": "もう一度お試しください。",
+			"errorGender": "性別を選択してください。",
+			"errorInterests": "興味のある分野を1つ以上選択してください。",
+			"errorName": "氏名を入力してください。",
+			"errorPassword": "パスワードは8文字以上で入力してください。",
+			"errorPeriod": "期間を選択してください。",
+			"errorUser": "ユーザーを選択してください。",
+			"errorUsers": "ユーザーを1人以上選択してください。",
+			"gender": "性別",
+			"genderFemale": "女性",
+			"genderMale": "男性",
+			"genderOther": "その他",
+			"interestDesign": "デザイン",
+			"interestProgramming": "プログラミング",
+			"interestReading": "読書",
+			"interests": "興味のある分野",
+			"name": "氏名",
+			"password": "パスワード",
+			"period": "期間",
+			"saved": "保存しました",
+			"savedDescription": "変更内容を保存しました。",
+			"submit": "送信",
+			"title": "フォーム例",
+			"user": "ユーザー",
+			"users": "ユーザー（複数）",
+			"userSato": "佐藤花子",
+			"userSuzuki": "鈴木一郎",
+			"userTakahashi": "高橋美咲",
+			"userTanaka": "田中太郎"
+		},
+		"hamburger": {
+			"home": "ホーム",
+			"mainMenu": "メインメニュー",
+			"menu": "メニュー",
+			"selectPage": "ページを選択してください。",
+			"settings": "設定",
+			"user": "ユーザー"
+		},
+		"image": {
+			"description": "画像の説明文です。",
+			"sample": "サンプル画像"
+		},
+		"labels": {
+			"date": "日付",
+			"file": "ファイル",
+			"heading": "見出し",
+			"language": "言語",
+			"name": "名前",
+			"notifications": "通知設定",
+			"password": "パスワード",
+			"period": "期間",
+			"switch": "スイッチ切り替え",
+			"userList": "ユーザー一覧"
+		},
+		"languageSelect": {
+			"currentLanguage": "現在の言語: {{language}}",
+			"preview": "プレビュー"
+		},
+		"layout": {
+			"centerDescription": "この領域は画面の中央に配置され、最大幅は {{maxWidth}} に制限されます。",
+			"clusterDescription": "space・justify・align を Controls から変更して、子要素の配置や間隔を確認できます。",
+			"content_other": "コンテンツ{{count}}",
+			"contentArea": "コンテンツ領域",
+			"input": "入力項目",
+			"inputPlaceholder": "入力してください",
+			"large": "大",
+			"medium": "中",
+			"small": "小"
+		},
+		"list": {
+			"application": "申請書",
+			"identityDocument": "本人確認書類",
+			"photo": "証明写真"
+		},
+		"table": {
+			"actions": "アクション",
+			"ascending": "昇順",
+			"cancel": "キャンセル",
+			"caption": "メンバー一覧。列見出しを押すと並び替えできます。",
+			"delete": "削除",
+			"descending": "降順",
+			"edit": "編集",
+			"name": "名前",
+			"next": "次へ",
+			"noMembers": "該当するメンバーがいません。",
+			"previous": "前へ",
+			"reset": "絞り込み・ソートをリセット",
+			"role": "役割",
+			"roleCustomerSuccess": "カスタマーサクセス",
+			"roleDesigner": "デザイナー",
+			"roleEngineer": "エンジニア",
+			"roleMarketer": "マーケター",
+			"roleProductManager": "プロダクトマネージャー",
+			"roleSales": "営業",
+			"save": "保存",
+			"search": "名前で検索",
+			"searchDescription": "名前の一部を入力して絞り込めます。",
+			"showing_other": "全{{count}}件中{{start}}〜{{end}}件を表示",
+			"sortable": "ソート可能",
+			"team": "チーム",
+			"teamDevelopment": "開発",
+			"teamMarketing": "マーケティング",
+			"teamProduct": "プロダクト",
+			"teamSales": "営業",
+			"teamSupport": "サポート"
+		},
+		"text": "これはテキストです。",
+		"toast": {
+			"check": "ご確認ください",
+			"checkDescription": "入力内容に注意してください。",
+			"error": "エラーが発生しました",
+			"errorDescription": "もう一度お試しください。",
+			"instructions": "ボタンを押すと、それぞれの種類の toast が表示されます。",
+			"notice": "お知らせ",
+			"noticeDescription": "新しい更新があります。",
+			"saved": "保存しました",
+			"savedDescription": "変更内容を保存しました。"
+		},
+		"tooltip": {
+			"bottom": "下",
+			"details": "詳細",
+			"detailsDescription": "この操作の詳細を確認できます。",
+			"instructions": "ボタンにマウスを乗せるか、キーボードでフォーカスすると説明が表示されます。",
+			"left": "左",
+			"placementInstructions": "表示位置を確認できます。",
+			"right": "右",
+			"shownBottom": "下に表示",
+			"shownLeft": "左に表示",
+			"shownRight": "右に表示",
+			"shownTop": "上に表示",
+			"top": "上"
+		}
+	}
+}

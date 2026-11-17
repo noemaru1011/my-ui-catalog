@@ -43,14 +43,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: (args) => {
 		const [value, setValue] = useState<string | undefined>(undefined);
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 
 		return (
 			<Combobox
 				{...args}
 				label={
 					args.label === '言語'
-						? t('example.story.labels.language')
+						? t('story.labels.language')
 						: args.label
 				}
 				value={value}

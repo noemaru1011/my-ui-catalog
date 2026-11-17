@@ -20,14 +20,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Image
 				{...args}
-				alt={args.alt === 'サンプル画像' ? t('example.story.image.sample') : args.alt}
+				alt={args.alt === 'サンプル画像' ? t('story.image.sample') : args.alt}
 				description={
 					args.description === '画像の説明文です。'
-						? t('example.story.image.description')
+						? t('story.image.description')
 						: args.description
 				}
 			/>

@@ -22,14 +22,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const renderTextarea = (args: ComponentProps<typeof Textarea>) => {
-	const { t } = useTranslation();
+	const { t } = useTranslation('example');
 
 	return (
 		<Textarea
 			{...args}
 			label={
 				args.label === '名前'
-					? t('example.story.labels.name')
+					? t('story.labels.name')
 					: args.label
 			}
 		/>
