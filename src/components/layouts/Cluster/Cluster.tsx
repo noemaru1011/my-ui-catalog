@@ -36,7 +36,7 @@ export function Cluster({
 		<div
 			className={cn(
 				'flex',
-				nowrap ? 'max-w-80 flex-nowrap overflow-x-auto' : 'flex-wrap',
+				nowrap ? 'flex-nowrap overflow-x-auto' : 'flex-wrap',
 				{
 					'gap-2': space === 'sm',
 					'gap-4': space === 'md',
