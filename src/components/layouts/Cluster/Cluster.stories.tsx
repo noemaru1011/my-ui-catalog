@@ -1,3 +1,4 @@
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -9,7 +10,7 @@ const meta = {
 	tags: ['autodocs'],
 	argTypes: {
 		nowrap: {
-			control: 'boolean'
+			control: 'boolean',
 		},
 		space: {
 			control: 'inline-radio',
@@ -46,8 +47,10 @@ const Item = ({
 		{title}
 	</div>
 );
+
 export const Default: Story = {
 	args: {
+		nowrap: false,
 		space: 'sm',
 		justify: 'start',
 		align: 'center',
@@ -57,14 +60,45 @@ export const Default: Story = {
 		return (
 			<Container width="full">
 				<Card>
-					<CardHeader>
-					</CardHeader>
+					<CardHeader />
 					<CardContent>
 						<Cluster {...args}>
 							<Item title={t('story.layout.small')} />
 							<Item title={t('story.layout.medium')} className="py-6" />
 							<Item title={t('story.layout.large')} className="py-8" />
+							<Item title={t('story.layout.small')} />
+							<Item title={t('story.layout.medium')} className="py-6" />
 						</Cluster>
+					</CardContent>
+				</Card>
+			</Container>
+		);
+	},
+};
+
+export const NoWrap: Story = {
+	args: {
+		nowrap: true,
+		space: 'sm',
+		justify: 'start',
+		align: 'center',
+	},
+	render: (args) => {
+		const { t } = useTranslation('example');
+		return (
+			<Container width="full">
+				<Card>
+					<CardHeader />
+					<CardContent>
+						<div className="max-w-80 overflow-x-auto">
+							<Cluster {...args}>
+								<Item title={t('story.layout.small')} />
+								<Item title={t('story.layout.medium')} className="py-6" />
+								<Item title={t('story.layout.large')} className="py-8" />
+								<Item title={t('story.layout.small')} />
+								<Item title={t('story.layout.medium')} className="py-6" />
+							</Cluster>
+						</div>
 					</CardContent>
 				</Card>
 			</Container>
