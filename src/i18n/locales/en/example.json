@@ -146,7 +146,6 @@
 		},
 		"layout": {
 			"centerDescription": "This area is centered on the screen, and its maximum width is limited to {{maxWidth}}.",
-			"clusterDescription": "Change space, justify, and align in Controls to see how child elements are arranged and spaced.",
 			"content_one": "Content block {{count}}",
 			"content_other": "Content block {{count}}",
 			"contentArea": "Content area",

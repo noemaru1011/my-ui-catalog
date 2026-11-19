@@ -145,7 +145,6 @@
 		},
 		"layout": {
 			"centerDescription": "この領域は画面の中央に配置され、最大幅は {{maxWidth}} に制限されます。",
-			"clusterDescription": "space・justify・align を Controls から変更して、子要素の配置や間隔を確認できます。",
 			"content_other": "コンテンツ{{count}}",
 			"contentArea": "コンテンツ領域",
 			"input": "入力項目",
