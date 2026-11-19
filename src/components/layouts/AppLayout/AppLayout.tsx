@@ -9,15 +9,10 @@ type AppLayoutProps = {
 
 export function AppLayout({ header, main }: AppLayoutProps) {
 	return (
-		<div className="flex min-h-screen flex-col">
-			<header className="sticky top-0 z-10 flex h-14 w-full items-center border-b-2 bg-white px-4 sm:px-6 dark:bg-blue-950">
-				<div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4">
-					{header}
-				</div>
-			</header>
+		<>
+			<header className="z-sticky sticky top-0 w-full border-b p-4">{header}</header>
 
 			<main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6">{main}</main>
-			{/* フッターはサイトの回遊を目的とはしないので、不要*/}
-		</div>
+		</>
 	);
 }

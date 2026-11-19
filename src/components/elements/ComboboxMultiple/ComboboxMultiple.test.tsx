@@ -24,7 +24,7 @@ describe('ComboboxMultiple', () => {
 			expect(screen.getByText('権限')).toBeInTheDocument();
 			expect(screen.getByRole('combobox', { name: '権限' })).toHaveAttribute(
 				'placeholder',
-				i18n.t('common.selectPlaceholder'),
+				i18n.t('selectPlaceholder'),
 			);
 		});
 
@@ -155,7 +155,7 @@ describe('ComboboxMultiple', () => {
 
 			expect(screen.getByRole('combobox', { name: '権限' })).toHaveAttribute(
 				'placeholder',
-				i18n.t('common.selectPlaceholder'),
+				i18n.t('selectPlaceholder'),
 			);
 		});
 
@@ -170,7 +170,7 @@ describe('ComboboxMultiple', () => {
 
 			expect(screen.getByRole('combobox', { name: '権限' })).not.toHaveAttribute(
 				'placeholder',
-				i18n.t('common.selectPlaceholder'),
+				i18n.t('selectPlaceholder'),
 			);
 		});
 	});

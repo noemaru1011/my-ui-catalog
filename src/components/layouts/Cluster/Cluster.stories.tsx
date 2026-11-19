@@ -1,6 +1,7 @@
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Cluster } from './Cluster';
 import { Container } from '../Container/Container';
 
@@ -8,6 +9,9 @@ const meta = {
 	component: Cluster,
 	tags: ['autodocs'],
 	argTypes: {
+		nowrap: {
+			control: 'boolean',
+		},
 		space: {
 			control: 'inline-radio',
 			options: ['sm', 'md', 'lg'],
@@ -43,26 +47,58 @@ const Item = ({
 		{title}
 	</div>
 );
+
 export const Default: Story = {
 	args: {
+		nowrap: false,
 		space: 'sm',
 		justify: 'start',
 		align: 'center',
 	},
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Container width="full">
 				<Card>
-					<CardHeader>
-						<CardTitle>{t('example.story.layout.clusterDescription')}</CardTitle>
-					</CardHeader>
+					<CardHeader />
 					<CardContent>
 						<Cluster {...args}>
-							<Item title={t('example.story.layout.small')} />
-							<Item title={t('example.story.layout.medium')} className="py-6" />
-							<Item title={t('example.story.layout.large')} className="py-8" />
+							<Item title={t('story.layout.small')} />
+							<Item title={t('story.layout.medium')} className="py-6" />
+							<Item title={t('story.layout.large')} className="py-8" />
+							<Item title={t('story.layout.small')} />
+							<Item title={t('story.layout.medium')} className="py-6" />
 						</Cluster>
+					</CardContent>
+				</Card>
+			</Container>
+		);
+	},
+};
+
+export const NoWrap: Story = {
+	args: {
+		nowrap: true,
+		space: 'sm',
+		justify: 'start',
+		align: 'center',
+	},
+	render: (args) => {
+		const { t } = useTranslation('example');
+		return (
+			<Container width="full">
+				<Card>
+					<CardHeader />
+					<CardContent>
+						<div className="max-w-80 overflow-x-auto">
+							<Cluster {...args}>
+								<Item title={t('story.layout.small')} />
+								<Item title={t('story.layout.medium')} className="py-6" />
+								<Item title={t('story.layout.large')} className="py-8" />
+								<Item title={t('story.layout.small')} />
+								<Item title={t('story.layout.medium')} className="py-6" />
+							</Cluster>
+						</div>
 					</CardContent>
 				</Card>
 			</Container>

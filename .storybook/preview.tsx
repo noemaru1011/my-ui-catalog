@@ -1,12 +1,13 @@
 import type { Preview } from '@storybook/react-vite';
 import '../src/index.css';
-import { MemoryRouter } from 'react-router-dom';
-import { ThemeProvider } from '../src/components/providers/theme-provider';
-import { Toaster } from '@/components/ui/toast';
 import i18n from '../src/i18n';
-import '../src/i18n';
+
+import { MemoryRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { TooltipProvider } from '@/components/ui/tooltip';
+
+import { ThemeProvider } from '../src/components/providers/theme-provider';
+import { Toaster } from '../src/components/ui/toast';
+import { TooltipProvider } from '../src/components/ui/tooltip';
 
 const createTestQueryClient = () =>
 	new QueryClient({
@@ -18,6 +19,9 @@ const createTestQueryClient = () =>
 	});
 
 const preview: Preview = {
+	beforeAll: async () => {
+		await i18n.changeLanguage('ja');
+	},
 	decorators: [
 		(Story) => {
 			const queryClient = createTestQueryClient();
@@ -36,10 +40,6 @@ const preview: Preview = {
 			);
 		},
 	],
-
-	beforeEach: async () => {
-		await i18n.changeLanguage('ja');
-	},
 
 	parameters: {
 		controls: {

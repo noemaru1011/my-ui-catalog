@@ -11,7 +11,7 @@ type InternalServerErrorProps = {
 };
 
 export function InternalServerError({ homeUrl }: InternalServerErrorProps) {
-	const { t } = useTranslation();
+	const { t } = useTranslation('error');
 
 	return (
 		<Stack space="sm">
@@ -21,12 +21,12 @@ export function InternalServerError({ homeUrl }: InternalServerErrorProps) {
 
 			<Cluster space="sm">
 				<ServerCrash size={32} strokeWidth={1.5} />
-				<Heading type="sectionTitle">{t('error.internalServerError.title')}</Heading>
+				<Heading type="sectionTitle">{t('internalServerError.title')}</Heading>
 			</Cluster>
 
-			<Text color="muted">{t('error.internalServerError.description')}</Text>
+			<Text color="muted">{t('internalServerError.description')}</Text>
 
-			<Link to={homeUrl} label={t('error.backToHome')} size="lg" />
+			<Link to={homeUrl} label={t('backToHome')} size="lg" />
 		</Stack>
 	);
 }

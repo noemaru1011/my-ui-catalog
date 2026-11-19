@@ -47,7 +47,7 @@ export function Input({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{readOnly && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+				{readOnly && <Badge variant="outline">{t('notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}

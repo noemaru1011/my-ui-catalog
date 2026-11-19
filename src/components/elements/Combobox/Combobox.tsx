@@ -64,7 +64,7 @@ export function Combobox({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+				{disabled && <Badge variant="outline">{t('notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}
@@ -81,7 +81,7 @@ export function Combobox({
 			>
 				<ComboboxInput
 					id={inputId}
-					placeholder={t('common.selectPlaceholder')}
+					placeholder={t('selectPlaceholder')}
 					aria-invalid={!!error}
 					disabled={disabled}
 					showClear
@@ -89,7 +89,7 @@ export function Combobox({
 				/>
 
 				<ComboboxContent>
-					<ComboboxEmpty> {t('common.noItemsFound')}</ComboboxEmpty>
+					<ComboboxEmpty> {t('noItemsFound')}</ComboboxEmpty>
 
 					<ComboboxList>
 						{(option) => (

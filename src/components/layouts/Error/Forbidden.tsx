@@ -11,7 +11,7 @@ type ForbiddenProps = {
 };
 
 export function Forbidden({ homeUrl }: ForbiddenProps) {
-	const { t } = useTranslation();
+	const { t } = useTranslation('error');
 
 	return (
 		<Stack space="sm">
@@ -21,12 +21,12 @@ export function Forbidden({ homeUrl }: ForbiddenProps) {
 
 			<Cluster space="sm">
 				<ShieldBan size={32} strokeWidth={1.5} />
-				<Heading type="sectionTitle">{t('error.forbidden.title')}</Heading>
+				<Heading type="sectionTitle">{t('forbidden.title')}</Heading>
 			</Cluster>
 
-			<Text color="muted">{t('error.forbidden.description')}</Text>
+			<Text color="muted">{t('forbidden.description')}</Text>
 
-			<Link to={homeUrl} label={t('error.backToHome')} size="lg" />
+			<Link to={homeUrl} label={t('backToHome')} size="lg" />
 		</Stack>
 	);
 }

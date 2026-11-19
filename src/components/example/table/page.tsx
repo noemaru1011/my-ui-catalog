@@ -7,21 +7,21 @@ import { DataTable } from './data-table';
  * ページネーションは最初の場合は前へのボタン,最後の場合は次へのボタンを表示させないようにする。
  */
 export function Page() {
-	const { t } = useTranslation();
+	const { t } = useTranslation('example');
 	const roles = {
-		designer: t('example.story.table.roleDesigner'),
-		engineer: t('example.story.table.roleEngineer'),
-		productManager: t('example.story.table.roleProductManager'),
-		customerSuccess: t('example.story.table.roleCustomerSuccess'),
-		marketer: t('example.story.table.roleMarketer'),
-		sales: t('example.story.table.roleSales'),
+		designer: t('story.table.roleDesigner'),
+		engineer: t('story.table.roleEngineer'),
+		productManager: t('story.table.roleProductManager'),
+		customerSuccess: t('story.table.roleCustomerSuccess'),
+		marketer: t('story.table.roleMarketer'),
+		sales: t('story.table.roleSales'),
 	};
 	const teams = {
-		product: t('example.story.table.teamProduct'),
-		development: t('example.story.table.teamDevelopment'),
-		support: t('example.story.table.teamSupport'),
-		marketing: t('example.story.table.teamMarketing'),
-		sales: t('example.story.table.teamSales'),
+		product: t('story.table.teamProduct'),
+		development: t('story.table.teamDevelopment'),
+		support: t('story.table.teamSupport'),
+		marketing: t('story.table.teamMarketing'),
+		sales: t('story.table.teamSales'),
 	};
 	const members = [
 		{ id: 1, name: '山田 太郎', role: roles.designer, team: teams.product },

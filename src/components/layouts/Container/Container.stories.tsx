@@ -26,13 +26,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Container {...args}>
 				<Input
 					id="default"
-					label={t('example.story.layout.input')}
-					placeholder={t('example.story.layout.inputPlaceholder')}
+					label={t('story.layout.input')}
+					placeholder={t('story.layout.inputPlaceholder')}
 				/>
 			</Container>
 		);

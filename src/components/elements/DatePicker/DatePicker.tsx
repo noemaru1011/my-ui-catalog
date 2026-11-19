@@ -48,7 +48,7 @@ export function DatePicker({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{readOnly && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+				{readOnly && <Badge variant="outline">{t('notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}
@@ -68,7 +68,7 @@ export function DatePicker({
 								readOnly && 'border-dashed',
 							)}
 						>
-							{value ? format(value, 'yyyy/MM/dd') : t('common.datePickerPlaceholder')}
+							{value ? format(value, 'yyyy/MM/dd') : t('datePickerPlaceholder')}
 						</Button>
 					}
 				/>

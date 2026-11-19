@@ -1,0 +1,24 @@
+{
+	"back": "戻る",
+	"darkMode": "ダークモード",
+	"darkModeToggle": "ダークモード切り替え",
+	"datePickerPlaceholder": "日付を選択してください。",
+	"dateRangePlaceholder": "期間を選択してください。",
+	"displayLanguage": "表示言語",
+	"file": {
+		"acceptedTypes": "対応形式: {{accept}}",
+		"attach": "ファイルを添付",
+		"clickToSelect": "クリックしてファイルを選択",
+		"dragAndDrop": "ファイルをドラッグ＆ドロップ",
+		"limits": "最大{{maxFiles}}件 / {{maxSize}} MiB",
+		"remove": "削除",
+		"selectedFiles": "選択したファイル"
+	},
+	"hidePassword": "パスワードを隠す",
+	"lightMode": "ライトモード",
+	"loading": "読み込み中...",
+	"noItemsFound": "該当する項目がありません。",
+	"notEditable": "編集不可",
+	"selectPlaceholder": "選択してください。",
+	"showPassword": "パスワードを表示"
+}

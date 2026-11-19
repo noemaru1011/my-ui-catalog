@@ -1,0 +1,24 @@
+{
+	"back": "Back",
+	"darkMode": "Dark mode",
+	"darkModeToggle": "Toggle dark mode",
+	"datePickerPlaceholder": "Please select a date.",
+	"dateRangePlaceholder": "Please select a date range.",
+	"displayLanguage": "Display language",
+	"file": {
+		"acceptedTypes": "Accepted formats: {{accept}}",
+		"attach": "Attach files",
+		"clickToSelect": "Click to select files",
+		"dragAndDrop": "Drag and drop files",
+		"limits": "Maximum {{maxFiles}} files / {{maxSize}} MiB",
+		"remove": "Remove",
+		"selectedFiles": "Selected files"
+	},
+	"hidePassword": "Hide password",
+	"lightMode": "Light mode",
+	"loading": "Loading...",
+	"noItemsFound": "No items found.",
+	"notEditable": "Not editable",
+	"selectPlaceholder": "Please select.",
+	"showPassword": "Show password"
+}

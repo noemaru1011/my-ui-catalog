@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     render: () => {
         const Component = () => {
-            const { t, i18n } = useTranslation();
+            const { t, i18n } = useTranslation('example');
 
             const currentLanguage = i18n.language.startsWith('en')
                 ? 'en'
@@ -41,17 +41,17 @@ export const Default: Story = {
 
                     <Stack>
                         <Text size="lg" weight="bold">
-                            {t('example.story.languageSelect.preview')}
+                            {t('story.languageSelect.preview')}
                         </Text>
 
                         <Text weight="bold" color="muted">
-                            {t('example.story.languageSelect.currentLanguage', {
+                            {t('story.languageSelect.currentLanguage', {
                                 language: currentLanguage,
                             })}
                         </Text>
 
                         <Text size="md">
-                            {t('example.story.description')}
+                            {t('story.description')}
                         </Text>
                     </Stack>
                 </Stack>

@@ -29,21 +29,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: () => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<HamburgerMenu>
 				<DrawerHeader>
-					<DrawerTitle>{t('example.story.hamburger.menu')}</DrawerTitle>
-					<DrawerDescription>{t('example.story.hamburger.selectPage')}</DrawerDescription>
+					<DrawerTitle>{t('story.hamburger.menu')}</DrawerTitle>
+					<DrawerDescription>{t('story.hamburger.selectPage')}</DrawerDescription>
 				</DrawerHeader>
-				<Stack as="nav" aria-label={t('example.story.hamburger.mainMenu')}>
+				<Stack as="nav" aria-label={t('story.hamburger.mainMenu')}>
 					<Stack as="ul" space="sm">
 						{(['home', 'user', 'settings'] as const).map((page) => (
 							<Stack as="li" key={page}>
 								<DrawerClose
 									render={<Button variant="ghost" className="w-full justify-start" />}
 								>
-									{t(`example.story.hamburger.${page}`)}
+									{t(`story.hamburger.${page}`)}
 								</DrawerClose>
 							</Stack>
 						))}

@@ -17,7 +17,7 @@ describe('Combobox', () => {
 
 		expect(screen.getByRole('combobox', { name: '言語' })).toBeInTheDocument();
 
-		expect(screen.getByPlaceholderText(i18n.t('common.selectPlaceholder'))).toBeInTheDocument();
+		expect(screen.getByPlaceholderText(i18n.t('selectPlaceholder'))).toBeInTheDocument();
 	});
 
 	it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {

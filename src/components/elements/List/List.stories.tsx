@@ -22,13 +22,13 @@ type Story = StoryObj<Omit<typeof meta, 'component'>>;
 
 export const Default: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 
 		return (
 			<List {...args}>
 				{(['identityDocument', 'application', 'photo'] as const).map((key) => (
 					<ListItem key={key}>
-						<Text>{t(`example.story.list.${key}`)}</Text>
+						<Text>{t(`story.list.${key}`)}</Text>
 					</ListItem>
 				))}
 			</List>
@@ -39,16 +39,16 @@ export const Default: Story = {
 
 export const Nested: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 
 		return (
 			<List {...args}>
 				<ListItem>
-					<Text>{t('example.story.list.identityDocument')}</Text>
+					<Text>{t('story.list.identityDocument')}</Text>
 				</ListItem>
 
 				<ListItem>
-					<Text>{t('example.story.list.application')}</Text>
+					<Text>{t('story.list.application')}</Text>
 					<List variant="number">
 						<ListItem>
 							<Text>申請書</Text>
@@ -60,7 +60,7 @@ export const Nested: Story = {
 				</ListItem>
 
 				<ListItem>
-					<Text>{t('example.story.list.photo')}</Text>
+					<Text>{t('story.list.photo')}</Text>
 					<List variant="number">
 						<ListItem>
 							<Text>顔写真</Text>

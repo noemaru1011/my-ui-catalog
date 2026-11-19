@@ -78,7 +78,7 @@ export function ComboboxMultiple({
 			<FieldLabel htmlFor={inputId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+				{disabled && <Badge variant="outline">{t('notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}
@@ -143,7 +143,7 @@ export function ComboboxMultiple({
 									<ComboboxChipsInput
 										id={inputId}
 										aria-invalid={!!error}
-										placeholder={values.length === 0 ? t('common.selectPlaceholder') : undefined}
+										placeholder={values.length === 0 ? t('selectPlaceholder') : undefined}
 										className="min-w-8 flex-1"
 									/>
 								</>
@@ -153,7 +153,7 @@ export function ComboboxMultiple({
 				</ComboboxChips>
 
 				<ComboboxContent anchor={anchor}>
-					<ComboboxEmpty>{t('common.noItemsFound')}</ComboboxEmpty>
+					<ComboboxEmpty>{t('noItemsFound')}</ComboboxEmpty>
 
 					<ComboboxList>
 						{(option) => (

@@ -139,7 +139,7 @@ export function FileUpload({
 				<FieldLabel htmlFor={inputId}>
 					{label}
 					{required && <span className="text-destructive">*</span>}
-					{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+					{disabled && <Badge variant="outline">{t('notEditable')}</Badge>}
 				</FieldLabel>
 			)}
 
@@ -170,13 +170,13 @@ export function FileUpload({
 				>
 					<Stack space="sm">
 						<Stack space="sm">
-							<Text weight="bold">{t('common.file.dragAndDrop')}</Text>
-							<Text color="muted">{t('common.file.clickToSelect')}</Text>
+							<Text weight="bold">{t('file.dragAndDrop')}</Text>
+							<Text color="muted">{t('file.clickToSelect')}</Text>
 						</Stack>
 
-						<Text color="muted">{t('common.file.limits', { maxFiles, maxSize })}</Text>
+						<Text color="muted">{t('file.limits', { maxFiles, maxSize })}</Text>
 
-						{accept && <Text color="muted">{t('common.file.acceptedTypes', { accept })}</Text>}
+						{accept && <Text color="muted">{t('file.acceptedTypes', { accept })}</Text>}
 					</Stack>
 
 					<input
@@ -191,7 +191,7 @@ export function FileUpload({
 						accept={accept}
 						multiple={multiple}
 						disabled={disabled}
-						aria-label={label ?? t('common.file.clickToSelect')}
+						aria-label={label ?? t('file.clickToSelect')}
 						aria-invalid={!!displayedError}
 						aria-describedby={describedBy || undefined}
 						className="sr-only"
@@ -208,7 +208,7 @@ export function FileUpload({
 				{files.length > 0 && (
 					<Stack space="sm">
 						<Cluster justify="between">
-							<Text weight="bold">{t('common.file.selectedFiles')}</Text>
+							<Text weight="bold">{t('file.selectedFiles')}</Text>
 							<Text color="muted">
 								{files.length} / {maxFiles}
 							</Text>
@@ -244,7 +244,7 @@ export function FileUpload({
 												e.stopPropagation();
 												removeFile(index);
 											}}
-											aria-label={`${file.name} ${t('common.file.remove')}`}
+											aria-label={`${file.name} ${t('file.remove')}`}
 										>
 											<X className="h-4 w-4" />
 										</Button>

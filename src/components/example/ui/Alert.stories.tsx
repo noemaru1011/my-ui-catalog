@@ -34,24 +34,24 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: () => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Stack space="md">
 				<Alert>
 					<CircleCheck aria-hidden="true" />
-					<AlertTitle>{t('example.story.alert.saved')}</AlertTitle>
+					<AlertTitle>{t('story.alert.saved')}</AlertTitle>
 					<AlertDescription>
-						<Text color="muted">{t('example.story.alert.savedDescription')}</Text>
+						<Text color="muted">{t('story.alert.savedDescription')}</Text>
 					</AlertDescription>
 				</Alert>
 				<Alert variant="destructive">
 					<AlertCircle aria-hidden="true" />
-					<AlertTitle>{t('example.story.alert.error')}</AlertTitle>
+					<AlertTitle>{t('story.alert.error')}</AlertTitle>
 					<AlertDescription>
-						<Text color="muted">{t('example.story.alert.errorDescription')}</Text>
+						<Text color="muted">{t('story.alert.errorDescription')}</Text>
 					</AlertDescription>
 					<AlertAction>
-						<Button variant="ghost" size="icon-xs" aria-label={t('example.story.alert.close')}>
+						<Button variant="ghost" size="icon-xs" aria-label={t('story.alert.close')}>
 							<X aria-hidden="true" />
 						</Button>
 					</AlertAction>
@@ -66,13 +66,13 @@ export const Destructive: Story = {
 		variant: 'destructive',
 	},
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Alert {...args}>
 				<AlertCircle aria-hidden="true" />
-				<AlertTitle>{t('example.story.alert.error')}</AlertTitle>
+				<AlertTitle>{t('story.alert.error')}</AlertTitle>
 				<AlertDescription>
-					<Text color="muted">{t('example.story.alert.errorDescription')}</Text>
+					<Text color="muted">{t('story.alert.errorDescription')}</Text>
 				</AlertDescription>
 			</Alert>
 		);

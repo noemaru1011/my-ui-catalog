@@ -32,12 +32,12 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: (args) => {
 		const [dateRange, setDateRange] = useState<DateRangeType>();
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 
 		return (
 			<DateRange
 				{...args}
-				label={args.label === '期間' ? t('example.story.labels.period') : args.label}
+				label={args.label === '期間' ? t('story.labels.period') : args.label}
 				value={dateRange}
 				onChange={setDateRange}
 			/>

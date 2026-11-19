@@ -1,11 +1,18 @@
 import './index.css';
 
+// Elements
 export * from './components/elements';
+
+// Layouts
 export * from './components/layouts';
+
+// Providers
 export * from './components/providers/theme-provider';
-// UIコンポーネントは名前空間として公開
+
+// UI primitives（名前空間として公開）
 export * as primitives from './components/ui';
-// Buttonなど、elementsと重複しないものだけ直接公開
+
+// UI components（elementsと重複しないものを直接公開）
 export {
 	Alert,
 	AlertDialog,
@@ -29,5 +36,8 @@ export {
 	Toast,
 	Tooltip,
 } from './components/ui';
+// i18n
+export * from './i18n';
+// Utilities
 export * from './lib/data-table-features';
 export * from './lib/utils';

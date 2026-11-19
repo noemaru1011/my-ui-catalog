@@ -25,20 +25,20 @@ type Story = StoryObj<typeof Disclosure>;
 
 export const Default: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Disclosure
 				{...args}
 				triggerText={
 					args.triggerText === '詳細を表示'
-						? t('example.story.disclosure.showDetails')
+						? t('story.disclosure.showDetails')
 						: args.triggerText
 				}
 			>
 				<Text>
-					{t('example.story.disclosure.content')}{' '}
-					<Link to="#" label={t('example.story.disclosure.detailsPage')} />
-					{t('example.story.accordion.faqSuffix')}
+					{t('story.disclosure.content')}{' '}
+					<Link to="#" label={t('story.disclosure.detailsPage')} />
+					{t('story.accordion.faqSuffix')}
 				</Text>
 			</Disclosure>
 		);

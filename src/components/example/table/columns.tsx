@@ -14,7 +14,7 @@ export type Member = {
 };
 
 type ColumnOptions = {
-	t: TFunction;
+	t: TFunction<'example'>;
 	editingId: number | null;
 	editDraft: Pick<Member, 'name' | 'role'>;
 	onDraftChange: (field: 'name' | 'role', value: string) => void;
@@ -48,13 +48,13 @@ export function createColumns({
 					variant="ghost"
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
-					{t('example.story.table.name')}
+					{t('story.table.name')}
 					{column.getIsSorted() === 'asc' ? (
-						<ArrowUp aria-label={t('example.story.table.ascending')} />
+						<ArrowUp aria-label={t('story.table.ascending')} />
 					) : column.getIsSorted() === 'desc' ? (
-						<ArrowDown aria-label={t('example.story.table.descending')} />
+						<ArrowDown aria-label={t('story.table.descending')} />
 					) : (
-						<ArrowUpDown aria-label={t('example.story.table.sortable')} />
+						<ArrowUpDown aria-label={t('story.table.sortable')} />
 					)}
 				</Button>
 			),
@@ -64,7 +64,7 @@ export function createColumns({
 					<Input
 						id={`member-${row.original.id}-name`}
 						label=""
-						aria-label={t('example.story.table.name')}
+						aria-label={t('story.table.name')}
 						inputSize="sm"
 						value={editDraft.name}
 						onChange={(event) => onDraftChange('name', event.target.value)}
@@ -80,13 +80,13 @@ export function createColumns({
 					variant="ghost"
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
-					{t('example.story.table.role')}
+					{t('story.table.role')}
 					{column.getIsSorted() === 'asc' ? (
-						<ArrowUp aria-label={t('example.story.table.ascending')} />
+						<ArrowUp aria-label={t('story.table.ascending')} />
 					) : column.getIsSorted() === 'desc' ? (
-						<ArrowDown aria-label={t('example.story.table.descending')} />
+						<ArrowDown aria-label={t('story.table.descending')} />
 					) : (
-						<ArrowUpDown aria-label={t('example.story.table.sortable')} />
+						<ArrowUpDown aria-label={t('story.table.sortable')} />
 					)}
 				</Button>
 			),
@@ -95,7 +95,7 @@ export function createColumns({
 					<Input
 						id={`member-${row.original.id}-role`}
 						label=""
-						aria-label={t('example.story.table.role')}
+						aria-label={t('story.table.role')}
 						inputSize="sm"
 						value={editDraft.role}
 						onChange={(event) => onDraftChange('role', event.target.value)}
@@ -105,26 +105,26 @@ export function createColumns({
 				),
 		}),
 		COLUMN_HELPER.accessor('team', {
-			header: t('example.story.table.team'),
+			header: t('story.table.team'),
 		}),
 		COLUMN_HELPER.display({
 			id: 'actions',
-			header: t('example.story.table.actions'),
+			header: t('story.table.actions'),
 			enableSorting: false,
 			cell: ({ row }) =>
 				editingId === row.original.id ? (
 					<Cluster space="sm">
 						<Button type="button" size="sm" onClick={() => onSave(row.original.id)}>
-							{t('example.story.table.save')}
+							{t('story.table.save')}
 						</Button>
 						<Button type="button" size="sm" variant="outline" onClick={onCancel}>
-							{t('example.story.table.cancel')}
+							{t('story.table.cancel')}
 						</Button>
 					</Cluster>
 				) : (
 					<Cluster space="sm">
 						<Button type="button" size="sm" variant="outline" onClick={() => onEdit(row.original)}>
-							{t('example.story.table.edit')}
+							{t('story.table.edit')}
 						</Button>
 						<Button
 							type="button"
@@ -132,7 +132,7 @@ export function createColumns({
 							variant="destructive"
 							onClick={() => onDelete(row.original.id)}
 						>
-							{t('example.story.table.delete')}
+							{t('story.table.delete')}
 						</Button>
 					</Cluster>
 				),

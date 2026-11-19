@@ -11,7 +11,7 @@ type NotFoundProps = {
 };
 
 export function NotFound({ homeUrl }: NotFoundProps) {
-	const { t } = useTranslation();
+	const { t } = useTranslation('error');
 
 	return (
 		<Stack space="sm">
@@ -21,12 +21,12 @@ export function NotFound({ homeUrl }: NotFoundProps) {
 
 			<Cluster space="sm">
 				<FileQuestion size={32} strokeWidth={1.5} />
-				<Heading type="sectionTitle">{t('error.notfound.title')}</Heading>
+				<Heading type="sectionTitle">{t('notfound.title')}</Heading>
 			</Cluster>
 
-			<Text color="muted">{t('error.notfound.description')}</Text>
+			<Text color="muted">{t('notfound.description')}</Text>
 
-			<Link to={homeUrl} label={t('error.backToHome')} size="lg" />
+			<Link to={homeUrl} label={t('backToHome')} size="lg" />
 		</Stack>
 	);
 }

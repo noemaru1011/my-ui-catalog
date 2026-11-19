@@ -50,7 +50,7 @@ export function Radio({
 			<FieldLegend variant="label" className={error ? 'text-destructive mb-0' : 'mb-0'}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+				{disabled && <Badge variant="outline">{t('notEditable')}</Badge>}
 			</FieldLegend>
 
 			{description && <FieldDescription>{description}</FieldDescription>}

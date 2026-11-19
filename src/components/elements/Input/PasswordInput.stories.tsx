@@ -26,13 +26,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<PasswordInput
 				{...args}
 				label={
 					args.label === 'パスワード'
-						? t('example.story.labels.password')
+						? t('story.labels.password')
 						: args.label
 				}
 			/>

@@ -34,17 +34,17 @@ export const Default: Story = {
 		children: null,
 	},
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Container width="full">
 				<Center {...args}>
 					<div className="min-h-64 border-2 border-dashed border-blue-500 p-6">
 						<Heading type="blockTitle">
-							{t('example.story.layout.contentArea')}
+							{t('story.layout.contentArea')}
 						</Heading>
 						<Text>maxWidth: {args.maxWidth}</Text>
 						<Text>
-							{t('example.story.layout.centerDescription', {
+							{t('story.layout.centerDescription', {
 								maxWidth: args.maxWidth,
 							})}
 						</Text>

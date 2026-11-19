@@ -70,7 +70,7 @@ export function Select({
 			<FieldLabel htmlFor={triggerId}>
 				{label}
 				{required && <span className="text-destructive">*</span>}
-				{disabled && <Badge variant="outline">{t('common.notEditable')}</Badge>}
+				{disabled && <Badge variant="outline">{t('notEditable')}</Badge>}
 			</FieldLabel>
 
 			{description && <FieldDescription>{description}</FieldDescription>}
@@ -91,7 +91,7 @@ export function Select({
 						disabled && 'border-dashed disabled:bg-transparent dark:disabled:bg-transparent',
 					)}
 				>
-					<SelectValue placeholder={t('common.selectPlaceholder')} />
+					<SelectValue placeholder={t('selectPlaceholder')} />
 				</SelectTrigger>
 
 				<SelectContent>

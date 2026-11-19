@@ -22,18 +22,18 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: () => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Dialog>
 				<DialogTrigger render={<Button />}>
-					{t('example.story.dialog.showDetails')}
+					{t('story.dialog.showDetails')}
 				</DialogTrigger>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>{t('example.story.dialog.title')}</DialogTitle>
-						<DialogDescription>{t('example.story.dialog.description')}</DialogDescription>
+						<DialogTitle>{t('story.dialog.title')}</DialogTitle>
+						<DialogDescription>{t('story.dialog.description')}</DialogDescription>
 					</DialogHeader>
-					<Text>{t('example.story.dialog.content')}</Text>
+					<Text>{t('story.dialog.content')}</Text>
 					<DialogFooter showCloseButton />
 				</DialogContent>
 			</Dialog>

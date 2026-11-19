@@ -1,0 +1,223 @@
+{
+	"story": {
+		"description": "hello world",
+		"accordion": {
+			"changePlan": "Can I change my subscription plan?",
+			"changePlanAnswer": "You can change your subscription plan at any time from your account settings. For details, see the",
+			"faq": "FAQ",
+			"faqSuffix": "for more information.",
+			"paymentMethods": "Which payment methods are available?",
+			"paymentMethodsAnswer": "You can pay by credit card or bank transfer. For details, see the",
+			"resetPassword": "How do I reset my password?",
+			"resetPasswordAnswer": "You can reset your password from the login screen. For details, see the"
+		},
+		"alert": {
+			"close": "Close notification",
+			"error": "An error occurred",
+			"errorDescription": "Could not save your changes. Please try again later.",
+			"saved": "Changes saved",
+			"savedDescription": "Project settings were updated successfully."
+		},
+		"alertDialog": {
+			"cancel": "Cancel",
+			"confirmDelete": "Are you sure you want to delete this?",
+			"deleteAction": "Delete",
+			"irreversible": "This action cannot be undone. The selected item will be permanently deleted."
+		},
+		"blockQuote": "This is an example of a blockquote. Use blockquotes to show text quoted from other documents or sources and visually distinguish it from regular text.",
+		"button": {
+			"saving": "Saving"
+		},
+		"card": {
+			"announcements": "Announcements",
+			"cancel": "Cancel",
+			"contentOnly": "A simple view with only the card header and content.",
+			"lastUpdated": "Last updated: Nov 4, 2026",
+			"projectDescription": "Manage basic project information.",
+			"projectDetails": "View the project name and publishing status here.",
+			"projectSettings": "Project settings",
+			"published": "Published",
+			"save": "Save changes"
+		},
+		"carousel": {
+			"forest": "Forest landscape",
+			"gallery": "Landscape gallery",
+			"instructions": "Use the arrow buttons to switch images.",
+			"mountains": "Mountain landscape",
+			"next": "Next image",
+			"ocean": "Coastal landscape",
+			"previous": "Previous image"
+		},
+		"descriptionList": {
+			"address": "Address",
+			"email": "Email address",
+			"location": "Kasumigaseki, Chiyoda City, Tokyo",
+			"name": "Name",
+			"person": "Taro Yamada"
+		},
+		"dialog": {
+			"content": "Dialog content is displayed here.",
+			"description": "Use a dialog to display additional information or actions.",
+			"showDetails": "Show details",
+			"title": "Dialog title"
+		},
+		"disclosure": {
+			"content": "This is the content of the disclosure. For more information, see the",
+			"detailsPage": "details page",
+			"showDetails": "Show details"
+		},
+		"form": {
+			"agreement": "Agree to the terms",
+			"agreeTerms": "I agree to the terms",
+			"attachmentsButton": "Attachments (button)",
+			"attachmentsDrop": "Attachments (drag and drop)",
+			"category": "Category",
+			"categoryDesign": "Design",
+			"categoryEngineering": "Engineering",
+			"categorySales": "Sales",
+			"date": "Date",
+			"description": "Description",
+			"error": "An error occurred",
+			"errorAgreement": "You must agree to the terms.",
+			"errorAttachmentCount_one": "Please attach no more than {{count}} file.",
+			"errorAttachmentCount_other": "Please attach no more than {{count}} files.",
+			"errorAttachmentRequired": "Please select a file.",
+			"errorAttachmentSize": "Each file must be 1 MiB or smaller.",
+			"errorCategory": "Please select a category.",
+			"errorDate": "Please select a date.",
+			"errorDescription": "Please enter a description.",
+			"errorDescriptionToast": "Please try again.",
+			"errorGender": "Please select a gender.",
+			"errorInterests": "Select at least one area of interest.",
+			"errorName": "Please enter your name.",
+			"errorPassword": "Password must be at least 8 characters.",
+			"errorPeriod": "Please select a date range.",
+			"errorUser": "Please select a user.",
+			"errorUsers": "Please select at least one user.",
+			"gender": "Gender",
+			"genderFemale": "Female",
+			"genderMale": "Male",
+			"genderOther": "Other",
+			"interestDesign": "Design",
+			"interestProgramming": "Programming",
+			"interestReading": "Reading",
+			"interests": "Areas of interest",
+			"name": "Full name",
+			"password": "Password",
+			"period": "Date range",
+			"saved": "Saved",
+			"savedDescription": "Your changes have been saved.",
+			"submit": "Submit",
+			"title": "Form example",
+			"user": "User",
+			"users": "Users (multiple)",
+			"userSato": "Hanako Sato",
+			"userSuzuki": "Ichiro Suzuki",
+			"userTakahashi": "Misaki Takahashi",
+			"userTanaka": "Taro Tanaka"
+		},
+		"hamburger": {
+			"home": "Home",
+			"mainMenu": "Main menu",
+			"menu": "Menu",
+			"selectPage": "Select a page.",
+			"settings": "Settings",
+			"user": "Users"
+		},
+		"image": {
+			"description": "Image description",
+			"sample": "Sample image"
+		},
+		"labels": {
+			"date": "Date",
+			"file": "File",
+			"heading": "Heading",
+			"language": "Language",
+			"name": "Name",
+			"notifications": "Notifications",
+			"password": "Password",
+			"period": "Date range",
+			"switch": "Toggle switch",
+			"userList": "User list"
+		},
+		"languageSelect": {
+			"currentLanguage": "Current language: {{language}}",
+			"preview": "Preview"
+		},
+		"layout": {
+			"centerDescription": "This area is centered on the screen, and its maximum width is limited to {{maxWidth}}.",
+			"content_one": "Content block {{count}}",
+			"content_other": "Content block {{count}}",
+			"contentArea": "Content area",
+			"input": "Input field",
+			"inputPlaceholder": "Enter a value",
+			"large": "Large",
+			"medium": "Medium",
+			"small": "Small"
+		},
+		"list": {
+			"application": "Application form",
+			"identityDocument": "Identity document",
+			"photo": "ID photo"
+		},
+		"table": {
+			"actions": "Actions",
+			"ascending": "Ascending",
+			"cancel": "Cancel",
+			"caption": "Member list. Select a column heading to sort.",
+			"delete": "Delete",
+			"descending": "Descending",
+			"edit": "Edit",
+			"name": "Name",
+			"next": "Next",
+			"noMembers": "No matching members.",
+			"previous": "Previous",
+			"reset": "Reset filters and sorting",
+			"role": "Role",
+			"roleCustomerSuccess": "Customer success",
+			"roleDesigner": "Designer",
+			"roleEngineer": "Engineer",
+			"roleMarketer": "Marketer",
+			"roleProductManager": "Product manager",
+			"roleSales": "Sales",
+			"save": "Save",
+			"search": "Search by name",
+			"searchDescription": "Enter part of a name to filter the results.",
+			"showing_one": "Showing {{start}} to {{end}} of {{count}} result",
+			"showing_other": "Showing {{start}} to {{end}} of {{count}} results",
+			"sortable": "Sortable",
+			"team": "Team",
+			"teamDevelopment": "Development",
+			"teamMarketing": "Marketing",
+			"teamProduct": "Product",
+			"teamSales": "Sales",
+			"teamSupport": "Support"
+		},
+		"text": "This is text.",
+		"toast": {
+			"check": "Please review",
+			"checkDescription": "Please check your input.",
+			"error": "An error occurred",
+			"errorDescription": "Please try again.",
+			"instructions": "Click a button to display each type of toast.",
+			"notice": "Notice",
+			"noticeDescription": "A new update is available.",
+			"saved": "Saved",
+			"savedDescription": "Your changes have been saved."
+		},
+		"tooltip": {
+			"bottom": "Bottom",
+			"details": "Details",
+			"detailsDescription": "View details about this action.",
+			"instructions": "Hover over or focus a button with the keyboard to show its description.",
+			"left": "Left",
+			"placementInstructions": "See where the tooltip is placed.",
+			"right": "Right",
+			"shownBottom": "Shown below",
+			"shownLeft": "Shown to the left",
+			"shownRight": "Shown to the right",
+			"shownTop": "Shown above",
+			"top": "Top"
+		}
+	}
+}

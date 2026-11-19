@@ -26,30 +26,30 @@ type Story = StoryObj<Omit<typeof meta, 'component'>>;
 
 export const Default: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
-		const faqLink = <Link to="#" label={t('example.story.accordion.faq')} />;
-		const faqSuffix = t('example.story.accordion.faqSuffix');
+		const { t } = useTranslation('example');
+		const faqLink = <Link to="#" label={t('story.accordion.faq')} />;
+		const faqSuffix = t('story.accordion.faqSuffix');
 		return (
 			<Accordion {...args}>
-				<Accordion.Item value="item-1" trigger={t('example.story.accordion.resetPassword')}>
+				<Accordion.Item value="item-1" trigger={t('story.accordion.resetPassword')}>
 					<Text>
-						{t('example.story.accordion.resetPasswordAnswer')} {faqLink} {faqSuffix}
+						{t('story.accordion.resetPasswordAnswer')} {faqLink} {faqSuffix}
 					</Text>
 				</Accordion.Item>
 
-				<Accordion.Item value="item-2" trigger={t('example.story.accordion.changePlan')}>
+				<Accordion.Item value="item-2" trigger={t('story.accordion.changePlan')}>
 					<Text>
-						{t('example.story.accordion.changePlanAnswer')} {faqLink} {faqSuffix}
+						{t('story.accordion.changePlanAnswer')} {faqLink} {faqSuffix}
 					</Text>
 				</Accordion.Item>
 
 				<Accordion.Item
 					value="item-3"
-					trigger={t('example.story.accordion.paymentMethods')}
+					trigger={t('story.accordion.paymentMethods')}
 					disabled
 				>
 					<Text>
-						{t('example.story.accordion.paymentMethodsAnswer')} {faqLink} {faqSuffix}
+						{t('story.accordion.paymentMethodsAnswer')} {faqLink} {faqSuffix}
 					</Text>
 				</Accordion.Item>
 			</Accordion>

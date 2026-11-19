@@ -35,7 +35,7 @@ type DataTableProps = {
 };
 
 export function DataTable({ data }: DataTableProps) {
-	const { t } = useTranslation();
+	const { t } = useTranslation('example');
 	const [members, setMembers] = useState(data);
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -86,8 +86,8 @@ export function DataTable({ data }: DataTableProps) {
 			<Cluster justify="between" align="end">
 				<Input
 					id="table-example-search"
-					label={t('example.story.table.search')}
-					description={t('example.story.table.searchDescription')}
+					label={t('story.table.search')}
+					description={t('story.table.searchDescription')}
 					inputSize="sm"
 					value={(nameColumn?.getFilterValue() as string) ?? ''}
 					onChange={(event) => nameColumn?.setFilterValue(event.target.value)}
@@ -101,12 +101,12 @@ export function DataTable({ data }: DataTableProps) {
 						table.setPageIndex(0);
 					}}
 				>
-					{t('example.story.table.reset')}
+					{t('story.table.reset')}
 				</Button>
 			</Cluster>
 			<div className="overflow-hidden rounded-md border">
 				<Table>
-					<TableCaption>{t('example.story.table.caption')}</TableCaption>
+					<TableCaption>{t('story.table.caption')}</TableCaption>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
@@ -132,7 +132,7 @@ export function DataTable({ data }: DataTableProps) {
 						) : (
 							<TableRow>
 								<TableCell colSpan={columns.length} className="h-24 text-center">
-									{t('example.story.table.noMembers')}
+									{t('story.table.noMembers')}
 								</TableCell>
 							</TableRow>
 						)}
@@ -142,7 +142,7 @@ export function DataTable({ data }: DataTableProps) {
 
 			<Cluster justify="between">
 				<Text as="span" color="muted">
-					{t('example.story.table.showing', {
+					{t('story.table.showing', {
 						start: filteredCount === 0 ? 0 : pagination.pageIndex * pagination.pageSize + 1,
 						end: Math.min((pagination.pageIndex + 1) * pagination.pageSize, filteredCount),
 						count: filteredCount,
@@ -155,8 +155,8 @@ export function DataTable({ data }: DataTableProps) {
 							<PaginationItem>
 								<PaginationPrevious
 									href="#"
-									text={t('example.story.table.previous')}
-									aria-label={t('example.story.table.previous')}
+									text={t('story.table.previous')}
+									aria-label={t('story.table.previous')}
 									onClick={(e) => {
 										e.preventDefault();
 										table.previousPage();
@@ -177,8 +177,8 @@ export function DataTable({ data }: DataTableProps) {
 							<PaginationItem>
 								<PaginationNext
 									href="#"
-									text={t('example.story.table.next')}
-									aria-label={t('example.story.table.next')}
+									text={t('story.table.next')}
+									aria-label={t('story.table.next')}
 									onClick={(e) => {
 										e.preventDefault();
 										table.nextPage();

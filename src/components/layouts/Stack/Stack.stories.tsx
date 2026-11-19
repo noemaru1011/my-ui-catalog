@@ -33,13 +33,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<div className="w-80">
 				<Stack {...args}>
 					{[1, 2, 3].map((count) => (
 						<div className="rounded-md border p-4" key={count}>
-							<Text>{t('example.story.layout.content', { count })}</Text>
+							<Text>{t('story.layout.content', { count })}</Text>
 						</div>
 					))}
 				</Stack>

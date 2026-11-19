@@ -18,13 +18,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: (args) => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Link
 				{...args}
 				label={
 					args.label === 'ユーザー一覧'
-						? t('example.story.labels.userList')
+						? t('story.labels.userList')
 						: args.label
 				}
 			/>

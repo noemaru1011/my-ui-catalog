@@ -7,7 +7,7 @@ import { toast } from '@/components/ui/toast';
 import { createFormSchema, DEFAULT_FORM_VALUES, type FormValues } from '../schema/formSchema';
 
 export function useExampleForm() {
-	const { t, i18n } = useTranslation();
+	const { t, i18n } = useTranslation('example');
 	const previousLanguage = useRef(i18n.language);
 
 	const {
@@ -41,16 +41,16 @@ export function useExampleForm() {
 		},
 		onSuccess: () => {
 			toast.add({
-				title: t('example.story.form.saved'),
-				description: t('example.story.form.savedDescription'),
+				title: t('story.form.saved'),
+				description: t('story.form.savedDescription'),
 				type: 'success',
 			});
 			reset();
 		},
 		onError: () => {
 			toast.add({
-				title: t('example.story.form.error'),
-				description: t('example.story.form.errorDescriptionToast'),
+				title: t('story.form.error'),
+				description: t('story.form.errorDescriptionToast'),
 				type: 'error',
 			});
 		},

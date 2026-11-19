@@ -13,7 +13,7 @@ describe('DatePicker', () => {
 		it('id を省略した場合は自動生成した id をラベルに関連付ける', () => {
 			render(<DatePicker label="開始日" />);
 
-			const button = screen.getByText(i18n.t('common.datePickerPlaceholder'), {
+			const button = screen.getByText(i18n.t('datePickerPlaceholder'), {
 				selector: 'button',
 			});
 
@@ -26,7 +26,7 @@ describe('DatePicker', () => {
 
 			expect(screen.getByText('開始日')).toBeInTheDocument();
 			expect(
-				screen.getByText(i18n.t('common.datePickerPlaceholder'), {
+				screen.getByText(i18n.t('datePickerPlaceholder'), {
 					selector: 'button',
 				}),
 			).toBeInTheDocument();

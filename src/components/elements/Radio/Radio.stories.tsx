@@ -30,14 +30,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: (args) => {
 		const [value, setValue] = useState('');
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 
 		return (
 			<Radio
 				{...args}
 				label={
 					args.label === '言語'
-						? t('example.story.labels.language')
+						? t('story.labels.language')
 						: args.label
 				}
 				value={value}

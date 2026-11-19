@@ -41,27 +41,27 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 function CardPreview({ size = 'default' }: { size?: 'default' | 'sm' }) {
-	const { t } = useTranslation();
+	const { t } = useTranslation('example');
 	return (
 		<Container width="xl">
 			<Card size={size}>
 				<CardHeader>
-					<CardTitle>{t('example.story.card.projectSettings')}</CardTitle>
-					<CardDescription>{t('example.story.card.projectDescription')}</CardDescription>
+					<CardTitle>{t('story.card.projectSettings')}</CardTitle>
+					<CardDescription>{t('story.card.projectDescription')}</CardDescription>
 					<CardAction>
-						<Badge variant="secondary">{t('example.story.card.published')}</Badge>
+						<Badge variant="secondary">{t('story.card.published')}</Badge>
 					</CardAction>
 				</CardHeader>
 				<CardContent>
 					<Stack space="sm">
-						<Text>{t('example.story.card.projectDetails')}</Text>
-						<Text color="muted">{t('example.story.card.lastUpdated')}</Text>
+						<Text>{t('story.card.projectDetails')}</Text>
+						<Text color="muted">{t('story.card.lastUpdated')}</Text>
 					</Stack>
 				</CardContent>
 				<CardFooter>
 					<Cluster space="sm" justify="end">
-						<Button variant="outline">{t('example.story.card.cancel')}</Button>
-						<Button>{t('example.story.card.save')}</Button>
+						<Button variant="outline">{t('story.card.cancel')}</Button>
+						<Button>{t('story.card.save')}</Button>
 					</Cluster>
 				</CardFooter>
 			</Card>
@@ -82,15 +82,15 @@ export const Small: Story = {
 
 export const ContentOnly: Story = {
 	render: () => {
-		const { t } = useTranslation();
+		const { t } = useTranslation('example');
 		return (
 			<Container width="xl">
 				<Card>
 					<CardHeader>
-						<CardTitle>{t('example.story.card.announcements')}</CardTitle>
+						<CardTitle>{t('story.card.announcements')}</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<Text>{t('example.story.card.contentOnly')}</Text>
+						<Text>{t('story.card.contentOnly')}</Text>
 					</CardContent>
 				</Card>
 			</Container>

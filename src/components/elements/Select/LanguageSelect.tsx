@@ -27,7 +27,7 @@ export function LanguageSelect(props: Props) {
 	return (
 		<Select
 			{...props}
-			label={t('common.displayLanguage')}
+			label={t('displayLanguage')}
 			options={DEFAULT_LANGUAGES}
 			onChange={(value) => {
 				if (value === 'ja' || value === 'en') {
