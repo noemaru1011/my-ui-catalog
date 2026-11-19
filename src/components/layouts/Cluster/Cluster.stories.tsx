@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Cluster } from './Cluster';
 import { Container } from '../Container/Container';
 
@@ -8,6 +8,9 @@ const meta = {
 	component: Cluster,
 	tags: ['autodocs'],
 	argTypes: {
+		nowrap: {
+			control: 'boolean'
+		},
 		space: {
 			control: 'inline-radio',
 			options: ['sm', 'md', 'lg'],
@@ -55,7 +58,6 @@ export const Default: Story = {
 			<Container width="full">
 				<Card>
 					<CardHeader>
-						<CardTitle>{t('story.layout.clusterDescription')}</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<Cluster {...args}>
