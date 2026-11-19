@@ -36,7 +36,7 @@ export function Cluster({
 		<div
 			className={cn(
 				'flex',
-				nowrap ? 'flex-nowrap' : 'flex-wrap',
+				nowrap ? 'max-w-80 flex-nowrap overflow-x-auto' : 'flex-wrap',
 				{
 					'gap-2': space === 'sm',
 					'gap-4': space === 'md',
@@ -55,6 +55,7 @@ export function Cluster({
 					'items-stretch': align === 'stretch',
 				},
 			)}
+			{...(nowrap && { tabIndex: 0 })}
 		>
 			{children}
 		</div>
