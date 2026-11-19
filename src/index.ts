@@ -36,7 +36,8 @@ export {
 	Toast,
 	Tooltip,
 } from './components/ui';
-
+// i18n
+export * from './i18n';
 // Utilities
 export * from './lib/data-table-features';
 export * from './lib/utils';
