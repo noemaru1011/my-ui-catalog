@@ -8,7 +8,8 @@
 	},
 	"files": [
 		"dist",
-		"README.md"
+		"llms.txt",
+		"llms-full.txt"
 	],
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
@@ -107,7 +108,8 @@
 		"zod": "^4.6.7"
 	},
 	"allowScripts": {
-		"esbuild@0.28.2": true
+		"esbuild@0.28.2": true,
+		"@swc/core@1.16.22": true
 	},
 	"overrides": {
 		"@joshwooding/vite-plugin-react-docgen-typescript": {

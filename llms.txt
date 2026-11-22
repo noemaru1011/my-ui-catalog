@@ -1,0 +1,56 @@
+# my-ui-catalog
+
+> React 19 / TypeScript 向けの再利用可能な UI コンポーネントライブラリです。Elements、Layouts、UI Primitives、Theme Provider などを提供します。
+
+## Documentation
+
+- [Full AI Context](./llms-full.txt): AI エージェント向けの詳細な利用ガイド
+- [README](./README.md): インストール・基本的な利用方法
+- [Storybook](https://noemaru1011.github.io/my-ui-catalog/): コンポーネントの表示・動作確認
+- [package.json](./package.json): パッケージ情報・依存関係・公開設定
+- [Source Entry](./src/index.ts): 公開 API のエントリーポイント
+- [Styles](./src/index.css): Tailwind CSS・テーマ・デザイントークン
+
+## Package
+
+- npm package: `@noemaru1011/ui`
+- Repository: https://github.com/noemaru1011/my-ui-catalog
+
+## Main Features
+
+- React 19 対応の UI コンポーネント
+- TypeScript による型定義
+- Elements: 汎用的な UI コンポーネント
+- Layouts: レイアウト構築用コンポーネント
+- UI Primitives: 基本 UI コンポーネント
+- Theme Provider: ライト・ダークテーマ対応
+- i18n: 日本語をデフォルトとした多言語対応
+
+## Instructions for AI Agents
+
+1. コンポーネントの利用方法を回答する前に、必要に応じて `llms-full.txt` を参照してください。
+2. 実際の Props や型定義は、公開されている TypeScript 定義またはソースコードを正としてください。
+3. README や Storybook に記載のない Props・挙動を推測で作らないでください。
+4. 基本的には `@noemaru1011/ui` からコンポーネントを import してください。
+5. スタイルを利用する場合は `@noemaru1011/ui/style.css` を読み込んでください。
+6. `primitives` 名前空間は低レベルの UI コンポーネントを利用する場合に使用してください。
+
+## Quick Start
+
+```tsx
+import '@noemaru1011/ui/style.css';
+
+import { Button, Card } from '@noemaru1011/ui';
+
+export function Example() {
+  return (
+    <Card>
+      <Button>Click me</Button>
+    </Card>
+  );
+}
+```
+
+## Detailed Context
+
+See [llms-full.txt](./llms-full.txt) for the full component catalog, exports, styling conventions, theme configuration, and usage guidance.
