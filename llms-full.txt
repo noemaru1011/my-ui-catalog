@@ -1,0 +1,507 @@
+# my-ui-catalog — Full AI Context
+
+## 1. Overview
+
+`@noemaru1011/ui` is a reusable UI component library built with React and TypeScript.
+
+It provides components for application interfaces, layout composition, common interactions, and low-level UI primitives.
+
+Repository:
+
+- https://github.com/noemaru1011/my-ui-catalog
+
+Storybook:
+
+- https://noemaru1011.github.io/my-ui-catalog/
+
+npm package:
+
+- `@noemaru1011/ui`
+
+## 2. Technology Stack
+
+The project uses the following technologies:
+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS 4
+- Base UI
+- class-variance-authority
+- i18next
+- react-i18next
+- Storybook
+
+Use the package's published peer dependency requirements as the source of truth for compatibility.
+
+## 3. Installation
+
+```bash
+npm install @noemaru1011/ui
+```
+
+Import the stylesheet in the application entry point:
+
+```tsx
+import '@noemaru1011/ui/style.css';
+```
+
+The stylesheet provides the library's Tailwind CSS output, theme variables, and component styles.
+
+## 4. Public API
+
+The package entry point is `src/index.ts`.
+
+### 4.1 Elements
+
+The Elements collection provides higher-level, reusable interface components.
+
+```tsx
+import {
+  Accordion,
+  Blockquote,
+  Checkbox,
+  Combobox,
+  ComboboxMultiple,
+  DatePicker,
+  DateRange,
+  DescriptionList,
+  Disclosure,
+  FileUpload,
+  FileUploadButton,
+  HamburgerMenu,
+  Heading,
+  Image,
+  Input,
+  PasswordInput,
+  Link,
+  List,
+  Loading,
+  Radio,
+  LanguageSelect,
+  Select,
+  Switch,
+  ThemeSwitch,
+  Text,
+  Textarea,
+} from '@noemaru1011/ui';
+```
+
+Available components:
+
+- Accordion
+- Blockquote
+- Checkbox
+- Combobox
+- ComboboxMultiple
+- DatePicker
+- DateRange
+- DescriptionList
+- Disclosure
+- FileUpload
+- FileUploadButton
+- HamburgerMenu
+- Heading
+- Image
+- Input
+- PasswordInput
+- Link
+- List
+- Loading
+- Radio
+- LanguageSelect
+- Select
+- Switch
+- ThemeSwitch
+- Text
+- Textarea
+
+### 4.2 Layouts
+
+The Layouts collection provides components for composing page and application structures.
+
+```tsx
+import {
+  AppLayout,
+  Center,
+  Cluster,
+  Container,
+  Forbidden,
+  InternalServerError,
+  NotFound,
+  Grid,
+  Stack,
+} from '@noemaru1011/ui';
+```
+
+Available components:
+
+- AppLayout
+- Center
+- Cluster
+- Container
+- Forbidden
+- InternalServerError
+- NotFound
+- Grid
+- Stack
+
+### 4.3 UI Components
+
+The package also exports commonly used UI components directly.
+
+```tsx
+import {
+  Alert,
+  AlertDialog,
+  Badge,
+  Breadcrumb,
+  Button,
+  Card,
+  Carousel,
+  Dialog,
+  Drawer,
+  Field,
+  InputGroup,
+  Label,
+  Pagination,
+  Popover,
+  RadioGroup,
+  Separator,
+  Spinner,
+  Table,
+  Tabs,
+  Toast,
+  Tooltip,
+} from '@noemaru1011/ui';
+```
+
+Available components:
+
+- Alert
+- AlertDialog
+- Badge
+- Breadcrumb
+- Button
+- Card
+- Carousel
+- Dialog
+- Drawer
+- Field
+- InputGroup
+- Label
+- Pagination
+- Popover
+- RadioGroup
+- Separator
+- Spinner
+- Table
+- Tabs
+- Toast
+- Tooltip
+
+### 4.4 Primitive Components
+
+Low-level UI primitives are available through the `primitives` namespace.
+
+```tsx
+import { primitives } from '@noemaru1011/ui';
+```
+
+The namespace exposes the components exported from `src/components/ui`.
+
+These include:
+
+- accordion
+- alert
+- alert-dialog
+- badge
+- breadcrumb
+- button
+- calendar
+- card
+- carousel
+- checkbox
+- combobox
+- dialog
+- drawer
+- field
+- input-group
+- input
+- label
+- pagination
+- popover
+- radio-group
+- select
+- separator
+- spinner
+- switch
+- table
+- tabs
+- textarea
+- toast
+- tooltip
+
+Use the higher-level Elements and Layouts exports when they satisfy the use case. Use primitives when lower-level control is needed.
+
+### 4.5 Other Exports
+
+The package entry point also exports:
+
+- Theme Provider
+- i18n configuration
+- data-table-features
+- utility functions
+
+Refer to `src/index.ts` and the corresponding source files for exact export names and signatures.
+
+## 5. Button
+
+The Button component is based on Base UI and uses class-variance-authority for variant and size styling.
+
+### Variants
+
+- `default`
+- `outline`
+- `secondary`
+- `ghost`
+- `destructive`
+- `link`
+
+### Sizes
+
+- `default`
+- `xs`
+- `sm`
+- `lg`
+- `icon`
+- `icon-xs`
+- `icon-sm`
+- `icon-lg`
+
+### Loading State
+
+The Button supports a `loading` property.
+
+When loading is enabled:
+
+- The button is disabled.
+- `aria-busy` is set.
+- A Spinner is displayed.
+
+Example:
+
+```tsx
+import { Button } from '@noemaru1011/ui';
+
+export function SaveButton() {
+  return (
+    <Button loading>
+      Saving...
+    </Button>
+  );
+}
+```
+
+The exact TypeScript interface should be checked in the published type definitions.
+
+## 6. Styling and Theme
+
+The library stylesheet is defined in:
+
+- `src/index.css`
+
+The project uses Tailwind CSS 4 and semantic CSS variables.
+
+### Theme
+
+The stylesheet defines:
+
+- Light theme variables on `:root`
+- Dark theme variables on `.dark`
+
+The library supports semantic design tokens for colors and UI styling.
+
+Use the provided theme variables rather than hardcoding colors when extending the design system.
+
+### Typography
+
+The stylesheet includes Noto Sans JP Variable as a Japanese font resource.
+
+### Border Radius
+
+The base radius is:
+
+```css
+--radius: 0.625rem;
+```
+
+This corresponds to 10px when the root font size is 16px.
+
+The design system generally uses the standard radius scale. Documented exceptions include:
+
+- `rounded-full`
+- `rounded-none`
+- `rounded-[inherit]`
+- `rounded-[2px]`
+
+### Z-index
+
+The stylesheet defines semantic z-index utility classes:
+
+- `z-base`
+- `z-local`
+- `z-sticky`
+- `z-popover`
+- `z-overlay`
+- `z-modal`
+- `z-toast`
+- `z-tooltip`
+
+Prefer these semantic layers when implementing overlays, dialogs, popovers, notifications, and tooltips.
+
+## 7. Internationalization (i18n)
+
+The i18n configuration is defined in:
+
+- `src/i18n/index.ts`
+
+The library uses:
+
+- i18next
+- i18next-browser-languagedetector
+- react-i18next
+
+Configuration:
+
+- Default language: Japanese (`ja`)
+- Fallback language: Japanese (`ja`)
+- Default namespace: `common`
+- Namespaces:
+  - `common`
+  - `error`
+  - `example`
+
+Language detection:
+
+- localStorage
+- Browser navigator
+
+Detected language settings are cached in localStorage.
+
+Refer to the i18n source and exported API for the exact initialization and integration procedure.
+
+## 8. Basic Usage
+
+```tsx
+import '@noemaru1011/ui/style.css';
+
+import {
+  Button,
+  Card,
+  Heading,
+  Stack,
+  Text,
+} from '@noemaru1011/ui';
+
+export function SamplePage() {
+  return (
+    <Stack>
+      <Card>
+        <Heading>Welcome</Heading>
+        <Text>This is a sample page.</Text>
+        <Button>Continue</Button>
+      </Card>
+    </Stack>
+  );
+}
+```
+
+This example illustrates the import pattern. Check the published type definitions for the exact props supported by each component.
+
+## 9. Build and Source Structure
+
+The library build configuration is:
+
+- `vite.lib.config.ts`
+
+The build entry point is:
+
+- `src/index.ts`
+
+The build output directory is:
+
+- `dist`
+
+The library build also generates TypeScript declaration files.
+
+Important source locations:
+
+| Path | Purpose |
+|---|---|
+| `src/index.ts` | Public package entry point |
+| `src/components/elements/` | Higher-level reusable components |
+| `src/components/layouts/` | Layout components |
+| `src/components/ui/` | Low-level UI primitives |
+| `src/components/providers/theme-provider/` | Theme provider |
+| `src/i18n/` | Internationalization |
+| `src/index.css` | Global styles and design tokens |
+| `src/stories/` | Storybook documentation and examples |
+| `.storybook/` | Storybook configuration |
+
+## 10. Storybook
+
+Storybook is used to document and demonstrate components.
+
+Public Storybook:
+
+https://noemaru1011.github.io/my-ui-catalog/
+
+The project configures Storybook to load MDX and component stories from `src`.
+
+Use Storybook to inspect component appearance and examples. For exact TypeScript APIs, use the source code or published declaration files.
+
+## 11. Guidelines for AI Agents
+
+When generating code using this library, follow these rules:
+
+1. Import components from `@noemaru1011/ui` unless there is a clear reason to use another entry point.
+2. Import `@noemaru1011/ui/style.css` in the application.
+3. Prefer Elements and Layouts for common application UI.
+4. Use `primitives` for low-level UI composition.
+5. Do not invent component names, props, variants, or event handlers.
+6. Verify exact component interfaces against the published TypeScript declaration files.
+7. Do not assume every primitive has the same API as its higher-level counterpart.
+8. Reuse the library's theme tokens and semantic styles.
+9. Prefer the existing i18n configuration for translated text.
+10. Use Storybook as a visual reference, not as a replacement for TypeScript API definitions.
+
+## 12. Source of Truth
+
+When information conflicts, use this priority order:
+
+1. Published TypeScript declaration files
+2. Current source code
+3. Package metadata
+4. Storybook examples
+5. README and other documentation
+6. This AI context document
+
+This document is intended to help AI systems understand the package structure and usage. It is not a replacement for the actual API definitions.
+
+## 13. Maintenance
+
+When the library changes, update this document alongside the relevant source changes.
+
+In particular, review:
+
+- Public exports
+- Component names
+- Component props and types
+- Dependencies and peer dependencies
+- Styling and theme tokens
+- i18n configuration
+- Installation instructions
+- Storybook examples
+
+Keep `llms.txt` concise and use `llms-full.txt` for detailed documentation.
