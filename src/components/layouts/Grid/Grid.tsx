@@ -1,11 +1,21 @@
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-type GridProps = {
+type GridColumns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+
+type GridItemProps = {
 	children: ReactNode;
-	columns?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+	span?: GridColumns;
+	className?: string;
+};
+
+type GridProps = {
+	/** GridItemPropsのみ有効です。 */
+	children:
+		| ReactElement<GridItemProps, typeof GridItem>
+		| ReactElement<GridItemProps, typeof GridItem>[];
+	columns?: GridColumns;
 	space?: 'none' | 'sm' | 'md' | 'lg';
-	//** レスポンシブ対応用にclassNameを受け取れるようにする。 */
 	className?: string;
 };
 
@@ -24,12 +34,31 @@ const COLUMN_CLASSES = {
 	12: 'grid-cols-12',
 } as const;
 
+const SPAN_CLASSES = {
+	1: 'col-span-1',
+	2: 'col-span-2',
+	3: 'col-span-3',
+	4: 'col-span-4',
+	5: 'col-span-5',
+	6: 'col-span-6',
+	7: 'col-span-7',
+	8: 'col-span-8',
+	9: 'col-span-9',
+	10: 'col-span-10',
+	11: 'col-span-11',
+	12: 'col-span-12',
+} as const;
+
 const SPACE_CLASSES = {
 	none: 'gap-0',
 	sm: 'gap-2',
 	md: 'gap-4',
 	lg: 'gap-6',
 } as const;
+
+function GridItem({ children, span = 12, className }: GridItemProps) {
+	return <div className={cn(SPAN_CLASSES[span], className)}>{children}</div>;
+}
 
 export function Grid({ children, columns = 12, space = 'md', className }: GridProps) {
 	return (
@@ -38,3 +67,5 @@ export function Grid({ children, columns = 12, space = 'md', className }: GridPr
 		</div>
 	);
 }
+
+Grid.Item = GridItem;
