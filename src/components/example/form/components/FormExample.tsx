@@ -41,7 +41,7 @@ export function FormExample({ register, control, errors, onSubmit, isPending }: 
 	const options = createFormOptions(t);
 
 	return (
-		<Center maxWidth="xl">
+		<Center>
 			<Stack space="lg">
 				<Heading type="sectionTitle">{t('story.form.title')}</Heading>
 

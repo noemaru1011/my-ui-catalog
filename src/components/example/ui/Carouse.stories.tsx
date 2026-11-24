@@ -40,7 +40,7 @@ export const Default: Story = {
 	render: () => {
 		const { t } = useTranslation('example');
 		return (
-			<Center maxWidth="md">
+			<Center>
 				<Stack space="md">
 					<Heading type="blockTitle">{t('story.carousel.gallery')}</Heading>
 					<Text color="muted">{t('story.carousel.instructions')}</Text>
