@@ -27,6 +27,9 @@ export default defineConfig({
 	},
 
 	test: {
+		coverage: {
+			exclude: ['src/i18n/locales/**/*.json', 'src/components/ui/**'],
+		},
 		projects: [
 			{
 				extends: true,
