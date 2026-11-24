@@ -162,4 +162,75 @@ describe('DateRange', () => {
 
 		expect(screen.getByRole('button', { name: '対象期間' })).toBeInTheDocument();
 	});
+
+	describe('クリア', () => {
+		it('日付範囲が選択されている場合にクリアボタンを表示する', () => {
+			render(
+				<DateRange
+					id="period"
+					label="対象期間"
+					value={{
+						from: new Date(2026, 9, 10),
+						to: new Date(2026, 9, 15),
+					}}
+				/>,
+			);
+
+			expect(screen.getByRole('button', { name: '入力をクリア' })).toBeInTheDocument();
+		});
+
+		it('日付範囲が未選択の場合にクリアボタンを表示しない', () => {
+			render(<DateRange id="period" label="対象期間" />);
+
+			expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+		});
+
+		it('クリアボタンをクリックすると onChange を undefined で呼び出す', async () => {
+			const user = userEvent.setup();
+			const onChange = vi.fn();
+
+			render(
+				<DateRange
+					id="period"
+					label="対象期間"
+					value={{
+						from: new Date(2026, 9, 10),
+						to: new Date(2026, 9, 15),
+					}}
+					onChange={onChange}
+				/>,
+			);
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(onChange).toHaveBeenCalledTimes(1);
+			expect(onChange).toHaveBeenCalledWith(undefined);
+		});
+
+		it('onChange が未指定でもクリア時にエラーにならない', async () => {
+			const user = userEvent.setup();
+
+			render(<DateRange id="period" label="対象期間" value={{ from: new Date(2026, 9, 10) }} />);
+
+			await expect(
+				user.click(screen.getByRole('button', { name: '入力をクリア' })),
+			).resolves.toBeUndefined();
+		});
+
+		it('readOnly が true の場合にクリアボタンを表示しない', () => {
+			render(
+				<DateRange
+					id="period"
+					label="対象期間"
+					value={{
+						from: new Date(2026, 9, 10),
+						to: new Date(2026, 9, 15),
+					}}
+					readOnly
+				/>,
+			);
+
+			expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+		});
+	});
 });

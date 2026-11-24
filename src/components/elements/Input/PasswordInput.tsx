@@ -1,9 +1,9 @@
-import { Button } from '@base-ui/react';
-import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import { EyeIcon, EyeOffIcon, X } from 'lucide-react';
 import { type ComponentProps, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
+import { Button } from '@/components/ui';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 import { cn } from '@/lib/utils';
@@ -34,6 +34,9 @@ export function PasswordInput({
 	required = false,
 	readOnly = false,
 	inputSize = 'md',
+	value,
+	defaultValue,
+	onChange,
 	...rawProps
 }: PasswordInputProps) {
 	const props = withoutExternalStyle(rawProps);
@@ -42,6 +45,7 @@ export function PasswordInput({
 	const { t } = useTranslation();
 
 	const [visible, setVisible] = useState(false);
+	const [inputValue, setInputValue] = useState(String(value ?? defaultValue ?? ''));
 
 	const sizeClass = {
 		sm: 'h-7 text-base',
@@ -49,6 +53,26 @@ export function PasswordInput({
 		lg: 'h-10 text-base',
 	}[inputSize];
 
+	/** 入力値を変更する。 */
+	const handleChange: ComponentProps<typeof InputGroupInput>['onChange'] = (event) => {
+		setInputValue(event.target.value);
+		onChange?.(event);
+	};
+
+	/** 入力値をクリアする。 */
+	const handleClear = () => {
+		const input = document.getElementById(inputId) as HTMLInputElement | null;
+
+		if (!input) return;
+
+		setInputValue('');
+
+		const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set;
+
+		setter?.call(input, '');
+
+		input.dispatchEvent(new Event('input', { bubbles: true }));
+	};
 	return (
 		<Field data-invalid={!!error}>
 			<FieldLabel htmlFor={inputId}>
@@ -65,19 +89,36 @@ export function PasswordInput({
 					type={visible ? 'text' : 'password'}
 					aria-invalid={!!error}
 					readOnly={readOnly}
+					value={value}
+					defaultValue={value === undefined ? defaultValue : undefined}
+					onChange={handleChange}
 					{...props}
 				/>
 
 				<InputGroupAddon align="inline-end">
+					{inputValue && !readOnly && (
+						<Button
+							//タブを押してもスキップ
+							tabIndex={-1}
+							variant="ghost"
+							size="icon"
+							onClick={handleClear}
+							aria-label={t('clearInput')}
+						>
+							<X size={4} />
+						</Button>
+					)}
+
 					<Button
 						//タブを押してもスキップ
 						tabIndex={-1}
-						type="button"
+						variant="ghost"
+						size="icon"
 						onClick={() => setVisible((prev) => !prev)}
 						disabled={readOnly}
 						aria-label={visible ? t('hidePassword') : t('showPassword')}
 					>
-						{visible ? <EyeIcon size={16} /> : <EyeOffIcon size={16} />}
+						{visible ? <EyeIcon size={4} /> : <EyeOffIcon size={4} />}
 					</Button>
 				</InputGroupAddon>
 			</InputGroup>

@@ -20,5 +20,6 @@
 	"noItemsFound": "該当する項目がありません。",
 	"notEditable": "編集不可",
 	"selectPlaceholder": "選択してください。",
+	"clearInput": "入力をクリア",
 	"showPassword": "パスワードを表示"
 }

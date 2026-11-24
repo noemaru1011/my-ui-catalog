@@ -1,3 +1,4 @@
+import { X } from 'lucide-react';
 import { useId } from 'react';
 import type { DateRange as DateRangeType } from 'react-day-picker';
 import { useTranslation } from 'react-i18next';
@@ -38,6 +39,7 @@ export function DateRange({
 }: DateRangeProps) {
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
+
 	const sizeClass = {
 		sm: 'h-7',
 		md: 'h-8',
@@ -49,6 +51,7 @@ export function DateRange({
 	};
 
 	const { t } = useTranslation();
+
 	const displayValue = value?.from
 		? value.to
 			? `${formatDate(value.from)} - ${formatDate(value.to)}`
@@ -65,39 +68,56 @@ export function DateRange({
 
 			{description && <FieldDescription>{description}</FieldDescription>}
 
-			<Popover>
-				<PopoverTrigger
-					render={
-						<Button
-							id={inputId}
-							variant="outline"
-							disabled={readOnly}
-							aria-invalid={!!error}
-							className={cn(
-								'w-full justify-start font-normal',
-								sizeClass,
-								!displayValue && 'text-muted-foreground',
-								readOnly && 'border-dashed',
-							)}
-						>
-							{displayValue ?? t('dateRangePlaceholder')}
-						</Button>
-					}
-				/>
-
-				<PopoverContent className="w-auto p-0" align="start">
-					<Calendar
-						mode="range"
-						selected={value}
-						onSelect={onChange}
-						defaultMonth={value?.from}
-						numberOfMonths={numberOfMonths}
-						captionLayout="dropdown"
-						startMonth={new Date(1900, 0)}
-						endMonth={new Date(2100, 11)}
+			<div className="relative">
+				<Popover>
+					<PopoverTrigger
+						render={
+							<Button
+								id={inputId}
+								variant="outline"
+								disabled={readOnly}
+								aria-invalid={!!error}
+								className={cn(
+									'w-full justify-start font-normal',
+									sizeClass,
+									!displayValue && 'text-muted-foreground',
+									displayValue && !readOnly && 'pr-9',
+									readOnly && 'border-dashed',
+								)}
+							>
+								{displayValue ?? t('dateRangePlaceholder')}
+							</Button>
+						}
 					/>
-				</PopoverContent>
-			</Popover>
+
+					<PopoverContent className="w-auto p-0" align="start">
+						<Calendar
+							mode="range"
+							selected={value}
+							onSelect={onChange}
+							defaultMonth={value?.from}
+							numberOfMonths={numberOfMonths}
+							captionLayout="dropdown"
+							startMonth={new Date(1900, 0)}
+							endMonth={new Date(2100, 11)}
+						/>
+					</PopoverContent>
+				</Popover>
+
+				{displayValue && !readOnly && (
+					<Button
+						type="button"
+						variant="ghost"
+						size="icon"
+						tabIndex={-1}
+						className="text-muted-foreground hover:text-foreground absolute top-1/2 right-1 size-6 -translate-y-1/2"
+						onClick={() => onChange?.(undefined)}
+						aria-label={t('clearInput')}
+					>
+						<X size={4} />
+					</Button>
+				)}
+			</div>
 
 			{error && <FieldError>{error}</FieldError>}
 		</Field>

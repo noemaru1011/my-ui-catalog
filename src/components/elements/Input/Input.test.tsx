@@ -304,4 +304,105 @@ describe('Input', () => {
 			expect(screen.getByRole('spinbutton', { name: '年齢' })).toHaveValue(20);
 		});
 	});
+
+	describe('クリア', () => {
+		it('入力値がある場合にクリアボタンを表示する', () => {
+			render(<Input id="username" label="ユーザー名" defaultValue="test-user" />);
+
+			expect(screen.getByRole('button', { name: '入力をクリア' })).toBeInTheDocument();
+		});
+
+		it('入力値がない場合にクリアボタンを表示しない', () => {
+			render(<Input id="username" label="ユーザー名" />);
+
+			expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+		});
+
+		it('クリアボタンをクリックすると入力値を空にする', async () => {
+			const user = userEvent.setup();
+
+			render(<Input id="username" label="ユーザー名" defaultValue="test-user" />);
+
+			const input = screen.getByRole('textbox', { name: 'ユーザー名' });
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(input).toHaveValue('');
+		});
+
+		it('クリアボタンをクリックすると onChange を呼び出す', async () => {
+			const user = userEvent.setup();
+			const onChange = vi.fn();
+
+			render(
+				<Input id="username" label="ユーザー名" defaultValue="test-user" onChange={onChange} />,
+			);
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(onChange).toHaveBeenCalled();
+			expect(onChange.mock.calls.at(-1)?.[0].target.value).toBe('');
+		});
+
+		it('入力要素のrefがない場合はクリア処理を終了する', async () => {
+			const user = userEvent.setup();
+
+			render(<Input id="username" label="ユーザー名" defaultValue="test-user" ref={null} />);
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(screen.getByRole('button', { name: '入力をクリア' })).toBeInTheDocument();
+		});
+
+		it('controlled component の入力値をクリアすると onChange に空文字を渡す', async () => {
+			const user = userEvent.setup();
+			const onChange = vi.fn((event: { target: HTMLInputElement }) => event.target.value);
+
+			render(
+				<Input id="username" label="ユーザー名" value="controlled-value" onChange={onChange} />,
+			);
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(onChange).toHaveBeenCalled();
+			expect(onChange.mock.results.at(-1)?.value).toBe('');
+		});
+
+		it('readOnly が true の場合にクリアボタンを表示しない', () => {
+			render(<Input id="username" label="ユーザー名" defaultValue="test-user" readOnly />);
+
+			expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+		});
+
+		describe('クリア処理の分岐', () => {
+			it('readOnly の場合は入力値があってもクリアボタンを表示しない', () => {
+				render(<Input id="username" label="ユーザー名" defaultValue="test-user" readOnly />);
+
+				expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+			});
+
+			it('value が変更された場合に入力値を同期する', () => {
+				const { rerender } = render(<Input id="username" label="ユーザー名" value="first-value" />);
+
+				expect(screen.getByRole('button', { name: '入力をクリア' })).toBeInTheDocument();
+
+				rerender(<Input id="username" label="ユーザー名" value="" />);
+
+				expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+			});
+
+			it('value が undefined の場合は defaultValue を使用する', () => {
+				render(<Input id="username" label="ユーザー名" defaultValue="default-value" />);
+
+				expect(screen.getByLabelText('ユーザー名')).toHaveValue('default-value');
+				expect(screen.getByRole('button', { name: '入力をクリア' })).toBeInTheDocument();
+			});
+
+			it('value が null の場合は空文字に同期する', () => {
+				render(<Input id="username" label="ユーザー名" value={null as never} />);
+
+				expect(screen.getByLabelText('ユーザー名')).toHaveValue('');
+			});
+		});
+	});
 });

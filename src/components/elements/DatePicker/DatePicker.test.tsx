@@ -135,6 +135,50 @@ describe('DatePicker', () => {
 		});
 	});
 
+	describe('クリア', () => {
+		it('日付が選択されている場合にクリアボタンを表示する', () => {
+			render(<DatePicker id="date" label="開始日" value={new Date(2024, 5, 15)} />);
+
+			expect(screen.getByRole('button', { name: '入力をクリア' })).toBeInTheDocument();
+		});
+
+		it('日付が未選択の場合にクリアボタンを表示しない', () => {
+			render(<DatePicker id="date" label="開始日" />);
+
+			expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+		});
+
+		it('クリアボタンをクリックすると onChange を undefined で呼び出す', async () => {
+			const user = userEvent.setup();
+			const onChange = vi.fn();
+
+			render(
+				<DatePicker id="date" label="開始日" value={new Date(2024, 5, 15)} onChange={onChange} />,
+			);
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(onChange).toHaveBeenCalledTimes(1);
+			expect(onChange).toHaveBeenCalledWith(undefined);
+		});
+
+		it('onChange が未指定でもクリア時にエラーにならない', async () => {
+			const user = userEvent.setup();
+
+			render(<DatePicker id="date" label="開始日" value={new Date(2024, 5, 15)} />);
+
+			await expect(
+				user.click(screen.getByRole('button', { name: '入力をクリア' })),
+			).resolves.toBeUndefined();
+		});
+
+		it('readOnly が true の場合にクリアボタンを表示しない', () => {
+			render(<DatePicker id="date" label="開始日" value={new Date(2024, 5, 15)} readOnly />);
+
+			expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+		});
+	});
+
 	describe('日付選択', () => {
 		it('ボタンをクリックするとカレンダーを表示する', async () => {
 			const user = userEvent.setup();
