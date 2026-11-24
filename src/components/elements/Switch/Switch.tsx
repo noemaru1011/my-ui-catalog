@@ -1,5 +1,4 @@
 import { type ComponentProps, type ReactNode, useId } from 'react';
-import { Cluster } from '@/components/layouts/Cluster/Cluster';
 import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Label } from '@/components/ui/label';
@@ -39,10 +38,14 @@ export function Switch({
 		return switchElement;
 	}
 
-	const labelElement = <Label htmlFor={switchId}>{label}</Label>;
+	const labelElement = (
+		<Label htmlFor={switchId} className="shrink-0 whitespace-nowrap">
+			{label}
+		</Label>
+	);
 
 	return (
-		<Cluster space="sm" align="center">
+		<div className="inline-flex flex-nowrap items-center gap-2">
 			{labelPosition === 'left' ? (
 				<>
 					{labelElement}
@@ -54,6 +57,6 @@ export function Switch({
 					{labelElement}
 				</>
 			)}
-		</Cluster>
+		</div>
 	);
 }
