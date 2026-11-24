@@ -64,7 +64,8 @@
 		"disclosure": {
 			"content": "こちらはDisclosureのコンテンツです。詳しくは",
 			"detailsPage": "詳細ページ",
-			"showDetails": "詳細を表示"
+			"showDetails": "詳細を表示",
+			"closeDetails": "詳細を非表示"
 		},
 		"form": {
 			"agreement": "利用規約への同意",
@@ -144,7 +145,6 @@
 			"preview": "プレビュー"
 		},
 		"layout": {
-			"centerDescription": "この領域は画面の中央に配置され、最大幅は {{maxWidth}} に制限されます。",
 			"content_other": "コンテンツ{{count}}",
 			"contentArea": "コンテンツ領域",
 			"input": "入力項目",

@@ -9,7 +9,8 @@ const meta = {
 	component: Disclosure,
 	tags: ['autodocs'],
 	args: {
-		triggerText: '詳細を表示',
+		openText: '詳細を表示',
+		closeText: '詳細を非表示',
 		defaultOpen: false,
 	},
 	argTypes: {
@@ -29,10 +30,15 @@ export const Default: Story = {
 		return (
 			<Disclosure
 				{...args}
-				triggerText={
-					args.triggerText === '詳細を表示'
+				openText={
+					args.openText === '詳細を表示'
 						? t('story.disclosure.showDetails')
-						: args.triggerText
+						: args.openText
+				}
+				closeText={
+					args.closeText === '詳細を非表示'
+						? t('story.disclosure.closeDetails')
+						: args.closeText
 				}
 			>
 				<Text>
