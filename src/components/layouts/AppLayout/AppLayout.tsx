@@ -12,7 +12,9 @@ export function AppLayout({ header, main }: AppLayoutProps) {
 		<>
 			<header className="z-sticky sticky top-0 w-full border-b p-4">{header}</header>
 
-			<main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6">{main}</main>
+			<main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-6 sm:px-6">
+				{main}
+			</main>
 		</>
 	);
 }
