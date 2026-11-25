@@ -21,5 +21,7 @@
 	"notEditable": "Not editable",
 	"selectPlaceholder": "Please select.",
 	"clearInput": "Clear Input.",
-	"showPassword": "Show password"
+	"showPassword": "Show password",
+	"horizontalScrollArea": "Horizontal scroll area",
+	"switchCandidateDisplay": "Switch candidate display"
 }
