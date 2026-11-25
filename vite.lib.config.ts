@@ -1,8 +1,8 @@
 import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import dts from 'unplugin-dts/vite';
 import { defineConfig, esmExternalRequirePlugin } from 'vite';
-import dts from 'vite-plugin-dts';
 
 export default defineConfig({
 	plugins: [
