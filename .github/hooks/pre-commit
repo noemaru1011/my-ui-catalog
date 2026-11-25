@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-# 変更ファイルを取得（ステージング済み・未ステージング両方）
-CHANGED_FILES=$(git diff --name-only HEAD)
+# ステージング済みの変更ファイルのみを取得
+CHANGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR)
 
 # テスト対象ファイルがあるか確認
 TEST_TARGETS=$(echo "$CHANGED_FILES" | grep -E '\.(ts|tsx|js|jsx|vue)$' || true)
