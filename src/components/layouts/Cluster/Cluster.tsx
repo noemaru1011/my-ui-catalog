@@ -3,15 +3,10 @@ import { cn } from '@/lib/utils';
 
 type ClusterProps = PropsWithChildren<{
 	/**
-	 * 折り返しを無効にする
-	 * @default false
-	 */
-	nowrap?: boolean;
-	/**
 	 * 子要素間の間隔
 	 * @default 'md'
 	 */
-	space?: 'sm' | 'md' | 'lg';
+	space?: 'none' | 'sm' | 'md' | 'lg';
 	/**
 	 * 水平方向の配置
 	 * @default 'start'
@@ -24,9 +19,11 @@ type ClusterProps = PropsWithChildren<{
 	align?: 'start' | 'center' | 'end' | 'stretch';
 }>;
 
-/** 子要素を横方向に並べるレイアウトコンポーネントです。space は要素間の間隔、justify は水平方向の配置、align は垂直方向の配置を制御します。子要素が収まらない場合は自動的に折り返します。 */
+/**
+ * 子要素を横方向に並べ、収まりきらない場合は折り返すレイアウトコンポーネントです。
+ * space は要素間の間隔、justify は水平方向の配置、align は垂直方向の配置を制御します。
+ */
 export function Cluster({
-	nowrap = false,
 	space = 'md',
 	justify = 'start',
 	align = 'center',
@@ -35,9 +32,9 @@ export function Cluster({
 	return (
 		<div
 			className={cn(
-				'flex',
-				nowrap ? 'flex-nowrap overflow-x-auto' : 'flex-wrap',
+				'flex flex-wrap',
 				{
+					'gap-0': space === 'none',
 					'gap-2': space === 'sm',
 					'gap-4': space === 'md',
 					'gap-6': space === 'lg',
@@ -55,7 +52,6 @@ export function Cluster({
 					'items-stretch': align === 'stretch',
 				},
 			)}
-			{...(nowrap && { tabIndex: 0 })}
 		>
 			{children}
 		</div>
