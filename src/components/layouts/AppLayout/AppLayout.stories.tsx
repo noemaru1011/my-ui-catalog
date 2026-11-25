@@ -29,8 +29,8 @@ export const Default: Story = {
     args: {
         header: (
             <>
-                <Heading type="subBlockTitle">ヘッダー見出し</Heading>
-                <Cluster justify="end">
+                <Cluster justify="between">
+                    <Heading type="subBlockTitle">ヘッダー見出し</Heading>
                     <Button type="button">ログアウト(例)</Button>
                 </Cluster>
             </>
