@@ -64,7 +64,7 @@ function ComboboxInput({
 					<InputGroupButton
 						size="icon-xs"
 						variant="ghost"
-						aria-label="候補の表示を切り替え"
+						aria-label="switch-Candidate-Display"
 						render={<ComboboxTrigger />}
 						data-slot="input-group-button"
 						className="group-has-data-[slot=combobox-clear]/input-group:hidden data-pressed:bg-transparent"
@@ -230,7 +230,7 @@ function ComboboxChip({
 			{/* KEEP: 削除対象が分かる読み上げ名を維持 */}
 			{showRemove && (
 				<ComboboxPrimitive.ChipRemove
-					aria-label={`${children}を削除`}
+					aria-label={`${children}-Delete`}
 					render={<Button variant="ghost" size="icon-xs" />}
 					className="-ml-1 opacity-50 hover:opacity-100"
 					data-slot="combobox-chip-remove"
