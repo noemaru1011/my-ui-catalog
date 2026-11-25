@@ -52,12 +52,22 @@ UI 要素の配置やレイアウトには、原則として既存のレイア�
 ```text
 components/
 └── layouts/
+    ├── AppLayout/
+    │   └── AppLayout.tsx
     ├── Center/
     │   └── Center.tsx
     ├── Cluster/
     │   └── Cluster.tsx
     ├── Container/
     │   └── Container.tsx
+    ├── Error/
+    │   ├── Forbidden.tsx
+    │   ├── InternalServerError.tsx
+    │   └── NotFound.tsx
+    ├── Grid/
+    │   └── Grid.tsx
+    ├── Reel/
+    │   └── Reel.tsx
     └── Stack/
         └── Stack.tsx
 ```
@@ -66,12 +76,17 @@ components/
 
 | コンポーネント | 用途 |
 | -------------- | ---- |
+| `AppLayout` | ヘッダーとメインコンテンツを持つ画面全体の基本レイアウト |
 | `Center` | 子要素を中央に配置する場合 |
 | `Cluster` | 子要素を横方向に並べ、まとまりとして配置する場合 |
 | `Container` | コンテンツの最大幅や表示領域を制御する場合 |
+| `Grid` | 12カラムのグリッドやレスポンシブな配置を構成する場合 |
+| `Reel` | 子要素を横一列に並べ、横スクロールが必要な場合 |
 | `Stack` | 子要素を縦方向に積み重ねて配置する場合 |
 
 レイアウトの構成には、これらのコンポーネントの使用を優先し、目的に応じて適切に組み合わせてください。
+
+エラー画面には、403・404・500 の表示用途に合わせた `Forbidden`、`NotFound`、`InternalServerError` を使用してください。
 
 ### テキスト・リンクコンポーネントの使用
 
@@ -102,7 +117,7 @@ components/
 
 ### 実装ルール
 
-- レイアウトには `Center`、`Cluster`、`Container`、`Stack` などの既存コンポーネントを使用する。
+- レイアウトには `AppLayout`、`Center`、`Cluster`、`Container`、`Grid`、`Reel`、`Stack` などの既存コンポーネントを使用する。
 - 見出しには `Heading`、本文には `Text`、リンクには `Link` を使用する。
 - 既存コンポーネントで実現できる機能を、HTML 要素や独自スタイルで再実装しない。
 - 既存コンポーネントが必要な機能に対応していない場合は、既存コンポーネントの拡張、または再利用可能なコンポーネントの追加を検討する。
