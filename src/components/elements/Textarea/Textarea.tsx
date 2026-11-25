@@ -1,13 +1,14 @@
 import { type ComponentProps, useId } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
-import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import { Textarea as BaseTextarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
-type TextareaProps = WithoutExternalStyle<ComponentProps<typeof BaseTextarea>, 'disabled'> & {
+type TextareaProps = Omit<
+	ComponentProps<typeof BaseTextarea>,
+	'className' | 'style' | 'disabled'
+> & {
 	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
 	label: string;
@@ -26,9 +27,8 @@ export function Textarea({
 	error,
 	required = false,
 	readOnly = false,
-	...rawProps
+	...props
 }: TextareaProps) {
-	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const textareaId = id ?? generatedId;
 	const { t } = useTranslation();

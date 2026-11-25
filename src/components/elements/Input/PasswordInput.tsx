@@ -1,17 +1,15 @@
 import { EyeIcon, EyeOffIcon, X } from 'lucide-react';
 import { type ComponentProps, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
-import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Button } from '@/components/ui';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
-type PasswordInputProps = WithoutExternalStyle<
+type PasswordInputProps = Omit<
 	ComponentProps<typeof InputGroupInput>,
-	'type' | 'disabled'
+	'className' | 'style' | 'type' | 'disabled'
 > & {
 	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
@@ -37,9 +35,8 @@ export function PasswordInput({
 	value,
 	defaultValue,
 	onChange,
-	...rawProps
+	...props
 }: PasswordInputProps) {
-	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
 	const { t } = useTranslation();

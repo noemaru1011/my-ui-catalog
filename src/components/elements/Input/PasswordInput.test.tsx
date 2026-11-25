@@ -108,13 +108,6 @@ describe('PasswordInput', () => {
 		expect(handleChange).toHaveBeenCalled();
 	});
 
-	it('className などの外部スタイル指定を受け付けない', () => {
-		// WithoutExternalStyle の型制約はコンパイル時に検証する。
-		// 実行時のスタイル除去は withoutExternalStyle のテストで検証する。
-		render(<PasswordInput id="password" label="パスワード" />);
-		expect(screen.getByLabelText('パスワード')).toBeInTheDocument();
-	});
-
 	describe('クリア', () => {
 		it('入力値がある場合にクリアボタンを表示する', () => {
 			render(<PasswordInput id="password" label="パスワード" defaultValue="secret123" />);

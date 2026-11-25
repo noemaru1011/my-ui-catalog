@@ -1,8 +1,6 @@
 import { type ComponentProps, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Option } from '@/components/types/Option';
-import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
-import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import {
 	Select as BaseSelect,
@@ -16,9 +14,9 @@ import {
 import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
-type SelectProps = WithoutExternalStyle<
+type SelectProps = Omit<
 	ComponentProps<typeof BaseSelect>,
-	'disabled' | 'value' | 'onValueChange'
+	'className' | 'style' | 'disabled' | 'value' | 'onValueChange'
 > & {
 	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
@@ -46,9 +44,8 @@ export function Select({
 	required = false,
 	disabled = false,
 	inputSize = 'md',
-	...rawProps
+	...props
 }: SelectProps) {
-	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const triggerId = id ?? generatedId;
 	const { t } = useTranslation();

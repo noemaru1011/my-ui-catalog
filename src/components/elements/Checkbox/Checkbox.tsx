@@ -1,8 +1,6 @@
 import { type ComponentProps, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Option } from '@/components/types/Option';
-import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
-import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox as BaseCheckbox } from '@/components/ui/checkbox';
 import {
@@ -15,9 +13,9 @@ import {
 	FieldSet,
 } from '@/components/ui/field';
 
-type CheckboxProps = WithoutExternalStyle<
+type CheckboxProps = Omit<
 	ComponentProps<typeof BaseCheckbox>,
-	'value' | 'checked' | 'onCheckedChange' | 'disabled'
+	'className' | 'style' | 'value' | 'checked' | 'onCheckedChange' | 'disabled'
 > & {
 	label: string;
 	options: Option[];
@@ -40,9 +38,8 @@ export function Checkbox({
 	error,
 	required = false,
 	disabled = false,
-	...rawProps
+	...props
 }: CheckboxProps) {
-	const props = withoutExternalStyle(rawProps);
 	const { t } = useTranslation();
 	const generatedId = useId();
 
