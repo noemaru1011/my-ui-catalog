@@ -114,4 +114,98 @@ describe('PasswordInput', () => {
 		render(<PasswordInput id="password" label="パスワード" />);
 		expect(screen.getByLabelText('パスワード')).toBeInTheDocument();
 	});
+
+	describe('クリア', () => {
+		it('入力値がある場合にクリアボタンを表示する', () => {
+			render(<PasswordInput id="password" label="パスワード" defaultValue="secret123" />);
+
+			expect(screen.getByRole('button', { name: '入力をクリア' })).toBeInTheDocument();
+		});
+
+		it('入力値がない場合にクリアボタンを表示しない', () => {
+			render(<PasswordInput id="password" label="パスワード" />);
+
+			expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+		});
+
+		it('クリア時に onChange を呼び出す', async () => {
+			const user = userEvent.setup();
+			const onChange = vi.fn();
+
+			render(
+				<PasswordInput
+					id="password"
+					label="パスワード"
+					defaultValue="secret123"
+					onChange={onChange}
+				/>,
+			);
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(onChange).toHaveBeenCalled();
+			expect(onChange.mock.calls.at(-1)?.[0].target.value).toBe('');
+		});
+
+		it('controlled component の入力値をクリアすると onChange に空文字を渡す', async () => {
+			const user = userEvent.setup();
+			const onChange = vi.fn((event: { target: HTMLInputElement }) => event.target.value);
+
+			render(
+				<PasswordInput id="password" label="パスワード" value="secret123" onChange={onChange} />,
+			);
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(onChange).toHaveBeenCalled();
+			expect(onChange.mock.results.at(-1)?.value).toBe('');
+		});
+
+		it('入力値をクリアできる', async () => {
+			const user = userEvent.setup();
+
+			render(<PasswordInput label="パスワード" defaultValue="password123" />);
+
+			const input = screen.getByLabelText('パスワード');
+			expect(input).toHaveValue('password123');
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(input).toHaveValue('');
+			expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+		});
+
+		it('クリアボタンをクリックすると入力値を空にする', async () => {
+			const user = userEvent.setup();
+
+			render(<PasswordInput id="password" label="パスワード" defaultValue="password123" />);
+
+			const input = screen.getByLabelText('パスワード');
+
+			expect(input).toHaveValue('password123');
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(input).toHaveValue('');
+			expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+		});
+
+		it('readOnly が true の場合にクリアボタンを表示しない', () => {
+			render(<PasswordInput id="password" label="パスワード" defaultValue="secret123" readOnly />);
+
+			expect(screen.queryByRole('button', { name: '入力をクリア' })).not.toBeInTheDocument();
+		});
+
+		it('入力欄がDOMから取得できない場合はクリア処理を終了する', async () => {
+			const user = userEvent.setup();
+
+			render(<PasswordInput id="password" label="パスワード" defaultValue="secret123" />);
+
+			screen.getByLabelText('パスワード').remove();
+
+			await user.click(screen.getByRole('button', { name: '入力をクリア' }));
+
+			expect(screen.getByRole('button', { name: '入力をクリア' })).toBeInTheDocument();
+		});
+	});
 });

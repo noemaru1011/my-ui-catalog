@@ -1,22 +1,16 @@
 import type { ReactNode } from 'react';
-import { cn } from '@/lib/utils';
 
 type CenterProps = {
 	children: ReactNode;
-	maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+	/** 最低限の高さ（画面の高さ）を確保するかどうか。(親要素が横幅しか確保してないときに用いる。) */
+	minHeight?: boolean;
 };
 
-/** コンテンツを水平方向の中央に配置するコンポーネントです。用途はコンテンツの最大幅と中央寄せ */
-export function Center({ children, maxWidth = 'lg' }: CenterProps) {
+/** 子要素を親要素に対して垂直・水平方向の中央に配置するコンポーネントです。 */
+export function Center({ children, minHeight }: CenterProps) {
 	return (
 		<div
-			className={cn('mx-auto w-full', {
-				'max-w-screen-sm': maxWidth === 'sm',
-				'max-w-screen-md': maxWidth === 'md',
-				'max-w-screen-lg': maxWidth === 'lg',
-				'max-w-screen-xl': maxWidth === 'xl',
-				'max-w-full': maxWidth === 'full',
-			})}
+			className={`flex w-full items-center justify-center ${minHeight ? 'min-h-dvh' : 'h-full'}`}
 		>
 			{children}
 		</div>

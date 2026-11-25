@@ -38,10 +38,11 @@ type ComboboxMultipleProps = WithoutExternalStyle<
 	required?: boolean;
 	/** 極力使用せず、表示できるか検討する。 */
 	disabled?: boolean;
+	/** 入力欄のサイズを指定。 */
 	inputSize?: 'sm' | 'md' | 'lg';
+	/** 入力欄に表示する選択済みチップの最大件数。超過分はTooltip内に表示する。 @default 2 */
+	maxVisibleChips?: number;
 };
-
-const MAX_VISIBLE_CHIPS = 2;
 
 export function ComboboxMultiple({
 	id,
@@ -54,6 +55,7 @@ export function ComboboxMultiple({
 	required = false,
 	disabled = false,
 	inputSize = 'md',
+	maxVisibleChips = 2,
 	...rawProps
 }: ComboboxMultipleProps) {
 	const props = withoutExternalStyle(rawProps);
@@ -105,8 +107,8 @@ export function ComboboxMultiple({
 				>
 					<ComboboxValue>
 						{(values) => {
-							const visibleValues = values.slice(0, MAX_VISIBLE_CHIPS);
-							const hiddenCount = values.length - MAX_VISIBLE_CHIPS;
+							const visibleValues = values.slice(0, maxVisibleChips);
+							const hiddenCount = Math.max(0, values.length - maxVisibleChips);
 
 							return (
 								<>
@@ -130,7 +132,7 @@ export function ComboboxMultiple({
 
 											<TooltipContent>
 												<div className="flex max-w-xs flex-wrap gap-1">
-													{values.slice(MAX_VISIBLE_CHIPS).map((option: Option) => (
+													{values.slice(maxVisibleChips).map((option: Option) => (
 														<Badge key={option.value} variant="secondary">
 															{option.label}
 														</Badge>

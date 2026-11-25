@@ -6,4 +6,5 @@ export * from './Error/Forbidden';
 export * from './Error/InternalServerError';
 export * from './Error/NotFound';
 export * from './Grid/Grid';
+export * from './Reel/Reel';
 export * from './Stack/Stack';

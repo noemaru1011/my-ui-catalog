@@ -20,5 +20,8 @@
 	"noItemsFound": "No items found.",
 	"notEditable": "Not editable",
 	"selectPlaceholder": "Please select.",
-	"showPassword": "Show password"
+	"clearInput": "Clear Input.",
+	"showPassword": "Show password",
+	"horizontalScrollArea": "Horizontal scroll area",
+	"switchCandidateDisplay": "Switch candidate display"
 }

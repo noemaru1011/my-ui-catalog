@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { X } from 'lucide-react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
@@ -53,38 +54,54 @@ export function DatePicker({
 
 			{description && <FieldDescription>{description}</FieldDescription>}
 
-			<Popover>
-				<PopoverTrigger
-					render={
-						<Button
-							id={inputId}
-							variant="outline"
-							disabled={readOnly}
-							aria-invalid={!!error}
-							className={cn(
-								'w-full justify-start font-normal',
-								sizeClass,
-								!value && 'text-muted-foreground',
-								readOnly && 'border-dashed',
-							)}
-						>
-							{value ? format(value, 'yyyy/MM/dd') : t('datePickerPlaceholder')}
-						</Button>
-					}
-				/>
-
-				<PopoverContent aria-label={label} className="w-auto p-0" align="start">
-					<Calendar
-						mode="single"
-						selected={value}
-						onSelect={onChange}
-						defaultMonth={value}
-						captionLayout="dropdown"
-						startMonth={new Date(1900, 0)}
-						endMonth={new Date(2100, 11)}
+			<div className="relative">
+				<Popover>
+					<PopoverTrigger
+						render={
+							<Button
+								id={inputId}
+								variant="outline"
+								disabled={readOnly}
+								aria-invalid={!!error}
+								className={cn(
+									'w-full justify-start font-normal',
+									sizeClass,
+									!value && 'text-muted-foreground',
+									value && !readOnly && 'pr-9',
+									readOnly && 'border-dashed',
+								)}
+							>
+								{value ? format(value, 'yyyy/MM/dd') : t('datePickerPlaceholder')}
+							</Button>
+						}
 					/>
-				</PopoverContent>
-			</Popover>
+
+					<PopoverContent aria-label={label} className="w-auto p-0" align="start">
+						<Calendar
+							mode="single"
+							selected={value}
+							onSelect={onChange}
+							defaultMonth={value}
+							captionLayout="dropdown"
+							startMonth={new Date(1900, 0)}
+							endMonth={new Date(2100, 11)}
+						/>
+					</PopoverContent>
+				</Popover>
+
+				{value && !readOnly && (
+					<Button
+						type="button"
+						variant="ghost"
+						size="icon"
+						className="text-muted-foreground hover:text-foreground absolute top-1/2 right-1 size-6 -translate-y-1/2"
+						onClick={() => onChange?.(undefined)}
+						aria-label={t('clearInput')}
+					>
+						<X size={4} />
+					</Button>
+				)}
+			</div>
 
 			{error && <FieldError>{error}</FieldError>}
 		</Field>

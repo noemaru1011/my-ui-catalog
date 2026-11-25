@@ -64,7 +64,8 @@
 		"disclosure": {
 			"content": "This is the content of the disclosure. For more information, see the",
 			"detailsPage": "details page",
-			"showDetails": "Show details"
+			"showDetails": "Show details",
+			"closeDetails": "Close details"
 		},
 		"form": {
 			"agreement": "Agree to the terms",
@@ -145,7 +146,6 @@
 			"preview": "Preview"
 		},
 		"layout": {
-			"centerDescription": "This area is centered on the screen, and its maximum width is limited to {{maxWidth}}.",
 			"content_one": "Content block {{count}}",
 			"content_other": "Content block {{count}}",
 			"contentArea": "Content area",

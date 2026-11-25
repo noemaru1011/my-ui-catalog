@@ -1,16 +1,15 @@
-<div align="center">
+ <div align="center">
 
 <img src="my-icon.jpg" alt="UI Catalog" width="180" />
 
 # UI Catalog
 
-## 概要
+React と TypeScript で構築した、個人開発の UI コンポーネントカタログです。
 
-このプロジェクトは、React と TypeScript で構築した、個人開発の UI コンポーネントカタログです。
 Storybook を活用し、コンポーネントの表示・動作・バリエーションを一元管理します。
 
 [**カタログを確認する**](https://noemaru1011.github.io/my-ui-catalog/)
-<!-- Tech Stack -->
+
 <p align="center">
   <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
@@ -22,6 +21,7 @@ Storybook を活用し、コンポーネントの表示・動作・バリエー�
   <img src="https://img.shields.io/badge/react--i18next-26A69A?style=for-the-badge&logo=react&logoColor=white" />
   <img src="https://img.shields.io/badge/i18next--cli-26A69A?style=for-the-badge&logo=i18next&logoColor=white" />
 </p>
+
 <p align="center">
   <img src="https://img.shields.io/badge/React_Hook_Form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white" />
   <img src="https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white" />
@@ -36,7 +36,7 @@ Storybook を活用し、コンポーネントの表示・動作・バリエー�
 
 </div>
 
-### 技術スタック
+## 技術スタック
 
 | カテゴリー           | 技術名                              |
 | -------------------- | ----------------------------------- |
@@ -54,204 +54,149 @@ Storybook を活用し、コンポーネントの表示・動作・バリエー�
 | CI/CD                | GitHub Actions                      |
 | Deployment           | GitHub Pages                        |
 
-## インストール及びスタート方法
+## 主な機能
 
-### 1. 環境準備
+### Elements
 
-| Tool       | Version     |
-| ---------- | ----------- |
-| Node.js    | `>=24.22.2` |
-| npm        | Required    |
-| Git        | Required    |
-| GitHub CLI | Required    |
+アプリケーションの UI を構成する、再利用可能なコンポーネントを提供します。
 
-Node.js のバージョンは `.nvmrc` と `package.json` の `engines` で管理しています。
+### Layouts
 
-### 2. Repositoryをクローン
+コンテンツの配置やレイアウトを制御するコンポーネントを提供します。
 
-```bash
-git clone https://github.com/noemaru1011/my-ui-catalog.git
+- `AppLayout`：アプリケーション全体の基本レイアウトを提供する
+- `Center`：子要素を中央に配置する
+- `Cluster`：子要素を横方向にまとめて配置する
+- `Container`：コンテンツの最大幅などを制御する
+- `Grid`：子要素をグリッド形式で配置する
+- `Reel`：子要素を横方向に並べ、横スクロール可能にする
+- `Stack`：子要素を縦方向に積み重ねて配置する
+- `Error`：404・403・500 などのエラー画面を提供する
 
-cd my-ui-catalog
-```
+### UI Primitives
 
-### 3. Node.jsの環境構築
-
-nvm を使用している場合、プロジェクトで指定された Node.js のバージョンを適用します。
-
-```bash
-nvm use
-```
-
-### 4. 依存関係のインストール
-
-```bash
-npm ci
-```
-
-インストール時には `prepare` スクリプトによって、Git フックの参照先が `.github/hooks` に設定されます。
-
-### 5. Storybookの起動
-
-```bash
-npm run storybook
-```
-
-ブラウザで以下にアクセスします。
-
-<http://localhost:6006>
-
-### 6. Storybookのビルド
-
-```bash
-npm run build-storybook
-```
-
-ビルド成果物は `storybook-static/` に出力されます。
+shadcn/ui をベースとした、ボタン・入力欄・ラベル・ポップオーバーなどの基本的な UI コンポーネントを提供します。
 
 ## 使い方
 
-### 1. プロジェクトを実行するコマンド
+### 1. インストール
 
 ```bash
-# Biome による Lint
-npm run lint
-
-# Biome によるフォーマット
-npm run format
-
-# Biome によるチェック
-npm run check
-
-# Biome によるチェックと自動修正
-npm run check:fix
-
-# Vitest の Watch モードでテストを実行
-npm run test
-
-# 全 Vitest プロジェクトのテストを一括実行
-npm run test:run
-
-# コンポーネントテストを実行
-npm run test:components
-
-# Storybook の Story テストを実行
-npm run test:storybook
-
-# カバレッジ付きでテストを実行
-npm run test:coverage
-
-# Playwright E2E テストを実行 
-npm run test:e2e
-
-# 日本語・英語の翻訳キーが揃っているか確認
-npm run i18n:check
-
-# 使用されていない翻訳キーがないか確認
-npm run i18n:check:unused
+npm install @noemaru1011/ui
 ```
 
-### 2. プロジェクトの主な機能の使い方を説明
+### 2. i18nextの初期化
 
-#### Elements
+i18nextとreact-i18nextを利用する場合は、アプリケーションでi18nextを初期化します。
 
-自作したアプリケーションの UI を構成する、再利用可能なコンポーネントを管理します。
+```tsx
+// i18n.ts
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-#### Layouts
+i18n.use(initReactI18next).init({
+	lng: 'ja',
+	fallbackLng: 'ja',
+	resources: {
+		ja: {
+			translation: {},
+		},
+		en: {
+			translation: {},
+		},
+	},
+	interpolation: {
+		escapeValue: false,
+	},
+});
 
-コンポーネントの配置やレイアウトを制御するためのコンポーネントを管理します。
+export default i18n;
+```
 
-#### UI Primitives
+### 3. CSSの読み込み
 
-`src/components/ui/` では、shadcn/ui をベースとした UI プリミティブを管理します。
+アプリケーションのエントリーポイントでCSSを読み込みます。
 
-ボタン、入力欄、ラベル、ポップオーバーなど、上位のコンポーネントを構成する基本的な UI 要素を配置します。
+```tsx
+import '@noemaru1011/ui/style.css';
+```
 
-#### Examples
+### 4. Providerの設定
 
-複数のコンポーネントを組み合わせた使用例を管理します。
+`ThemeProvider`、`TooltipProvider`、`Toaster` をアプリケーションのルートに設定します。
 
-- `src/components/example/form/`：フォームの実装例
-- `src/components/example/table/`：テーブルの実装例
+```tsx
+import { ThemeProvider, primitives } from '@noemaru1011/ui';
 
-### 3. コード例
+const { Toaster, TooltipProvider } = primitives;
 
-#### Layouts
+function Root() {
+	return (
+		<ThemeProvider>
+			<TooltipProvider delay={100}>
+				<App />
+				<Toaster />
+			</TooltipProvider>
+		</ThemeProvider>
+	);
+}
+```
 
-- **Center**：子要素を中央に配置する
-- **Cluster**：子要素を横方向にまとめて配置する
-- **Container**：コンテンツの最大幅などを制御する
-- **Stack**：子要素を縦方向に積み重ねて配置する
+### 5. コンポーネントの利用
 
-#### Form
+利用したいコンポーネントをインポートして使用します。
 
-`src/components/example/form/`
+```tsx
+import { Button, Card } from '@noemaru1011/ui';
 
-以下の技術を組み合わせたフォームの実装例です。
+function Example() {
+	return (
+		<Card>
+			<Button>ボタン</Button>
+		</Card>
+	);
+}
+```
 
-- Zod：入力値のバリデーション
-- React Hook Form：フォーム状態の管理
-- カスタムフック：フォーム処理の共通化
-- フォーム UI：入力画面の構築
-- ページ：フォームの利用例
+### 6. Primitivesの利用
 
-#### Table
+基本的なUIコンポーネントは `primitives` から利用できます。
 
-`src/components/example/table/`
+```tsx
+import { primitives } from '@noemaru1011/ui';
 
-TanStack Table v9 を使用したテーブルの実装例です。
+const { CardHeader, CardTitle, CardDescription, CardContent, CardFooter } = primitives;
+```
 
-- ソート
-- 絞り込み
-- ページネーション
-- 行編集
+### 7. Layoutsの利用
 
-## 運用
+レイアウトコンポーネントを組み合わせて、画面構成を作成できます。
 
-本リポジトリでは、品質の担保と開発効率の向上を目的に、以下のルールと自動化ツールを導入しています。
+```tsx
+import { Center, Container, Stack } from '@noemaru1011/ui';
 
-### 1. 開発フローと GitHub Projects 連携
+function Example() {
+	return (
+		<Container>
+			<Center>
+				<Stack>
+					<h1>タイトル</h1>
+					<p>コンテンツ</p>
+				</Stack>
+			</Center>
+		</Container>
+	);
+}
+```
 
-すべての作業は **Issue** を起点とし、GitHub Projects 上でステータスを管理します。
+### 8. コンポーネント一覧
 
-1. **Issue の作成**
-   - `.github/ISSUE_TEMPLATE/issue.md` のテンプレートに従ってタスクを起票します。
-   - 起票された Issue はプロジェクトボードの `Todo` に追加されます。
-2. **ブランチ作成・実装**
-   - Issue 画面の「Create a branch」から作業用ブランチを作成し、ステータスを `In Progress` に変更します。
-   - コミット時には Git Hooks（`pre-commit` / `commit-msg`）が自動実行され、コードフォーマットやコミットメッセージの規約チェックが行われます。
-3. **Pull Request（PR）の作成**
-   - 実装完了後、`.github/PULL_REQUEST_TEMPLATE.md` に従って PR を作成し、ステータスを `In Review` に変更します。
-   - PR の説明欄に `Closes #<Issue番号>` を記載し、Issue と紐付けます。
-4. **レビュー・マージ**
-   - CI の通過およびレビュアーの承認後、マージを行います。
-   - マージされると紐づいた Issue が自動的にクローズされ、プロジェクトボードのステータスも `Done` へ移行します。
+各コンポーネントの使用方法やバリエーションは、Storybookで確認できます。
 
-### 2. ローカル開発環境（Git Hooks）
+[Storybook](https://noemaru1011.github.io/my-ui-catalog/)
 
-- **`pre-commit`**: コミット前に Lint やフォーマットチェック等を実行します。
-- **`commit-msg`**: コミットメッセージが規約（Conventional Commits 等）に沿っているか検証します。
+## 開発に参加する
 
-### 3. CI / CD（GitHub Actions）
+開発環境の構築、コマンド一覧、テストの実行方法、開発フローなどについては、以下を参照してください。
 
-`.github/workflows` に定義された以下のワークフローが自動実行されます。
-
-- **`ci.yml`**: 自動テスト、ビルド、静的解析を実行します。**CI がすべてパスすることがマージの必須条件です。**
-- **`check-node-version.yml`**: .nvmrcを変更した際に、package.jsonのバージョンに差異がないか検証します。
-- **`cd.yml`**: `master` ブランチへのマージをトリガーに、本番環境への自動デプロイを実行します。
-
-### 4. 依存パッケージの自動更新（Dependabot）
-
-- `.github/dependabot.yml` の設定に基づき、依存ライブラリのアップデートやセキュリティパッチの PR が定期的に自動作成されます。
-- Dependabot による PR も通常の PR と同様に CI の通過を確認したうえでマージします。
-
-### 5. コードオーナーとブランチ保護（CODEOWNERS）
-
-品質担保および開発ルール維持のため、`.github/CODEOWNERS` とブランチ保護ルール（Rulesets）により、重要ファイルの変更にはコードオーナーの承認を必須としています。
-
-- **保護対象ファイル・ディレクトリ**
-  - **`.github/`・`.agents/`**: CI/CD ワークフロー、Git Hooks、AI 向け指示書などの開発ルール・自動化基盤
-  - **`*.test.ts(x)`・`*.spec.ts(x)`・`/e2e/`**: 単体テストおよび E2E テストコード（テスト削除・改ざんによる CI 突破の防止）
-- **変更・削除時の運用ルール**
-  - 上記ファイルを含む PR を作成すると、自動的にコードオーナー（`@noemaru1011`）がレビュアーに割り当てられます。
-  - テストの削除やルールの変更が正当な理由に基づく場合は、PR 上で理由を明記し、コードオーナーの承認（Approve）を得た
+- [CONTRIBUTING.md](CONTRIBUTING.md)

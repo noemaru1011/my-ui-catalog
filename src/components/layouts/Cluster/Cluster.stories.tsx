@@ -9,12 +9,9 @@ const meta = {
 	component: Cluster,
 	tags: ['autodocs'],
 	argTypes: {
-		nowrap: {
-			control: 'boolean',
-		},
 		space: {
 			control: 'inline-radio',
-			options: ['sm', 'md', 'lg'],
+			options: ['none', 'sm', 'md', 'lg'],
 		},
 		justify: {
 			control: 'inline-radio',
@@ -50,7 +47,6 @@ const Item = ({
 
 export const Default: Story = {
 	args: {
-		nowrap: false,
 		space: 'sm',
 		justify: 'start',
 		align: 'center',
@@ -69,36 +65,6 @@ export const Default: Story = {
 							<Item title={t('story.layout.small')} />
 							<Item title={t('story.layout.medium')} className="py-6" />
 						</Cluster>
-					</CardContent>
-				</Card>
-			</Container>
-		);
-	},
-};
-
-export const NoWrap: Story = {
-	args: {
-		nowrap: true,
-		space: 'sm',
-		justify: 'start',
-		align: 'center',
-	},
-	render: (args) => {
-		const { t } = useTranslation('example');
-		return (
-			<Container width="full">
-				<Card>
-					<CardHeader />
-					<CardContent>
-						<div className="max-w-80 overflow-x-auto">
-							<Cluster {...args}>
-								<Item title={t('story.layout.small')} />
-								<Item title={t('story.layout.medium')} className="py-6" />
-								<Item title={t('story.layout.large')} className="py-8" />
-								<Item title={t('story.layout.small')} />
-								<Item title={t('story.layout.medium')} className="py-6" />
-							</Cluster>
-						</div>
 					</CardContent>
 				</Card>
 			</Container>

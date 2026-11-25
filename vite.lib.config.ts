@@ -16,6 +16,8 @@ export default defineConfig({
 				'react/jsx-runtime',
 				'i18next',
 				'react-i18next',
+				'react-router',
+				'react-router-dom',
 				'use-sync-external-store',
 				'use-sync-external-store/shim',
 				'use-sync-external-store/shim/with-selector',
