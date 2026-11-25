@@ -35,3 +35,20 @@ export const Default: Story = {
 		);
 	},
 };
+
+export const MinHeight: Story = {
+	args: {
+		children: null,
+		minHeight: true
+	},
+	render: (args) => {
+		const { t } = useTranslation('example');
+		return (
+			<Center {...args}>
+				<Heading type="blockTitle">
+					{t('story.layout.contentArea')}
+				</Heading>
+			</Center>
+		);
+	},
+};
