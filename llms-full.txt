@@ -130,6 +130,7 @@ import {
   InternalServerError,
   NotFound,
   Grid,
+  Reel,
   Stack,
 } from '@noemaru1011/ui';
 ```
@@ -144,6 +145,7 @@ Available components:
 - InternalServerError
 - NotFound
 - Grid
+- Reel
 - Stack
 
 ### 4.3 UI Components
