@@ -1,0 +1,23 @@
+## ライセンス・免責事項
+
+本プロジェクトは、[shadcn/ui](https://ui.shadcn.com/) をベースにカスタマイズ・拡張したUIコンポーネントライブラリです。
+
+- 本プロジェクトは現状有姿（AS IS）で提供されます。
+- 動作や品質、特定の目的への適合性について、明示的・黙示的を問わず保証しません。
+- 本プロジェクトの利用によって発生した損害や不具合について、作者は責任を負いません。
+- 利用者自身の責任においてご利用ください。
+- shadcn/uiおよびその他の依存ライブラリについては、それぞれのライセンス条件に従ってください。
+
+本プロジェクトに含まれる第三者の著作物には、それぞれのライセンスが適用されます。
+
+### License and Disclaimer
+
+This project is a UI component library customized and extended based on [shadcn/ui](https://ui.shadcn.com/).
+
+- This project is provided "AS IS", without any warranties or guarantees.
+- The author makes no express or implied warranties regarding its functionality, quality, or fitness for a particular purpose.
+- The author shall not be held liable for any damages, issues, or losses arising from the use of this project.
+- Users are responsible for using this project at their own risk.
+- shadcn/ui and other third-party dependencies are subject to their respective license terms.
+
+Third-party components and materials included in this project remain subject to their respective licenses.
