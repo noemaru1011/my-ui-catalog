@@ -1,15 +1,16 @@
 import { X } from 'lucide-react';
 import { type ComponentProps, useEffect, useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
-import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Button } from '@/components/ui';
 import { Badge } from '@/components/ui/badge';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input as BaseInput } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
-type InputProps = WithoutExternalStyle<ComponentProps<typeof BaseInput>, 'type' | 'disabled'> & {
+type InputProps = Omit<
+	ComponentProps<typeof BaseInput>,
+	'className' | 'style' | 'type' | 'disabled'
+> & {
 	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
 	label: string;
@@ -34,9 +35,8 @@ export function Input({
 	onChange,
 	value,
 	defaultValue,
-	...rawProps
+	...props
 }: InputProps) {
-	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
 	const { t } = useTranslation();

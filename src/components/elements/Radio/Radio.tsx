@@ -1,8 +1,6 @@
 import type { ComponentProps } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Option } from '@/components/types/Option';
-import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
-import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Badge } from '@/components/ui/badge';
 import {
 	Field,
@@ -15,9 +13,9 @@ import {
 } from '@/components/ui/field';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
-type RadioProps = WithoutExternalStyle<
+type RadioProps = Omit<
 	ComponentProps<typeof RadioGroup>,
-	'disabled' | 'value' | 'onValueChange' | 'onChange'
+	'className' | 'style' | 'disabled' | 'value' | 'onValueChange' | 'onChange'
 > & {
 	label: string;
 	options: Option[];
@@ -40,9 +38,8 @@ export function Radio({
 	error,
 	required = false,
 	disabled = false,
-	...rawProps
+	...props
 }: RadioProps) {
-	const props = withoutExternalStyle(rawProps);
 	const { t } = useTranslation();
 
 	return (

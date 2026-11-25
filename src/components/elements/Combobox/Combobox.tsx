@@ -2,8 +2,6 @@ import type { Combobox as ComboboxPrimitive } from '@base-ui/react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Option } from '@/components/types/Option';
-import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
-import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import {
 	Combobox as BaseCombobox,
 	ComboboxContent,
@@ -16,9 +14,9 @@ import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui
 import { cn } from '@/lib/utils';
 import { Badge } from '../../ui/badge';
 
-type ComboboxProps = WithoutExternalStyle<
+type ComboboxProps = Omit<
 	ComboboxPrimitive.Root.Props<Option>,
-	'items' | 'disabled' | 'value' | 'onValueChange' | 'onChange'
+	'className' | 'style' | 'items' | 'disabled' | 'value' | 'onValueChange' | 'onChange'
 > & {
 	/** idは指定しなかったら場合、自動採番。 */
 	id?: string;
@@ -45,9 +43,8 @@ export function Combobox({
 	required = false,
 	disabled = false,
 	inputSize = 'md',
-	...rawProps
+	...props
 }: ComboboxProps) {
-	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const inputId = id ?? generatedId;
 	const { t } = useTranslation();

@@ -1,12 +1,10 @@
 import { type ComponentProps, type ReactNode, useId } from 'react';
-import type { WithoutExternalStyle } from '@/components/types/WithoutExternalStyle';
-import { withoutExternalStyle } from '@/components/types/WithoutExternalStyle';
 import { Label } from '@/components/ui/label';
 import { Switch as BaseSwitch } from '@/components/ui/switch';
 
-type SwitchProps = WithoutExternalStyle<
+type SwitchProps = Omit<
 	ComponentProps<typeof BaseSwitch>,
-	'id' | 'aria-label' | 'disabled'
+	'className' | 'style' | 'id' | 'aria-label' | 'disabled'
 > & {
 	/** idを指定しない場合は自動採番。 */
 	id?: string;
@@ -24,9 +22,8 @@ export function Switch({
 	labelPosition = 'left',
 	'aria-label': ariaLabel,
 	disabled = false,
-	...rawProps
+	...props
 }: SwitchProps) {
-	const props = withoutExternalStyle(rawProps);
 	const generatedId = useId();
 	const switchId = id ?? generatedId;
 
