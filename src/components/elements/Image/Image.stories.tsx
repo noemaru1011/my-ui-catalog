@@ -4,14 +4,19 @@ import { useTranslation } from 'react-i18next';
 import { Image } from './Image';
 
 const meta = {
-    component: Image,
-    tags: ['autodocs'],
-    args: {
-        src: 'https://placehold.co/600x400',
-        alt: 'サンプル画像',
-        description: '画像の説明文です。',
-        width: '400px',
-    },
+	component: Image,
+	tags: ['autodocs'],
+	args: {
+		src: 'https://placehold.co/600x400',
+		alt: 'サンプル画像',
+		description: '画像の説明文です。',
+		width: '400px',
+	},
+	argTypes: {
+		width: {
+			control: "text"
+		}
+	}
 } satisfies Meta<typeof Image>;
 
 export default meta;

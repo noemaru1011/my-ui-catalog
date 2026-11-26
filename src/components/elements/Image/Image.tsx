@@ -5,9 +5,10 @@ export type ImageProps = {
 	/** アクセシビリティの観点から必ず指定する。 */
 	alt: string;
 	description?: string;
-	/** リンク先のURL。指定した場合、画像がリンクとして表示される。*/
+	/** リンク先のURL。指定した場合、画像がリンクとして表示される。 */
 	to?: string;
-	width?: string;
+	/** 画像の幅。px または % で指定する。 */
+	width?: `${number}px` | `${number}%`;
 };
 
 export function Image({ src, alt, description, to, width = '100%' }: ImageProps) {
