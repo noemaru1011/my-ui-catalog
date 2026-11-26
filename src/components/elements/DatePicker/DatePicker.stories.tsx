@@ -18,6 +18,12 @@ const meta = {
 			control: 'inline-radio',
 			options: ['sm', 'md', 'lg'],
 		},
+		startMonth: {
+			control: "date"
+		},
+		endMonth: {
+			control: "date"
+		}
 	},
 	args: {
 		id: 'date',

@@ -15,6 +15,10 @@ type DatePickerProps = {
 	label: string;
 	value?: Date;
 	onChange?: (date: Date | undefined) => void;
+	/** カレンダーで選択できる最初の月。 */
+	startMonth?: Date;
+	/** カレンダーで選択できる最後の月。 */
+	endMonth?: Date;
 	/** 編集不可の理由などを記載。 */
 	description?: string;
 	error?: string;
@@ -29,6 +33,8 @@ export function DatePicker({
 	label,
 	value,
 	onChange,
+	startMonth = new Date(1900, 0),
+	endMonth = new Date(2100, 11),
 	description,
 	error,
 	required = false,
@@ -83,8 +89,8 @@ export function DatePicker({
 							onSelect={onChange}
 							defaultMonth={value}
 							captionLayout="dropdown"
-							startMonth={new Date(1900, 0)}
-							endMonth={new Date(2100, 11)}
+							startMonth={startMonth}
+							endMonth={endMonth}
 						/>
 					</PopoverContent>
 				</Popover>

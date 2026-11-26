@@ -21,6 +21,12 @@ const meta = {
 		inputSize: {
 			control: 'inline-radio',
 			options: ['sm', 'md', 'lg'],
+		},
+		startMonth: {
+			control: "date"
+		},
+		endMonth: {
+			control: "date"
 		}
 	},
 } satisfies Meta<typeof DateRange>;
