@@ -10,7 +10,9 @@ type AppLayoutProps = {
 export function AppLayout({ header, main }: AppLayoutProps) {
 	return (
 		<>
-			<header className="z-sticky sticky top-0 w-full border-b p-4">{header}</header>
+			<header className="bg-background z-sticky sticky top-0 w-full border-b">
+				<div className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6">{header}</div>
+			</header>
 
 			<main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-6 sm:px-6">
 				{main}
